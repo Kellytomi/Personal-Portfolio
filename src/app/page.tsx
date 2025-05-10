@@ -34,7 +34,7 @@ export default function Home(): JSX.Element {
           
           <div className="container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div>
+              <div className="text-center lg:text-left">
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -48,15 +48,15 @@ export default function Home(): JSX.Element {
                     Available for Projects
                   </div>
                   <h4 className="text-primary font-medium mb-4">Hi, I'm Etoma (Kelvin)</h4>
-                  <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-6">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6">
                     Digital Solutions <span className="gradient-text">Expert</span>
                   </h1>
-                  <p className="text-lg sm:text-xl mb-10 text-muted max-w-xl">
+                  <p className="text-base sm:text-lg md:text-xl mb-10 text-muted max-w-xl mx-auto lg:mx-0">
                     I help businesses streamline operations and increase efficiency through automation, integration, and digital solutions.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <Link href="/contact" className="btn btn-primary">Get in Touch</Link>
-                    <Link href="/projects" className="btn bg-white border border-black/10 text-text hover:bg-black/5">
+                  <div className="flex flex-col sm:flex-row gap-4 sm:mb-0 mb-16 max-w-xs mx-auto sm:mx-0">
+                    <Link href="/contact" className="btn btn-primary text-center py-2.5 px-5">Get in Touch</Link>
+                    <Link href="/projects" className="btn bg-white border border-black/10 text-text hover:bg-black/5 text-center py-2.5 px-5">
                       View Projects
                     </Link>
                   </div>
