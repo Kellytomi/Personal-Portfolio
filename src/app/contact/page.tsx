@@ -40,10 +40,10 @@ export default function Contact(): JSX.Element {
                 className="mb-6"
               >
                 <a 
-                  href="mailto:hello@fxsion.com" 
+                  href="mailto:kelvineetoma95@gmail.com" 
                   className="inline-block bg-gray-100 hover:bg-gray-200 text-black px-8 py-4 rounded-full text-lg font-medium transition-all duration-300"
                 >
-                  hello@fxsion.com
+                  kelvineetoma95@gmail.com
                 </a>
               </motion.div>
 

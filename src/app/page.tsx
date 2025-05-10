@@ -81,9 +81,9 @@ export default function Home(): JSX.Element {
               </motion.div>
             </div>
 
-            {/* Scroll to explore animation */}
+            {/* Scroll to explore animation - now centered between hero and stats */}
             <motion.div 
-              className="absolute bottom2 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-center text-gray-500"
+              className="flex flex-col items-center text-center text-gray-500 mt-24 mb-0"
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
