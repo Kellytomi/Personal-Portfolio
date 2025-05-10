@@ -1,0 +1,110 @@
+@theme {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-offwhite: #f8f8f8;
+  --color-midnight: #1a1b4b;
+  --color-gold: #d4af37;
+  --color-soft-white: #f8f9fa;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-jakarta), system-ui, sans-serif !important;
+  }
+
+  body {
+    @apply bg-surface text-text;
+    font-family: var(--font-jakarta), system-ui, sans-serif !important;
+  }
+
+  /* Custom cursor rules - keep default cursor visible */
+  a, button, input[type="button"], input[type="submit"],
+  .cursor-pointer, [role="button"] {
+    cursor: auto;
+  }
+
+  ::selection {
+    @apply bg-accent text-primary;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+    font-family: var(--font-syne), serif !important;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .btn {
+    @apply inline-flex items-center px-6 py-3 rounded-lg font-medium tracking-wide transition-all duration-300 shadow-soft hover:shadow-hover transform hover:-translate-y-0.5;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-opacity-90;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-opacity-90;
+  }
+  
+  .section-title {
+    @apply font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-tighter;
+  }
+  
+  .section-subtitle {
+    @apply text-lg md:text-xl text-muted mb-12 tracking-normal;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-soft hover:shadow-hover transition-all duration-300 transform hover:-translate-y-1;
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/90 border-b border-black/5;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-b from-black to-secondary;
+  }
+
+  .display-text {
+    @apply font-display font-bold tracking-tighter;
+  }
+
+  .body-text {
+    @apply font-sans tracking-normal;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-shadow {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-shadow-sm {
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+}
