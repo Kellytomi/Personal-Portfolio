@@ -26,38 +26,44 @@ export default function Home(): JSX.Element {
         <PageSpacer />
         
         {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center pt-24 sm:pt-28 md:pt-20 lg:pt-0">
+        <section className="min-h-[85vh] flex items-center pt-16 sm:pt-20 md:pt-16 lg:pt-0 relative">
+          {/* Grid with gradient mask for top-to-bottom blending */}
+          <div className="absolute inset-0 grid-bg opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/30 to-transparent" />
+          
           <motion.div 
-            className="absolute inset-0 bg-[url('/grid.svg')] opacity-5"
+            className="absolute inset-0" 
             style={{ y }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface to-white/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-surface/50 via-surface/50 to-white/30" />
           
           <div className="container relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div className="text-center lg:text-left">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+              <div className="text-center lg:text-left mt-4 sm:mt-0">
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <div className="inline-block px-4 py-2 bg-gray-200 text-gray-800 rounded-full text-sm font-medium mb-4">
+                  <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-3">
                     <span className="relative inline-flex mr-2">
                       <span className="inline-block w-2.5 h-2.5 bg-green-500 rounded-full"></span>
                       <span className="animate-ping absolute inline-flex h-2.5 w-2.5 rounded-full bg-green-400 opacity-75"></span>
                     </span>
                     Available for Projects
                   </div>
-                  <h4 className="text-primary font-medium mb-4">Hi, I'm Etoma (Kelvin)</h4>
-                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6">
-                    Full-Stack Developer <span className="gradient-text">&</span> Workflow Automation Specialist
+                  <h4 className="text-primary font-medium mb-2 md:mb-3">Hi, I'm Etoma (Kelvin)</h4>
+                  <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-5">
+                    Turn Hours of <span className="gradient-text">Coding</span><br />into Minutes.
                   </h1>
-                  <p className="text-base sm:text-lg md:text-xl mb-10 text-muted max-w-xl mx-auto lg:mx-0">
+                  <p className="text-base sm:text-lg mb-6 md:mb-8 text-muted max-w-xl mx-auto lg:mx-0">
                     Building seamless apps, powerful websites, and smart automated systems that transform how businesses operate. Combining technical expertise with a passion for elegant solutions.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4 sm:mb-0 mb-16 max-w-xs mx-auto sm:mx-0">
-                    <Link href="/contact" className="btn btn-primary text-center py-2.5 px-5">Get in Touch</Link>
-                    <Link href="/projects" className="btn bg-white border border-black/10 text-text hover:bg-black/5 text-center py-2.5 px-5">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:mb-0 mb-10 max-w-md mx-auto lg:mx-0">
+                    <Link href="/skills" className="cta-button">
+                      <span>See My Skills</span>
+                    </Link>
+                    <Link href="/projects" className="btn btn-secondary text-center">
                       View Projects
                     </Link>
                   </div>
@@ -67,9 +73,10 @@ export default function Home(): JSX.Element {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="hidden lg:block"
+                className="hidden lg:block relative"
               >
-                <div className="relative h-[70vh] max-h-[700px]">
+                <div className="relative h-[60vh] max-h-[600px] rounded-xl overflow-hidden">
+                  <div className="absolute inset-0 bg-primary/5 z-10"></div>
                   <Image
                     src="/desk-header.jpg"
                     alt="Digital Workspace"
@@ -79,12 +86,25 @@ export default function Home(): JSX.Element {
                   />
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent mix-blend-multiply rounded-xl" />
                 </div>
+                
+                {/* Floating highlighted box similar to ACAD AI */}
+                <div className="absolute -bottom-6 -left-6 bg-white rounded-lg shadow-card p-6 max-w-xs">
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="text-primary">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-bold">Automate every step</h3>
+                  </div>
+                  <p className="text-sm text-muted">from creation to deployment and managing results for all your code</p>
+                </div>
               </motion.div>
             </div>
 
-            {/* Scroll to explore animation - now centered between hero and stats */}
+            {/* Scroll to explore animation */}
             <motion.div 
-              className="flex flex-col items-center text-center text-gray-500 mt-24 mb-0"
+              className="flex flex-col items-center text-center text-gray-500 mt-12 md:mt-16 mb-0"
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -113,7 +133,7 @@ export default function Home(): JSX.Element {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="text-center"
+                  className="bg-white p-6 rounded-xl shadow-card text-center"
                 >
                   <div className="text-4xl md:text-5xl font-display font-bold text-primary mb-2">
                     <CountUp end={stat.value} suffix={stat.suffix} />
@@ -135,6 +155,7 @@ export default function Home(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="text-center mb-16"
             >
+              <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">My Services</div>
               <h2 className="section-title mb-4">My Expertise</h2>
               <p className="section-subtitle max-w-2xl mx-auto">
                 I specialize in creating seamless digital experiences that drive growth and efficiency
@@ -147,21 +168,21 @@ export default function Home(): JSX.Element {
                   title: 'Web Development',
                   description: 'I build responsive, performant websites and web applications using modern frameworks and best practices.',
                   icon: '🌐',
-                  gradient: 'from-[#56CCF2] to-[#2F80ED]',
+                  gradient: 'from-[#3151B5] to-[#56CCF2]',
                   skillsLink: '/skills#web-development'
                 },
                 {
                   title: 'Mobile Development',
                   description: 'I create powerful native and cross-platform mobile applications with intuitive interfaces and powerful functionality.',
                   icon: '📱',
-                  gradient: 'from-[#6A11CB] to-[#2575FC]',
+                  gradient: 'from-[#3151B5] to-[#56CCF2]',
                   skillsLink: '/skills#mobile-development'
                 },
                 {
                   title: 'Workflow Automation',
                   description: 'I streamline operations with intelligent automation that eliminates repetitive tasks and creates efficient processes.',
                   icon: '⚡',
-                  gradient: 'from-[#FF4E50] to-[#F9D423]',
+                  gradient: 'from-[#3151B5] to-[#56CCF2]',
                   skillsLink: '/skills#automation-and-integration'
                 },
               ].map((service, index) => (
@@ -175,9 +196,9 @@ export default function Home(): JSX.Element {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="card p-8 group h-full cursor-pointer hover:shadow-md transition-all duration-300"
+                    className="feature-card group h-full cursor-pointer"
                   >
-                    <div className={`w-16 h-16 rounded-lg bg-gray-100 group-hover:bg-gradient-to-r ${service.gradient} flex items-center justify-center text-2xl mb-6 transition-all duration-300`}>
+                    <div className={`w-16 h-16 rounded-lg bg-primary/10 group-hover:bg-gradient-to-r ${service.gradient} flex items-center justify-center text-2xl mb-6 transition-all duration-300 group-hover:text-white text-primary`}>
                       {service.icon}
                     </div>
                     <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors">
@@ -199,7 +220,7 @@ export default function Home(): JSX.Element {
           </div>
         </section>
 
-        {/* Featured Projects */}
+        {/* Process Section */}
         <section className="py-32 bg-surface relative">
           <div className="container relative">
             <motion.div
@@ -209,70 +230,87 @@ export default function Home(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="text-center mb-16"
             >
-              <h2 className="section-title mb-4">Featured Work</h2>
+              <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">How I Work</div>
+              <h2 className="section-title mb-4">My Development Process</h2>
               <p className="section-subtitle max-w-2xl mx-auto">
-                A selection of my recent projects showcasing my expertise and capabilities
+                A streamlined approach to ensure efficient delivery of high-quality solutions
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-12">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
               {[
                 {
-                  title: 'Healthcare Workflow Automation',
-                  description: 'Automated patient intake and documentation processes for a medical practice, reducing administrative time by 70%.',
-                  image: '/projects/healthcare.jpg',
-                  tags: ['Zapier', 'Document Automation', 'PandaDoc']
+                  step: 1,
+                  title: 'Discovery & Planning',
+                  description: 'I work closely with you to understand your requirements, goals, and vision for the project.'
                 },
                 {
-                  title: 'E-commerce Integration Suite',
-                  description: 'Developed a custom integration between Shopify, accounting software, and fulfillment services for seamless operations.',
-                  image: '/projects/ecommerce.jpg',
-                  tags: ['Make.com', 'API Integration', 'Shopify']
+                  step: 2,
+                  title: 'Design & Prototyping',
+                  description: 'Create wireframes and interactive prototypes to visualize the solution before development begins.'
                 },
-              ].map((project, index) => (
+                {
+                  step: 3,
+                  title: 'Development',
+                  description: 'Build the solution using modern technologies and frameworks, following best practices and standards.'
+                },
+                {
+                  step: 4,
+                  title: 'Testing & QA',
+                  description: 'Rigorous testing across devices and browsers to ensure functionality, performance, and security.'
+                },
+                {
+                  step: 5,
+                  title: 'Deployment & Launch',
+                  description: 'Smooth deployment process with complete documentation and support to ensure a successful launch.'
+                },
+                {
+                  step: 6,
+                  title: 'Maintenance & Support',
+                  description: 'Ongoing maintenance, updates, and support to keep your solution running optimally.'
+                }
+              ].map((process, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="card overflow-hidden group"
+                  className="step-card"
                 >
-                  <div className="relative h-64 overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-8">
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-muted mb-4">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, i) => (
-                        <div key={i} className="px-3 py-1 bg-black/5 rounded-full text-sm">
-                          {tag}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <div className="step-number">{process.step}</div>
+                  <h3 className="text-xl font-bold mb-3 text-secondary">{process.title}</h3>
+                  <p className="text-muted">{process.description}</p>
                 </motion.div>
               ))}
             </div>
-            
-            <div className="text-center mt-12">
-              <Link href="/projects" className="btn bg-white border border-black/10 text-text hover:bg-black/5">
-                View All Projects
-              </Link>
-            </div>
           </div>
         </section>
-        <Footer />
+
+        {/* CTA Section */}
+        <section className="py-20 bg-white">
+          <div className="container">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-center"
+            >
+              <div className="bg-primary text-white p-8 md:p-12 rounded-xl">
+                <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">Ready to work together?</h2>
+                <p className="text-lg mb-8 text-white/80 max-w-2xl mx-auto">
+                  Let's collaborate to turn your vision into reality. Contact me to discuss your project requirements.
+                </p>
+                <Link href="/contact" className="btn bg-white text-primary hover:bg-gray-100 py-3 px-8 text-lg inline-block">
+                  Get Started
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <Footer variant="white" />
       </main>
     </PageTransition>
   );

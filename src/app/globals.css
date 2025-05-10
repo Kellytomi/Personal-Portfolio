@@ -1,10 +1,11 @@
 @theme {
-  --color-black: #000000;
+  --color-black: #1A1A1A;
   --color-white: #ffffff;
-  --color-offwhite: #f8f8f8;
-  --color-midnight: #1a1b4b;
-  --color-gold: #d4af37;
-  --color-soft-white: #f8f9fa;
+  --color-offwhite: #F8FAFE;
+  --color-primary: #3151B5;
+  --color-secondary: #0F1D56;
+  --color-accent: #56CCF2;
+  --color-muted: #6B7280;
 }
 
 @tailwind base;
@@ -22,16 +23,20 @@
   body {
     @apply bg-surface text-text;
     font-family: var(--font-jakarta), system-ui, sans-serif !important;
+    background-image: url('/grid-pattern.svg');
+    background-size: 30px 30px;
+    background-position: center;
+    background-attachment: fixed;
   }
 
   /* Custom cursor rules - keep default cursor visible */
   a, button, input[type="button"], input[type="submit"],
   .cursor-pointer, [role="button"] {
-    cursor: auto;
+    cursor: pointer;
   }
 
   ::selection {
-    @apply bg-accent text-primary;
+    @apply bg-accent text-white;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -54,11 +59,11 @@
   }
   
   .btn-secondary {
-    @apply bg-secondary text-white hover:bg-opacity-90;
+    @apply bg-white border border-primary/20 text-primary hover:bg-primary/5;
   }
   
   .section-title {
-    @apply font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-tighter;
+    @apply font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-secondary tracking-tighter;
   }
   
   .section-subtitle {
@@ -66,15 +71,15 @@
   }
 
   .card {
-    @apply bg-white rounded-xl shadow-soft hover:shadow-hover transition-all duration-300 transform hover:-translate-y-1;
+    @apply bg-white rounded-xl shadow-card hover:shadow-hover transition-all duration-300 transform hover:-translate-y-1;
   }
 
   .glass-effect {
-    @apply backdrop-blur-md bg-white/90 border-b border-black/5;
+    @apply backdrop-blur-sm bg-white/70 border-b border-black/5;
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-b from-black to-secondary;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
   }
 
   .display-text {
@@ -83,6 +88,22 @@
 
   .body-text {
     @apply font-sans tracking-normal;
+  }
+  
+  .step-card {
+    @apply relative bg-white rounded-lg shadow-card p-6 hover:shadow-hover transition-all duration-300;
+  }
+  
+  .step-number {
+    @apply absolute -top-4 -left-4 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm;
+  }
+  
+  .feature-card {
+    @apply bg-white rounded-xl shadow-card p-6 hover:shadow-hover transition-all duration-300 border border-gray-100;
+  }
+  
+  .cta-button {
+    @apply px-6 py-3 bg-primary text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:bg-primary/90 flex items-center justify-center gap-2;
   }
 }
 
@@ -106,6 +127,18 @@
 
   .text-shadow-sm {
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .grid-bg {
+    background-image: url('/grid-pattern.svg');
+    background-size: 30px 30px;
+    background-position: center;
+    opacity: 1;
+    background-attachment: fixed;
+  }
+  
+  .clip-path-slant {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   }
   
   .bg-consistent-black {

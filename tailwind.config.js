@@ -7,12 +7,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary': '#000000',  // Pure black
-        'secondary': '#333333', // Dark gray
-        'accent': '#FFFFFF',   // Pure white
-        'surface': '#F8F8F8',  // Off-white
-        'text': '#121212',     // Nearly black for text
-        'muted': '#777777',    // Medium gray for secondary text
+        'primary': '#3151B5',  // Primary blue from the ACAD AI design
+        'secondary': '#0F1D56', // Dark blue for secondary elements
+        'accent': '#56CCF2',   // Light blue accent
+        'surface': '#F8FAFE',  // Light blue-tinted background
+        'text': '#1A1A1A',     // Dark text color
+        'muted': '#6B7280',    // Medium gray for secondary text
         'highlight': '#FFFFFF', // White for highlights
       },
       fontFamily: {
@@ -53,6 +53,10 @@ module.exports = {
       boxShadow: {
         'soft': '0 4px 20px rgba(0, 0, 0, 0.05)',
         'hover': '0 8px 30px rgba(0, 0, 0, 0.1)',
+        'card': '0px 4px 25px rgba(0, 0, 0, 0.08)',
+      },
+      backgroundImage: {
+        'grid-pattern': "url('/grid-pattern.svg')",
       },
     },
   },

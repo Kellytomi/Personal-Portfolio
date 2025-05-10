@@ -61,7 +61,10 @@ export default function Portfolio(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="text-center mb-16"
             >
-              <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 text-primary mb-6">
+                <span className="text-sm font-medium">Creative Solutions</span>
+              </div>
+              <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 gradient-text">
                 My Portfolio
               </h1>
               <p className="text-lg text-muted max-w-2xl mx-auto">
@@ -127,7 +130,7 @@ export default function Portfolio(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="mt-20 text-center"
             >
-              <div className="bg-black text-white p-8 md:p-12 rounded-xl">
+              <div className="bg-primary text-white p-8 md:p-12 rounded-xl">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">
                   Ready to work together?
                 </h2>
@@ -136,7 +139,7 @@ export default function Portfolio(): JSX.Element {
                 </p>
                 <Link 
                   href="/contact" 
-                  className="btn bg-white text-black hover:bg-gray-100 py-3 px-8 text-lg inline-block"
+                  className="btn bg-white text-primary hover:bg-gray-100 py-3 px-8 text-lg inline-block"
                 >
                   Get in Touch
                 </Link>
@@ -145,7 +148,7 @@ export default function Portfolio(): JSX.Element {
           </div>
         </section>
         
-        <Footer />
+        <Footer variant="white" />
       </main>
     </PageTransition>
   );

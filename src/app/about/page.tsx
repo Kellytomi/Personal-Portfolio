@@ -74,7 +74,9 @@ export default function About(): JSX.Element {
         <Navigation />
         
         {/* Hero Section - Split Design */}
-        <section className="min-h-screen flex flex-col lg:flex-row">
+        <section className="min-h-screen flex flex-col lg:flex-row pt-16 sm:pt-20 md:pt-16 lg:pt-0 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-surface/50 via-surface/50 to-white/30" />
+          
           {/* Left panel - Photo & Visual */}
           <div className="w-full lg:w-1/2 relative h-[60vh] lg:h-screen bg-gradient-to-br from-primary/10 to-secondary/10">
             <motion.div 
@@ -97,7 +99,7 @@ export default function About(): JSX.Element {
           </div>
           
           {/* Right panel - Bio & Information */}
-          <div className="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16">
+          <div className="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16 relative z-10">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -402,19 +404,19 @@ export default function About(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="text-center"
             >
-              <div className="bg-black text-white p-8 md:p-12 rounded-xl">
+              <div className="bg-primary text-white p-8 md:p-12 rounded-xl">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
                 <p className="text-lg mb-8 text-white/80 max-w-2xl mx-auto">
                   Let's discuss how I can help solve your challenges and achieve your business goals through my expertise in web development, mobile development, and workflow automation.
                 </p>
-                <Link href="/contact" className="btn bg-white text-black hover:bg-gray-100 py-3 px-8 text-lg inline-block">
+                <Link href="/contact" className="btn bg-white text-primary hover:bg-gray-100 py-3 px-8 text-lg inline-block">
                   Get in Touch
                 </Link>
               </div>
             </motion.div>
           </div>
         </section>
-        <Footer />
+        <Footer variant="white" />
       </main>
     </PageTransition>
   );

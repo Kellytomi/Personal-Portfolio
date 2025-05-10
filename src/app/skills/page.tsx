@@ -365,7 +365,7 @@ export default function Skills(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="text-center"
             >
-              <div className="bg-black text-white p-8 md:p-12 rounded-xl">
+              <div className="bg-primary text-white p-8 md:p-12 rounded-xl">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">
                   Let's Put These Skills to Work
                 </h2>
@@ -375,7 +375,7 @@ export default function Skills(): JSX.Element {
                 </p>
                 <Link 
                   href="/contact" 
-                  className="btn bg-white text-black hover:bg-gray-100 py-3 px-8 text-lg inline-block"
+                  className="btn bg-white text-primary hover:bg-gray-100 py-3 px-8 text-lg inline-block"
                 >
                   Discuss Your Project
                 </Link>
@@ -383,7 +383,7 @@ export default function Skills(): JSX.Element {
             </motion.div>
           </div>
         </section>
-        <Footer />
+        <Footer variant="white" />
       </main>
     </PageTransition>
   );

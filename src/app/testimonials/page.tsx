@@ -169,7 +169,10 @@ export default function Testimonials(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="text-center max-w-3xl mx-auto mb-16"
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-8 tracking-tight">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 text-primary mb-6">
+                <span className="text-sm font-medium">Client Success Stories</span>
+              </div>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-8 tracking-tight gradient-text">
                 Client<br />Testimonials
               </h1>
               <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
@@ -423,7 +426,7 @@ export default function Testimonials(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="text-center"
             >
-              <div className="bg-black text-white p-8 md:p-12 rounded-xl">
+              <div className="bg-primary text-white p-8 md:p-12 rounded-xl">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">
                   Ready to Transform Your Business?
                 </h2>
@@ -432,7 +435,7 @@ export default function Testimonials(): JSX.Element {
                 </p>
                 <Link 
                   href="/contact" 
-                  className="btn bg-white text-black hover:bg-gray-100 py-3 px-8 text-lg inline-block"
+                  className="btn bg-white text-primary hover:bg-gray-100 py-3 px-8 text-lg inline-block"
                 >
                   Get in Touch
                 </Link>
@@ -440,7 +443,7 @@ export default function Testimonials(): JSX.Element {
             </motion.div>
           </div>
         </section>
-        <Footer />
+        <Footer variant="white" />
       </main>
     </PageTransition>
   );
