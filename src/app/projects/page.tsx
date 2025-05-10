@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import PageTransition from '@/components/PageTransition';
+import Footer from '@/components/Footer';
 
 interface Project {
   title: string;
@@ -148,7 +149,7 @@ export default function Projects(): JSX.Element {
                 <span className="text-sm font-medium">Showcasing My Work</span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text">
-                Projects & Case Studies
+                Project Highlights
               </h1>
               <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
                 Explore a selection of my recent projects that demonstrate my expertise in automation, integration, and digital solution development.
@@ -289,6 +290,7 @@ export default function Projects(): JSX.Element {
             />
           )}
         </AnimatePresence>
+        <Footer />
       </main>
     </PageTransition>
   );

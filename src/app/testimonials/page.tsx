@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import CountUp from '@/components/CountUp';
 import PageTransition from '@/components/PageTransition';
+import Footer from '@/components/Footer';
 
 interface Testimonial {
   name: string;
@@ -172,7 +173,7 @@ export default function Testimonials(): JSX.Element {
                 Client<br />Testimonials
               </h1>
               <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
-                Real results from real clients. Discover how our solutions have transformed businesses across industries.
+                Real results from real clients. Discover how my solutions have transformed businesses across industries.
               </p>
             </motion.div>
 
@@ -382,8 +383,8 @@ export default function Testimonials(): JSX.Element {
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Results That Speak Volumes</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Our solutions deliver measurable impact for businesses across industries. 
-                Here's the quantifiable difference we've made for our clients.
+                My solutions deliver measurable impact for businesses across industries. 
+                Here's the quantifiable difference I've made for my clients.
               </p>
             </motion.div>
             
@@ -437,6 +438,7 @@ export default function Testimonials(): JSX.Element {
             </motion.div>
           </div>
         </section>
+        <Footer />
       </main>
     </PageTransition>
   );

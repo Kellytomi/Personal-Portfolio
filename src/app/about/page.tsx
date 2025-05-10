@@ -1,11 +1,12 @@
 "use client";
 
 import Navigation from '@/components/Navigation';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import Link from 'next/link';
 import { useRef } from 'react';
 import Image from 'next/image';
 import PageTransition from '@/components/PageTransition';
+import Footer from '@/components/Footer';
 
 export default function About(): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -14,8 +15,6 @@ export default function About(): JSX.Element {
     offset: ["start start", "end start"]
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  
   // Education timeline data
   const education = [
     {
@@ -239,8 +238,9 @@ export default function About(): JSX.Element {
                     {[
                       { name: 'Workflow Automation', level: 95, icon: '⚡' },
                       { name: 'API Integrations', level: 90, icon: '🔄' },
-                      { name: 'Document Solutions', level: 92, icon: '📄' },
                       { name: 'Web Development', level: 88, icon: '💻' },
+                      { name: 'Mobile Development (Flutter)', level: 87, icon: '📱' },
+                      { name: 'Document Solutions', level: 92, icon: '📄' },
                       { name: 'Project Management', level: 85, icon: '📊' },
                     ].map((skill, index) => (
                       <div key={index} className="space-y-2">
@@ -310,8 +310,90 @@ export default function About(): JSX.Element {
           </div>
         </section>
         
+        {/* Certifications Section - Full Width */}
+        <section className="py-16 bg-gray-50">
+          <div className="container">
+            <motion.h3
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-2xl font-bold mb-8 flex items-center"
+            >
+              <span className="inline-block w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center mr-4">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.5 15.5L10.5 13.5M10.5 13.5L12.5 17.5M10.5 13.5L14.5 9.5M14.5 9.5L18.5 7.5M14.5 9.5L16.5 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+              Certifications & Credentials
+            </motion.h3>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                {
+                  name: 'Certified Zapier Expert',
+                  issuer: 'Zapier',
+                  year: '2022',
+                  color: 'from-orange-400 to-red-500',
+                  hoverClass: 'hover:from-orange-400 hover:to-red-500',
+                  icon: '⚡'
+                },
+                {
+                  name: 'Flutter Developer',
+                  issuer: 'Google',
+                  year: '2021',
+                  color: 'from-blue-400 to-indigo-500',
+                  hoverClass: 'hover:from-blue-400 hover:to-indigo-500',
+                  icon: '📱'
+                },
+                {
+                  name: 'Next.js & React Pro',
+                  issuer: 'Vercel',
+                  year: '2022',
+                  color: 'from-slate-700 to-slate-900',
+                  hoverClass: 'hover:from-slate-700 hover:to-slate-900',
+                  icon: '🌐'
+                },
+                {
+                  name: 'PandaDoc Partner',
+                  issuer: 'PandaDoc',
+                  year: '2023',
+                  color: 'from-blue-400 to-sky-500',
+                  hoverClass: 'hover:from-blue-400 hover:to-sky-500',
+                  icon: '📄'
+                },
+              ].map((cert, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 group"
+                >
+                  <div className={`bg-gradient-to-r from-gray-400 to-gray-600 ${cert.hoverClass} text-white p-6 transition-all duration-500`}>
+                    <div className="text-3xl mb-3">{cert.icon}</div>
+                    <h4 className="text-xl font-bold">{cert.name}</h4>
+                  </div>
+                  <div className="p-4 bg-white">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">
+                        {cert.issuer}
+                      </span>
+                      <span className="text-xs bg-gray-200 text-gray-600 group-hover:bg-primary/10 group-hover:text-primary px-2 py-1 rounded-full transition-all duration-300">
+                        {cert.year}
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
         {/* Call to Action */}
-        <section className="py-20 bg-gradient-to-br from-primary to-secondary text-white">
+        <section className="py-20 bg-consistent-black text-white">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -321,8 +403,8 @@ export default function About(): JSX.Element {
               className="text-center max-w-3xl mx-auto"
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
-              <p className="text-lg mb-8 text-white/80">
-                Let's work together to create innovative digital solutions that drive growth and efficiency.
+              <p className="text-lg mb-8 text-white/80 max-w-2xl mx-auto">
+                Let's discuss how I can help solve your challenges and achieve your business goals through my expertise in web development, mobile development, and workflow automation.
               </p>
               <Link href="/contact" className="btn bg-white text-primary hover:bg-white/90">
                 Get in Touch
@@ -330,6 +412,7 @@ export default function About(): JSX.Element {
             </motion.div>
           </div>
         </section>
+        <Footer />
       </main>
     </PageTransition>
   );

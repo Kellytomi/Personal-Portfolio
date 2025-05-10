@@ -8,6 +8,7 @@ import { useRef } from 'react';
 import CountUp from '@/components/CountUp';
 import PageSpacer from '@/components/PageSpacer';
 import PageTransition from '@/components/PageTransition';
+import Footer from '@/components/Footer';
 
 export default function Home(): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -134,31 +135,31 @@ export default function Home(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="text-center mb-16"
             >
-              <h2 className="section-title mb-4">What I Do</h2>
+              <h2 className="section-title mb-4">My Expertise</h2>
               <p className="section-subtitle max-w-2xl mx-auto">
-                I specialize in creating seamless digital experiences that automate workflows and integrate systems
+                I specialize in creating seamless digital experiences that drive growth and efficiency
               </p>
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  title: 'Workflow Automation',
-                  description: 'Streamline repetitive tasks and create efficient processes that save time and reduce errors.',
-                  icon: '⚡',
-                  gradient: 'from-[#FF4E50] to-[#F9D423]',
-                },
-                {
-                  title: 'System Integration',
-                  description: 'Connect your favorite tools and applications to create a unified ecosystem.',
-                  icon: '🔄',
+                  title: 'Web Development',
+                  description: 'I build responsive, performant websites and web applications using modern frameworks and best practices.',
+                  icon: '🌐',
                   gradient: 'from-[#56CCF2] to-[#2F80ED]',
                 },
                 {
-                  title: 'Digital Solutions',
-                  description: 'Custom digital tools and applications tailored to your specific business needs.',
-                  icon: '💻',
+                  title: 'Mobile Development',
+                  description: 'I create powerful native and cross-platform mobile applications with intuitive interfaces and powerful functionality.',
+                  icon: '📱',
                   gradient: 'from-[#6A11CB] to-[#2575FC]',
+                },
+                {
+                  title: 'Workflow Automation',
+                  description: 'I streamline operations with intelligent automation that eliminates repetitive tasks and creates efficient processes.',
+                  icon: '⚡',
+                  gradient: 'from-[#FF4E50] to-[#F9D423]',
                 },
               ].map((service, index) => (
                 <motion.div
@@ -178,6 +179,12 @@ export default function Home(): JSX.Element {
                   <p className="text-muted">
                     {service.description}
                   </p>
+                  <Link href={`/skills`} className="inline-flex items-center mt-4 text-primary font-medium">
+                    Learn more
+                    <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
                 </motion.div>
               ))}
             </div>
@@ -257,73 +264,7 @@ export default function Home(): JSX.Element {
             </div>
           </div>
         </section>
-
-        {/* Featured Services */}
-        <section className="py-32 bg-white relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-surface to-white" />
-          <div className="container relative">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-16"
-            >
-              <h2 className="section-title mb-4">Our Expertise</h2>
-              <p className="section-subtitle max-w-2xl mx-auto">
-                Delivering comprehensive digital solutions that drive growth and efficiency
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  title: 'Workflow Automation',
-                  description: 'Streamline operations with intelligent automation using Zapier, Make, and custom integrations.',
-                  icon: '⚡',
-                  gradient: 'from-[#FF6B6B] to-[#4ECDC4]',
-                },
-                {
-                  title: 'Document Solutions',
-                  description: 'Transform document processes with smart automation and seamless CRM integration.',
-                  icon: '📄',
-                  gradient: 'from-[#A8E6CF] to-[#3D84A8]',
-                },
-                {
-                  title: 'Digital Development',
-                  description: 'Create powerful web and mobile applications using cutting-edge technologies.',
-                  icon: '💻',
-                  gradient: 'from-[#FFD93D] to-[#FF6B6B]',
-                },
-              ].map((service, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="card p-8 group"
-                >
-                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-r ${service.gradient} flex items-center justify-center text-2xl mb-6`}>
-                    {service.icon}
-                  </div>
-                  <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted">
-                    {service.description}
-                  </p>
-                  <Link href={`/services#${service.title.toLowerCase().replace(' ', '-')}`} className="inline-flex items-center mt-4 text-primary font-medium">
-                    Learn more
-                    <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Footer />
       </main>
     </PageTransition>
   );

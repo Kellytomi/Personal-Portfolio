@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import PageTransition from '@/components/PageTransition';
+import Footer from '@/components/Footer';
 
 interface Skill {
   name: string;
@@ -49,17 +50,31 @@ export default function Skills(): JSX.Element {
       ],
     },
     {
-      category: 'Development',
-      description: 'Building modern web and mobile applications with cutting-edge technologies',
-      moreInfo: 'My development approach focuses on creating scalable, maintainable applications using the latest technologies. I prioritize performance, accessibility, and user experience in every project.',
-      icon: '💻',
+      category: 'Web Development',
+      description: 'Building modern web applications with cutting-edge technologies',
+      moreInfo: 'My development approach focuses on creating scalable, maintainable web applications using the latest technologies. I prioritize performance, accessibility, and user experience in every project.',
+      icon: '🌐',
       iconBg: 'from-blue-400 to-indigo-500',
       skills: [
         { name: 'Next.js', level: 90, color: '#000000', icon: '/skills/nextjs.svg' },
         { name: 'React', level: 88, color: '#61DAFB', icon: '/skills/react.svg' },
         { name: 'TypeScript', level: 85, color: '#3178C6', icon: '/skills/typescript.svg' },
         { name: 'Node.js', level: 82, color: '#339933', icon: '/skills/nodejs.svg' },
-        { name: 'Flutter', level: 75, color: '#02569B', icon: '/skills/flutter.svg' },
+        { name: 'Tailwind CSS', level: 92, color: '#38B2AC', icon: '/skills/tailwind.svg' },
+      ],
+    },
+    {
+      category: 'Mobile Development',
+      description: 'Creating native and cross-platform mobile applications',
+      moreInfo: 'I build high-performance mobile applications that provide exceptional user experiences. Using Flutter, I can deliver beautiful, natively compiled applications from a single codebase.',
+      icon: '📱',
+      iconBg: 'from-blue-400 to-indigo-500',
+      skills: [
+        { name: 'Flutter', level: 87, color: '#02569B', icon: '/skills/flutter.svg' },
+        { name: 'Dart', level: 85, color: '#0175C2', icon: '/skills/dart.svg' },
+        { name: 'Firebase', level: 82, color: '#FFCA28', icon: '/skills/firebase.svg' },
+        { name: 'RESTful APIs', level: 90, color: '#61AFFE', icon: '/skills/api.svg' },
+        { name: 'UI/UX Design', level: 80, color: '#FF3366', icon: '/skills/ui-ux.svg' },
       ],
     },
     {
@@ -73,19 +88,6 @@ export default function Skills(): JSX.Element {
         { name: 'DocuSign', level: 85, color: '#FDB52B', icon: '/skills/docusign.svg' },
         { name: 'Document AI', level: 80, color: '#4285F4', icon: '/skills/documentai.svg' },
         { name: 'PDF Automation', level: 90, color: '#FF0000', icon: '/skills/pdf.svg' },
-      ],
-    },
-    {
-      category: 'Design & Branding',
-      description: 'Creating visually appealing and user-friendly digital experiences',
-      moreInfo: 'Good design is essential for successful digital products. I focus on creating clean, intuitive interfaces that enhance user experience while reflecting your brand identity.',
-      icon: '🎨',
-      iconBg: 'from-pink-400 to-red-500',
-      skills: [
-        { name: 'UI/UX Design', level: 85, color: '#FF3366', icon: '/skills/ui-ux.svg' },
-        { name: 'Responsive Design', level: 90, color: '#7952B3', icon: '/skills/responsive.svg' },
-        { name: 'Brand Identity', level: 80, color: '#F24E1E', icon: '/skills/brand.svg' },
-        { name: 'Tailwind CSS', level: 92, color: '#38B2AC', icon: '/skills/tailwind.svg' },
       ],
     },
   ];
@@ -347,6 +349,7 @@ export default function Skills(): JSX.Element {
             </motion.div>
           </div>
         </section>
+        <Footer />
       </main>
     </PageTransition>
   );
