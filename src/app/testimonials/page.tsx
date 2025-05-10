@@ -414,27 +414,29 @@ export default function Testimonials(): JSX.Element {
         </section>
         
         {/* CTA Section */}
-        <section className="py-20 bg-primary">
+        <section className="py-20 bg-white">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="text-center max-w-3xl mx-auto"
+              className="text-center"
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-                Ready to Transform Your Business?
-              </h2>
-              <p className="text-lg mb-8 text-white/80 max-w-2xl mx-auto">
-                Let's discuss how my expertise can help solve your challenges and achieve your business goals.
-              </p>
-              <Link 
-                href="/contact" 
-                className="btn bg-white text-primary hover:bg-white/90 hover:shadow-xl hover:shadow-black/10"
-              >
-                Get in Touch
-              </Link>
+              <div className="bg-black text-white p-8 md:p-12 rounded-xl">
+                <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                  Ready to Transform Your Business?
+                </h2>
+                <p className="text-lg mb-8 max-w-2xl mx-auto">
+                  Let's discuss how my expertise can help solve your challenges and achieve your business goals.
+                </p>
+                <Link 
+                  href="/contact" 
+                  className="btn bg-white text-black hover:bg-gray-100 py-3 px-8 text-lg inline-block"
+                >
+                  Get in Touch
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>

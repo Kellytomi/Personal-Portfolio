@@ -269,13 +269,18 @@ export default function Projects(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="mt-20 text-center"
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">Have a project in mind?</h2>
-              <p className="text-muted mb-8 max-w-xl mx-auto">
-                I'm always open to discussing new projects and how I can help bring your ideas to life.
-              </p>
-              <Link href="/contact" className="btn btn-primary">
-                Let's Talk
-              </Link>
+              <div className="bg-black text-white p-8 md:p-12 rounded-xl">
+                <h2 className="text-2xl md:text-3xl font-bold mb-4">Have a project in mind?</h2>
+                <p className="text-lg mb-8 max-w-2xl mx-auto">
+                  I'm always open to discussing new projects and how I can help bring your ideas to life.
+                </p>
+                <Link 
+                  href="/contact" 
+                  className="btn bg-white text-black hover:bg-gray-100 py-3 px-8 text-lg inline-block"
+                >
+                  Let's Talk
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>

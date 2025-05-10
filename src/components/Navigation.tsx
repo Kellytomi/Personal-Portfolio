@@ -17,6 +17,7 @@ const navItems: NavItem[] = [
   { name: 'About', href: '/about' },
   { name: 'Skills', href: '/skills' },
   { name: 'Projects', href: '/projects' },
+  { name: 'Portfolio', href: '/portfolio' },
   { name: 'Testimonials', href: '/testimonials' },
   { name: 'Contact', href: '/contact' },
 ];
@@ -33,7 +34,7 @@ export default function Navigation(): JSX.Element {
             <Link href="/" className="flex items-center h-full">
               <Image 
                 src="/images/etoma.png" 
-                alt="Fxsion Logo" 
+                alt="Etoma-Etoto Kelvin Odi" 
                 width={150} 
                 height={40} 
                 className="object-contain mt-1"

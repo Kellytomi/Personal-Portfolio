@@ -3,7 +3,11 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-export default function Footer(): JSX.Element {
+interface FooterProps {
+  variant?: 'black' | 'white';
+}
+
+export default function Footer({ variant = 'black' }: FooterProps): JSX.Element {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -12,6 +16,8 @@ export default function Footer(): JSX.Element {
   };
 
   const currentYear = new Date().getFullYear();
+  
+  const isWhite = variant === 'white';
 
   return (
     <motion.footer
@@ -19,18 +25,18 @@ export default function Footer(): JSX.Element {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="bg-consistent-black text-white py-4"
+      className={`${isWhite ? 'bg-white text-black' : 'bg-consistent-black text-white'} py-5`}
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors"
+              className={`flex items-center gap-1 ${isWhite ? 'text-black hover:text-gray-700' : 'text-white hover:text-gray-300'} transition-colors text-xs sm:text-sm md:text-base`}
               aria-label="Back to top"
             >
               <svg 
-                className="w-5 h-5" 
+                className="w-4 h-4 sm:w-5 sm:h-5" 
                 viewBox="0 0 24 24" 
                 fill="none" 
                 xmlns="http://www.w3.org/2000/svg"
@@ -47,18 +53,18 @@ export default function Footer(): JSX.Element {
             </button>
           </div>
           
-          <div className="text-center text-white/80">
+          <div className={`text-center ${isWhite ? 'text-black/70' : 'text-white/80'} text-xs sm:text-sm md:text-base mx-2`}>
             {currentYear} © Etoma-Etoto Kelvin Odi
           </div>
           
           <div className="flex items-center">
             <Link 
               href="/contact"
-              className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors"
+              className={`flex items-center gap-1 ${isWhite ? 'text-black hover:text-gray-700' : 'text-white hover:text-gray-300'} transition-colors text-xs sm:text-sm md:text-base`}
             >
               Contact Me
               <svg 
-                className="w-5 h-5" 
+                className="w-4 h-4 sm:w-5 sm:h-5" 
                 viewBox="0 0 24 24" 
                 fill="none" 
                 xmlns="http://www.w3.org/2000/svg"

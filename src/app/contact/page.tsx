@@ -89,7 +89,7 @@ export default function Contact(): JSX.Element {
                       />
                     </div>
                     <div>
-                      <h3 className="text-lg font-medium">Kelvin Odi</h3>
+                      <h3 className="text-lg font-medium">Etoma-etoto (Kelvin) Odi</h3>
                       <p className="text-gray-400">Founder, Fxsion</p>
                     </div>
                   </div>

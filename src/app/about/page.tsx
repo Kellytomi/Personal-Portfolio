@@ -393,22 +393,24 @@ export default function About(): JSX.Element {
         </section>
         
         {/* Call to Action */}
-        <section className="py-20 bg-consistent-black text-white">
+        <section className="py-20 bg-white">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="text-center max-w-3xl mx-auto"
+              className="text-center"
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
-              <p className="text-lg mb-8 text-white/80 max-w-2xl mx-auto">
-                Let's discuss how I can help solve your challenges and achieve your business goals through my expertise in web development, mobile development, and workflow automation.
-              </p>
-              <Link href="/contact" className="btn bg-white text-primary hover:bg-white/90">
-                Get in Touch
-              </Link>
+              <div className="bg-black text-white p-8 md:p-12 rounded-xl">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
+                <p className="text-lg mb-8 text-white/80 max-w-2xl mx-auto">
+                  Let's discuss how I can help solve your challenges and achieve your business goals through my expertise in web development, mobile development, and workflow automation.
+                </p>
+                <Link href="/contact" className="btn bg-white text-black hover:bg-gray-100 py-3 px-8 text-lg inline-block">
+                  Get in Touch
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>

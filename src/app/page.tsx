@@ -50,10 +50,10 @@ export default function Home(): JSX.Element {
                   </div>
                   <h4 className="text-primary font-medium mb-4">Hi, I'm Etoma (Kelvin)</h4>
                   <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6">
-                    Digital Solutions <span className="gradient-text">Expert</span>
+                    Full-Stack Developer <span className="gradient-text">&</span> Workflow Automation Specialist
                   </h1>
                   <p className="text-base sm:text-lg md:text-xl mb-10 text-muted max-w-xl mx-auto lg:mx-0">
-                    I help businesses streamline operations and increase efficiency through automation, integration, and digital solutions.
+                    Building seamless apps, powerful websites, and smart automated systems that transform how businesses operate. Combining technical expertise with a passion for elegant solutions.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 sm:mb-0 mb-16 max-w-xs mx-auto sm:mx-0">
                     <Link href="/contact" className="btn btn-primary text-center py-2.5 px-5">Get in Touch</Link>
@@ -148,44 +148,52 @@ export default function Home(): JSX.Element {
                   description: 'I build responsive, performant websites and web applications using modern frameworks and best practices.',
                   icon: '🌐',
                   gradient: 'from-[#56CCF2] to-[#2F80ED]',
+                  skillsLink: '/skills#web-development'
                 },
                 {
                   title: 'Mobile Development',
                   description: 'I create powerful native and cross-platform mobile applications with intuitive interfaces and powerful functionality.',
                   icon: '📱',
                   gradient: 'from-[#6A11CB] to-[#2575FC]',
+                  skillsLink: '/skills#mobile-development'
                 },
                 {
                   title: 'Workflow Automation',
                   description: 'I streamline operations with intelligent automation that eliminates repetitive tasks and creates efficient processes.',
                   icon: '⚡',
                   gradient: 'from-[#FF4E50] to-[#F9D423]',
+                  skillsLink: '/skills#automation-and-integration'
                 },
               ].map((service, index) => (
-                <motion.div
+                <Link 
+                  href={service.skillsLink} 
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="card p-8 group"
+                  className="block"
                 >
-                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-r ${service.gradient} flex items-center justify-center text-2xl mb-6`}>
-                    {service.icon}
-                  </div>
-                  <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted">
-                    {service.description}
-                  </p>
-                  <Link href={`/skills`} className="inline-flex items-center mt-4 text-primary font-medium">
-                    Learn more
-                    <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </Link>
-                </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="card p-8 group h-full cursor-pointer hover:shadow-md transition-all duration-300"
+                  >
+                    <div className={`w-16 h-16 rounded-lg bg-gray-100 group-hover:bg-gradient-to-r ${service.gradient} flex items-center justify-center text-2xl mb-6 transition-all duration-300`}>
+                      {service.icon}
+                    </div>
+                    <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-muted mb-4">
+                      {service.description}
+                    </p>
+                    <div className="inline-flex items-center text-primary font-medium">
+                      Learn more
+                      <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </div>

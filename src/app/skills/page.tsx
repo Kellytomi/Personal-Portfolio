@@ -3,7 +3,7 @@
 import Navigation from '@/components/Navigation';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
@@ -32,8 +32,8 @@ export default function Skills(): JSX.Element {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const [activeCategory, setActiveCategory] = useState<number>(0);
   
+  // Define skill categories
   const skillCategories: SkillCategory[] = [
     {
       category: 'Automation & Integration',
@@ -91,14 +91,63 @@ export default function Skills(): JSX.Element {
       ],
     },
   ];
-
-  // Calculate experience level
+  
+  // Helper function for generating category IDs
+  const getCategoryId = (category: string): string => {
+    return category.toLowerCase()
+      .replace(/&/g, 'and')
+      .replace(/\s+/g, '-');
+  };
+  
+  // Setup initial state for activeCategory based on URL hash
+  const [activeCategory, setActiveCategory] = useState<number>(() => {
+    // This function runs only on initial render
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        const index = skillCategories.findIndex(
+          category => getCategoryId(category.category) === hash
+        );
+        if (index !== -1) {
+          return index;
+        }
+      }
+    }
+    return 0; // Default to first category if no hash or no match
+  });
+  
+  // Experience level calculation
   const getExperienceLevel = (level: number): string => {
     if (level >= 90) return 'Expert';
     if (level >= 80) return 'Advanced';
     if (level >= 70) return 'Proficient';
     return 'Intermediate';
   };
+  
+  // Handle URL hash changes and scroll to the correct section
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.substring(1);
+      
+      if (hash) {
+        const element = document.getElementById(hash);
+        if (element) {
+          // Delay the scroll slightly to ensure the page has rendered
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }, 300);
+        }
+        
+        // Set active category based on hash
+        const index = skillCategories.findIndex(
+          category => getCategoryId(category.category) === hash
+        );
+        if (index !== -1 && index !== activeCategory) {
+          setActiveCategory(index);
+        }
+      }
+    }
+  }, []); // Empty dependency array so it only runs once on mount
 
   return (
     <PageTransition>
@@ -147,6 +196,7 @@ export default function Skills(): JSX.Element {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ y: -3 }}
                   whileTap={{ y: 0 }}
+                  id={getCategoryId(category.category)}
                 >
                   <span className="flex items-center gap-2">
                     <span>{category.icon}</span>
@@ -170,7 +220,7 @@ export default function Skills(): JSX.Element {
                 transition={{ duration: 0.5 }}
                 key={`info-${activeCategory}`}
               >
-                <div className="sticky top-32">
+                <div className="sticky top-32" id={getCategoryId(skillCategories[activeCategory].category)}>
                   <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${skillCategories[activeCategory].iconBg} flex items-center justify-center mb-6 text-3xl shadow-lg`}>
                     {skillCategories[activeCategory].icon}
                   </div>
@@ -306,46 +356,30 @@ export default function Skills(): JSX.Element {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-primary relative overflow-hidden">
-          <motion.div 
-            className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"
-            animate={{ 
-              scale: [1, 1.1, 1],
-              rotate: [0, 3, 0]
-            }}
-            transition={{ 
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-          
+        <section className="py-20 bg-white relative">
           <div className="container relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="text-center max-w-3xl mx-auto"
+              className="text-center"
             >
-              <h2 className="font-display text-4xl font-bold mb-6 text-surface">
-                Let's Put These Skills to Work
-              </h2>
-              <p className="text-lg mb-8 text-surface/80 max-w-2xl mx-auto leading-relaxed">
-                Looking for a technical partner who can bring your ideas to life?
-                Let's discuss how my expertise can help solve your challenges and achieve your business goals.
-              </p>
-              <motion.div 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-              >
+              <div className="bg-black text-white p-8 md:p-12 rounded-xl">
+                <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                  Let's Put These Skills to Work
+                </h2>
+                <p className="text-lg mb-8 max-w-2xl mx-auto">
+                  Looking for a technical partner who can bring your ideas to life?
+                  Let's discuss how my expertise can help solve your challenges and achieve your business goals.
+                </p>
                 <Link 
                   href="/contact" 
-                  className="btn bg-surface text-primary hover:bg-surface/90 hover:shadow-xl hover:shadow-black/10 transition-all duration-300"
+                  className="btn bg-white text-black hover:bg-gray-100 py-3 px-8 text-lg inline-block"
                 >
                   Discuss Your Project
                 </Link>
-              </motion.div>
+              </div>
             </motion.div>
           </div>
         </section>
