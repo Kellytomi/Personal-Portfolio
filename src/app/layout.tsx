@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Syne } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import ClientOnly from "@/components/ClientOnly";
+import CommandPalette from "@/components/CommandPalette";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
       <body className="bg-surface text-text" style={{fontFamily: 'var(--font-jakarta), sans-serif'}}>
         <ClientOnly>
           <CustomCursor />
+          <CommandPalette />
         </ClientOnly>
         {children}
       </body>
