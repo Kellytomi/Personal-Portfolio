@@ -28,7 +28,9 @@ export default function Home(): JSX.Element {
     const handleLoad = () => {
       setTimeout(() => {
         setIsLoading(false);
-      }, 300); // Small delay to ensure smooth transition
+        // Add loaded class to body to trigger background image
+        document.body.classList.add('loaded');
+      }, 800); // Small delay to ensure smooth transition and show the animation
     };
     
     // If the window is already loaded, run immediately
@@ -41,7 +43,8 @@ export default function Home(): JSX.Element {
     // Initial timeout in case load event doesn't fire
     const timeout = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+      document.body.classList.add('loaded');
+    }, 2500); // Increased timeout to allow animation to be seen
     
     return () => {
       window.removeEventListener('load', handleLoad);
@@ -55,7 +58,18 @@ export default function Home(): JSX.Element {
         {/* Loading screen */}
         {isLoading && (
           <div className="loading-screen">
-            <div className="loading-animation"></div>
+            <div className="loader">
+              <div className="loader-cube">
+                <div className="loader-face"></div>
+                <div className="loader-face"></div>
+                <div className="loader-face"></div>
+                <div className="loader-face"></div>
+                <div className="loader-face"></div>
+                <div className="loader-face"></div>
+              </div>
+            </div>
+            <div className="loading-text">CREATING EXPERIENCE</div>
+            <div className="progress-bar"></div>
           </div>
         )}
         

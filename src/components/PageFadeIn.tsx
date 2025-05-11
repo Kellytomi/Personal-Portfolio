@@ -1,34 +1,30 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface PageFadeInProps {
   children: ReactNode;
 }
 
 export default function PageFadeIn({ children }: PageFadeInProps) {
-  const [isVisible, setIsVisible] = useState(false);
-
+  const [mounted, setMounted] = useState(false);
+  
   useEffect(() => {
-    // Small delay to ensure the component has mounted
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-      // Add loaded class to body to trigger background image
-      document.body.classList.add('loaded');
-    }, 100);
-
-    return () => clearTimeout(timer);
+    setMounted(true);
   }, []);
-
+  
+  if (!mounted) {
+    return null;
+  }
+  
   return (
-    <div 
-      style={{ 
-        opacity: isVisible ? 1 : 0,
-        transition: 'opacity 0.5s ease-in-out',
-        visibility: isVisible ? 'visible' : 'hidden'
-      }}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: 'easeInOut' }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 } 
