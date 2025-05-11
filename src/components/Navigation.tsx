@@ -68,7 +68,7 @@ export default function Navigation(): JSX.Element {
             {/* CTA Button */}
             <div className="hidden md:block">
               <Link href="/contact" className="cta-button">
-                <span>Contact Me</span>
+                <span>Say Hello</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -117,7 +117,7 @@ export default function Navigation(): JSX.Element {
                 className="block px-4 py-3 mt-4 bg-primary text-white rounded-lg text-center font-medium"
                 onClick={() => setIsOpen(false)}
               >
-                Contact Me
+                Say Hello
               </Link>
             </div>
           </motion.div>

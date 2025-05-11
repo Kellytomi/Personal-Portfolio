@@ -50,21 +50,21 @@ export default function Home(): JSX.Element {
                       <span className="inline-block w-2.5 h-2.5 bg-green-500 rounded-full"></span>
                       <span className="animate-ping absolute inline-flex h-2.5 w-2.5 rounded-full bg-green-400 opacity-75"></span>
                     </span>
-                    Available for Projects
+                    Open to new projects
                   </div>
-                  <h4 className="text-primary font-medium mb-2 md:mb-3">Hi, I'm Etoma (Kelvin)</h4>
+                  <h4 className="text-primary font-medium mb-2 md:mb-3">Hey there, I'm Etoma (Kelvin) 👋</h4>
                   <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-5">
-                    Turn Hours of <span className="gradient-text">Coding</span><br />into Minutes.
+                    I build <span className="gradient-text">awesome digital stuff</span> that people love
                   </h1>
                   <p className="text-base sm:text-lg mb-6 md:mb-8 text-muted max-w-xl mx-auto lg:mx-0">
-                    Building seamless apps, powerful websites, and smart automated systems that transform how businesses operate. Combining technical expertise with a passion for elegant solutions.
+                    When I'm not coding, you'll find me playing basketball, binging Netflix shows, or experimenting with new recipes. My passion is creating digital experiences that make people's lives easier and more enjoyable.
                   </p>
                   <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:mb-0 mb-10 max-w-md mx-auto lg:mx-0">
-                    <Link href="/skills" className="cta-button">
-                      <span>See My Skills</span>
+                    <Link href="/about" className="cta-button">
+                      <span>Get to know me</span>
                     </Link>
                     <Link href="/projects" className="btn btn-secondary text-center">
-                      View Projects
+                      See my work
                     </Link>
                   </div>
                 </motion.div>
@@ -73,13 +73,12 @@ export default function Home(): JSX.Element {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="hidden lg:block relative"
+                className="lg:block relative"
               >
                 <div className="relative h-[60vh] max-h-[600px] rounded-xl overflow-hidden">
-                  <div className="absolute inset-0 bg-primary/5 z-10"></div>
                   <Image
-                    src="/desk-header.jpg"
-                    alt="Digital Workspace"
+                    src="/profile-casual.jpg"
+                    alt="Kelvin smiling"
                     fill
                     className="object-cover rounded-xl"
                     priority
@@ -87,17 +86,15 @@ export default function Home(): JSX.Element {
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent mix-blend-multiply rounded-xl" />
                 </div>
                 
-                {/* Floating highlighted box similar to ACAD AI */}
+                {/* Floating highlighted box with personal touch */}
                 <div className="absolute -bottom-6 -left-6 bg-white rounded-lg shadow-card p-6 max-w-xs">
                   <div className="flex items-center gap-4 mb-3">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="text-primary">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
+                      <span className="text-xl">🎮</span>
                     </div>
-                    <h3 className="font-bold">Automate every step</h3>
+                    <h3 className="font-bold">Fun fact</h3>
                   </div>
-                  <p className="text-sm text-muted">from creation to deployment and managing results for all your code</p>
+                  <p className="text-sm text-muted">I once stayed up 48 hours straight to finish a game jam project. Worth it!</p>
                 </div>
               </motion.div>
             </div>
@@ -108,7 +105,7 @@ export default function Home(): JSX.Element {
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              <p className="text-sm mb-1">Scroll to explore</p>
+              <p className="text-sm mb-1">Scroll down for more</p>
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -116,17 +113,119 @@ export default function Home(): JSX.Element {
           </div>
         </section>
 
-        {/* Stats */}
+        {/* Personal section - Restructured */}
         <section className="py-20 relative bg-white">
           <div className="absolute inset-0 bg-gradient-to-b from-surface to-white" />
           <div className="container relative">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-center mb-8"
+              >
+                <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">My Story</div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">A bit about me</h2>
+              </motion.div>
+              
+              <div className="grid md:grid-cols-3 gap-8 items-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="md:col-span-1"
+                >
+                  <div className="relative h-64 md:h-80 rounded-xl overflow-hidden">
+                    <Image
+                      src="/profile-casual-2.jpg"
+                      alt="Kelvin coding"
+                      fill
+                      className="object-cover rounded-xl"
+                    />
+                  </div>
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="md:col-span-2 space-y-4"
+                >
+                  <div className="bg-white p-6 rounded-xl shadow-sm">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-2xl">👨‍💻</span>
+                      <h3 className="text-xl font-bold">The Dev Journey</h3>
+                    </div>
+                    <p className="text-muted">
+                      I'm Kelvin, a self-taught developer with a passion for creating digital experiences that make people smile. 
+                      I started coding when I was 14, building simple games and websites for fun.
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white p-6 rounded-xl shadow-sm">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-2xl">🛠️</span>
+                      <h3 className="text-xl font-bold">What Drives Me</h3>
+                    </div>
+                    <p className="text-muted">
+                      These days, I love combining creativity with technology to build things that solve real problems. 
+                      Whether it's a sleek mobile app, an intuitive website, or a clever automation tool, I'm happiest when I'm making something that helps people.
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white p-6 rounded-xl shadow-sm">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-2xl">🏀</span>
+                      <h3 className="text-xl font-bold">Outside the Code</h3>
+                    </div>
+                    <p className="text-muted">
+                      When I'm not in front of my computer, I'm probably shooting hoops at the local court, trying to perfect my pasta carbonara recipe, or binge-watching sci-fi shows with my cat, Pixel.
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="flex justify-center mt-8"
+              >
+                <Link href="/about" className="btn btn-primary">
+                  More about me
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* What I Do section (renamed from Stats) */}
+        <section className="py-20 relative bg-white">
+          <div className="container relative">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-center mb-12"
+            >
+              <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">What I Do</div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Things I'm good at</h2>
+            </motion.div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
               {[
-                { value: 95, label: 'Client Satisfaction', suffix: '%' },
-                { value: 150, label: 'Workflows Automated', suffix: '+' },
-                { value: 30, label: 'Integrations Mastered', suffix: '+' },
-                { value: 5, label: 'Years Experience', suffix: '+' },
-              ].map((stat, index) => (
+                { title: 'Frontend Development', description: 'Creating beautiful, responsive interfaces that people enjoy using', icon: '💻' },
+                { title: 'Problem Solving', description: 'Finding elegant solutions to complex technical challenges', icon: '🧩' },
+                { title: 'Mobile Apps', description: 'Building native-feeling experiences for iOS and Android', icon: '📱' },
+                { title: 'UI/UX Design', description: 'Crafting intuitive interfaces with the user in mind', icon: '🎨' },
+                { title: 'Smart Automation', description: 'Making computers do the boring stuff so humans don\'t have to', icon: '⚡' },
+                { title: 'Learning New Tech', description: 'Quickly picking up new tools and frameworks', icon: '🚀' },
+              ].map((skill, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -135,17 +234,16 @@ export default function Home(): JSX.Element {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="bg-white p-6 rounded-xl shadow-card text-center"
                 >
-                  <div className="text-4xl md:text-5xl font-display font-bold text-primary mb-2">
-                    <CountUp end={stat.value} suffix={stat.suffix} />
-                  </div>
-                  <div className="text-muted">{stat.label}</div>
+                  <div className="text-4xl mb-4">{skill.icon}</div>
+                  <h3 className="text-xl font-bold mb-2 text-primary">{skill.title}</h3>
+                  <p className="text-muted">{skill.description}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Featured Services */}
+        {/* Services section with more personal tone */}
         <section className="py-32 bg-white relative">
           <div className="container relative">
             <motion.div
@@ -155,32 +253,32 @@ export default function Home(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="text-center mb-16"
             >
-              <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">My Services</div>
-              <h2 className="section-title mb-4">My Expertise</h2>
+              <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">My Skills</div>
+              <h2 className="section-title mb-4">What I Love Building</h2>
               <p className="section-subtitle max-w-2xl mx-auto">
-                I specialize in creating seamless digital experiences that drive growth and efficiency
+                Here are the things I'm passionate about creating
               </p>
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  title: 'Web Development',
-                  description: 'I build responsive, performant websites and web applications using modern frameworks and best practices.',
+                  title: 'Websites & Apps',
+                  description: 'I create engaging websites and web apps that are not only beautiful but also fun to use. I focus on the details that make users smile.',
                   icon: '🌐',
                   gradient: 'from-[#3151B5] to-[#56CCF2]',
                   skillsLink: '/skills#web-development'
                 },
                 {
-                  title: 'Mobile Development',
-                  description: 'I create powerful native and cross-platform mobile applications with intuitive interfaces and powerful functionality.',
+                  title: 'Mobile Experiences',
+                  description: 'I build mobile apps that people actually want to use. No clunky interfaces here - just smooth, intuitive experiences that feel natural.',
                   icon: '📱',
                   gradient: 'from-[#3151B5] to-[#56CCF2]',
                   skillsLink: '/skills#mobile-development'
                 },
                 {
-                  title: 'Workflow Automation',
-                  description: 'I streamline operations with intelligent automation that eliminates repetitive tasks and creates efficient processes.',
+                  title: 'Smart Automation',
+                  description: 'I love making computers do boring stuff so humans don\'t have to. It\'s like magic, but with code instead of wands.',
                   icon: '⚡',
                   gradient: 'from-[#3151B5] to-[#56CCF2]',
                   skillsLink: '/skills#automation-and-integration'
@@ -208,7 +306,7 @@ export default function Home(): JSX.Element {
                       {service.description}
                     </p>
                     <div className="inline-flex items-center text-primary font-medium">
-                      Learn more
+                      Check it out
                       <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
@@ -220,7 +318,7 @@ export default function Home(): JSX.Element {
           </div>
         </section>
 
-        {/* Process Section */}
+        {/* How I Work section with more personal approach */}
         <section className="py-32 bg-surface relative">
           <div className="container relative">
             <motion.div
@@ -230,10 +328,10 @@ export default function Home(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="text-center mb-16"
             >
-              <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">How I Work</div>
-              <h2 className="section-title mb-4">My Development Process</h2>
+              <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">My Approach</div>
+              <h2 className="section-title mb-4">How I Like to Work</h2>
               <p className="section-subtitle max-w-2xl mx-auto">
-                A streamlined approach to ensure efficient delivery of high-quality solutions
+                My approach is all about keeping things fun, collaborative, and focused on what matters
               </p>
             </motion.div>
 
@@ -241,34 +339,19 @@ export default function Home(): JSX.Element {
               {[
                 {
                   step: 1,
-                  title: 'Discovery & Planning',
-                  description: 'I work closely with you to understand your requirements, goals, and vision for the project.'
+                  title: 'Chat & Brainstorm',
+                  description: 'Let\'s grab a (virtual) coffee and talk about your ideas. The best solutions start with great conversations.'
                 },
                 {
                   step: 2,
-                  title: 'Design & Prototyping',
-                  description: 'Create wireframes and interactive prototypes to visualize the solution before development begins.'
+                  title: 'Sketch & Prototype',
+                  description: 'I\'ll create some mockups we can play with. It\'s like test-driving a car before buying it.'
                 },
                 {
                   step: 3,
-                  title: 'Development',
-                  description: 'Build the solution using modern technologies and frameworks, following best practices and standards.'
+                  title: 'Build & Launch',
+                  description: 'I\'ll bring our ideas to life with code, keeping you in the loop. Then we celebrate when it goes live!'
                 },
-                {
-                  step: 4,
-                  title: 'Testing & QA',
-                  description: 'Rigorous testing across devices and browsers to ensure functionality, performance, and security.'
-                },
-                {
-                  step: 5,
-                  title: 'Deployment & Launch',
-                  description: 'Smooth deployment process with complete documentation and support to ensure a successful launch.'
-                },
-                {
-                  step: 6,
-                  title: 'Maintenance & Support',
-                  description: 'Ongoing maintenance, updates, and support to keep your solution running optimally.'
-                }
               ].map((process, index) => (
                 <motion.div
                   key={index}
@@ -276,41 +359,146 @@ export default function Home(): JSX.Element {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="step-card"
+                  className="bg-white p-8 md:p-10 rounded-xl shadow-card relative overflow-hidden group"
                 >
-                  <div className="step-number">{process.step}</div>
-                  <h3 className="text-xl font-bold mb-3 text-secondary">{process.title}</h3>
-                  <p className="text-muted">{process.description}</p>
+                  <div
+                    className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/80 to-primary flex items-start justify-end p-2 text-white font-extrabold text-xl"
+                    style={{ clipPath: 'polygon(100% 0, 0 0, 100% 100%)' }}
+                  >
+                    {process.step}
+                  </div>
+                  <h3 className="text-xl font-bold mb-4 mt-4">{process.title}</h3>
+                  <p className="text-muted mb-4">{process.description}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20 bg-white">
-          <div className="container">
+        {/* Personal projects showcase */}
+        <section className="py-32 bg-white relative">
+          <div className="container relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="text-center"
+              className="text-center mb-16"
             >
-              <div className="bg-primary text-white p-8 md:p-12 rounded-xl">
-                <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">Ready to work together?</h2>
-                <p className="text-lg mb-8 text-white/80 max-w-2xl mx-auto">
-                  Let's collaborate to turn your vision into reality. Contact me to discuss your project requirements.
-                </p>
-                <Link href="/contact" className="btn bg-white text-primary hover:bg-gray-100 py-3 px-8 text-lg inline-block">
-                  Get Started
-                </Link>
-              </div>
+              <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">My Projects</div>
+              <h2 className="section-title mb-4">Stuff I've Built</h2>
+              <p className="section-subtitle max-w-2xl mx-auto">
+                Here are some of my favorite projects I've worked on recently
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Featured Project 1 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="group relative overflow-hidden rounded-xl shadow-card"
+              >
+                <div className="relative h-64 md:h-72 w-full">
+                  <Image 
+                    src="/project1.jpg" 
+                    alt="Project screenshot" 
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-3 py-1 bg-primary/90 text-white text-xs rounded-full">Personal Favorite</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-1">Recipe Finder App</h3>
+                  <p className="text-white/80 mb-3 text-sm">A mobile app that helps you find recipes based on ingredients you already have</p>
+                  <Link href="/projects" className="text-white font-medium inline-flex items-center">
+                    View project
+                    <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* Featured Project 2 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="group relative overflow-hidden rounded-xl shadow-card"
+              >
+                <div className="relative h-64 md:h-72 w-full">
+                  <Image 
+                    src="/project2.jpg" 
+                    alt="Project screenshot" 
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-3 py-1 bg-secondary/90 text-white text-xs rounded-full">Fun Project</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-1">Basketball Stats Tracker</h3>
+                  <p className="text-white/80 mb-3 text-sm">A web app I built to track my pickup basketball game stats with friends</p>
+                  <Link href="/projects" className="text-white font-medium inline-flex items-center">
+                    View project
+                    <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="flex justify-center mt-12"
+            >
+              <Link href="/projects" className="btn btn-primary">
+                See all my projects
+              </Link>
             </motion.div>
           </div>
         </section>
 
-        <Footer variant="white" />
+        {/* Contact CTA - More friendly tone */}
+        <section className="py-20 bg-gradient-to-r from-primary to-secondary relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10 pattern-dots" />
+          <div className="container relative">
+            <div className="max-w-3xl mx-auto text-center text-white">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">Let's create something awesome together!</h2>
+                <p className="text-lg text-white/80 mb-8">
+                  Got a cool project idea? Want to chat about tech? Or just want to say hi? I'd love to hear from you!
+                </p>
+                <Link 
+                  href="/contact"
+                  className="inline-block px-8 py-4 bg-white text-primary rounded-full font-bold text-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                >
+                  Get in touch
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <Footer />
       </main>
     </PageTransition>
   );

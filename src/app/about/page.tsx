@@ -110,21 +110,21 @@ export default function About(): JSX.Element {
                 <span className="text-sm font-medium">About Me</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
-                Etoma-Etoto Kelvin Odi
+                Hi, I'm Kelvin
               </h1>
               <p className="text-xl text-muted mb-8">
-                Digital Solutions Expert & Founder of Fxsion
+                Developer, basketball enthusiast, and pasta chef in training
               </p>
               <div className="prose prose-lg mb-8">
                 <p>
-                  I'm a passionate digital solutions expert with over 5 years of experience in 
-                  workflow automation, system integration, and document solutions. As the founder 
-                  of Fxsion, I help businesses transform their operations through innovative digital strategies.
+                  I'm a self-taught developer who loves creating digital stuff that people enjoy using. 
+                  I started coding as a teenager because I wanted to make my own games, and that 
+                  curiosity has evolved into a passion for building all kinds of digital experiences.
                 </p>
                 <p>
-                  My approach combines technical expertise with a deep understanding of business 
-                  processes, allowing me to create tailored solutions that drive efficiency and growth. 
-                  I believe that the right digital tools, properly implemented, can transform any organization.
+                  When I'm not glued to my keyboard, you'll find me on the basketball court trying 
+                  (and occasionally succeeding) at three-pointers, experimenting with new pasta recipes, 
+                  or binge-watching sci-fi shows with my cat, Pixel.
                 </p>
               </div>
               
@@ -157,7 +157,7 @@ export default function About(): JSX.Element {
             >
               <h2 className="section-title mb-4">My Journey</h2>
               <p className="section-subtitle max-w-2xl mx-auto">
-                The path that has shaped my expertise and approach to digital solutions
+                A slightly less boring timeline of how I got here
               </p>
             </motion.div>
             
@@ -178,7 +178,7 @@ export default function About(): JSX.Element {
                       <path d="M19.501 4H4.50098C3.67253 4 3.00098 4.67157 3.00098 5.5V11.1446C3.22566 11.0277 3.47205 10.9665 3.73209 10.9665H6.00049V10H8.00049V10.9665H16.0005V10H18.0005V10.9665H20.2689C20.5289 10.9665 20.7753 11.0277 21 11.1446V5.5C21 4.67157 20.3294 4 19.501 4Z" fill="currentColor"/>
                     </svg>
                   </span>
-                  Work Experience
+                  My Work Adventures
                 </motion.h3>
                 
                 <div className="space-y-8">
@@ -233,7 +233,7 @@ export default function About(): JSX.Element {
                         <path d="M14.75 12C14.75 13.2426 13.7426 14.25 12.5 14.25C11.2574 14.25 10.25 13.2426 10.25 12C10.25 10.7574 11.2574 9.75 12.5 9.75C13.7426 9.75 14.75 10.7574 14.75 12Z" fill="currentColor"/>
                       </svg>
                     </span>
-                    Key Skills
+                    Cool Stuff I Can Do
                   </motion.h3>
                   
                   <div className="space-y-6">
@@ -394,6 +394,48 @@ export default function About(): JSX.Element {
           </div>
         </section>
         
+        {/* Add Fun Facts section before the CTA */}
+        <section className="py-20 bg-surface">
+          <div className="container">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-center mb-16"
+            >
+              <h2 className="section-title mb-4">Fun Facts About Me</h2>
+              <p className="section-subtitle max-w-2xl mx-auto">
+                The stuff you won't find on my LinkedIn profile
+              </p>
+            </motion.div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {[
+                { icon: '🏀', title: 'Basketball Fanatic', description: 'I play pickup games twice a week and have a small collection of NBA jerseys' },
+                { icon: '🍝', title: 'Pasta Chef', description: 'I\'m on a mission to perfect my homemade carbonara recipe' },
+                { icon: '🎮', title: 'Casual Gamer', description: 'I stay up way too late playing indie games and retro classics' },
+                { icon: '🐱', title: 'Cat Person', description: 'My coding buddy is a black cat named Pixel who loves to walk on my keyboard' },
+                { icon: '🌱', title: 'Plant Dad', description: 'I have a small jungle of houseplants that somehow haven\'t died yet' },
+                { icon: '🎬', title: 'Sci-Fi Nerd', description: 'I can quote entire episodes of Firefly and The Expanse from memory' },
+              ].map((fact, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white p-6 rounded-xl shadow-card"
+                >
+                  <div className="text-3xl mb-4">{fact.icon}</div>
+                  <h3 className="text-lg font-bold mb-2">{fact.title}</h3>
+                  <p className="text-muted text-sm">{fact.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
         {/* Call to Action */}
         <section className="py-20 bg-white">
           <div className="container">
@@ -416,7 +458,8 @@ export default function About(): JSX.Element {
             </motion.div>
           </div>
         </section>
-        <Footer variant="white" />
+
+        <Footer />
       </main>
     </PageTransition>
   );

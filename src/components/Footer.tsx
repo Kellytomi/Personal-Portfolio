@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 interface FooterProps {
   variant?: 'black' | 'white';
@@ -18,6 +19,17 @@ export default function Footer({ variant = 'black' }: FooterProps): JSX.Element 
   const currentYear = new Date().getFullYear();
   
   const isWhite = variant === 'white';
+  
+  // Fun emoji array to randomly select from
+  const emojis = ['✨', '🚀', '💻', '🎮', '🎧', '🍕', '🏀', '📚'];
+  
+  // Use state and effect to handle client-side rendering only
+  const [emoji, setEmoji] = useState('💻');
+  
+  useEffect(() => {
+    // Only run this on the client after hydration
+    setEmoji(emojis[Math.floor(Math.random() * emojis.length)]);
+  }, []);
 
   return (
     <motion.footer
@@ -25,9 +37,15 @@ export default function Footer({ variant = 'black' }: FooterProps): JSX.Element 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className={`${isWhite ? 'bg-white text-black' : 'bg-consistent-black text-white'} py-5`}
+      className={`${isWhite ? 'bg-white text-black' : 'bg-consistent-black text-white'} pt-8 pb-6`}
     >
       <div className="container mx-auto px-4">
+        <div className="mb-4 text-center">
+          <p className={`text-sm ${isWhite ? 'text-black/70' : 'text-white/80'}`}>
+            Made with {emoji} and lots of coffee in Calabar, Nigeria
+          </p>
+        </div>
+        
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <button
@@ -49,12 +67,12 @@ export default function Footer({ variant = 'black' }: FooterProps): JSX.Element 
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>Back Top</span>
+              <span>Back to top</span>
             </button>
           </div>
           
           <div className={`text-center ${isWhite ? 'text-black/70' : 'text-white/80'} text-xs sm:text-sm md:text-base mx-2`}>
-            {currentYear} © Etoma-Etoto Kelvin Odi
+            {currentYear} © Kelvin's Digital Playground
           </div>
           
           <div className="flex items-center">
@@ -62,7 +80,7 @@ export default function Footer({ variant = 'black' }: FooterProps): JSX.Element 
               href="/contact"
               className={`flex items-center gap-1 ${isWhite ? 'text-black hover:text-gray-700' : 'text-white hover:text-gray-300'} transition-colors text-xs sm:text-sm md:text-base`}
             >
-              Contact Me
+              Say hi
               <svg 
                 className="w-4 h-4 sm:w-5 sm:h-5" 
                 viewBox="0 0 24 24" 
