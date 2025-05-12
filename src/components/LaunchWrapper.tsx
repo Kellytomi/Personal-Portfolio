@@ -43,7 +43,7 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
     // ------ COUNTDOWN CONTROL CENTER ------
     
     // 1. MASTER SWITCH: Set to 'true' to enable countdown, 'false' to disable it completely
-    const enableCountdown = true;
+    const enableCountdown = false;
     
     // 2. LAUNCH DATE SETTINGS:
     // Always use the date directly from site config
