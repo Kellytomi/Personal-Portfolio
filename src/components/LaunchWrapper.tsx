@@ -6,7 +6,7 @@ import { siteConfig } from '@/config/site';
 
 // Change this version number whenever you update the launch date
 // This will force the component to use the new date
-const CONFIG_VERSION = "1.2";
+const CONFIG_VERSION = "1.1";
 
 interface LaunchWrapperProps {
   children: React.ReactNode;
@@ -42,11 +42,11 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
   useEffect(() => {
     // ------ COUNTDOWN CONTROL CENTER ------
     
-    // 1. MASTER SWITCH: Use environment variable or site config
-    const enableCountdown = siteConfig.comingSoonMode;
+    // 1. MASTER SWITCH: Set to 'true' to enable countdown, 'false' to disable it completely
+    const enableCountdown = true;
     
     // 2. LAUNCH DATE SETTINGS:
-    // Always use the date from site config (which gets it from env var)
+    // Always use the date directly from site config
     const getLaunchDate = () => {
       // Check if we have the current config version
       const storedVersion = localStorage.getItem('configVersion');
@@ -73,13 +73,11 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
       return new Date(siteConfig.launchDate);
     };
     
-    // 3. MANUAL OVERRIDE: Use environment variable if available
-    const manualOverride = (() => {
-      const override = process.env.NEXT_PUBLIC_COMING_SOON_OVERRIDE;
-      if (override === 'true') return true;
-      if (override === 'false') return false;
-      return null; // Default: use date-based logic
-    })();
+    // 3. MANUAL OVERRIDE: Force specific behavior regardless of date
+    //    - Set to null for date-based behavior (countdown shows before launch date)
+    //    - Set to true to always show main site (bypass countdown)
+    //    - Set to false to always show countdown
+    const manualOverride = null;
     
     // Check if the site has already been launched (stored in localStorage)
     const hasLaunched = localStorage.getItem('siteHasLaunched') === 'true';
@@ -97,7 +95,6 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
     
     console.log("Launch date:", launchDate);
     console.log("Current date:", currentDate);
-    console.log("Coming soon mode enabled:", enableCountdown);
     
     if (!enableCountdown) {
       // Master switch is off - always show the main site
@@ -145,9 +142,6 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
           </p>
           <p style={{ fontSize: '12px', margin: '5px 0' }}>
             Launch date: {new Date(siteConfig.launchDate).toLocaleString()}
-          </p>
-          <p style={{ fontSize: '12px', margin: '5px 0' }}>
-            Coming soon mode: {siteConfig.comingSoonMode ? 'Enabled' : 'Disabled'}
           </p>
           <button 
             onClick={resetCountdown}
