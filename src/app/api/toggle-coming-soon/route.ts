@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { cookies } from 'next/headers';
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,16 +11,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
     }
     
-    // Read the site config file
-    const configPath = path.join(process.cwd(), 'src', 'config', 'site.ts');
-    let configContent = fs.readFileSync(configPath, 'utf8');
-    
-    // Replace the comingSoonMode value
-    const modeRegex = /(comingSoonMode:\s*)(true|false)/;
-    configContent = configContent.replace(modeRegex, `$1${enabled}`);
-    
-    // Write the updated config back to the file
-    fs.writeFileSync(configPath, configContent, 'utf8');
+    // Store the setting in a cookie
+    const cookieStore = cookies();
+    cookieStore.set('portfolio_coming_soon', enabled ? 'true' : 'false', {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+    });
     
     return NextResponse.json({ success: true, enabled });
   } catch (error) {

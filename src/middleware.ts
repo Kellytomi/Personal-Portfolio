@@ -9,6 +9,12 @@ export function middleware(request: NextRequest) {
   // Check for admin authentication (using cookies)
   const isAdmin = request.cookies.get('portfolio_admin_auth')?.value === 'true';
   
+  // Check coming soon mode from cookie first, then fallback to config
+  const comingSoonCookie = request.cookies.get('portfolio_coming_soon');
+  const comingSoonMode = comingSoonCookie 
+    ? comingSoonCookie.value === 'true'
+    : siteConfig.comingSoonMode;
+  
   // Paths that are always allowed
   const allowedPaths = [
     '/coming-soon',
@@ -18,7 +24,8 @@ export function middleware(request: NextRequest) {
     '/_next',
     '/favicon.ico',
     '/robots.txt',
-    '/sitemap.xml'
+    '/sitemap.xml',
+    '/images', // Allow direct access to images
   ];
   
   // Check if the current path is allowed or if it's already the coming-soon page
@@ -27,7 +34,7 @@ export function middleware(request: NextRequest) {
   );
   
   // If coming soon mode is enabled, not on an allowed path, and not an admin, redirect to coming-soon
-  if (siteConfig.comingSoonMode && !isAllowedPath && !isAdmin) {
+  if (comingSoonMode && !isAllowedPath && !isAdmin) {
     const url = request.nextUrl.clone();
     url.pathname = '/coming-soon';
     return NextResponse.redirect(url);

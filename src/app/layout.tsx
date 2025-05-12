@@ -48,8 +48,12 @@ export const metadata: Metadata = {
   authors: [{ name: 'Etoma Kelvin' }],
   creator: 'Etoma Kelvin',
   icons: {
-    icon: '/images/Etomafavicon.png',
+    icon: [
+      { url: '/images/Etomafavicon.png', sizes: 'any' },
+      { url: '/favicon.ico', sizes: 'any' }
+    ],
     apple: '/images/Etomafavicon.png',
+    shortcut: '/images/Etomafavicon.png',
   },
   openGraph: {
     type: 'website',
@@ -68,7 +72,10 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
     <html lang="en" className={`${jakarta.variable} ${syne.variable}`} style={{fontFamily: 'var(--font-jakarta), sans-serif'}}>
       <head>
         <meta name="x-font-options" content="no-substitute" />
-        <link rel="icon" href="/images/Etomafavicon.png" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/Etomafavicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/Etomafavicon.png" />
+        <link rel="shortcut icon" href="/images/Etomafavicon.png" />
       </head>
       <body className="bg-surface text-text loaded" style={{fontFamily: 'var(--font-jakarta), sans-serif'}}>
         <CookiesProvider>
