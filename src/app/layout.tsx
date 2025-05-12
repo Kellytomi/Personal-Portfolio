@@ -27,8 +27,11 @@ interface RootLayoutProps {
 }
 
 export const metadata: Metadata = {
-  title: "Kelvin Odi | Fullstack Developer & Workflow Automation Specialist",
-  description: "Professional portfolio of Kelvin Odi, a specialist in web development, workflow automation, and business process optimization.",
+  title: {
+    template: '%s | Etoma Kelvin',
+    default: 'Etoma Kelvin | Fullstack Developer & Workflow Automation Specialist'
+  },
+  description: "Professional portfolio of Etoma Kelvin, a specialist in web development, workflow automation, and business process optimization.",
   keywords: [
     'web development', 
     'workflow automation', 
@@ -42,14 +45,18 @@ export const metadata: Metadata = {
     'Make.com',
     'airtable'
   ],
-  authors: [{ name: 'Kelvin Odi' }],
-  creator: 'Kelvin Odi',
+  authors: [{ name: 'Etoma Kelvin' }],
+  creator: 'Etoma Kelvin',
+  icons: {
+    icon: '/images/Etomafavicon.png',
+    apple: '/images/Etomafavicon.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    title: 'Kelvin Odi | Fullstack Developer & Workflow Automation Specialist',
-    description: 'Professional portfolio of Kelvin Odi, a specialist in web development, workflow automation, and business process optimization.',
-    images: [{ url: '/og-image.jpg' }],
+    title: 'Etoma Kelvin | Fullstack Developer & Workflow Automation Specialist',
+    description: 'Professional portfolio of Etoma Kelvin, a specialist in web development, workflow automation, and business process optimization.',
+    images: [{ url: '/images/Etomafavicon.png' }],
   },
   other: {
     'x-font-options': 'no-substitute'
@@ -61,6 +68,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
     <html lang="en" className={`${jakarta.variable} ${syne.variable}`} style={{fontFamily: 'var(--font-jakarta), sans-serif'}}>
       <head>
         <meta name="x-font-options" content="no-substitute" />
+        <link rel="icon" href="/images/Etomafavicon.png" />
       </head>
       <body className="bg-surface text-text loaded" style={{fontFamily: 'var(--font-jakarta), sans-serif'}}>
         <CookiesProvider>

@@ -2,9 +2,11 @@
 FROM node:18-alpine AS build
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies with troubleshooting flags
 COPY package.json package-lock.json* ./
-RUN npm install
+# First clear npm cache and use legacy peer deps flag
+RUN npm cache clean --force && \
+    npm install --legacy-peer-deps --no-fund --no-audit
 
 # Copy source files
 COPY . .
