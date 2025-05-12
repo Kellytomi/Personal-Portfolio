@@ -269,7 +269,7 @@ export default function Projects(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="mt-20 text-center"
             >
-              <div className="bg-primary text-white p-8 md:p-12 rounded-xl">
+              <div className="bg-primary text-white p-8 md:p-12 rounded-xl dark-section">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">Have a project in mind?</h2>
                 <p className="text-lg mb-8 max-w-2xl mx-auto">
                   I'm always open to discussing new projects and how I can help bring your ideas to life.

@@ -446,7 +446,7 @@ export default function About(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="text-center"
             >
-              <div className="bg-primary text-white p-8 md:p-12 rounded-xl">
+              <div className="bg-primary text-white p-8 md:p-12 rounded-xl dark-section">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
                 <p className="text-lg mb-8 text-white/80 max-w-2xl mx-auto">
                   Let's discuss how I can help solve your challenges and achieve your business goals through my expertise in web development, mobile development, and workflow automation.

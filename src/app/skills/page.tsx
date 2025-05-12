@@ -156,10 +156,6 @@ export default function Skills(): JSX.Element {
         
         {/* Hero Section */}
         <section className="pt-32 pb-16 relative">
-          <motion.div 
-            className="absolute inset-0 bg-[url('/grid.svg')] opacity-5"
-            style={{ y }}
-          />
           <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface to-white/50" />
           
           <div className="container relative">
@@ -365,7 +361,7 @@ export default function Skills(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="text-center"
             >
-              <div className="bg-primary text-white p-8 md:p-12 rounded-xl">
+              <div className="bg-primary text-white p-8 md:p-12 rounded-xl dark-section">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">
                   Let's Put These Skills to Work
                 </h2>

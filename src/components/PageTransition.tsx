@@ -1,13 +1,30 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 interface PageTransitionProps {
   children: ReactNode;
 }
 
 const PageTransition = ({ children }: PageTransitionProps) => {
+  // Effect to temporarily hide the body background grid during page transitions
+  useEffect(() => {
+    // Remove the loaded class to hide the grid background during transition
+    document.body.classList.remove('loaded');
+    
+    // Add a small delay before showing the grid again to ensure the transition completes first
+    const timer = setTimeout(() => {
+      document.body.classList.add('loaded');
+    }, 400); // Match this with the duration of the enter transition
+    
+    return () => {
+      clearTimeout(timer);
+      // Ensure the loaded class is removed on unmount to prevent flashing
+      document.body.classList.remove('loaded');
+    };
+  }, []);
+
   const variants = {
     hidden: { 
       opacity: 0, 
@@ -37,6 +54,14 @@ const PageTransition = ({ children }: PageTransitionProps) => {
       initial="hidden"
       animate="enter"
       exit="exit"
+      onAnimationStart={() => {
+        // Hide grid at the start of animation
+        document.body.classList.remove('loaded');
+      }}
+      onAnimationComplete={() => {
+        // Show grid when animation completes
+        document.body.classList.add('loaded');
+      }}
     >
       {children}
     </motion.div>

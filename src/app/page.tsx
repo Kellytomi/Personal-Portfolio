@@ -40,6 +40,9 @@ export default function Home(): JSX.Element {
       window.addEventListener('load', handleLoad);
     }
     
+    // Apply loaded class immediately as well to ensure grid is visible
+    document.body.classList.add('loaded');
+    
     // Initial timeout in case load event doesn't fire
     const timeout = setTimeout(() => {
       setIsLoading(false);
@@ -79,8 +82,20 @@ export default function Home(): JSX.Element {
           
           {/* Hero Section */}
           <section className="min-h-[85vh] flex items-center pt-16 sm:pt-20 md:pt-16 lg:pt-0 relative">
-            {/* Grid with gradient mask for top-to-bottom blending */}
-            <div className="absolute inset-0 grid-bg opacity-20" />
+            {/* Direct grid background with inline styles */}
+            <div 
+              className="absolute inset-0" 
+              style={{
+                backgroundImage: 'url(/grid-pattern.svg)',
+                backgroundSize: '30px 30px',
+                backgroundPosition: 'center',
+                backgroundAttachment: 'fixed',
+                opacity: 0.5,
+                pointerEvents: 'none',
+                zIndex: 0
+              }}
+            />
+
             <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/30 to-transparent" />
             
             <motion.div 
@@ -527,7 +542,7 @@ export default function Home(): JSX.Element {
             </section>
 
             {/* Contact CTA - More friendly tone */}
-            <section className="py-20 bg-gradient-to-r from-primary to-secondary relative overflow-hidden">
+            <section className="py-20 bg-gradient-to-r from-primary to-secondary relative overflow-hidden dark-section">
               <div className="absolute inset-0 opacity-10 pattern-dots" />
               <div className="container relative">
                 <div className="max-w-3xl mx-auto text-center text-white">

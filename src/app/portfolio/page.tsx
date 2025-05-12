@@ -130,7 +130,7 @@ export default function Portfolio(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="mt-20 text-center"
             >
-              <div className="bg-primary text-white p-8 md:p-12 rounded-xl">
+              <div className="bg-primary text-white p-8 md:p-12 rounded-xl dark-section">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">
                   Ready to work together?
                 </h2>

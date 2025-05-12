@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -23,11 +23,69 @@ const navItems: NavItem[] = [
 
 export default function Navigation(): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOverDarkSection, setIsOverDarkSection] = useState<boolean>(false);
+  const [scrollY, setScrollY] = useState<number>(0);
   const pathname = usePathname();
 
+  // Track scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    
+    // Set initial scroll position
+    setScrollY(window.scrollY);
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Set up intersection observer to detect dark sections
+  useEffect(() => {
+    // Define sections that should trigger a color change in the navbar
+    const darkSections = document.querySelectorAll('.dark-section, .bg-primary, .bg-secondary, .bg-gradient-to-r');
+    
+    if (darkSections.length === 0) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+      // Check if any dark section is intersecting with the viewport
+      const isIntersecting = entries.some(entry => entry.isIntersecting);
+      setIsOverDarkSection(isIntersecting);
+    }, { 
+      threshold: 0.15, // When at least 15% of the section is visible
+      rootMargin: '-80px 0px 0px 0px' // Adjust based on navbar height
+    });
+    
+    // Observe all dark sections
+    darkSections.forEach(section => {
+      observer.observe(section);
+    });
+    
+    return () => {
+      darkSections.forEach(section => {
+        observer.unobserve(section);
+      });
+    };
+  }, [pathname]); // Re-run when path changes to observe sections on new pages
+
+  // Determine navbar classes based on current state and scroll position
+  // At the top of any page (scrollY near 0), always use transparent styling
+  // Otherwise, check if over dark section
+  const navbarBgClass = scrollY < 10
+    ? 'backdrop-blur-sm bg-white/10'
+    : isOverDarkSection 
+      ? 'backdrop-blur-sm bg-white/80 border-b border-gray-200/20 shadow-sm'
+      : 'backdrop-blur-sm bg-white/10';
+  
+  const textColorClass = scrollY < 10
+    ? 'text-muted' 
+    : isOverDarkSection
+      ? 'text-primary'
+      : 'text-muted';
+
   return (
-    <nav className="fixed w-full z-50">
-      <div className="relative border-none backdrop-blur-sm bg-white/10">
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${navbarBgClass}`}>
+      <div className="relative border-none">
         <div className="container mx-auto relative z-10">
           <div className="flex items-center justify-between h-20">
             <Link href="/" className="flex items-center h-full">
@@ -48,7 +106,7 @@ export default function Navigation(): JSX.Element {
                   key={item.name}
                   href={item.href}
                   className={`relative group ${
-                    pathname === item.href ? 'text-primary font-medium' : 'text-muted'
+                    pathname === item.href ? 'text-primary font-medium' : textColorClass
                   }`}
                 >
                   <span className="relative">
@@ -95,7 +153,7 @@ export default function Navigation(): JSX.Element {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden relative border-none backdrop-blur-sm bg-white/20"
+            className={`md:hidden relative border-none backdrop-blur-sm ${scrollY < 10 ? 'bg-white/20' : (isOverDarkSection ? 'bg-white/90' : 'bg-white/20')}`}
           >
             <div className="container mx-auto py-4 space-y-4 relative z-10">
               {navItems.map((item) => (
@@ -105,7 +163,7 @@ export default function Navigation(): JSX.Element {
                   className={`block px-4 py-2 rounded-lg transition-colors duration-200 ${
                     pathname === item.href
                       ? 'bg-primary text-white'
-                      : 'text-muted hover:bg-primary/5'
+                      : `${textColorClass} hover:bg-primary/5`
                   }`}
                   onClick={() => setIsOpen(false)}
                 >

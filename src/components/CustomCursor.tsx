@@ -47,7 +47,7 @@ const CursorCharacter = ({
   cursorYSpring, 
   isLoading, 
   isClicking, 
-  isHovering 
+  isHovering
 }: { 
   cursorXSpring: any;
   cursorYSpring: any;
@@ -156,6 +156,7 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   
@@ -193,6 +194,8 @@ export default function CustomCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
+      
+      // Regular hovering detection
       if (
         target.tagName.toLowerCase() === 'a' || 
         target.tagName.toLowerCase() === 'button' ||

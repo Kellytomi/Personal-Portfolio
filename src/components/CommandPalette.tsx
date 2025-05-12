@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, Fragment } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Dialog, Transition } from '@headlessui/react';
 
@@ -11,6 +11,7 @@ interface CommandItem {
   shortcut?: string;
   action: () => void;
   section?: string;
+  href?: string;
 }
 
 export default function CommandPalette() {
@@ -18,14 +19,16 @@ export default function CommandPalette() {
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isMac, setIsMac] = useState(true);
+  const [activeItemId, setActiveItemId] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-
-  // Detect OS on mount
-  useEffect(() => {
-    const userAgent = window.navigator.userAgent;
-    setIsMac(userAgent.indexOf('Mac') !== -1);
-  }, []);
+  const pathname = usePathname();
+  
+  // Skip rendering on admin and coming-soon pages
+  if (pathname?.startsWith('/admin') || pathname === '/coming-soon') {
+    return null;
+  }
 
   // Generate command items
   const items: CommandItem[] = [
@@ -34,42 +37,49 @@ export default function CommandPalette() {
       name: 'Home',
       action: () => router.push('/'),
       section: 'Navigation',
+      href: '/'
     },
     {
       id: 'about',
       name: 'About',
       action: () => router.push('/about'),
       section: 'Navigation',
+      href: '/about'
     },
     {
       id: 'projects',
       name: 'Projects',
       action: () => router.push('/projects'),
       section: 'Navigation',
+      href: '/projects'
     },
     {
       id: 'skills',
       name: 'Skills',
       action: () => router.push('/skills'),
       section: 'Navigation',
+      href: '/skills'
     },
     {
       id: 'contact',
       name: 'Contact',
       action: () => router.push('/contact'),
       section: 'Navigation',
+      href: '/contact'
     },
     {
       id: 'portfolio',
       name: 'Portfolio',
       action: () => router.push('/portfolio'),
       section: 'Navigation',
+      href: '/portfolio'
     },
     {
       id: 'testimonials',
       name: 'Testimonials',
       action: () => router.push('/testimonials'),
       section: 'Navigation',
+      href: '/testimonials'
     },
     {
       id: 'theme',
@@ -93,6 +103,25 @@ export default function CommandPalette() {
       section: 'Actions',
     },
   ];
+
+  // Update the active item ID based on the current pathname
+  useEffect(() => {
+    // Find the item that matches the current path
+    const matchingItem = items.find(item => {
+      if (!item.href) return false;
+      if (item.href === '/' && pathname === '/') return true;
+      if (item.href !== '/' && pathname?.startsWith(item.href)) return true;
+      return false;
+    });
+    
+    setActiveItemId(matchingItem?.id || null);
+  }, [pathname]);
+  
+  // Detect OS on mount
+  useEffect(() => {
+    const userAgent = window.navigator.userAgent;
+    setIsMac(userAgent.indexOf('Mac') !== -1);
+  }, []);
 
   // Filter items based on query
   const filteredItems = query === ''
@@ -131,37 +160,43 @@ export default function CommandPalette() {
       if (e.key === 'Escape') {
         setIsOpen(false);
       }
+      
+      // Handle keyboard navigation when palette is open
+      if (isOpen) {
+        const allItems = Object.values(sections).flat();
+        
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          setSelectedIndex((prev) => (prev < allItems.length - 1 ? prev + 1 : 0));
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          setSelectedIndex((prev) => (prev > 0 ? prev - 1 : allItems.length - 1));
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          if (allItems[selectedIndex]) {
+            allItems[selectedIndex].action();
+            setIsOpen(false);
+          }
+        }
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isMac]);
+  }, [isMac, isOpen, sections, selectedIndex]);
 
-  // Handle keyboard navigation within the palette
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    const allItems = Object.values(sections).flat();
-    
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      setSelectedIndex((prev) => (prev < allItems.length - 1 ? prev + 1 : 0));
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : allItems.length - 1));
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      if (allItems[selectedIndex]) {
-        allItems[selectedIndex].action();
-        setIsOpen(false);
-      }
-    }
-  };
-
-  // Focus input when opened
+  // Auto-focus the input field when the palette opens
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      setTimeout(() => {
+    if (isOpen) {
+      // Focus immediately
+      inputRef.current?.focus();
+      
+      // Also set a small timeout to ensure focus in some edge cases
+      const timeoutId = setTimeout(() => {
         inputRef.current?.focus();
-      }, 100);
+      }, 50);
+      
+      return () => clearTimeout(timeoutId);
     }
   }, [isOpen]);
 
@@ -184,6 +219,7 @@ export default function CommandPalette() {
       <Transition show={isOpen} as={Fragment}>
         <Dialog
           as="div"
+          initialFocus={inputRef}
           className="fixed inset-0 z-[100] overflow-y-auto"
           onClose={() => setIsOpen(false)}
         >
@@ -209,7 +245,18 @@ export default function CommandPalette() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-2xl text-left align-middle transition-all transform bg-secondary border border-white/10 shadow-2xl rounded-xl mt-[15vh]">
+              <div 
+                ref={dialogRef}
+                className="inline-block w-full max-w-2xl text-left align-middle transition-all transform bg-secondary border border-white/10 shadow-2xl rounded-xl mt-[15vh]"
+                tabIndex={-1}
+                onKeyDown={(e) => {
+                  // Added this to capture keys at the dialog level
+                  // Prevents default behaviors that might interfere with our navigation
+                  if (['ArrowUp', 'ArrowDown', 'Enter'].includes(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
+              >
                 <div className="relative">
                   <input
                     ref={inputRef}
@@ -218,7 +265,7 @@ export default function CommandPalette() {
                     className="w-full py-4 px-6 bg-transparent text-white outline-none border-b border-white/10 focus:border-accent/70 transition-colors text-lg"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    onKeyDown={handleKeyDown}
+                    // Remove onKeyDown here, since we now handle it globally
                   />
                   
                   <div className="absolute top-4 right-4 flex items-center gap-2">
@@ -243,12 +290,13 @@ export default function CommandPalette() {
                           const allItems = Object.values(sections).flat();
                           const globalIdx = allItems.findIndex(i => i.id === item.id);
                           const isSelected = globalIdx === selectedIndex;
+                          const isActive = item.id === activeItemId;
                           
                           return (
                             <div
                               key={item.id}
                               className={`px-4 py-2 cursor-pointer rounded-lg flex items-center justify-between ${
-                                isSelected ? 'bg-accent/30 text-white' : 'text-white/80 hover:bg-white/5'
+                                isActive ? 'bg-primary/20' : (isSelected ? 'bg-white/5' : 'hover:bg-white/5')
                               }`}
                               onClick={() => {
                                 item.action();
@@ -257,7 +305,7 @@ export default function CommandPalette() {
                             >
                               <div className="flex items-center gap-3">
                                 <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                                  isSelected ? 'bg-accent text-secondary' : 'bg-white/10 text-white/70'
+                                  isActive ? 'bg-primary text-white' : 'bg-white/10 text-white/70'
                                 }`}>
                                   {sectionName === 'Navigation' ? (
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -269,7 +317,7 @@ export default function CommandPalette() {
                                     </svg>
                                   )}
                                 </div>
-                                <span className={`${isSelected ? 'text-white font-medium' : 'text-white/80'}`}>
+                                <span className={`${isActive ? 'text-white font-medium' : 'text-white/80'}`}>
                                   {item.name}
                                 </span>
                               </div>

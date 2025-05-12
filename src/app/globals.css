@@ -191,16 +191,16 @@
   body {
     @apply bg-surface text-text;
     font-family: var(--font-jakarta), system-ui, sans-serif !important;
-    background-image: none; /* Start with no background image */
+    background-image: none;
     background-size: 30px 30px;
     background-position: center;
     background-attachment: fixed;
-    transition: background-image 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
   }
 
   /* JavaScript will add this class once loaded */
   body.loaded {
-    background-image: url('/grid-pattern.svg');
+    opacity: 1;
   }
 
   /* Custom cursor rules - keep default cursor visible */
@@ -304,11 +304,20 @@
   }
   
   .grid-bg {
+    position: absolute;
+    inset: 0;
     background-image: url('/grid-pattern.svg');
     background-size: 30px 30px;
     background-position: center;
-    opacity: 1;
+    opacity: 0.3;
     background-attachment: fixed;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .loaded .grid-bg {
+    opacity: 0.3;
   }
   
   .clip-path-slant {
