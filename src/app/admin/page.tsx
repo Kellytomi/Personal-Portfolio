@@ -50,6 +50,8 @@ export default function AdminPage() {
   
   const toggleComingSoonMode = async () => {
     try {
+      console.log('Toggling coming soon mode to:', !comingSoonEnabled);
+      
       const res = await fetch('/api/toggle-coming-soon', {
         method: 'POST',
         headers: {
@@ -59,18 +61,22 @@ export default function AdminPage() {
       });
       
       const data = await res.json();
+      console.log('Toggle response:', data);
       
       if (data.success) {
         setComingSoonEnabled(!comingSoonEnabled);
         setMessage(`Coming soon mode ${!comingSoonEnabled ? 'enabled' : 'disabled'}`);
-        // Force refresh to apply changes
-        router.refresh();
+        
+        // Force refresh to apply changes - more aggressive refresh
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } else {
         setMessage('Failed to update status');
       }
     } catch (error) {
       setMessage('An error occurred');
-      console.error(error);
+      console.error('Toggle error:', error);
     }
   };
   

@@ -7,10 +7,19 @@ export async function GET() {
     const cookieStore = cookies();
     const comingSoonCookie = cookieStore.get('portfolio_coming_soon');
     
-    // Use the cookie value if available, otherwise default to the value in site config
+    // Read from environment variable
+    const envValue = process.env.NEXT_PUBLIC_COMING_SOON_MODE === 'true';
+    
+    // Log what we found
+    console.log('Coming soon status check:', {
+      cookieValue: comingSoonCookie?.value,
+      envValue
+    });
+    
+    // Use the cookie value if available, otherwise default to the env variable
     const enabled = comingSoonCookie 
       ? comingSoonCookie.value === 'true'
-      : process.env.NEXT_PUBLIC_COMING_SOON_MODE === 'true';
+      : envValue;
     
     return NextResponse.json({ enabled, success: true });
   } catch (error) {
