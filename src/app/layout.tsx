@@ -5,6 +5,7 @@ import CustomCursor from "@/components/CustomCursor";
 import ClientOnly from "@/components/ClientOnly";
 import CommandPalette from "@/components/CommandPalette";
 import { CookiesProvider } from "next-client-cookies/server";
+import LaunchWrapper from "@/components/LaunchWrapper";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
     default: 'Etoma Kelvin | Fullstack Developer & Workflow Automation Specialist'
   },
   description: "Professional portfolio of Etoma Kelvin, a specialist in web development, workflow automation, and business process optimization.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://etomakelvin.com'),
   keywords: [
     'web development', 
     'workflow automation', 
@@ -83,7 +85,9 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
             <CustomCursor />
             <CommandPalette />
           </ClientOnly>
-          {children}
+          <LaunchWrapper>
+            {children}
+          </LaunchWrapper>
         </CookiesProvider>
       </body>
     </html>

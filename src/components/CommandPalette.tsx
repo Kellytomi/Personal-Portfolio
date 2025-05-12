@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, Fragment } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog } from '@headlessui/react';
 
 interface CommandItem {
   id: string;
@@ -216,134 +216,127 @@ export default function CommandPalette() {
         <span className="ml-1">Command Palette</span>
       </div>
 
-      <Transition show={isOpen} as={Fragment}>
-        <Dialog
-          as="div"
-          initialFocus={inputRef}
-          className="fixed inset-0 z-[100] overflow-y-auto"
-          onClose={() => setIsOpen(false)}
-        >
-          <div className="min-h-screen px-4 text-center">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <div className="fixed inset-0 bg-black/70 backdrop-blur-md" />
-            </Transition.Child>
+      <AnimatePresence>
+        {isOpen && (
+          <Dialog
+            as="div"
+            initialFocus={inputRef}
+            className="fixed inset-0 z-[100] overflow-y-auto"
+            onClose={() => setIsOpen(false)}
+          >
+            <div className="min-h-screen px-4 text-center">
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 bg-black/70 backdrop-blur-md"
+                />
+              </AnimatePresence>
 
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
-            >
-              <div 
-                ref={dialogRef}
-                className="inline-block w-full max-w-2xl text-left align-middle transition-all transform bg-secondary border border-white/10 shadow-2xl rounded-xl mt-[15vh]"
-                tabIndex={-1}
-                onKeyDown={(e) => {
-                  // Added this to capture keys at the dialog level
-                  // Prevents default behaviors that might interfere with our navigation
-                  if (['ArrowUp', 'ArrowDown', 'Enter'].includes(e.key)) {
-                    e.preventDefault();
-                  }
-                }}
-              >
-                <div className="relative">
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    placeholder="Search commands..."
-                    className="w-full py-4 px-6 bg-transparent text-white outline-none border-b border-white/10 focus:border-accent/70 transition-colors text-lg"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    // Remove onKeyDown here, since we now handle it globally
-                  />
-                  
-                  <div className="absolute top-4 right-4 flex items-center gap-2">
-                    <kbd className="px-2 py-1 text-xs rounded bg-black/20 text-white/70">↑↓</kbd>
-                    <span className="text-white/50 text-xs">to navigate</span>
-                    <kbd className="px-2 py-1 text-xs rounded bg-black/20 text-white/70">↵</kbd>
-                    <span className="text-white/50 text-xs">to select</span>
-                    <kbd className="px-2 py-1 text-xs rounded bg-black/20 text-white/70">esc</kbd>
-                    <span className="text-white/50 text-xs">to close</span>
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="inline-block w-full max-w-2xl text-left align-middle transition-all transform bg-secondary border border-white/10 shadow-2xl rounded-xl mt-[15vh]"
+                  tabIndex={-1}
+                  onKeyDown={(e) => {
+                    // Added this to capture keys at the dialog level
+                    // Prevents default behaviors that might interfere with our navigation
+                    if (['ArrowUp', 'ArrowDown', 'Enter'].includes(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
+                >
+                  <div className="relative">
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      placeholder="Search commands..."
+                      className="w-full py-4 px-6 bg-transparent text-white outline-none border-b border-white/10 focus:border-accent/70 transition-colors text-lg"
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      // Remove onKeyDown here, since we now handle it globally
+                    />
+                    
+                    <div className="absolute top-4 right-4 flex items-center gap-2">
+                      <kbd className="px-2 py-1 text-xs rounded bg-black/20 text-white/70">↑↓</kbd>
+                      <span className="text-white/50 text-xs">to navigate</span>
+                      <kbd className="px-2 py-1 text-xs rounded bg-black/20 text-white/70">↵</kbd>
+                      <span className="text-white/50 text-xs">to select</span>
+                      <kbd className="px-2 py-1 text-xs rounded bg-black/20 text-white/70">esc</kbd>
+                      <span className="text-white/50 text-xs">to close</span>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="max-h-[60vh] overflow-auto p-2">
-                  {Object.entries(sections).map(([sectionName, sectionItems], sectionIdx) => (
-                    <div key={sectionName} className={sectionIdx > 0 ? 'mt-4' : ''}>
-                      <div className="px-4 py-2 text-xs font-medium text-white/50 uppercase tracking-wider">
-                        {sectionName}
-                      </div>
-                      <div className="mt-1">
-                        {sectionItems.map((item, itemIdx) => {
-                          // Calculate the overall index of this item
-                          const allItems = Object.values(sections).flat();
-                          const globalIdx = allItems.findIndex(i => i.id === item.id);
-                          const isSelected = globalIdx === selectedIndex;
-                          const isActive = item.id === activeItemId;
-                          
-                          return (
-                            <div
-                              key={item.id}
-                              className={`px-4 py-2 cursor-pointer rounded-lg flex items-center justify-between ${
-                                isActive ? 'bg-primary/20' : (isSelected ? 'bg-white/5' : 'hover:bg-white/5')
-                              }`}
-                              onClick={() => {
-                                item.action();
-                                setIsOpen(false);
-                              }}
-                            >
-                              <div className="flex items-center gap-3">
-                                <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                                  isActive ? 'bg-primary text-white' : 'bg-white/10 text-white/70'
-                                }`}>
-                                  {sectionName === 'Navigation' ? (
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                      <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                    </svg>
-                                  ) : (
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                      <path d="M13 10V3L4 14H11V21L20 10H13Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                    </svg>
-                                  )}
-                                </div>
-                                <span className={`${isActive ? 'text-white font-medium' : 'text-white/80'}`}>
-                                  {item.name}
-                                </span>
-                              </div>
-                              {item.shortcut && (
-                                <kbd className="text-xs text-white/50 bg-black/20 px-2 py-1 rounded">
-                                  {item.shortcut}
-                                </kbd>
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
                   
-                  {filteredItems.length === 0 && (
-                    <div className="py-8 text-center text-white/50">
-                      No results found for "{query}"
-                    </div>
-                  )}
-                </div>
-              </div>
-            </Transition.Child>
-          </div>
-        </Dialog>
-      </Transition>
+                  <div className="max-h-[60vh] overflow-auto p-2">
+                    {Object.entries(sections).map(([sectionName, sectionItems], sectionIdx) => (
+                      <div key={sectionName} className={sectionIdx > 0 ? 'mt-4' : ''}>
+                        <div className="px-4 py-2 text-xs font-medium text-white/50 uppercase tracking-wider">
+                          {sectionName}
+                        </div>
+                        <div className="mt-1">
+                          {sectionItems.map((item, itemIdx) => {
+                            // Calculate the overall index of this item
+                            const allItems = Object.values(sections).flat();
+                            const globalIdx = allItems.findIndex(i => i.id === item.id);
+                            const isSelected = globalIdx === selectedIndex;
+                            const isActive = item.id === activeItemId;
+                            
+                            return (
+                              <div
+                                key={item.id}
+                                className={`px-4 py-2 cursor-pointer rounded-lg flex items-center justify-between ${
+                                  isActive ? 'bg-primary/20' : (isSelected ? 'bg-white/5' : 'hover:bg-white/5')
+                                }`}
+                                onClick={() => {
+                                  item.action();
+                                  setIsOpen(false);
+                                }}
+                              >
+                                <div className="flex items-center gap-3">
+                                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                                    isActive ? 'bg-primary text-white' : 'bg-white/10 text-white/70'
+                                  }`}>
+                                    {sectionName === 'Navigation' ? (
+                                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                      </svg>
+                                    ) : (
+                                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M13 10V3L4 14H11V21L20 10H13Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                      </svg>
+                                    )}
+                                  </div>
+                                  <span className={`${isActive ? 'text-white font-medium' : 'text-white/80'}`}>
+                                    {item.name}
+                                  </span>
+                                </div>
+                                {item.shortcut && (
+                                  <kbd className="text-xs text-white/50 bg-black/20 px-2 py-1 rounded">
+                                    {item.shortcut}
+                                  </kbd>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ))}
+                    
+                    {filteredItems.length === 0 && (
+                      <div className="py-8 text-center text-white/50">
+                        No results found for "{query}"
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </Dialog>
+        )}
+      </AnimatePresence>
     </>
   );
 } 

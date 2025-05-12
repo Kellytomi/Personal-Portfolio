@@ -13,11 +13,13 @@ export default function ComingSoon() {
     minutes: 0,
     seconds: 0
   });
+  const [countdownComplete, setCountdownComplete] = useState(false);
 
-  // Get launch date from config
-  const targetDate = siteConfig.launchDate;
-
+  // Always use the date directly from config
   useEffect(() => {
+    // Get the target date directly from config
+    const targetDate = siteConfig.launchDate;
+    
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const distance = targetDate - now;
@@ -26,6 +28,15 @@ export default function ComingSoon() {
         // Timer expired
         clearInterval(interval);
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setCountdownComplete(true);
+        
+        // Store that the site has launched
+        localStorage.setItem('siteHasLaunched', 'true');
+        
+        // Redirect after a short delay to show zeros
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 1500);
       } else {
         setTimeLeft({
           days: Math.floor(distance / (1000 * 60 * 60 * 24)),
@@ -37,7 +48,7 @@ export default function ComingSoon() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [targetDate]);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-950 text-white p-8">

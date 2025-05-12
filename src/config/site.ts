@@ -2,8 +2,8 @@ export const siteConfig = {
   // Set to true to enable coming soon mode, false to disable it
   comingSoonMode: process.env.NEXT_PUBLIC_COMING_SOON_MODE === 'true' || false,
   
-  // Launch date: May 31, 2025 at 23:59:59
-  launchDate: new Date('2025-05-31T23:59:59').getTime(),
+  // Specific launch date (matching LaunchWrapper)
+  launchDate: new Date('2025-05-31T00:00:00').getTime(),
   
   // Site metadata
   name: 'My Portfolio',
