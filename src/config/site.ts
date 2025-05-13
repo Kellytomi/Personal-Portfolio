@@ -1,8 +1,8 @@
 export const siteConfig = {
   // Set to true to enable coming soon mode, false to disable it
-  comingSoonMode: process.env.NEXT_PUBLIC_COMING_SOON_MODE === 'true' || false,
+  comingSoonMode: false,
   
-  // Specific launch date (matching LaunchWrapper)
+  // Specific launch date (for display purposes only)
   launchDate: new Date('2025-05-31T00:00:00').getTime(),
   
   // Site metadata
@@ -14,6 +14,5 @@ export const siteConfig = {
     twitter: 'https://twitter.com/',
     linkedin: 'https://linkedin.com/in/',
     github: 'https://github.com/',
-    instagram: 'https://instagram.com/'
   }
 }; 

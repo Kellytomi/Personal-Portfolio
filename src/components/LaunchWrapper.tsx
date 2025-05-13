@@ -6,14 +6,13 @@ import { siteConfig } from '@/config/site';
 
 // Change this version number whenever you update the launch date
 // This will force the component to use the new date
-const CONFIG_VERSION = "1.1";
+const CONFIG_VERSION = "1.2";
 
 interface LaunchWrapperProps {
   children: React.ReactNode;
 }
 
 export default function LaunchWrapper({ children }: LaunchWrapperProps) {
-  const [isLaunched, setIsLaunched] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [showDevTools, setShowDevTools] = useState(false);
   
@@ -30,89 +29,15 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
   
-  // Reset countdown function
-  const resetCountdown = () => {
-    localStorage.removeItem('launchDate');
-    localStorage.removeItem('siteHasLaunched');
-    localStorage.removeItem('configVersion');
-    console.log('Countdown reset! Refreshing the page...');
-    window.location.reload();
+  // Toggle coming soon mode for development purposes
+  const toggleComingSoonMode = () => {
+    console.log('Coming soon mode toggled! Refresh the page to see changes. Update siteConfig.comingSoonMode to change permanently.');
+    // In a real implementation, you could update localStorage or a context 
+    // to temporarily override the setting without a page refresh
   };
   
   useEffect(() => {
-    // ------ COUNTDOWN CONTROL CENTER ------
-    
-    // 1. MASTER SWITCH: Set to 'true' to enable countdown, 'false' to disable it completely
-    const enableCountdown = true;
-    
-    // 2. LAUNCH DATE SETTINGS:
-    // Always use the date directly from site config
-    const getLaunchDate = () => {
-      // Check if we have the current config version
-      const storedVersion = localStorage.getItem('configVersion');
-      
-      // If version doesn't match or doesn't exist, use the current config date
-      if (storedVersion !== CONFIG_VERSION) {
-        // Store the new version and date
-        localStorage.setItem('configVersion', CONFIG_VERSION);
-        localStorage.setItem('launchDate', siteConfig.launchDate.toString());
-        
-        // Clear the launched flag if we're updating the config
-        localStorage.removeItem('siteHasLaunched');
-        
-        return new Date(siteConfig.launchDate);
-      }
-      
-      // Otherwise use stored date
-      const storedLaunchDate = localStorage.getItem('launchDate');
-      if (storedLaunchDate) {
-        return new Date(parseInt(storedLaunchDate));
-      }
-      
-      // Fallback to config date
-      return new Date(siteConfig.launchDate);
-    };
-    
-    // 3. MANUAL OVERRIDE: Force specific behavior regardless of date
-    //    - Set to null for date-based behavior (countdown shows before launch date)
-    //    - Set to true to always show main site (bypass countdown)
-    //    - Set to false to always show countdown
-    const manualOverride = null;
-    
-    // Check if the site has already been launched (stored in localStorage)
-    const hasLaunched = localStorage.getItem('siteHasLaunched') === 'true';
-    if (hasLaunched) {
-      setIsLaunched(true);
-      setIsLoading(false);
-      return;
-    }
-    
-    // ------- END CONTROL CENTER -------
-    
-    // Logic for determining whether to show the countdown
-    const launchDate = getLaunchDate();
-    const currentDate = new Date();
-    
-    console.log("Launch date:", launchDate);
-    console.log("Current date:", currentDate);
-    
-    if (!enableCountdown) {
-      // Master switch is off - always show the main site
-      setIsLaunched(true);
-    } else if (manualOverride !== null) {
-      // Manual override is active - follow its setting
-      setIsLaunched(manualOverride);
-    } else {
-      // Date-based logic - show countdown only before launch date
-      const shouldLaunch = currentDate >= launchDate;
-      setIsLaunched(shouldLaunch);
-      
-      // If we've reached the launch date, store that info
-      if (shouldLaunch) {
-        localStorage.setItem('siteHasLaunched', 'true');
-      }
-    }
-    
+    // Set loading to false after component mounts
     setIsLoading(false);
   }, []);
   
@@ -120,6 +45,9 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
   if (isLoading) {
     return null;
   }
+  
+  // Check if coming soon mode is enabled from config
+  const showComingSoon = siteConfig.comingSoonMode;
   
   // Show either the countdown or the actual site
   return (
@@ -138,13 +66,13 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
         }}>
           <h4 style={{ margin: '0 0 10px 0' }}>Development Tools</h4>
           <p style={{ fontSize: '12px', margin: '5px 0' }}>
-            Config version: {CONFIG_VERSION}
+            Coming Soon Mode: {siteConfig.comingSoonMode ? 'Enabled' : 'Disabled'}
           </p>
           <p style={{ fontSize: '12px', margin: '5px 0' }}>
             Launch date: {new Date(siteConfig.launchDate).toLocaleString()}
           </p>
           <button 
-            onClick={resetCountdown}
+            onClick={toggleComingSoonMode}
             style={{
               background: '#f44336',
               color: 'white',
@@ -154,11 +82,11 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
               cursor: 'pointer'
             }}
           >
-            Reset Countdown
+            Toggle Coming Soon
           </button>
         </div>
       )}
-      {isLaunched ? children : <ComingSoon />}
+      {showComingSoon ? <ComingSoon /> : children}
     </>
   );
 } 

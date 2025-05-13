@@ -83,9 +83,11 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         <CookiesProvider>
           <ClientOnly>
             <CustomCursor />
-            <CommandPalette />
           </ClientOnly>
           <LaunchWrapper>
+            <ClientOnly>
+              <CommandPalette />
+            </ClientOnly>
             {children}
           </LaunchWrapper>
         </CookiesProvider>

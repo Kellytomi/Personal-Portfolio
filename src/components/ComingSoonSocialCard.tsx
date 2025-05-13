@@ -11,7 +11,6 @@ export default function ComingSoonSocialCard({ className = '' }: SocialCardProps
     { icon: <FaTwitter size={20} />, href: siteConfig.socialLinks.twitter, label: 'Twitter' },
     { icon: <FaLinkedinIn size={20} />, href: siteConfig.socialLinks.linkedin, label: 'LinkedIn' },
     { icon: <FaGithub size={20} />, href: siteConfig.socialLinks.github, label: 'GitHub' },
-    { icon: <FaInstagram size={20} />, href: siteConfig.socialLinks.instagram, label: 'Instagram' }
   ];
 
   return (
