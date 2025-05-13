@@ -119,7 +119,7 @@ export default function Home(): JSX.Element {
                       </span>
                       Open to new projects
                     </div>
-                    <h4 className="text-primary font-medium mb-2 md:mb-3">Hey there, I'm Kelvin 👋</h4>
+                    <h4 className="text-primary font-medium mb-2 md:mb-3">Hey there, I'm Etoma-etoto (Kelvin) Odi 👋</h4>
                     <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-5">
                       I build <span className="gradient-text">awesome digital stuff</span> that people love
                     </h1>

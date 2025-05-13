@@ -29,17 +29,21 @@ interface RootLayoutProps {
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Etoma Kelvin',
-    default: 'Etoma Kelvin | Fullstack Developer & Workflow Automation Specialist'
+    template: '%s | Etoma-etoto Kelvin Odi',
+    default: 'Etoma-etoto Kelvin Odi | Fullstack Developer & Workflow Automation Specialist'
   },
-  description: "Professional portfolio of Etoma Kelvin, a specialist in web development, workflow automation, and business process optimization.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://etomakelvin.com'),
+  description: "Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development, workflow automation, and business process optimization.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'),
   keywords: [
     'web development', 
     'workflow automation', 
     'process optimization', 
     'fullstack developer', 
     'integration specialist',
+    'etoma',
+    'etoma kelvin',
+    'etoma-etoto kelvin odi',
+    'kelvin odi',
     'Next.js',
     'React',
     'JavaScript',
@@ -47,22 +51,33 @@ export const metadata: Metadata = {
     'Make.com',
     'airtable'
   ],
-  authors: [{ name: 'Etoma Kelvin' }],
-  creator: 'Etoma Kelvin',
+  authors: [{ name: 'Etoma-etoto Kelvin Odi' }],
+  creator: 'Etoma-etoto Kelvin Odi',
   icons: {
     icon: [
-      { url: '/images/Etomafavicon.png', sizes: 'any' },
-      { url: '/favicon.ico', sizes: 'any' }
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', sizes: '16x16' },
+      { url: '/favicon-32x32.png', sizes: '32x32' },
+      { url: '/favicon-48x48.png', sizes: '48x48' },
+      { url: '/favicon-192x192.png', sizes: '192x192' },
+      { url: '/favicon-512x512.png', sizes: '512x512' }
     ],
-    apple: '/images/Etomafavicon.png',
-    shortcut: '/images/Etomafavicon.png',
+    apple: '/favicon-192x192.png',
+    shortcut: '/favicon-192x192.png',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    title: 'Etoma Kelvin | Fullstack Developer & Workflow Automation Specialist',
-    description: 'Professional portfolio of Etoma Kelvin, a specialist in web development, workflow automation, and business process optimization.',
-    images: [{ url: '/images/Etomafavicon.png' }],
+    title: 'Etoma-etoto Kelvin Odi | Fullstack Developer & Workflow Automation Specialist',
+    description: 'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development, workflow automation, and business process optimization.',
+    images: [{ url: '/favicon-512x512.png' }],
+    url: 'https://etoma.dev'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Etoma-etoto Kelvin Odi | Fullstack Developer',
+    description: 'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development and workflow automation',
+    images: ['/favicon-512x512.png'],
   },
   other: {
     'x-font-options': 'no-substitute'
@@ -74,10 +89,14 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
     <html lang="en" className={`${jakarta.variable} ${syne.variable}`} style={{fontFamily: 'var(--font-jakarta), sans-serif'}}>
       <head>
         <meta name="x-font-options" content="no-substitute" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" href="/images/Etomafavicon.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/images/Etomafavicon.png" />
-        <link rel="shortcut icon" href="/images/Etomafavicon.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+        <link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png" />
+        <link rel="icon" href="/favicon-192x192.png" sizes="192x192" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon-192x192.png" />
+        <link rel="shortcut icon" href="/favicon-192x192.png" />
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="bg-surface text-text loaded" style={{fontFamily: 'var(--font-jakarta), sans-serif'}}>
         <CookiesProvider>

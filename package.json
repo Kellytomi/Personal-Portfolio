@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/generate-sitemap.js",
     "start": "next start",
     "start:standalone": "node start-standalone.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",

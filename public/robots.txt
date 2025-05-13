@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://etoma.dev/sitemap.xml 

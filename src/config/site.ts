@@ -6,8 +6,9 @@ export const siteConfig = {
   launchDate: new Date('2025-05-31T00:00:00').getTime(),
   
   // Site metadata
-  name: 'My Portfolio',
-  description: 'My professional portfolio showcasing my skills and projects',
+  name: 'Etoma-etoto Kelvin Odi',
+  description: 'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development, workflow automation, and business process optimization.',
+  url: 'https://etoma.dev',
   
   // Social links - update these with your actual social URLs
   socialLinks: {
