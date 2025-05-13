@@ -1,6 +1,6 @@
 export const siteConfig = {
   // Set to true to enable coming soon mode, false to disable it
-  comingSoonMode: false,
+  comingSoonMode: true,
   
   // Specific launch date (for display purposes only)
   launchDate: new Date('2025-05-31T00:00:00').getTime(),
@@ -12,8 +12,8 @@ export const siteConfig = {
   
   // Social links - update these with your actual social URLs
   socialLinks: {
-    twitter: 'https://twitter.com/',
-    linkedin: 'https://linkedin.com/in/',
-    github: 'https://github.com/',
+    twitter: 'https://x.com/klvntmi',
+    linkedin: 'https://www.linkedin.com/in/etoma-etoto-odi-9ba176251/', 
+    github: 'https://github.com/Kellytomi',
   }
 }; 
