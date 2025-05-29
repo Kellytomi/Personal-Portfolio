@@ -4,12 +4,11 @@ const path = require('path');
 const baseUrl = 'https://etoma.dev';
 
 // Add all your site's main pages here
-const pages = [
-  '/',
+const routes = [
+  '',
   '/about',
   '/skills',
   '/projects',
-  '/portfolio',
   '/testimonials',
   '/contact',
 ];
@@ -35,7 +34,7 @@ function generateSitemapXml(pages) {
 }
 
 // Write the sitemap to the public directory
-const sitemap = generateSitemapXml(pages);
+const sitemap = generateSitemapXml(routes);
 const sitemapPath = path.join(__dirname, '..', 'public', 'sitemap.xml');
 
 fs.writeFileSync(sitemapPath, sitemap);

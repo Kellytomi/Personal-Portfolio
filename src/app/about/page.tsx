@@ -18,9 +18,9 @@ export default function About(): JSX.Element {
   // Education timeline data
   const education = [
     {
-      year: '2015 - 2019',
-      degree: 'BSc in Computer Science',
-      institution: 'University of Lagos',
+      year: '2024 - 2028',
+      degree: 'BSc in Software Engineering',
+      institution: 'Lead City University, Ibadan',
       description: 'Specialized in software engineering with focus on application development and system architecture.'
     },
     {
@@ -130,14 +130,14 @@ export default function About(): JSX.Element {
               
               <div className="flex flex-wrap gap-4">
                 <a 
-                  href="https://www.linkedin.com/in/etomakelvin" 
+                  href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="btn bg-[#0A66C2] text-white"
+                  className="btn btn-primary"
                 >
-                  LinkedIn
+                  View Resume
                 </a>
-                <Link href="/contact" className="btn btn-primary">
+                <Link href="/contact" className="btn bg-gray-600 text-white hover:bg-gray-700">
                   Contact Me
                 </Link>
               </div>

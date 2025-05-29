@@ -198,13 +198,13 @@ export default function Home(): JSX.Element {
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">A bit about me</h2>
                   </motion.div>
                   
-                  <div className="grid md:grid-cols-3 gap-8 items-center">
+                  <div className="grid md:grid-cols-5 gap-8 items-start">
                     <motion.div
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5 }}
-                      className="md:col-span-1"
+                      className="md:col-span-2"
                     >
                       <div className="relative h-64 md:h-80 rounded-xl overflow-hidden">
                         <Image
@@ -221,7 +221,7 @@ export default function Home(): JSX.Element {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: 0.1 }}
-                      className="md:col-span-2 space-y-4"
+                      className="md:col-span-3 space-y-4 md:ml-4"
                     >
                       <div className="bg-white p-6 rounded-xl shadow-sm">
                         <div className="flex items-center gap-3 mb-3">

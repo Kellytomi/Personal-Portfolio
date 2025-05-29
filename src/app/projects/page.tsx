@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
@@ -63,6 +64,8 @@ const PreviewModal = ({ url, isOpen, onClose }: PreviewModalProps) => {
 };
 
 export default function Projects(): JSX.Element {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false);
   const [previewUrl, setPreviewUrl] = useState<string>('');
@@ -120,10 +123,30 @@ export default function Projects(): JSX.Element {
   
   const filters = ['all', 'Automation', 'Integration', 'Development', 'Document'];
   
+  // Initialize filter from URL parameter on component mount
+  useEffect(() => {
+    const filterParam = searchParams.get('filter');
+    if (filterParam && filters.includes(filterParam)) {
+      setActiveFilter(filterParam);
+    }
+  }, [searchParams]);
+  
   const filteredProjects = activeFilter === 'all' 
     ? projects 
     : projects.filter(project => project.category.includes(activeFilter));
   
+  // Update URL when filter changes
+  const handleFilterChange = (filter: string) => {
+    setActiveFilter(filter);
+    
+    // Update URL with the selected filter
+    const newUrl = filter === 'all' 
+      ? '/projects' 
+      : `/projects?filter=${encodeURIComponent(filter)}`;
+    
+    router.push(newUrl, { scroll: false });
+  };
+
   const openPreview = (url: string) => {
     setPreviewUrl(url);
     setIsPreviewOpen(true);
@@ -166,7 +189,7 @@ export default function Projects(): JSX.Element {
               {filters.map((filter, index) => (
                 <button
                   key={index}
-                  onClick={() => setActiveFilter(filter)}
+                  onClick={() => handleFilterChange(filter)}
                   className={`px-5 py-2 rounded-full text-sm font-medium transition-all
                     ${activeFilter === filter 
                       ? 'bg-primary text-white shadow-lg'
