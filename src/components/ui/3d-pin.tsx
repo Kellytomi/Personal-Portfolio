@@ -1,9 +1,29 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const ROTATION_RANGE = 50; // Maximum rotation range in degrees
+
+// Context for managing active pin state globally
+const PinContext = createContext<{
+  activePinId: string | null;
+  setActivePinId: (id: string | null) => void;
+}>({
+  activePinId: null,
+  setActivePinId: () => {},
+});
+
+// Provider component to wrap around components that use 3D pins
+export const PinProvider = ({ children }: { children: React.ReactNode }) => {
+  const [activePinId, setActivePinId] = useState<string | null>(null);
+
+  return (
+    <PinContext.Provider value={{ activePinId, setActivePinId }}>
+      {children}
+    </PinContext.Provider>
+  );
+};
 
 export const PinContainer = ({
   children,
@@ -11,37 +31,83 @@ export const PinContainer = ({
   href,
   className,
   containerClassName,
+  id, // Add unique ID for each pin
 }: {
   children: React.ReactNode;
   title?: string;
   href?: string;
   className?: string;
   containerClassName?: string;
+  id?: string;
 }) => {
+  const { activePinId, setActivePinId } = useContext(PinContext);
+  const pinId = id || Math.random().toString(36).substr(2, 9); // Generate unique ID if not provided
+  
   const [transform, setTransform] = useState(
     "translate(-50%,-50%) rotateX(0deg)"
   );
+  const [isHovered, setIsHovered] = useState(false);
+  const [isTouching, setIsTouching] = useState(false);
+
+  // Check if this pin is currently active
+  const isActive = activePinId === pinId;
+
+  // Reset pin when another pin becomes active
+  useEffect(() => {
+    if (!isActive) {
+      // Always reset transform when pin becomes inactive
+      setTransform("translate(-50%,-50%) rotateX(0deg) scale(1)");
+      setIsHovered(false);
+      setIsTouching(false);
+    }
+  }, [isActive]);
 
   // Original desktop hover behavior
   const onMouseEnter = () => {
-    setTransform("translate(-50%,-50%) rotateX(40deg) scale(0.8)");
+    if (!isTouching) { // Don't interfere with touch interactions
+      setTransform("translate(-50%,-50%) rotateX(40deg) scale(0.8)");
+      setIsHovered(true);
+      setActivePinId(pinId);
+    }
   };
   
   const onMouseLeave = () => {
-    setTransform("translate(-50%,-50%) rotateX(0deg) scale(1)");
+    if (!isTouching) { // Don't interfere with touch interactions
+      setTransform("translate(-50%,-50%) rotateX(0deg) scale(1)");
+      setIsHovered(false);
+      setActivePinId(null);
+    }
   };
 
-  // Mobile touch handlers with advanced tilt
-  const onTouchStart = () => {
-    // Start with a subtle tilt
-    setTransform(
-      `translate(-50%,-50%) rotateX(${ROTATION_RANGE / 4}deg) rotateY(${
-        ROTATION_RANGE / 4
-      }deg)`
-    );
+  // Mobile touch handlers - single unified handler
+  const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsTouching(true);
+    
+    // Toggle pin visibility on touch
+    const newShowPin = !isActive;
+    
+    if (newShowPin) {
+      setActivePinId(pinId);
+      // Start with a subtle tilt when showing pin
+      setTransform(
+        `translate(-50%,-50%) rotateX(${ROTATION_RANGE / 4}deg) rotateY(${
+          ROTATION_RANGE / 4
+        }deg)`
+      );
+    } else {
+      setActivePinId(null);
+      // Reset when hiding pin
+      setTransform("translate(-50%,-50%) rotateX(0deg) scale(1)");
+    }
   };
 
   const onTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    // Only allow move if pin is showing
+    if (!isActive || !isTouching) return;
+    
+    e.preventDefault();
+    
     const element = e.currentTarget;
     const rect = element.getBoundingClientRect();
     const touch = e.touches[0];
@@ -56,8 +122,16 @@ export const PinContainer = ({
     setTransform(newTransform);
   };
 
-  const onTouchEnd = () => {
-    setTransform("translate(-50%,-50%) rotateX(0deg) scale(1)");
+  const onTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    
+    // Only reset transform if pin is still showing, otherwise keep it hidden
+    if (isActive) {
+      setTransform("translate(-50%,-50%) rotateX(40deg) scale(0.8)");
+    }
+    
+    // Reset touching state after a small delay to prevent mouse events from interfering
+    setTimeout(() => setIsTouching(false), 100);
   };
 
   return (
@@ -88,7 +162,7 @@ export const PinContainer = ({
           <div className={cn("relative z-50", className)}>{children}</div>
         </div>
       </div>
-      <PinPerspective title={title} href={href} />
+      <PinPerspective title={title} href={href} showPin={isActive} isHovered={isHovered && !isTouching} />
     </div>
   );
 };
@@ -96,12 +170,20 @@ export const PinContainer = ({
 export const PinPerspective = ({
   title,
   href,
+  showPin,
+  isHovered,
 }: {
   title?: string;
   href?: string;
+  showPin?: boolean;
+  isHovered?: boolean;
 }) => {
   return (
-    <motion.div className="pointer-events-none w-72 sm:w-80 md:w-96 h-64 sm:h-72 md:h-80 flex items-center justify-center opacity-0 group-hover/pin:opacity-100 z-[60] transition duration-500">
+    <motion.div 
+      className={`pointer-events-none w-72 sm:w-80 md:w-96 h-64 sm:h-72 md:h-80 flex items-center justify-center z-[60] transition duration-500 ${
+        showPin || isHovered ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
       <div className="w-full h-full -mt-4 sm:-mt-6 md:-mt-7 flex-none inset-0">
         <div className="absolute top-0 inset-x-0 flex justify-center">
           <a

@@ -101,7 +101,7 @@ const FloatingDockDesktop = ({
   return (
     <motion.div
       className={cn(
-        "mx-auto hidden h-auto items-center gap-1 rounded-full bg-white/90 backdrop-blur-md px-6 py-3 md:flex shadow-lg border border-gray-200/50",
+        "mx-auto hidden h-auto items-center gap-1 rounded-full bg-white/90 backdrop-blur-md px-4 lg:px-6 py-2 lg:py-3 lg:flex shadow-lg border border-gray-200/50",
         className,
       )}
     >
@@ -111,28 +111,28 @@ const FloatingDockDesktop = ({
           <Link
             key={item.title}
             href={item.href}
-            className={`group relative flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
+            className={`group relative flex items-center gap-1 lg:gap-2 px-2 lg:px-4 py-1 lg:py-2 rounded-full transition-all duration-300 ${
               isActive 
                 ? 'bg-primary text-white' 
                 : 'hover:bg-primary/10'
             }`}
           >
             <motion.div 
-              className="flex items-center gap-2"
+              className="flex items-center gap-1 lg:gap-2"
               whileHover={{ 
                 scale: 1.1,
                 transition: { type: "spring", stiffness: 400, damping: 10 }
               }}
               whileTap={{ scale: 0.95 }}
             >
-              <div className={`w-4 h-4 transition-colors ${
+              <div className={`w-3 lg:w-4 h-3 lg:h-4 transition-colors ${
                 isActive 
                   ? 'text-white' 
                   : 'text-primary/70 group-hover:text-primary'
               }`}>
                 {item.icon}
               </div>
-              <span className={`text-sm font-medium transition-colors ${
+              <span className={`text-xs lg:text-sm font-medium transition-colors ${
                 isActive 
                   ? 'text-white' 
                   : 'text-gray-700 group-hover:text-primary'

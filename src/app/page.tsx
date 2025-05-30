@@ -10,7 +10,7 @@ import PageSpacer from '@/components/PageSpacer';
 import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
 import PageFadeIn from '@/components/PageFadeIn';
-import { PinContainer } from '@/components/ui/3d-pin';
+import { PinContainer, PinProvider } from '@/components/ui/3d-pin';
 
 export default function Home(): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -127,7 +127,7 @@ export default function Home(): JSX.Element {
                     <p className="text-base sm:text-lg mb-6 md:mb-8 text-muted max-w-xl mx-auto lg:mx-0">
                       When I'm not coding, you'll find me playing basketball, binging Netflix shows, or experimenting with new recipes. My passion is creating digital experiences that make people's lives easier and more enjoyable.
                     </p>
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:mb-0 mb-10 max-w-md mx-auto lg:mx-0">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center lg:justify-start gap-4 sm:mb-0 mb-10 max-w-md mx-auto lg:mx-0">
                       <Link href="/about" className="cta-button">
                         <span>Get to know me</span>
                       </Link>
@@ -463,71 +463,75 @@ export default function Home(): JSX.Element {
                 </motion.div>
 
                 <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 lg:gap-20">
-                  {/* Featured Project 1 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <PinContainer
-                      title="View Project"
-                      href="/projects"
-                      containerClassName="h-[22rem] w-[18rem] md:h-[25rem] md:w-[20rem]"
+                  <PinProvider>
+                    {/* Featured Project 1 */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5 }}
                     >
-                      <div className="flex basis-full flex-col p-3 md:p-4 tracking-tight text-gray-600 w-[18rem] md:w-[20rem] h-[18rem] md:h-[20rem]">
-                        <h3 className="max-w-xs !pb-1 md:!pb-2 !m-0 font-bold text-sm md:text-base text-gray-900">
-                          Recipe Finder App
-                        </h3>
-                        <div className="text-sm md:text-base !m-0 !p-0 font-normal">
-                          <span className="text-gray-600">
-                            A mobile app that helps you find recipes based on ingredients you already have
-                          </span>
+                      <PinContainer
+                        title="View Project"
+                        href="/projects"
+                        containerClassName="h-[22rem] w-[18rem] md:h-[25rem] md:w-[20rem]"
+                        id="featured-project-1"
+                      >
+                        <div className="flex basis-full flex-col p-3 md:p-4 tracking-tight text-gray-600 w-[18rem] md:w-[20rem] h-[18rem] md:h-[20rem]">
+                          <h3 className="max-w-xs !pb-1 md:!pb-2 !m-0 font-bold text-sm md:text-base text-gray-900">
+                            Recipe Finder App
+                          </h3>
+                          <div className="text-sm md:text-base !m-0 !p-0 font-normal">
+                            <span className="text-gray-600">
+                              A mobile app that helps you find recipes based on ingredients you already have
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 mt-3 md:mt-4 mb-3 md:mb-4">
+                            <span className="px-2 md:px-3 py-1 bg-primary/20 text-primary text-xs rounded-full">
+                              Personal Favorite
+                            </span>
+                          </div>
+                          <div className="flex flex-1 w-full rounded-lg mt-2 md:mt-4 bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500 relative overflow-hidden">
+                            <div className="absolute inset-0 bg-[url('/project1.jpg')] bg-cover bg-center opacity-70"></div>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2 mt-3 md:mt-4 mb-3 md:mb-4">
-                          <span className="px-2 md:px-3 py-1 bg-primary/20 text-primary text-xs rounded-full">
-                            Personal Favorite
-                          </span>
-                        </div>
-                        <div className="flex flex-1 w-full rounded-lg mt-2 md:mt-4 bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500 relative overflow-hidden">
-                          <div className="absolute inset-0 bg-[url('/project1.jpg')] bg-cover bg-center opacity-70"></div>
-                        </div>
-                      </div>
-                    </PinContainer>
-                  </motion.div>
+                      </PinContainer>
+                    </motion.div>
 
-                  {/* Featured Project 2 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                  >
-                    <PinContainer
-                      title="View Project"
-                      href="/projects"
-                      containerClassName="h-[22rem] w-[18rem] md:h-[25rem] md:w-[20rem]"
+                    {/* Featured Project 2 */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
                     >
-                      <div className="flex basis-full flex-col p-3 md:p-4 tracking-tight text-gray-600 w-[18rem] md:w-[20rem] h-[18rem] md:h-[20rem]">
-                        <h3 className="max-w-xs !pb-1 md:!pb-2 !m-0 font-bold text-sm md:text-base text-gray-900">
-                          Basketball Stats Tracker
-                        </h3>
-                        <div className="text-sm md:text-base !m-0 !p-0 font-normal">
-                          <span className="text-gray-600">
-                            A web app I built to track my pickup basketball game stats with friends
-                          </span>
+                      <PinContainer
+                        title="View Project"
+                        href="/projects"
+                        containerClassName="h-[22rem] w-[18rem] md:h-[25rem] md:w-[20rem]"
+                        id="featured-project-2"
+                      >
+                        <div className="flex basis-full flex-col p-3 md:p-4 tracking-tight text-gray-600 w-[18rem] md:w-[20rem] h-[18rem] md:h-[20rem]">
+                          <h3 className="max-w-xs !pb-1 md:!pb-2 !m-0 font-bold text-sm md:text-base text-gray-900">
+                            Basketball Stats Tracker
+                          </h3>
+                          <div className="text-sm md:text-base !m-0 !p-0 font-normal">
+                            <span className="text-gray-600">
+                              A web app I built to track my pickup basketball game stats with friends
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 mt-3 md:mt-4 mb-3 md:mb-4">
+                            <span className="px-2 md:px-3 py-1 bg-secondary/20 text-secondary text-xs rounded-full">
+                              Fun Project
+                            </span>
+                          </div>
+                          <div className="flex flex-1 w-full rounded-lg mt-2 md:mt-4 bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 relative overflow-hidden">
+                            <div className="absolute inset-0 bg-[url('/project2.jpg')] bg-cover bg-center opacity-70"></div>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2 mt-3 md:mt-4 mb-3 md:mb-4">
-                          <span className="px-2 md:px-3 py-1 bg-secondary/20 text-secondary text-xs rounded-full">
-                            Fun Project
-                          </span>
-                        </div>
-                        <div className="flex flex-1 w-full rounded-lg mt-2 md:mt-4 bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 relative overflow-hidden">
-                          <div className="absolute inset-0 bg-[url('/project2.jpg')] bg-cover bg-center opacity-70"></div>
-                        </div>
-                      </div>
-                    </PinContainer>
-                  </motion.div>
+                      </PinContainer>
+                    </motion.div>
+                  </PinProvider>
                 </div>
 
                 <motion.div 

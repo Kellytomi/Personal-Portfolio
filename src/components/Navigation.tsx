@@ -133,13 +133,13 @@ export default function Navigation(): JSX.Element {
                 alt="Etoma-Etoto Kelvin Odi" 
                 width={150} 
                 height={40} 
-                className="object-contain mt-1"
+                className="object-contain mt-1 w-[120px] sm:w-[140px] md:w-[150px]"
                 priority
               />
             </Link>
 
             {/* Desktop Navigation - Floating Dock */}
-            <div className="hidden md:flex items-center justify-center flex-1">
+            <div className="hidden lg:flex items-center justify-center flex-1">
               <FloatingDock
                 items={floatingDockItems}
                 desktopClassName=""
@@ -148,10 +148,10 @@ export default function Navigation(): JSX.Element {
             </div>
 
             {/* CTA Button */}
-            <div className="hidden md:block">
-              <Link href="/contact" className="cta-button">
+            <div className="hidden lg:block">
+              <Link href="/contact" className="cta-button text-sm lg:text-base px-4 lg:px-6 py-2 lg:py-3">
                 <span>Say Hello</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="16" height="16" className="lg:w-5 lg:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </Link>
@@ -159,7 +159,7 @@ export default function Navigation(): JSX.Element {
 
             {/* Mobile Navigation Button */}
             <button
-              className="md:hidden p-2 hover:bg-primary/5 rounded-lg transition-colors duration-200"
+              className="lg:hidden p-2 hover:bg-primary/5 rounded-lg transition-colors duration-200"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
@@ -177,7 +177,7 @@ export default function Navigation(): JSX.Element {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className={`md:hidden relative border-none backdrop-blur-sm ${scrollY < 10 ? 'bg-white/20' : (isOverDarkSection ? 'bg-white/90' : 'bg-white/20')}`}
+            className={`lg:hidden relative border-none backdrop-blur-sm ${scrollY < 10 ? 'bg-white/20' : (isOverDarkSection ? 'bg-white/90' : 'bg-white/20')}`}
           >
             <div className="container mx-auto py-4 space-y-4 relative z-10">
               {floatingDockItems.map((item) => (

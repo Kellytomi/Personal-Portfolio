@@ -128,7 +128,7 @@ export default function About(): JSX.Element {
                 </p>
               </div>
               
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <a 
                   href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view" 
                   target="_blank" 

@@ -8,7 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
-import { PinContainer } from '@/components/ui/3d-pin';
+import { PinContainer, PinProvider } from '@/components/ui/3d-pin';
 
 interface Project {
   title: string;
@@ -203,86 +203,89 @@ export default function Projects(): JSX.Element {
             </motion.div>
             
             {/* Projects Grid */}
-            <div className="flex flex-wrap justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20">
-              <AnimatePresence>
-                {filteredProjects.map((project, index) => (
-                  <motion.div
-                    key={project.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    layout
-                  >
-                    <PinContainer
-                      title={project.link ? "Visit Site" : "View Details"}
-                      href={project.link || "#"}
-                      containerClassName="h-[26rem] w-[18rem] sm:h-[28rem] sm:w-[20rem] md:h-[30rem] md:w-[22rem]"
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center">
+              <PinProvider>
+                <AnimatePresence>
+                  {filteredProjects.map((project, index) => (
+                    <motion.div
+                      key={project.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                      layout
                     >
-                      <div className="flex basis-full flex-col p-3 sm:p-4 tracking-tight text-gray-600 w-[18rem] sm:w-[20rem] md:w-[22rem] h-[22rem] sm:h-[24rem] md:h-[26rem]">
-                        <h3 className="max-w-xs !pb-1 sm:!pb-2 !m-0 font-bold text-sm sm:text-base text-gray-900">
-                          {project.title}
-                        </h3>
-                        <div className="text-xs sm:text-sm !m-0 !p-0 font-normal mb-3 sm:mb-4">
-                          <span className="text-gray-600">
-                            {project.description}
-                          </span>
-                        </div>
-                        
-                        {/* Categories */}
-                        <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
-                          {project.category.map((cat, i) => (
-                            <span key={i} className="px-2 sm:px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
-                              {cat}
+                      <PinContainer
+                        title={project.link ? "Visit Site" : "View Details"}
+                        href={project.link || "#"}
+                        containerClassName="h-[26rem] w-[18rem] sm:h-[28rem] sm:w-[20rem] md:h-[30rem] md:w-[22rem]"
+                        id={`project-${index}`}
+                      >
+                        <div className="flex basis-full flex-col p-3 sm:p-4 tracking-tight text-gray-600 w-[18rem] sm:w-[20rem] md:w-[22rem] h-[22rem] sm:h-[24rem] md:h-[26rem]">
+                          <h3 className="max-w-xs !pb-1 sm:!pb-2 !m-0 font-bold text-sm sm:text-base text-gray-900">
+                            {project.title}
+                          </h3>
+                          <div className="text-xs sm:text-sm !m-0 !p-0 font-normal mb-3 sm:mb-4">
+                            <span className="text-gray-600">
+                              {project.description}
                             </span>
-                          ))}
-                        </div>
-
-                        {/* Technologies */}
-                        <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
-                          {project.technologies.slice(0, 3).map((tech, i) => (
-                            <span key={i} className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">
-                              {tech}
-                            </span>
-                          ))}
-                          {project.technologies.length > 3 && (
-                            <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">
-                              +{project.technologies.length - 3} more
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Image/Visual */}
-                        <div className="flex flex-1 w-full rounded-lg mt-2 sm:mt-4 bg-gradient-to-br from-primary/20 to-secondary/20 relative overflow-hidden">
-                          <div 
-                            className="absolute inset-0 bg-cover bg-center opacity-60"
-                            style={{ backgroundImage: `url(${project.image})` }}
-                          ></div>
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                          </div>
                           
-                          {/* Action buttons overlay */}
-                          <div className="absolute bottom-1 sm:bottom-2 right-1 sm:right-2 flex gap-1 sm:gap-2">
-                            {project.previewUrl && (
-                              <button
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  openPreview(project.previewUrl!);
-                                }}
-                                className="p-1.5 sm:p-2 bg-white/20 backdrop-blur-md text-white rounded-lg hover:bg-white/30 transition-colors"
-                                title="Preview"
-                              >
-                                <svg className="w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M15 10L19.5528 7.72361C20.2177 7.39116 21 7.87465 21 8.61803V15.382C21 16.1253 20.2177 16.6088 19.5528 16.2764L15 14M5 18H13C14.1046 18 15 17.1046 15 16V8C15 6.89543 14.1046 6 13 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                </svg>
-                              </button>
+                          {/* Categories */}
+                          <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                            {project.category.map((cat, i) => (
+                              <span key={i} className="px-2 sm:px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
+                                {cat}
+                              </span>
+                            ))}
+                          </div>
+
+                          {/* Technologies */}
+                          <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                            {project.technologies.slice(0, 3).map((tech, i) => (
+                              <span key={i} className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">
+                                {tech}
+                              </span>
+                            ))}
+                            {project.technologies.length > 3 && (
+                              <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">
+                                +{project.technologies.length - 3} more
+                              </span>
                             )}
                           </div>
+
+                          {/* Image/Visual */}
+                          <div className="flex flex-1 w-full rounded-lg mt-2 sm:mt-4 bg-gradient-to-br from-primary/20 to-secondary/20 relative overflow-hidden">
+                            <div 
+                              className="absolute inset-0 bg-cover bg-center opacity-60"
+                              style={{ backgroundImage: `url(${project.image})` }}
+                            ></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                            
+                            {/* Action buttons overlay */}
+                            <div className="absolute bottom-1 sm:bottom-2 right-1 sm:right-2 flex gap-1 sm:gap-2">
+                              {project.previewUrl && (
+                                <button
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    openPreview(project.previewUrl!);
+                                  }}
+                                  className="p-1.5 sm:p-2 bg-white/20 backdrop-blur-md text-white rounded-lg hover:bg-white/30 transition-colors"
+                                  title="Preview"
+                                >
+                                  <svg className="w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15 10L19.5528 7.72361C20.2177 7.39116 21 7.87465 21 8.61803V15.382C21 16.1253 20.2177 16.6088 19.5528 16.2764L15 14M5 18H13C14.1046 18 15 17.1046 15 16V8C15 6.89543 14.1046 6 13 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                  </svg>
+                                </button>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </PinContainer>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+                      </PinContainer>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </PinProvider>
             </div>
             
             {filteredProjects.length === 0 && (
