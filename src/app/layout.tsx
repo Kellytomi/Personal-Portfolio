@@ -13,6 +13,7 @@ const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   preload: true,
   weight: ["400", "500", "600", "700"],
+  fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 });
 
 const syne = Syne({
@@ -21,6 +22,7 @@ const syne = Syne({
   variable: "--font-syne",
   preload: true,
   weight: ["400", "500", "600", "700", "800"],
+  fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "serif"],
 });
 
 interface RootLayoutProps {
@@ -86,9 +88,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
-    <html lang="en" className={`${jakarta.variable} ${syne.variable}`} style={{fontFamily: 'var(--font-jakarta), sans-serif'}}>
+    <html lang="en" className={`${jakarta.variable} ${syne.variable}`}>
       <head>
-        <meta name="x-font-options" content="no-substitute" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
         <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
@@ -98,7 +101,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         <link rel="shortcut icon" href="/favicon-192x192.png" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className="bg-surface text-text loaded" style={{fontFamily: 'var(--font-jakarta), sans-serif'}}>
+      <body className={`bg-surface text-text loaded ${jakarta.className}`}>
         <CookiesProvider>
           <ClientOnly>
             <CustomCursor />

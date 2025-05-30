@@ -17,8 +17,28 @@ module.exports = {
         'highlight': '#FFFFFF', // White for highlights
       },
       fontFamily: {
-        sans: ['var(--font-jakarta)'],
-        display: ['var(--font-syne)'],
+        sans: [
+          'var(--font-jakarta)', 
+          'Plus Jakarta Sans', 
+          'system-ui', 
+          '-apple-system', 
+          'BlinkMacSystemFont', 
+          'Segoe UI', 
+          'Roboto', 
+          'Helvetica Neue', 
+          'Arial', 
+          'sans-serif'
+        ],
+        display: [
+          'var(--font-syne)', 
+          'Syne', 
+          'system-ui', 
+          '-apple-system', 
+          'BlinkMacSystemFont', 
+          'Segoe UI', 
+          'Georgia', 
+          'serif'
+        ],
       },
       fontSize: {
         '7xl': ['5rem', { lineHeight: '1.1' }],
