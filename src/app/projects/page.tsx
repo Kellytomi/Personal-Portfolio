@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
+import { PinContainer } from '@/components/ui/3d-pin';
 
 interface Project {
   title: string;
@@ -202,7 +203,7 @@ export default function Projects(): JSX.Element {
             </motion.div>
             
             {/* Projects Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="flex flex-wrap justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20">
               <AnimatePresence>
                 {filteredProjects.map((project, index) => (
                   <motion.div
@@ -212,63 +213,73 @@ export default function Projects(): JSX.Element {
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                     layout
-                    className="card overflow-hidden group"
                   >
-                    <div className="relative h-60 overflow-hidden">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                        <div className="flex gap-2">
-                          {project.previewUrl && (
-                            <button
-                              onClick={() => openPreview(project.previewUrl!)}
-                              className="flex items-center justify-center bg-white/20 backdrop-blur-md text-white rounded-lg px-3 py-2 text-sm hover:bg-white/30 transition-colors"
-                            >
-                              <svg className="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M15 10L19.5528 7.72361C20.2177 7.39116 21 7.87465 21 8.61803V15.382C21 16.1253 20.2177 16.6088 19.5528 16.2764L15 14M5 18H13C14.1046 18 15 17.1046 15 16V8C15 6.89543 14.1046 6 13 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                              </svg>
-                              Preview
-                            </button>
-                          )}
-                          {project.link && (
-                            <Link
-                              href={project.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center justify-center bg-white/20 backdrop-blur-md text-white rounded-lg px-3 py-2 text-sm hover:bg-white/30 transition-colors"
-                            >
-                              <svg className="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 6H6C4.89543 6 4 6.89543 4 8V18C4 19.1046 4.89543 20 6 20H16C17.1046 20 18 19.1046 18 18V14M14 4H20M20 4V10M20 4L10 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                              </svg>
-                              Visit Site
-                            </Link>
+                    <PinContainer
+                      title={project.link ? "Visit Site" : "View Details"}
+                      href={project.link || "#"}
+                      containerClassName="h-[26rem] w-[18rem] sm:h-[28rem] sm:w-[20rem] md:h-[30rem] md:w-[22rem]"
+                    >
+                      <div className="flex basis-full flex-col p-3 sm:p-4 tracking-tight text-gray-600 w-[18rem] sm:w-[20rem] md:w-[22rem] h-[22rem] sm:h-[24rem] md:h-[26rem]">
+                        <h3 className="max-w-xs !pb-1 sm:!pb-2 !m-0 font-bold text-sm sm:text-base text-gray-900">
+                          {project.title}
+                        </h3>
+                        <div className="text-xs sm:text-sm !m-0 !p-0 font-normal mb-3 sm:mb-4">
+                          <span className="text-gray-600">
+                            {project.description}
+                          </span>
+                        </div>
+                        
+                        {/* Categories */}
+                        <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                          {project.category.map((cat, i) => (
+                            <span key={i} className="px-2 sm:px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
+                              {cat}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Technologies */}
+                        <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                          {project.technologies.slice(0, 3).map((tech, i) => (
+                            <span key={i} className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">
+                              {tech}
+                            </span>
+                          ))}
+                          {project.technologies.length > 3 && (
+                            <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">
+                              +{project.technologies.length - 3} more
+                            </span>
                           )}
                         </div>
+
+                        {/* Image/Visual */}
+                        <div className="flex flex-1 w-full rounded-lg mt-2 sm:mt-4 bg-gradient-to-br from-primary/20 to-secondary/20 relative overflow-hidden">
+                          <div 
+                            className="absolute inset-0 bg-cover bg-center opacity-60"
+                            style={{ backgroundImage: `url(${project.image})` }}
+                          ></div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                          
+                          {/* Action buttons overlay */}
+                          <div className="absolute bottom-1 sm:bottom-2 right-1 sm:right-2 flex gap-1 sm:gap-2">
+                            {project.previewUrl && (
+                              <button
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  openPreview(project.previewUrl!);
+                                }}
+                                className="p-1.5 sm:p-2 bg-white/20 backdrop-blur-md text-white rounded-lg hover:bg-white/30 transition-colors"
+                                title="Preview"
+                              >
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M15 10L19.5528 7.72361C20.2177 7.39116 21 7.87465 21 8.61803V15.382C21 16.1253 20.2177 16.6088 19.5528 16.2764L15 14M5 18H13C14.1046 18 15 17.1046 15 16V8C15 6.89543 14.1046 6 13 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              </button>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                      <p className="text-muted mb-4">{project.description}</p>
-                      <div className="mb-4 flex flex-wrap gap-2">
-                        {project.category.map((cat, i) => (
-                          <span key={i} className="px-3 py-1 bg-primary/5 rounded-full text-xs font-medium">
-                            {cat}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.map((tech, i) => (
-                          <span key={i} className="px-3 py-1 bg-gray-100 rounded-full text-xs text-muted">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                    </PinContainer>
                   </motion.div>
                 ))}
               </AnimatePresence>

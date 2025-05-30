@@ -10,6 +10,7 @@ import PageSpacer from '@/components/PageSpacer';
 import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
 import PageFadeIn from '@/components/PageFadeIn';
+import { PinContainer } from '@/components/ui/3d-pin';
 
 export default function Home(): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -461,37 +462,38 @@ export default function Home(): JSX.Element {
                   </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 lg:gap-20">
                   {/* Featured Project 1 */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="group relative overflow-hidden rounded-xl shadow-card"
                   >
-                    <div className="relative h-64 md:h-72 w-full">
-                      <Image 
-                        src="/project1.jpg" 
-                        alt="Project screenshot" 
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="px-3 py-1 bg-primary/90 text-white text-xs rounded-full">Personal Favorite</span>
+                    <PinContainer
+                      title="View Project"
+                      href="/projects"
+                      containerClassName="h-[22rem] w-[18rem] md:h-[25rem] md:w-[20rem]"
+                    >
+                      <div className="flex basis-full flex-col p-3 md:p-4 tracking-tight text-gray-600 w-[18rem] md:w-[20rem] h-[18rem] md:h-[20rem]">
+                        <h3 className="max-w-xs !pb-1 md:!pb-2 !m-0 font-bold text-sm md:text-base text-gray-900">
+                          Recipe Finder App
+                        </h3>
+                        <div className="text-sm md:text-base !m-0 !p-0 font-normal">
+                          <span className="text-gray-600">
+                            A mobile app that helps you find recipes based on ingredients you already have
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2 mt-3 md:mt-4 mb-3 md:mb-4">
+                          <span className="px-2 md:px-3 py-1 bg-primary/20 text-primary text-xs rounded-full">
+                            Personal Favorite
+                          </span>
+                        </div>
+                        <div className="flex flex-1 w-full rounded-lg mt-2 md:mt-4 bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500 relative overflow-hidden">
+                          <div className="absolute inset-0 bg-[url('/project1.jpg')] bg-cover bg-center opacity-70"></div>
+                        </div>
                       </div>
-                      <h3 className="text-xl font-bold text-white mb-1">Recipe Finder App</h3>
-                      <p className="text-white/80 mb-3 text-sm">A mobile app that helps you find recipes based on ingredients you already have</p>
-                      <Link href="/projects" className="text-white font-medium inline-flex items-center">
-                        View project
-                        <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </Link>
-                    </div>
+                    </PinContainer>
                   </motion.div>
 
                   {/* Featured Project 2 */}
@@ -500,30 +502,31 @@ export default function Home(): JSX.Element {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.1 }}
-                    className="group relative overflow-hidden rounded-xl shadow-card"
                   >
-                    <div className="relative h-64 md:h-72 w-full">
-                      <Image 
-                        src="/project2.jpg" 
-                        alt="Project screenshot" 
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="px-3 py-1 bg-secondary/90 text-white text-xs rounded-full">Fun Project</span>
+                    <PinContainer
+                      title="View Project"
+                      href="/projects"
+                      containerClassName="h-[22rem] w-[18rem] md:h-[25rem] md:w-[20rem]"
+                    >
+                      <div className="flex basis-full flex-col p-3 md:p-4 tracking-tight text-gray-600 w-[18rem] md:w-[20rem] h-[18rem] md:h-[20rem]">
+                        <h3 className="max-w-xs !pb-1 md:!pb-2 !m-0 font-bold text-sm md:text-base text-gray-900">
+                          Basketball Stats Tracker
+                        </h3>
+                        <div className="text-sm md:text-base !m-0 !p-0 font-normal">
+                          <span className="text-gray-600">
+                            A web app I built to track my pickup basketball game stats with friends
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2 mt-3 md:mt-4 mb-3 md:mb-4">
+                          <span className="px-2 md:px-3 py-1 bg-secondary/20 text-secondary text-xs rounded-full">
+                            Fun Project
+                          </span>
+                        </div>
+                        <div className="flex flex-1 w-full rounded-lg mt-2 md:mt-4 bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 relative overflow-hidden">
+                          <div className="absolute inset-0 bg-[url('/project2.jpg')] bg-cover bg-center opacity-70"></div>
+                        </div>
                       </div>
-                      <h3 className="text-xl font-bold text-white mb-1">Basketball Stats Tracker</h3>
-                      <p className="text-white/80 mb-3 text-sm">A web app I built to track my pickup basketball game stats with friends</p>
-                      <Link href="/projects" className="text-white font-medium inline-flex items-center">
-                        View project
-                        <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </Link>
-                    </div>
+                    </PinContainer>
                   </motion.div>
                 </div>
 

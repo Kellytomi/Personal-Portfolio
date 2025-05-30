@@ -137,7 +137,7 @@ export default function About(): JSX.Element {
                 >
                   View Resume
                 </a>
-                <Link href="/contact" className="btn bg-gray-600 text-white hover:bg-gray-700">
+                <Link href="/contact" className="btn btn-secondary">
                   Contact Me
                 </Link>
               </div>

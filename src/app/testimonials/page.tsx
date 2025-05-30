@@ -8,6 +8,8 @@ import { useState, useRef, useEffect } from 'react';
 import CountUp from '@/components/CountUp';
 import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
+import AnimatedTestimonialsDemo from '@/components/animated-testimonials-demo';
+import { HoverEffect } from '@/components/ui/card-hover-effect';
 
 interface Testimonial {
   name: string;
@@ -29,7 +31,6 @@ export default function Testimonials(): JSX.Element {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
   const [activeFilter, setActiveFilter] = useState<string>("All");
   
   const testimonials: Testimonial[] = [
@@ -125,22 +126,6 @@ export default function Testimonials(): JSX.Element {
     },
   ];
 
-  // Auto-rotate featured testimonial
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonialIndex((prevIndex) => 
-        prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000);
-    
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
-
-  // Manual navigation for featured testimonial
-  const goToTestimonial = (index: number) => {
-    setCurrentTestimonialIndex(index);
-  };
-  
   // Get unique industries for filter
   const industries = ["All", ...Array.from(new Set(testimonials.map(t => t.industry).filter(Boolean) as string[]))];
   
@@ -180,92 +165,11 @@ export default function Testimonials(): JSX.Element {
               </p>
             </motion.div>
 
-            {/* Featured Testimonial Carousel */}
-            <div className="max-w-5xl mx-auto mb-12 relative">
-              <div className="relative bg-white rounded-3xl shadow-lg overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary z-10" />
-                
-                <AnimatePresence mode="wait">
-                  <motion.div 
-                    key={currentTestimonialIndex}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="grid md:grid-cols-2 h-full"
-                  >
-                    <div className="relative h-60 md:h-full">
-                      <Image
-                        src={testimonials[currentTestimonialIndex].image}
-                        alt={testimonials[currentTestimonialIndex].name}
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
-                      <div className="absolute bottom-0 left-0 p-8 text-white">
-                        <div className="flex items-center gap-3 mb-2">
-                          <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white shadow-lg">
-                            <Image
-                              src={testimonials[currentTestimonialIndex].image}
-                              alt={testimonials[currentTestimonialIndex].name}
-                              width={56}
-                              height={56}
-                              className="object-cover"
-                            />
-                          </div>
-                          <div>
-                            <h3 className="font-bold text-xl">{testimonials[currentTestimonialIndex].name}</h3>
-                            <p className="text-sm text-white/90">{testimonials[currentTestimonialIndex].role}, {testimonials[currentTestimonialIndex].company}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="p-8 md:p-12 flex flex-col justify-center">
-                      <div className="text-6xl text-black/10 mb-6 font-serif">"</div>
-                      <blockquote className="text-lg md:text-xl text-gray-800 mb-8 leading-relaxed">
-                        {testimonials[currentTestimonialIndex].quote}
-                      </blockquote>
-                      
-                      <div className="flex items-center justify-between mt-auto">
-                        <div>
-                          <div className="font-bold text-primary">{testimonials[currentTestimonialIndex].project}</div>
-                          <div className="text-sm text-gray-500">{testimonials[currentTestimonialIndex].industry}</div>
-                        </div>
-                        <Link 
-                          href="/projects" 
-                          className="group inline-flex items-center text-sm font-medium border-b border-primary text-primary hover:border-secondary transition-colors duration-300"
-                        >
-                          View Project
-                          <svg className="w-4 h-4 ml-1 transform transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-              
-              {/* Carousel Navigation Dots */}
-              <div className="flex justify-center gap-2 mt-6 mb-16">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToTestimonial(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === currentTestimonialIndex 
-                        ? 'bg-primary w-6' 
-                        : 'bg-gray-300 hover:bg-gray-400'
-                    }`}
-                    aria-label={`View testimonial ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
+            {/* Featured Testimonial Carousel - New Animated Version */}
+            <AnimatedTestimonialsDemo />
             
             {/* Industry Filters */}
-            <div className="flex flex-wrap justify-center gap-4 mb-16">
+            <div className="flex flex-wrap justify-center gap-4 mb-4">
               {industries.map((industry, i) => (
                 <motion.button
                   key={i}
@@ -286,76 +190,12 @@ export default function Testimonials(): JSX.Element {
         </section>
         
         {/* Testimonial Cards Grid */}
-        <section className="py-16 bg-white">
+        <section className="pt-4 pb-8 bg-white">
           <div className="container">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <AnimatePresence>
-                {filteredTestimonials.map((testimonial, index) => (
-                  <motion.div
-                    key={testimonial.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    layout
-                    className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 group h-full flex flex-col"
-                  >
-                    <div className="relative h-64">
-                      <Image
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-70" />
-                      <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                        <div className="flex items-center gap-3 mb-2">
-                          <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-md">
-                            <Image
-                              src={testimonial.image}
-                              alt={testimonial.name}
-                              width={48}
-                              height={48}
-                              className="object-cover"
-                            />
-                          </div>
-                          <div>
-                            <h3 className="font-bold text-lg">{testimonial.name}</h3>
-                            <p className="text-xs opacity-90">{testimonial.role}, {testimonial.company}</p>
-                          </div>
-                        </div>
-                        <div className="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs self-start">
-                          {testimonial.industry}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="p-6 flex-grow flex flex-col">
-                      <blockquote className="text-gray-600 mb-6 leading-relaxed flex-grow">
-                        "{testimonial.quote}"
-                      </blockquote>
-                      
-                      <div className="mt-auto">
-                        <h4 className="font-bold text-primary mb-4">{testimonial.project}</h4>
-                        
-                        {testimonial.results && (
-                          <div className="space-y-2 mb-6">
-                            {testimonial.results.map((result, i) => (
-                              <div key={i} className="flex items-start gap-2 text-sm">
-                                <svg className="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span className="text-gray-600">{result}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </div>
+            <HoverEffect items={filteredTestimonials.map(testimonial => ({
+              title: `${testimonial.name}`,
+              description: `${testimonial.role} at ${testimonial.company}\n\n"${testimonial.quote}"\n\n📊 Key Results:\n• ${testimonial.results?.slice(0, 2).join('\n• ') || 'Outstanding project outcomes'}`
+            }))} />
             
             {filteredTestimonials.length === 0 && (
               <div className="text-center py-16">
