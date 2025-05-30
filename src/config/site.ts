@@ -3,7 +3,7 @@ export const siteConfig = {
   comingSoonMode: true,
   
   // Specific launch date (for display purposes only)
-  launchDate: new Date('2025-05-31T00:00:00').getTime(),
+  launchDate: new Date('2025-06-15T00:00:00').getTime(),
   
   // Site metadata
   name: 'Etoma-etoto Kelvin Odi',
