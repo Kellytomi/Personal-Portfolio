@@ -109,7 +109,7 @@ export default function About(): JSX.Element {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 text-primary mb-6">
                 <span className="text-sm font-medium">About Me</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+              <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 gradient-text">
                 Hi, I'm Kelvin
               </h1>
               <p className="text-xl text-muted mb-8">

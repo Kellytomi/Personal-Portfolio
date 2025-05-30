@@ -172,7 +172,7 @@ export default function Projects(): JSX.Element {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 text-primary mb-6">
                 <span className="text-sm font-medium">Showcasing My Work</span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 gradient-text">
                 Project Highlights
               </h1>
               <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">

@@ -85,7 +85,7 @@ export default function ComingSoon() {
             <span className="text-gray-900">Portfolio</span> <span className="text-blue-500 italic font-normal">launching</span> <span className="text-gray-900">soon.</span>
           </h1>
           
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6 leading-relaxed">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6 leading-relaxed font-sans">
             Creating a portfolio that showcases my skills and work experience.
             Stay tuned for the full experience.
           </p>
