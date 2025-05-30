@@ -81,7 +81,7 @@ export default function ComingSoon() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mb-6"
         >
-          <h1 className="text-4xl md:text-7xl font-bold mb-2 tracking-tight">
+          <h1 className="text-4xl md:text-7xl font-display font-bold mb-2 tracking-tight">
             <span className="text-gray-900">Portfolio</span> <span className="text-blue-500 italic font-normal">launching</span> <span className="text-gray-900">soon.</span>
           </h1>
           
