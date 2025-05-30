@@ -66,13 +66,6 @@ export default function CommandPalette() {
         href: '/contact'
       },
       {
-        id: 'portfolio',
-        name: 'Portfolio',
-        action: () => router.push('/portfolio'),
-        section: 'Navigation',
-        href: '/portfolio'
-      },
-      {
         id: 'testimonials',
         name: 'Testimonials',
         action: () => router.push('/testimonials'),

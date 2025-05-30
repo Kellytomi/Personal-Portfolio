@@ -78,8 +78,8 @@ export default function Contact(): JSX.Element {
               >
                 <div className="bg-primary text-white p-8 md:p-12 rounded-xl">
                   <p className="text-xl md:text-2xl mb-10">
-                    Let's collaborate! Whether it's a new project, a partnership, or 
-                    just a question, I'd love to hear from you. Reach out, and let's 
+                    Let's collaborate! Whether it's a new project, a partnership, or
+                    just a question, I'd love to hear from you. Reach out, and let's
                     create something amazing together!
                   </p>
 
@@ -95,7 +95,7 @@ export default function Contact(): JSX.Element {
                     </div>
                     <div>
                       <h3 className="text-lg font-medium">Etoma-etoto (Kelvin) Odi</h3>
-                      <p className="text-white/70">Founder, Fxsion</p>
+                      <p className="text-white/70">Full-Stack Developer</p>
                     </div>
                   </div>
                 </div>

@@ -31,8 +31,6 @@ export default function Skills(): JSX.Element {
     offset: ["start start", "end start"]
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  
   // Define skill categories
   const skillCategories: SkillCategory[] = [
     {
@@ -115,14 +113,6 @@ export default function Skills(): JSX.Element {
     }
     return 0; // Default to first category if no hash or no match
   });
-  
-  // Experience level calculation
-  const getExperienceLevel = (level: number): string => {
-    if (level >= 90) return 'Expert';
-    if (level >= 80) return 'Advanced';
-    if (level >= 70) return 'Proficient';
-    return 'Intermediate';
-  };
   
   // Handle URL hash changes and scroll to the correct section
   useEffect(() => {

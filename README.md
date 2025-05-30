@@ -1,4 +1,4 @@
-# Fxsion Portfolio Website
+# Kelvin's Personal Portfolio Website
 
 A modern, professional portfolio website for Etoma-Etoto Kelvin Odi, founder of Fxsion - a digital solutions agency specializing in workflow automation, document solutions, and digital development.
 
@@ -25,8 +25,8 @@ A modern, professional portfolio website for Etoma-Etoto Kelvin Odi, founder of 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/fxsion-portfolio.git
-cd fxsion-portfolio
+git clone https://github.com/yourusername/kelvin-portfolio.git
+cd kelvin-portfolio
 ```
 
 2. Install dependencies:
@@ -93,6 +93,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Etoma-Etoto Kelvin Odi - [contact@fxsion.com](mailto:contact@fxsion.com)
+Etoma-Etoto Kelvin Odi - [kelvinetoma95@gmail.com](mailto:kelvinetoma95@gmail.com)
 
-Project Link: [https://github.com/yourusername/fxsion-portfolio](https://github.com/yourusername/fxsion-portfolio)
+Project Link: [https://github.com/yourusername/kelvin-portfolio](https://github.com/yourusername/kelvin-portfolio)

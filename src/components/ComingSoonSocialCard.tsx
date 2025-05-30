@@ -1,4 +1,4 @@
-import { FaTwitter, FaLinkedinIn, FaGithub, FaInstagram } from 'react-icons/fa';
+import { FaTwitter, FaLinkedinIn, FaGithub } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { siteConfig } from '@/config/site';
 

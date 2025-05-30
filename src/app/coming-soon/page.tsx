@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import ComingSoonSocialCard from '@/components/ComingSoonSocialCard';
+import { BackgroundBeams } from '@/components/ui/background-beams';
 import { siteConfig } from '@/config/site';
 
 export default function ComingSoon() {
@@ -46,8 +47,11 @@ export default function ComingSoon() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white">
-      <div className="w-full max-w-6xl mx-auto px-6 py-12 text-center">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-blue-50/30 to-blue-100/50 relative overflow-hidden">
+      {/* Background Beams */}
+      <BackgroundBeams />
+      
+      <div className="w-full max-w-6xl mx-auto px-6 py-12 text-center relative z-10">
         {/* Logo area - reduced margin-bottom from mb-4 to mb-2 */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -64,7 +68,7 @@ export default function ComingSoon() {
                 width={200} 
                 height={100}
                 priority
-                className="h-auto"
+                className="h-auto drop-shadow-lg"
               />
             </div>
           </Link>
@@ -77,11 +81,11 @@ export default function ComingSoon() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mb-6"
         >
-          <h1 className="text-4xl md:text-7xl font-bold mb-2 tracking-tight">
+          <h1 className="text-4xl md:text-7xl font-display font-bold mb-2 tracking-tight text-gray-900">
             <span className="text-gray-900">Portfolio</span> <span className="text-blue-500 italic font-normal">launching</span> <span className="text-gray-900">soon.</span>
           </h1>
           
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6 leading-relaxed font-sans">
             Creating a portfolio that showcases my skills and work experience.
             Stay tuned for the full experience.
           </p>
@@ -94,11 +98,11 @@ export default function ComingSoon() {
               { label: 'minutes', value: timeLeft.minutes },
               { label: 'seconds', value: timeLeft.seconds }
             ].map((item, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-1">
+              <div key={index} className="text-center bg-white/40 backdrop-blur-sm rounded-lg px-4 py-3 shadow-lg border border-white/20">
+                <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-1 font-sans">
                   {formatNumber(item.value)}
                 </div>
-                <div className="text-sm uppercase tracking-wider text-gray-500">
+                <div className="text-sm uppercase tracking-wider text-gray-500 font-sans">
                   {item.label}
                 </div>
               </div>
@@ -117,11 +121,11 @@ export default function ComingSoon() {
             <input 
               type="email" 
               placeholder="Enter your email" 
-              className="flex-grow px-5 py-3 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-200"
+              className="flex-grow px-5 py-3 bg-white/80 backdrop-blur-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-200/50 placeholder:text-gray-500 font-sans"
             />
             <button
               onClick={() => alert("You'll be notified when we launch!")}
-              className="whitespace-nowrap px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md transition-colors flex items-center gap-2 justify-center"
+              className="whitespace-nowrap px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md transition-colors flex items-center gap-2 justify-center shadow-lg font-sans"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
