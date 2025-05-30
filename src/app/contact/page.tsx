@@ -78,8 +78,8 @@ export default function Contact(): JSX.Element {
               >
                 <div className="bg-primary text-white p-8 md:p-12 rounded-xl">
                   <p className="text-xl md:text-2xl mb-10">
-                    Let's collaborate! Whether it's a new project, a partnership, or 
-                    just a question, I'd love to hear from you. Reach out, and let's 
+                    Let&apos;s collaborate! Whether it&apos;s a new project, a partnership, or 
+                    just a question, I&apos;d love to hear from you. Reach out, and let&apos;s 
                     create something amazing together!
                   </p>
 

@@ -31,8 +31,6 @@ export default function Skills(): JSX.Element {
     offset: ["start start", "end start"]
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  
   // Define skill categories
   const skillCategories: SkillCategory[] = [
     {
@@ -115,14 +113,6 @@ export default function Skills(): JSX.Element {
     }
     return 0; // Default to first category if no hash or no match
   });
-  
-  // Experience level calculation
-  const getExperienceLevel = (level: number): string => {
-    if (level >= 90) return 'Expert';
-    if (level >= 80) return 'Advanced';
-    if (level >= 70) return 'Proficient';
-    return 'Intermediate';
-  };
   
   // Handle URL hash changes and scroll to the correct section
   useEffect(() => {
@@ -342,7 +332,7 @@ export default function Skills(): JSX.Element {
                   >
                     <h4 className="font-bold mb-3 text-primary">Continuous Learning</h4>
                     <p className="text-gray-600 text-sm">
-                      Technology evolves rapidly, and so do I. I'm constantly expanding my skills and keeping up with the latest innovations in {skillCategories[activeCategory].category.toLowerCase()}.
+                      Technology evolves rapidly, and so do I. I&apos;m constantly expanding my skills and keeping up with the latest innovations in {skillCategories[activeCategory].category.toLowerCase()}.
                     </p>
                   </motion.div>
                 </div>
@@ -363,11 +353,11 @@ export default function Skills(): JSX.Element {
             >
               <div className="bg-primary text-white p-8 md:p-12 rounded-xl dark-section">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                  Let's Put These Skills to Work
+                  Let&apos;s Put These Skills to Work
                 </h2>
                 <p className="text-lg mb-8 max-w-2xl mx-auto">
                   Looking for a technical partner who can bring your ideas to life?
-                  Let's discuss how my expertise can help solve your challenges and achieve your business goals.
+                  Let&apos;s discuss how my expertise can help solve your challenges and achieve your business goals.
                 </p>
                 <Link 
                   href="/contact" 

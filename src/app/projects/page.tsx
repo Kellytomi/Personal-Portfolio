@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import Navigation from '@/components/Navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { useRef, useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
 import { PinContainer, PinProvider } from '@/components/ui/3d-pin';
@@ -309,13 +308,13 @@ export default function Projects(): JSX.Element {
               <div className="bg-primary text-white p-8 md:p-12 rounded-xl dark-section">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">Have a project in mind?</h2>
                 <p className="text-lg mb-8 max-w-2xl mx-auto">
-                  I'm always open to discussing new projects and how I can help bring your ideas to life.
+                  I&apos;m always open to discussing new projects and how I can help bring your ideas to life.
                 </p>
                 <Link 
                   href="/contact" 
                   className="btn bg-white text-primary hover:bg-gray-100 py-3 px-8 text-lg inline-block"
                 >
-                  Let's Talk
+                  Let&apos;s Talk
                 </Link>
               </div>
             </motion.div>

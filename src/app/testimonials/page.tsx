@@ -1,13 +1,12 @@
 "use client";
 
 import Navigation from '@/components/Navigation';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
-import { useState, useRef, useEffect } from 'react';
-import CountUp from '@/components/CountUp';
+import { useRef, useState } from 'react';
 import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
+import CountUp from '@/components/CountUp';
 import AnimatedTestimonialsDemo from '@/components/animated-testimonials-demo';
 import { HoverEffect } from '@/components/ui/card-hover-effect';
 
@@ -271,7 +270,7 @@ export default function Testimonials(): JSX.Element {
                   Ready to Transform Your Business?
                 </h2>
                 <p className="text-lg mb-8 max-w-2xl mx-auto">
-                  Let's discuss how my expertise can help solve your challenges and achieve your business goals.
+                  Let&apos;s discuss how my expertise can help solve your challenges and achieve your business goals.
                 </p>
                 <Link 
                   href="/contact" 

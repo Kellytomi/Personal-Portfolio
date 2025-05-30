@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRef, useEffect, useState } from 'react';
-import CountUp from '@/components/CountUp';
 import PageSpacer from '@/components/PageSpacer';
 import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
@@ -120,12 +119,12 @@ export default function Home(): JSX.Element {
                       </span>
                       Open to new projects
                     </div>
-                    <h4 className="text-primary font-medium mb-2 md:mb-3">Hey there, I'm Etoma-etoto (Kelvin) Odi 👋</h4>
+                    <h4 className="text-primary font-medium mb-2 md:mb-3">Hey there, I&apos;m Etoma-etoto (Kelvin) Odi 👋</h4>
                     <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-5">
                       I build <span className="gradient-text">awesome digital stuff</span> that people love
                     </h1>
                     <p className="text-base sm:text-lg mb-6 md:mb-8 text-muted max-w-xl mx-auto lg:mx-0">
-                      When I'm not coding, you'll find me playing basketball, binging Netflix shows, or experimenting with new recipes. My passion is creating digital experiences that make people's lives easier and more enjoyable.
+                      When I&apos;m not coding, you&apos;ll find me playing basketball, binging Netflix shows, or experimenting with new recipes. My passion is creating digital experiences that make people&apos;s lives easier and more enjoyable.
                     </p>
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center lg:justify-start gap-4 sm:mb-0 mb-10 max-w-md mx-auto lg:mx-0">
                       <Link href="/about" className="cta-button">
@@ -230,7 +229,7 @@ export default function Home(): JSX.Element {
                           <h3 className="text-xl font-bold">The Dev Journey</h3>
                         </div>
                         <p className="text-muted">
-                          I'm Kelvin, a self-taught developer with a passion for creating digital experiences that make people smile. 
+                          I&apos;m Kelvin, a self-taught developer with a passion for creating digital experiences that make people smile. 
                           I started coding when I was 14, building simple games and websites for fun.
                         </p>
                       </div>
@@ -293,7 +292,7 @@ export default function Home(): JSX.Element {
                     { title: 'Problem Solving', description: 'Finding elegant solutions to complex technical challenges', icon: '🧩' },
                     { title: 'Mobile Apps', description: 'Building native-feeling experiences for iOS and Android', icon: '📱' },
                     { title: 'UI/UX Design', description: 'Crafting intuitive interfaces with the user in mind', icon: '🎨' },
-                    { title: 'Smart Automation', description: 'Making computers do the boring stuff so humans don\'t have to', icon: '⚡' },
+                    { title: 'Smart Automation', description: 'Making computers do the boring stuff so humans don&apos;t have to', icon: '⚡' },
                     { title: 'Learning New Tech', description: 'Quickly picking up new tools and frameworks', icon: '🚀' },
                   ].map((skill, index) => (
                     <motion.div
@@ -343,14 +342,14 @@ export default function Home(): JSX.Element {
                       title: 'Mobile Experiences',
                       description: 'I build mobile apps that people actually want to use. No clunky interfaces here - just smooth, intuitive experiences that feel natural.',
                       icon: '📱',
-                      gradient: 'from-[#3151B5] to-[#56CCF2]',
+                      gradient: 'from-[#8B5A2B] to-[#FFA500]',
                       skillsLink: '/skills#mobile-development'
                     },
                     {
                       title: 'Smart Automation',
-                      description: 'I love making computers do boring stuff so humans don\'t have to. It\'s like magic, but with code instead of wands.',
+                      description: 'I love making computers do boring stuff so humans don&apos;t have to. It&apos;s like magic, but with code instead of wands.',
                       icon: '⚡',
-                      gradient: 'from-[#3151B5] to-[#56CCF2]',
+                      gradient: 'from-[#9333EA] to-[#EC4899]',
                       skillsLink: '/skills#automation-and-integration'
                     },
                   ].map((service, index) => (
@@ -410,17 +409,17 @@ export default function Home(): JSX.Element {
                     {
                       step: 1,
                       title: 'Chat & Brainstorm',
-                      description: 'Let\'s grab a (virtual) coffee and talk about your ideas. The best solutions start with great conversations.'
+                      description: 'Let&apos;s grab a (virtual) coffee and talk about your ideas. The best solutions start with great conversations.'
                     },
                     {
                       step: 2,
                       title: 'Sketch & Prototype',
-                      description: 'I\'ll create some mockups we can play with. It\'s like test-driving a car before buying it.'
+                      description: 'I&apos;ll create some mockups we can play with. It&apos;s like test-driving a car before buying it.'
                     },
                     {
                       step: 3,
                       title: 'Build & Launch',
-                      description: 'I\'ll bring our ideas to life with code, keeping you in the loop. Then we celebrate when it goes live!'
+                      description: 'I&apos;ll bring our ideas to life with code, keeping you in the loop. Then we celebrate when it goes live!'
                     },
                   ].map((process, index) => (
                     <motion.div
@@ -456,9 +455,9 @@ export default function Home(): JSX.Element {
                   className="text-center mb-16"
                 >
                   <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">My Projects</div>
-                  <h2 className="section-title mb-4">Stuff I've Built</h2>
+                  <h2 className="section-title mb-4">Stuff I&apos;ve Built</h2>
                   <p className="section-subtitle max-w-2xl mx-auto">
-                    Here are some of my favorite projects I've worked on recently
+                    Here are some of my favorite projects I&apos;ve worked on recently
                   </p>
                 </motion.div>
 
@@ -559,9 +558,9 @@ export default function Home(): JSX.Element {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                   >
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6">Let's create something awesome together!</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-6">Let&apos;s create something awesome together!</h2>
                     <p className="text-lg text-white/80 mb-8">
-                      Got a cool project idea? Want to chat about tech? Or just want to say hi? I'd love to hear from you!
+                      Got a cool project idea? Want to chat about tech? Or just want to say hi? I&apos;d love to hear from you!
                     </p>
                     <Link 
                       href="/contact"
