@@ -1,6 +1,6 @@
 export const siteConfig = {
   // Set to true to enable coming soon mode, false to disable it
-  comingSoonMode: false,
+  comingSoonMode: true,
   
   // Specific launch date (for display purposes only)
   launchDate: new Date('2025-05-31T00:00:00').getTime(),

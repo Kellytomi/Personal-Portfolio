@@ -270,7 +270,7 @@ export default function Testimonials(): JSX.Element {
                   Ready to Transform Your Business?
                 </h2>
                 <p className="text-lg mb-8 max-w-2xl mx-auto">
-                  Let&apos;s discuss how my expertise can help solve your challenges and achieve your business goals.
+                  Let's discuss how my expertise can help solve your challenges and achieve your business goals.
                 </p>
                 <Link 
                   href="/contact" 

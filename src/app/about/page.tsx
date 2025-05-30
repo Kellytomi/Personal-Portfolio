@@ -68,19 +68,19 @@ export default function About(): JSX.Element {
                 <span className="text-sm font-medium">About Me</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 gradient-text">
-                Hi, I&apos;m Kelvin
+                Hi, I'm Kelvin
               </h1>
               <p className="text-xl text-muted mb-8">
                 Developer, basketball enthusiast, and pasta chef in training
               </p>
               <div className="prose prose-lg mb-8">
                 <p>
-                  I&apos;m a self-taught developer who loves creating digital stuff that people enjoy using. 
+                  I'm a self-taught developer who loves creating digital stuff that people enjoy using. 
                   I started coding as a teenager because I wanted to make my own games, and that 
                   curiosity has evolved into a passion for building all kinds of digital experiences.
                 </p>
                 <p>
-                  When I&apos;m not glued to my keyboard, you&apos;ll find me on the basketball court trying 
+                  When I'm not glued to my keyboard, you'll find me on the basketball court trying 
                   (and occasionally succeeding) at three-pointers, experimenting with new pasta recipes, 
                   or binge-watching sci-fi shows with my cat, Pixel.
                 </p>
@@ -156,18 +156,18 @@ export default function About(): JSX.Element {
                   <div className="prose prose-lg">
                     <p>
                       My journey into tech started pretty unconventionally. I was 14, obsessed with online games, 
-                      and frustrated that I couldn&apos;t build the features I wanted to see. So I did what any 
+                      and frustrated that I couldn't build the features I wanted to see. So I did what any 
                       reasonable teenager would do - I decided to learn how to code.
                     </p>
                     <p>
-                      Fast forward through countless Stack Overflow tabs, failed projects, and &quot;aha!&quot; moments, 
-                      and here I am - a developer who&apos;s worked with everyone from Nigerian startups to 
+                      Fast forward through countless Stack Overflow tabs, failed projects, and "aha!" moments, 
+                      and here I am - a developer who's worked with everyone from Nigerian startups to 
                       international agencies, helping them solve real problems with code.
                     </p>
                     <p>
-                      What I love most about this field is that there&apos;s always something new to learn. 
-                      Whether it&apos;s a new framework, a design pattern, or just a better way to solve an old problem, 
-                      the learning never stops - and I wouldn&apos;t have it any other way.
+                      What I love most about this field is that there's always something new to learn. 
+                      Whether it's a new framework, a design pattern, or just a better way to solve an old problem, 
+                      the learning never stops - and I wouldn't have it any other way.
                     </p>
                   </div>
                 </motion.div>
@@ -314,7 +314,7 @@ export default function About(): JSX.Element {
                 {
                   icon: '🎯',
                   title: 'Quality Over Quantity',
-                  description: 'I&apos;d rather build one amazing thing than ten mediocre ones. Every line of code should have a purpose.'
+                  description: 'I\'d rather build one amazing thing than ten mediocre ones. Every line of code should have a purpose.'
                 },
                 {
                   icon: '🤝',
@@ -324,22 +324,22 @@ export default function About(): JSX.Element {
                 {
                   icon: '📚',
                   title: 'Never Stop Learning',
-                  description: 'Technology evolves fast, and so should we. I&apos;m always exploring new tools, techniques, and ideas.'
+                  description: 'Technology evolves fast, and so should we. I\'m always exploring new tools, techniques, and ideas.'
                 },
                 {
                   icon: '💡',
                   title: 'Solve Real Problems',
-                  description: 'Code is just a tool. What matters is using it to make people&apos;s lives easier, businesses more efficient, or experiences more delightful.'
+                  description: 'Code is just a tool. What matters is using it to make people\'s lives easier, businesses more efficient, or experiences more delightful.'
                 },
                 {
                   icon: '🌱',
                   title: 'Sustainable Growth',
-                  description: 'Whether it&apos;s code architecture or personal development, I believe in building for the long term.'
+                  description: 'Whether it\'s code architecture or personal development, I believe in building for the long term.'
                 },
                 {
                   icon: '😊',
                   title: 'Have Fun Doing It',
-                  description: 'Work shouldn&apos;t feel like work. When you love what you do, it shows in the quality of your output.'
+                  description: 'Work shouldn\'t feel like work. When you love what you do, it shows in the quality of your output.'
                 }
               ].map((value, index) => (
                 <motion.div
@@ -371,17 +371,17 @@ export default function About(): JSX.Element {
             >
               <h2 className="section-title mb-4">Fun Facts About Me</h2>
               <p className="section-subtitle max-w-2xl mx-auto">
-                The stuff you won&apos;t find on my LinkedIn profile
+                The stuff you won't find on my LinkedIn profile
               </p>
             </motion.div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {[
                 { icon: '🏀', title: 'Basketball Fanatic', description: 'I play pickup games twice a week and have a small collection of NBA jerseys' },
-                { icon: '🍝', title: 'Pasta Chef', description: 'I&apos;m on a mission to perfect my homemade carbonara recipe' },
+                { icon: '🍝', title: 'Pasta Chef', description: 'I\'m on a mission to perfect my homemade carbonara recipe' },
                 { icon: '🎮', title: 'Casual Gamer', description: 'I stay up way too late playing indie games and retro classics' },
                 { icon: '🐱', title: 'Cat Person', description: 'My coding buddy is a black cat named Pixel who loves to walk on my keyboard' },
-                { icon: '🌱', title: 'Plant Dad', description: 'I have a small jungle of houseplants that somehow haven&apos;t died yet' },
+                { icon: '🌱', title: 'Plant Dad', description: 'I have a small jungle of houseplants that somehow haven\'t died yet' },
                 { icon: '🎬', title: 'Sci-Fi Nerd', description: 'I can quote entire episodes of Firefly and The Expanse from memory' },
               ].map((fact, index) => (
                 <motion.div
@@ -414,7 +414,7 @@ export default function About(): JSX.Element {
               <div className="bg-primary text-white p-8 md:p-12 rounded-xl dark-section">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
                 <p className="text-lg mb-8 text-white/80 max-w-2xl mx-auto">
-                  Let&apos;s discuss how I can help solve your challenges and achieve your business goals through my expertise in web development, mobile development, and workflow automation.
+                  Let's discuss how I can help solve your challenges and achieve your business goals through my expertise in web development, mobile development, and workflow automation.
                 </p>
                 <Link href="/contact" className="btn bg-white text-primary hover:bg-gray-100 py-3 px-8 text-lg inline-block">
                   Get in Touch
