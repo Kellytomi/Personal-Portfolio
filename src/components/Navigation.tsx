@@ -154,7 +154,7 @@ export default function Navigation(): JSX.Element {
                 as={Link}
                 href="/contact"
                 borderRadius="2rem"
-                className="text-white hover:text-white font-medium px-6 py-3 bg-primary hover:bg-primary/90"
+                className="text-primary hover:text-primary font-medium px-6 py-3 bg-white hover:bg-white border-2 border-primary/10"
                 containerClassName="h-12 w-32"
                 duration={4000}
               >

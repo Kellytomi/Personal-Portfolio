@@ -47,7 +47,7 @@ export function Button({
         <MovingBorder duration={duration} rx="30%" ry="30%">
           <div
             className={cn(
-              "h-20 w-20 bg-[radial-gradient(var(--primary)_40%,transparent_60%)] opacity-[0.8]",
+              "h-20 w-20 bg-[radial-gradient(var(--primary)_60%,transparent_80%)] opacity-[1]",
               borderClassName,
             )}
           />
@@ -56,7 +56,7 @@ export function Button({
 
       <div
         className={cn(
-          "relative flex h-full w-full items-center justify-center border border-primary/20 bg-primary text-white backdrop-blur-xl hover:bg-primary/90 transition-all duration-300",
+          "relative flex h-full w-full items-center justify-center border border-primary/20 bg-white text-primary shadow-sm hover:shadow-md transition-all duration-300",
           className,
         )}
         style={{
