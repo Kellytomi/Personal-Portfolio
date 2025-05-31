@@ -20,19 +20,13 @@ export function PointerHighlight({
   useEffect(() => {
     if (containerRef.current) {
       const { width, height } = containerRef.current.getBoundingClientRect();
-      setDimensions({ 
-        width: width + 8, 
-        height: height + 8 
-      });
+      setDimensions({ width: width + 12, height: height + 8 });
     }
 
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const { width, height } = entry.contentRect;
-        setDimensions({ 
-          width: width + 8, 
-          height: height + 8 
-        });
+        setDimensions({ width: width + 12, height: height + 8 });
       }
     });
 
@@ -49,7 +43,7 @@ export function PointerHighlight({
 
   return (
     <div
-      className={cn("relative w-fit", containerClassName)}
+      className={cn("relative inline-block", containerClassName)}
       ref={containerRef}
     >
       {children}
@@ -62,7 +56,7 @@ export function PointerHighlight({
         >
           <motion.div
             className={cn(
-              "absolute border border-primary dark:border-primary",
+              "absolute border-2 border-[#2563eb] bg-[#2563eb]/20",
               rectangleClassName,
             )}
             initial={{
@@ -74,8 +68,9 @@ export function PointerHighlight({
               height: dimensions.height,
             }}
             style={{
-              left: -4,
-              top: -4,
+              left: "50%",
+              top: "calc(50% + 8px)",
+              transform: "translate(-50%, -50%)",
             }}
             transition={{
               duration: 1,
@@ -88,12 +83,10 @@ export function PointerHighlight({
             whileInView={{
               opacity: 1,
               x: dimensions.width,
-              y: dimensions.height,
+              y: dimensions.height + 10,
             }}
             style={{
               rotate: -90,
-              left: -4,
-              top: -4,
             }}
             transition={{
               opacity: { duration: 0.1, ease: "easeInOut" },
@@ -102,7 +95,7 @@ export function PointerHighlight({
             }}
           >
             <Pointer
-              className={cn("h-5 w-5 text-primary", pointerClassName)}
+              className={cn("h-5 w-5 text-[#2563eb]", pointerClassName)}
             />
           </motion.div>
         </motion.div>
