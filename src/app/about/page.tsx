@@ -1,7 +1,7 @@
 "use client";
 
 import Navigation from '@/components/Navigation';
-import { motion, useScroll } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { useRef } from 'react';
 import Image from 'next/image';
@@ -10,10 +10,28 @@ import Footer from '@/components/Footer';
 
 export default function About(): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
+  const workTimelineRef = useRef<HTMLDivElement>(null);
+  const educationTimelineRef = useRef<HTMLDivElement>(null);
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
+
+  // Work timeline scroll animation
+  const { scrollYProgress: workScrollProgress } = useScroll({
+    target: workTimelineRef,
+    offset: ["start center", "end center"]
+  });
+
+  // Education timeline scroll animation  
+  const { scrollYProgress: educationScrollProgress } = useScroll({
+    target: educationTimelineRef,
+    offset: ["start center", "end center"]
+  });
+
+  const workLineHeight = useTransform(workScrollProgress, [0, 1], ["0%", "100%"]);
+  const educationLineHeight = useTransform(educationScrollProgress, [0, 1], ["0%", "100%"]);
 
   // Education timeline data
   const education = [
@@ -173,7 +191,7 @@ export default function About(): JSX.Element {
                 >
                   <span className="inline-block w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center mr-4">
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M21 13.2554C20.7753 13.3723 20.5289 13.4335 20.2689 13.4335H18.0005V14.5C18.0005 14.7761 17.7766 15 17.5005 15H16.5005C16.2243 15 16.0005 14.7761 16.0005 14.5V13.4335H8.00049V14.5C8.00049 14.7761 7.77663 15 7.50049 15H6.50049C6.22435 15 6.00049 14.7761 6.00049 14.5V13.4335H3.73209C3.47205 13.4335 3.22566 13.3723 3.00098 13.2554V18.5C3.00098 19.3284 3.67253 20 4.50098 20H19.501C20.3294 20 21.001 19.3284 21.001 18.5V13.2554H21Z" fill="currentColor"/>
+                      <path d="M21 13.2554C20.7753 13.3723 20.5289 13.4335 20.2689 13.4335H18.0005V14.5C18.0005 14.7761 17.7766 15 17.5005 15H16.5005C16.2243 15 16.0005 14.7761 16.0005 14.5V13.4335H8.00049V14.5C8.00049 14.7761 7.77663 15 7.50049 15H6.50049C6.22435 15 6.00049 14.7761 6.00049 11.5Z" fill="currentColor"/>
                       <path d="M6.00049 11.5V10.4665H3.73209C2.59347 10.4665 1.67598 11.384 1.67598 12.5226C1.67598 13.6613 2.59347 14.5788 3.73209 14.5788H6.00049V13.5H8.00049V14.5788H16.0005V13.5H18.0005V14.5788H20.2689C21.4075 14.5788 22.325 13.6613 22.325 12.5226C22.325 11.384 21.4075 10.4665 20.2689 10.4665H18.0005V11.5C18.0005 11.7761 17.7766 12 17.5005 12H16.5005C16.2243 12 16.0005 11.7761 16.0005 11.5V10.4665H8.00049V11.5C8.00049 11.7761 7.77663 12 7.50049 12H6.50049C6.22435 12 6.00049 11.7761 6.00049 11.5Z" fill="currentColor"/>
                       <path d="M19.501 4H4.50098C3.67253 4 3.00098 4.67157 3.00098 5.5V11.1446C3.22566 11.0277 3.47205 10.9665 3.73209 10.9665H6.00049V10H8.00049V10.9665H16.0005V10H18.0005V10.9665H20.2689C20.5289 10.9665 20.7753 11.0277 21 11.1446V5.5C21 4.67157 20.3294 4 19.501 4Z" fill="currentColor"/>
                     </svg>
@@ -181,33 +199,58 @@ export default function About(): JSX.Element {
                   My Work Adventures
                 </motion.h3>
                 
-                <div className="space-y-8">
-                  {experience.map((item, index) => (
+                <div className="relative" ref={workTimelineRef}>
+                  {/* Animated timeline line */}
+                  <div className="absolute left-3 top-6 w-0.5 h-full bg-gray-200 rounded-full">
                     <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="relative pl-8 border-l-2 border-primary/20"
-                    >
-                      <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary" />
-                      <span className="inline-block px-3 py-1 bg-primary/5 rounded-full text-sm font-medium mb-2">
-                        {item.year}
-                      </span>
-                      <h4 className="text-xl font-bold mb-1">{item.position}</h4>
-                      <p className="text-primary font-medium mb-2">{item.company}</p>
-                      <p className="text-muted mb-4">{item.description}</p>
-                      <ul className="space-y-1">
-                        {item.achievements.map((achievement, i) => (
-                          <li key={i} className="flex items-start">
-                            <span className="text-primary mr-2">•</span>
-                            {achievement}
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  ))}
+                      className="w-full bg-gradient-to-b from-primary to-secondary rounded-full"
+                      style={{ height: workLineHeight }}
+                    />
+                  </div>
+                  
+                  <div className="space-y-6">
+                    {experience.map((exp, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className="relative pl-8 pb-8 last:pb-0"
+                      >
+                        {/* Timeline dot with animation */}
+                        <motion.div 
+                          className="absolute left-0 top-6 w-6 h-6 bg-primary rounded-full border-4 border-white shadow-md z-10"
+                          initial={{ scale: 0 }}
+                          whileInView={{ scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.3, delay: index * 0.1 + 0.2 }}
+                        />
+                        
+                        {/* Content */}
+                        <div className="bg-white p-6 rounded-lg shadow-card border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+                            <h4 className="text-lg font-bold text-gray-900">{exp.position}</h4>
+                            <span className="text-sm text-primary font-medium mt-1 sm:mt-0">{exp.year}</span>
+                          </div>
+                          <p className="text-primary font-medium mb-3">{exp.company}</p>
+                          <p className="text-gray-600 mb-4 leading-relaxed">{exp.description}</p>
+                          
+                          {exp.achievements && (
+                            <div className="space-y-2">
+                              <h5 className="text-sm font-semibold text-gray-700 mb-2">Key Achievements:</h5>
+                              {exp.achievements.map((achievement, i) => (
+                                <div key={i} className="flex items-start gap-2">
+                                  <span className="text-primary text-xs mt-1.5">•</span>
+                                  <span className="text-sm text-gray-600">{achievement}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </div>
               
@@ -286,25 +329,46 @@ export default function About(): JSX.Element {
                     Education
                   </motion.h3>
                   
-                  <div className="space-y-6">
-                    {education.map((item, index) => (
+                  <div className="relative" ref={educationTimelineRef}>
+                    {/* Animated timeline line */}
+                    <div className="absolute left-3 top-6 w-0.5 h-full bg-gray-200 rounded-full">
                       <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="pl-8 relative border-l-2 border-primary/20 pb-6"
-                      >
-                        <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary" />
-                        <span className="inline-block px-3 py-1 bg-primary/5 rounded-full text-sm font-medium mb-2">
-                          {item.year}
-                        </span>
-                        <h4 className="text-xl font-bold mb-1">{item.degree}</h4>
-                        <p className="text-primary font-medium mb-2">{item.institution}</p>
-                        <p className="text-muted">{item.description}</p>
-                      </motion.div>
-                    ))}
+                        className="w-full bg-gradient-to-b from-secondary to-primary rounded-full"
+                        style={{ height: educationLineHeight }}
+                      />
+                    </div>
+                    
+                    <div className="space-y-6">
+                      {education.map((edu, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.5, delay: index * 0.1 }}
+                          className="relative pl-8 pb-8 last:pb-0"
+                        >
+                          {/* Timeline dot with animation */}
+                          <motion.div 
+                            className="absolute left-0 top-6 w-6 h-6 bg-secondary rounded-full border-4 border-white shadow-md z-10"
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.3, delay: index * 0.1 + 0.2 }}
+                          />
+                          
+                          {/* Content */}
+                          <div className="bg-white p-6 rounded-lg shadow-card border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+                              <h4 className="text-lg font-bold text-gray-900">{edu.degree}</h4>
+                              <span className="text-sm text-secondary font-medium mt-1 sm:mt-0">{edu.year}</span>
+                            </div>
+                            <p className="text-secondary font-medium mb-3">{edu.institution}</p>
+                            <p className="text-gray-600 leading-relaxed">{edu.description}</p>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -10,6 +10,7 @@ import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
 import PageFadeIn from '@/components/PageFadeIn';
 import { PinContainer, PinProvider } from '@/components/ui/3d-pin';
+import { PointerHighlight } from '@/components/ui/pointer-highlight';
 
 export default function Home(): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -121,7 +122,7 @@ export default function Home(): JSX.Element {
                     </div>
                     <h4 className="text-primary font-medium mb-2 md:mb-3">Hey there, I'm Etoma-etoto (Kelvin) Odi 👋</h4>
                     <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-5">
-                      I build <span className="gradient-text">awesome digital stuff</span> that people love
+                      I build <span className="gradient-text">awesome digital stuff</span> that <PointerHighlight>people love</PointerHighlight>
                     </h1>
                     <p className="text-base sm:text-lg mb-6 md:mb-8 text-muted max-w-xl mx-auto lg:mx-0">
                       When I'm not coding, you'll find me playing basketball, binging Netflix shows, or experimenting with new recipes. My passion is creating digital experiences that make people's lives easier and more enjoyable.
