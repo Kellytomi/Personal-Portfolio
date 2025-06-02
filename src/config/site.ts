@@ -12,7 +12,7 @@ export const siteConfig = {
   
   // Social links - update these with your actual social URLs
   socialLinks: {
-    twitter: 'https://x.com/klvntmi',
+    twitter: 'https://x.com/kelvin_dart',
     linkedin: 'https://www.linkedin.com/in/etoma-etoto-odi-9ba176251/', 
     github: 'https://github.com/Kellytomi',
   }

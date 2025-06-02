@@ -8,7 +8,7 @@ import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
 import CountUp from '@/components/CountUp';
 import AnimatedTestimonialsDemo from '@/components/animated-testimonials-demo';
-import { HoverEffect } from '@/components/ui/card-hover-effect';
+import { TestimonialsGrid } from '@/components/ui/testimonials-grid';
 
 interface Testimonial {
   name: string;
@@ -191,7 +191,7 @@ export default function Testimonials(): JSX.Element {
         {/* Testimonial Cards Grid */}
         <section className="pt-4 pb-8 bg-white">
           <div className="container">
-            <HoverEffect items={filteredTestimonials.map(testimonial => ({
+            <TestimonialsGrid items={filteredTestimonials.map(testimonial => ({
               title: `${testimonial.name}`,
               description: `${testimonial.role} at ${testimonial.company}\n\n"${testimonial.quote}"\n\n📊 Key Results:\n• ${testimonial.results?.slice(0, 2).join('\n• ') || 'Outstanding project outcomes'}`
             }))} />

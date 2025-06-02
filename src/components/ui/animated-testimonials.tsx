@@ -3,6 +3,7 @@
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { AvatarPlaceholder, getGenderFromName } from "./avatar-placeholder";
 
 type Testimonial = {
   quote: string;
@@ -43,6 +44,30 @@ export const AnimatedTestimonials = ({
     return Math.floor(Math.random() * 21) - 10;
   };
 
+  // Array of beautiful background colors for the cards
+  const cardBackgroundColors = [
+    'linear-gradient(135deg, #3151B5 0%, #4F46E5 100%)', // Primary blue gradient
+    'linear-gradient(135deg, #EC4899 0%, #F472B6 100%)', // Pink gradient
+    'linear-gradient(135deg, #9333EA 0%, #A855F7 100%)', // Purple gradient  
+    'linear-gradient(135deg, #56CCF2 0%, #06B6D4 100%)', // Light blue gradient
+    'linear-gradient(135deg, #10B981 0%, #34D399 100%)', // Green gradient
+    'linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%)', // Orange gradient
+    'linear-gradient(135deg, #EF4444 0%, #F87171 100%)', // Red gradient
+    'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%)', // Violet gradient
+    'linear-gradient(135deg, #06B6D4 0%, #67E8F9 100%)', // Cyan gradient
+    'linear-gradient(135deg, #84CC16 0%, #A3E635 100%)', // Lime gradient
+  ];
+
+  // Get consistent background for each testimonial
+  const getCardBackground = (name: string) => {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const index = Math.abs(hash) % cardBackgroundColors.length;
+    return cardBackgroundColors[index];
+  };
+
   return (
     <div className="mx-auto max-w-sm px-4 py-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
       <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
@@ -80,14 +105,18 @@ export const AnimatedTestimonials = ({
                   }}
                   className="absolute inset-0 origin-bottom"
                 >
-                  <img
-                    src={testimonial.src}
-                    alt={testimonial.name}
-                    width={500}
-                    height={500}
-                    draggable={false}
-                    className="h-full w-full rounded-3xl object-cover object-center shadow-lg"
-                  />
+                  <div 
+                    className="h-full w-full rounded-3xl shadow-lg overflow-hidden flex items-center justify-center"
+                    style={{ background: getCardBackground(testimonial.name) }}
+                  >
+                    <div className="w-32 h-32">
+                      <AvatarPlaceholder 
+                        gender={getGenderFromName(testimonial.name)}
+                        name={testimonial.name}
+                        className="rounded-full"
+                      />
+                    </div>
+                  </div>
                 </motion.div>
               ))}
             </AnimatePresence>

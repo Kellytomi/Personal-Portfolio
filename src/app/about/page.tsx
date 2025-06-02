@@ -7,6 +7,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
+import { Grid } from '@/components/ui/features-section';
 
 export default function About(): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -131,7 +132,7 @@ export default function About(): JSX.Element {
                 Hi, I'm Kelvin
               </h1>
               <p className="text-xl text-muted mb-8">
-                Developer, basketball enthusiast, and pasta chef in training
+                Developer, volleyball enthusiast, and pasta chef in training
               </p>
               <div className="prose prose-lg mb-8">
                 <p>
@@ -140,9 +141,9 @@ export default function About(): JSX.Element {
                   curiosity has evolved into a passion for building all kinds of digital experiences.
                 </p>
                 <p>
-                  When I'm not glued to my keyboard, you'll find me on the basketball court trying 
-                  (and occasionally succeeding) at three-pointers, experimenting with new pasta recipes, 
-                  or binge-watching sci-fi shows with my cat, Pixel.
+                  When I'm not glued to my keyboard, you'll find me on the volleyball court working 
+                  on my spikes and serves, experimenting with new pasta recipes, 
+                  or playing EAFC and Call of Duty with my dog, Buddy.
                 </p>
               </div>
               
@@ -160,6 +161,53 @@ export default function About(): JSX.Element {
                 </Link>
               </div>
             </motion.div>
+          </div>
+        </section>
+        
+        {/* Fun Facts About Me - Now before My Journey */}
+        <section className="py-20 bg-surface">
+          <div className="container">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-center mb-16"
+            >
+              <h2 className="section-title mb-4">Fun Facts About Me</h2>
+              <p className="section-subtitle max-w-2xl mx-auto">
+                The stuff you won't find on my LinkedIn profile
+              </p>
+            </motion.div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {[
+                { icon: '🏐', title: 'Volleyball Fanatic', description: 'I play matches twice a week and love perfecting my spikes and serves' },
+                { icon: '🍝', title: 'Pasta Chef', description: 'I\'m on a mission to perfect my homemade carbonara recipe' },
+                { icon: '🎮', title: 'Casual Gamer', description: 'I dominate in EAFC and stay up late playing Call of Duty matches' },
+                { icon: '🐕', title: 'Dog Person', description: 'My coding buddy is a golden retriever named Buddy who loves to sit by my desk' },
+                { icon: '🌱', title: 'Plant Dad', description: 'I have a small jungle of houseplants that somehow haven\'t died yet' },
+                { icon: '🎬', title: 'Sci-Fi Nerd', description: 'I can quote entire episodes of Firefly and The Expanse from memory' },
+              ].map((fact, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="relative bg-white p-6 rounded-xl shadow-card overflow-hidden text-center group hover:shadow-lg transition-all duration-300"
+                >
+                  <Grid size={20} />
+                  <div className="text-4xl mb-4 relative z-20">{fact.icon}</div>
+                  <h3 className="text-xl font-bold mb-2 text-primary relative z-20">
+                    {fact.title}
+                  </h3>
+                  <p className="text-muted relative z-20 text-sm">
+                    {fact.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
         
@@ -452,48 +500,6 @@ export default function About(): JSX.Element {
                       </span>
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-        
-        {/* Add Fun Facts section before the CTA */}
-        <section className="py-20 bg-surface">
-          <div className="container">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-16"
-            >
-              <h2 className="section-title mb-4">Fun Facts About Me</h2>
-              <p className="section-subtitle max-w-2xl mx-auto">
-                The stuff you won't find on my LinkedIn profile
-              </p>
-            </motion.div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {[
-                { icon: '🏀', title: 'Basketball Fanatic', description: 'I play pickup games twice a week and have a small collection of NBA jerseys' },
-                { icon: '🍝', title: 'Pasta Chef', description: 'I\'m on a mission to perfect my homemade carbonara recipe' },
-                { icon: '🎮', title: 'Casual Gamer', description: 'I stay up way too late playing indie games and retro classics' },
-                { icon: '🐱', title: 'Cat Person', description: 'My coding buddy is a black cat named Pixel who loves to walk on my keyboard' },
-                { icon: '🌱', title: 'Plant Dad', description: 'I have a small jungle of houseplants that somehow haven\'t died yet' },
-                { icon: '🎬', title: 'Sci-Fi Nerd', description: 'I can quote entire episodes of Firefly and The Expanse from memory' },
-              ].map((fact, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white p-6 rounded-xl shadow-card"
-                >
-                  <div className="text-3xl mb-4">{fact.icon}</div>
-                  <h3 className="text-lg font-bold mb-2">{fact.title}</h3>
-                  <p className="text-muted text-sm">{fact.description}</p>
                 </motion.div>
               ))}
             </div>

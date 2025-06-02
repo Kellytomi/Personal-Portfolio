@@ -108,7 +108,7 @@ export default function Contact(): JSX.Element {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="flex space-x-6 mt-16"
               >
-                <SocialLink href="https://x.com/klvntmi" icon={FaXTwitter({ size: 18 })} label="X (Twitter)" />
+                <SocialLink href="https://x.com/kelvin_dart" icon={FaXTwitter({ size: 18 })} label="X (Twitter)" />
                 <SocialLink href="https://www.linkedin.com/in/etoma-etoto-odi-9ba176251/" icon={FaLinkedinIn({ size: 18 })} label="LinkedIn" />
                 <SocialLink href="https://github.com/Kellytomi" icon={FaGithub({ size: 18 })} label="GitHub" />
               </motion.div>

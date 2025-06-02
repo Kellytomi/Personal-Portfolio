@@ -10,7 +10,9 @@ import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
 import PageFadeIn from '@/components/PageFadeIn';
 import { PinContainer, PinProvider } from '@/components/ui/3d-pin';
-import { PointerHighlight } from '@/components/ui/pointer-highlight';
+import { FlipWords } from '@/components/ui/flip-words';
+import FeaturesSectionDemo from '@/components/ui/features-section';
+import { BackgroundGradient } from '@/components/ui/background-gradient';
 
 export default function Home(): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -122,10 +124,10 @@ export default function Home(): JSX.Element {
                     </div>
                     <h4 className="text-primary font-medium mb-2 md:mb-3">Hey there, I'm Etoma-etoto (Kelvin) Odi 👋</h4>
                     <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-5">
-                      I build <span className="gradient-text">awesome digital stuff</span> that <PointerHighlight>people love</PointerHighlight>
+                      I build <span className="text-black">awesome digital stuff</span> that <FlipWords words={["people love", "users enjoy", "clients adore", "founders need"]} className="gradient-text" />
                     </h1>
                     <p className="text-base sm:text-lg mb-6 md:mb-8 text-muted max-w-xl mx-auto lg:mx-0">
-                      When I'm not coding, you'll find me playing basketball, binging Netflix shows, or experimenting with new recipes. My passion is creating digital experiences that make people's lives easier and more enjoyable.
+                      When I'm not coding, you'll find me playing volleyball, binging Netflix shows, or experimenting with new recipes. My passion is creating digital experiences that make people's lives easier and more enjoyable.
                     </p>
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center lg:justify-start gap-4 sm:mb-0 mb-10 max-w-md mx-auto lg:mx-0">
                       <Link href="/about" className="cta-button">
@@ -224,7 +226,7 @@ export default function Home(): JSX.Element {
                       transition={{ duration: 0.5, delay: 0.1 }}
                       className="md:col-span-3 space-y-4 md:ml-4"
                     >
-                      <div className="bg-white p-6 rounded-xl shadow-sm">
+                      <BackgroundGradient className="bg-white p-6 rounded-xl shadow-sm">
                         <div className="flex items-center gap-3 mb-3">
                           <span className="text-2xl">👨‍💻</span>
                           <h3 className="text-xl font-bold">The Dev Journey</h3>
@@ -233,9 +235,9 @@ export default function Home(): JSX.Element {
                           I'm Kelvin, a self-taught developer with a passion for creating digital experiences that make people smile. 
                           I started coding when I was 14, building simple games and websites for fun.
                         </p>
-                      </div>
+                      </BackgroundGradient>
                       
-                      <div className="bg-white p-6 rounded-xl shadow-sm">
+                      <BackgroundGradient className="bg-white p-6 rounded-xl shadow-sm">
                         <div className="flex items-center gap-3 mb-3">
                           <span className="text-2xl">🛠️</span>
                           <h3 className="text-xl font-bold">What Drives Me</h3>
@@ -244,17 +246,17 @@ export default function Home(): JSX.Element {
                           These days, I love combining creativity with technology to build things that solve real problems. 
                           Whether it's a sleek mobile app, an intuitive website, or a clever automation tool, I'm happiest when I'm making something that helps people.
                         </p>
-                      </div>
+                      </BackgroundGradient>
                       
-                      <div className="bg-white p-6 rounded-xl shadow-sm">
+                      <BackgroundGradient className="bg-white p-6 rounded-xl shadow-sm">
                         <div className="flex items-center gap-3 mb-3">
-                          <span className="text-2xl">🏀</span>
+                          <span className="text-2xl">🏐</span>
                           <h3 className="text-xl font-bold">Outside the Code</h3>
                         </div>
                         <p className="text-muted">
-                          When I'm not in front of my computer, I'm probably shooting hoops at the local court, trying to perfect my pasta carbonara recipe, or binge-watching sci-fi shows with my cat, Pixel.
+                          When I'm not in front of my computer, I'm probably spiking at the local volleyball court, trying to perfect my pasta carbonara recipe, or binge-watching sci-fi shows with my dog, Buddy.
                         </p>
-                      </div>
+                      </BackgroundGradient>
                     </motion.div>
                   </div>
                   
@@ -287,29 +289,14 @@ export default function Home(): JSX.Element {
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">Things I'm good at</h2>
                 </motion.div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-                  {[
-                    { title: 'Frontend Development', description: 'Creating beautiful, responsive interfaces that people enjoy using', icon: '💻' },
-                    { title: 'Problem Solving', description: 'Finding elegant solutions to complex technical challenges', icon: '🧩' },
-                    { title: 'Mobile Apps', description: 'Building native-feeling experiences for iOS and Android', icon: '📱' },
-                    { title: 'UI/UX Design', description: 'Crafting intuitive interfaces with the user in mind', icon: '🎨' },
-                    { title: 'Smart Automation', description: 'Making computers do the boring stuff so humans don\'t have to', icon: '⚡' },
-                    { title: 'Learning New Tech', description: 'Quickly picking up new tools and frameworks', icon: '🚀' },
-                  ].map((skill, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="bg-white p-6 rounded-xl shadow-card text-center"
-                    >
-                      <div className="text-4xl mb-4">{skill.icon}</div>
-                      <h3 className="text-xl font-bold mb-2 text-primary">{skill.title}</h3>
-                      <p className="text-muted">{skill.description}</p>
-                    </motion.div>
-                  ))}
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <FeaturesSectionDemo />
+                </motion.div>
               </div>
             </section>
 
@@ -513,11 +500,11 @@ export default function Home(): JSX.Element {
                       >
                         <div className="flex basis-full flex-col p-3 md:p-4 tracking-tight text-gray-600 w-[18rem] md:w-[20rem] h-[18rem] md:h-[20rem]">
                           <h3 className="max-w-xs !pb-1 md:!pb-2 !m-0 font-bold text-sm md:text-base text-gray-900">
-                            Basketball Stats Tracker
+                            Volleyball Stats Tracker
                           </h3>
                           <div className="text-sm md:text-base !m-0 !p-0 font-normal">
                             <span className="text-gray-600">
-                              A web app I built to track my pickup basketball game stats with friends
+                              A web app I built to track my volleyball game stats with friends
                             </span>
                           </div>
                           <div className="flex items-center gap-2 mt-3 md:mt-4 mb-3 md:mb-4">
