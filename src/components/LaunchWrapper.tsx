@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import ComingSoon from '@/app/coming-soon/page';
+import WelcomeScreen from '@/components/WelcomeScreen';
 import { siteConfig } from '@/config/site';
 
 // Change this version number whenever you update the launch date
@@ -15,6 +16,7 @@ interface LaunchWrapperProps {
 export default function LaunchWrapper({ children }: LaunchWrapperProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [showDevTools, setShowDevTools] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(false);
   
   // For development testing only - press Shift+D to show dev tools
   useEffect(() => {
@@ -22,6 +24,11 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
       // Shift+D to show/hide dev tools
       if (e.shiftKey && e.key === 'D') {
         setShowDevTools(prev => !prev);
+      }
+      
+      // Shift+W to show welcome screen again (for testing)
+      if (e.shiftKey && e.key === 'W') {
+        setShowWelcome(true);
       }
     };
     
@@ -35,15 +42,37 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
     // In a real implementation, you could update localStorage or a context 
     // to temporarily override the setting without a page refresh
   };
+
+  const resetWelcomeScreen = () => {
+    localStorage.removeItem('portfolio-welcome-shown');
+    setShowWelcome(true);
+  };
   
   useEffect(() => {
+    // Check if this is the first visit
+    const hasSeenWelcome = localStorage.getItem('portfolio-welcome-shown');
+    
+    if (!hasSeenWelcome && !siteConfig.comingSoonMode) {
+      setShowWelcome(true);
+    }
+    
     // Set loading to false after component mounts
     setIsLoading(false);
   }, []);
+
+  const handleWelcomeComplete = () => {
+    localStorage.setItem('portfolio-welcome-shown', 'true');
+    setShowWelcome(false);
+  };
   
   // Show nothing during initial load to prevent flash
   if (isLoading) {
     return null;
+  }
+
+  // Show welcome screen if it's the first visit and not in coming soon mode
+  if (showWelcome && !siteConfig.comingSoonMode) {
+    return <WelcomeScreen onComplete={handleWelcomeComplete} />;
   }
   
   // Check if coming soon mode is enabled from config
@@ -62,7 +91,8 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
           padding: '10px',
           borderRadius: '5px',
           color: 'white',
-          boxShadow: '0 0 10px rgba(0,0,0,0.5)'
+          boxShadow: '0 0 10px rgba(0,0,0,0.5)',
+          maxWidth: '300px'
         }}>
           <h4 style={{ margin: '0 0 10px 0' }}>Development Tools</h4>
           <p style={{ fontSize: '12px', margin: '5px 0' }}>
@@ -71,19 +101,40 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
           <p style={{ fontSize: '12px', margin: '5px 0' }}>
             Launch date: {new Date(siteConfig.launchDate).toLocaleString()}
           </p>
-          <button 
-            onClick={toggleComingSoonMode}
-            style={{
-              background: '#f44336',
-              color: 'white',
-              border: 'none',
-              padding: '5px 10px',
-              borderRadius: '3px',
-              cursor: 'pointer'
-            }}
-          >
-            Toggle Coming Soon
-          </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+            <button 
+              onClick={toggleComingSoonMode}
+              style={{
+                background: '#f44336',
+                color: 'white',
+                border: 'none',
+                padding: '5px 10px',
+                borderRadius: '3px',
+                cursor: 'pointer',
+                fontSize: '12px'
+              }}
+            >
+              Toggle Coming Soon
+            </button>
+            <button 
+              onClick={resetWelcomeScreen}
+              style={{
+                background: '#4CAF50',
+                color: 'white',
+                border: 'none',
+                padding: '5px 10px',
+                borderRadius: '3px',
+                cursor: 'pointer',
+                fontSize: '12px'
+              }}
+            >
+              Show Welcome Screen
+            </button>
+          </div>
+          <p style={{ fontSize: '10px', margin: '5px 0', opacity: '0.7' }}>
+            Shift+D: Toggle this panel<br/>
+            Shift+W: Show welcome screen
+          </p>
         </div>
       )}
       {showComingSoon ? <ComingSoon /> : children}

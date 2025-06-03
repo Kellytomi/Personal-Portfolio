@@ -13,6 +13,7 @@ import { PinContainer, PinProvider } from '@/components/ui/3d-pin';
 import { FlipWords } from '@/components/ui/flip-words';
 import FeaturesSectionDemo from '@/components/ui/features-section';
 import { BackgroundGradient } from '@/components/ui/background-gradient';
+import AnimatedTooltipDemo from '@/components/AnimatedTooltipDemo';
 
 export default function Home(): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -168,6 +169,17 @@ export default function Home(): JSX.Element {
                   </div>
                 </motion.div>
               </div>
+
+              {/* Trusted by section with animated tooltips */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 20 : 0 }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+                className="flex flex-col items-center text-center mt-12 md:mt-20 mb-8"
+              >
+                <p className="text-sm text-muted mb-4">Trusted by amazing people</p>
+                <AnimatedTooltipDemo />
+              </motion.div>
 
               {/* Scroll to explore animation */}
               <motion.div 
