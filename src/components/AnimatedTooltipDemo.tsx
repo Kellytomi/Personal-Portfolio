@@ -44,7 +44,7 @@ const clients = [
 
 export default function AnimatedTooltipDemo() {
   return (
-    <div className="flex flex-row items-center justify-center w-full">
+    <div className="flex flex-row items-center justify-center lg:justify-start w-full">
       <AnimatedTooltip items={clients} />
     </div>
   );

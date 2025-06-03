@@ -130,6 +130,13 @@ export default function Home(): JSX.Element {
                     <p className="text-base sm:text-lg mb-6 md:mb-8 text-muted max-w-xl mx-auto lg:mx-0">
                       When I'm not coding, you'll find me playing volleyball, binging Netflix shows, or experimenting with new recipes. My passion is creating digital experiences that make people's lives easier and more enjoyable.
                     </p>
+                    
+                    {/* Trusted by section with animated tooltips */}
+                    <div className="flex flex-col items-center lg:items-start mb-6 md:mb-8">
+                      <p className="text-sm text-muted mb-4">Trusted by amazing people</p>
+                      <AnimatedTooltipDemo />
+                    </div>
+                    
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center lg:justify-start gap-4 sm:mb-0 mb-10 max-w-md mx-auto lg:mx-0">
                       <Link href="/about" className="cta-button">
                         <span>Get to know me</span>
@@ -169,17 +176,6 @@ export default function Home(): JSX.Element {
                   </div>
                 </motion.div>
               </div>
-
-              {/* Trusted by section with animated tooltips */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 20 : 0 }}
-                transition={{ duration: 0.7, delay: 0.4 }}
-                className="flex flex-col items-center text-center mt-12 md:mt-20 mb-8"
-              >
-                <p className="text-sm text-muted mb-4">Trusted by amazing people</p>
-                <AnimatedTooltipDemo />
-              </motion.div>
 
               {/* Scroll to explore animation */}
               <motion.div 
