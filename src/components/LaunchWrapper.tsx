@@ -102,20 +102,20 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
             Launch date: {new Date(siteConfig.launchDate).toLocaleString()}
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-            <button 
-              onClick={toggleComingSoonMode}
-              style={{
-                background: '#f44336',
-                color: 'white',
-                border: 'none',
-                padding: '5px 10px',
-                borderRadius: '3px',
+          <button 
+            onClick={toggleComingSoonMode}
+            style={{
+              background: '#f44336',
+              color: 'white',
+              border: 'none',
+              padding: '5px 10px',
+              borderRadius: '3px',
                 cursor: 'pointer',
                 fontSize: '12px'
-              }}
-            >
-              Toggle Coming Soon
-            </button>
+            }}
+          >
+            Toggle Coming Soon
+          </button>
             <button 
               onClick={resetWelcomeScreen}
               style={{
