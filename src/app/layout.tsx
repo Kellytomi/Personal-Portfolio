@@ -67,30 +67,35 @@ export const metadata: Metadata = {
       { url: '/favicon-192x192.png', sizes: '192x192' },
       { url: '/favicon-512x512.png', sizes: '512x512' }
     ],
-    apple: '/favicon-192x192.png',
+    apple: '/apple-touch-icon.png',
     shortcut: '/favicon-32x32.png',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
+    siteName: 'Etoma-etoto Kelvin Odi Portfolio',
     title: 'Etoma-etoto Kelvin Odi | Fullstack Developer & Workflow Automation Specialist',
     description: 'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development, workflow automation, and business process optimization.',
     images: [{ 
-      url: '/og-image.png',
+      url: 'https://etoma.dev/og-image.png',
       width: 1200,
       height: 630,
-      alt: 'Etoma-etoto Kelvin Odi - Fullstack Developer Portfolio'
+      alt: 'Etoma-etoto Kelvin Odi - Fullstack Developer Portfolio',
+      type: 'image/png'
     }],
     url: 'https://etoma.dev'
   },
   twitter: {
     card: 'summary_large_image',
+    site: '@etoma',
+    creator: '@etoma',
     title: 'Etoma-etoto Kelvin Odi | Fullstack Developer',
     description: 'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development and workflow automation',
-    images: ['/og-image.png'],
+    images: ['https://etoma.dev/og-image.png'],
   },
   other: {
-    'x-font-options': 'no-substitute'
+    'x-font-options': 'no-substitute',
+    'theme-color': '#3151B5'
   }
 };
 

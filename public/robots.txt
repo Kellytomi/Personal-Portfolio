@@ -1,4 +1,18 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://etoma.dev/sitemap.xml 
+# Sitemap
+Sitemap: https://etoma.dev/sitemap.xml
+
+# Social Media Crawlers
+User-agent: facebookexternalhit/*
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: / 
