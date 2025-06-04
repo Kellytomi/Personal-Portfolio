@@ -60,28 +60,34 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon-16x16.png', sizes: '16x16' },
       { url: '/favicon-32x32.png', sizes: '32x32' },
+      { url: '/favicon-16x16.png', sizes: '16x16' },
       { url: '/favicon-48x48.png', sizes: '48x48' },
+      { url: '/favicon-64x64.png', sizes: '64x64' },
       { url: '/favicon-192x192.png', sizes: '192x192' },
       { url: '/favicon-512x512.png', sizes: '512x512' }
     ],
     apple: '/favicon-192x192.png',
-    shortcut: '/favicon-192x192.png',
+    shortcut: '/favicon-32x32.png',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     title: 'Etoma-etoto Kelvin Odi | Fullstack Developer & Workflow Automation Specialist',
     description: 'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development, workflow automation, and business process optimization.',
-    images: [{ url: '/favicon-512x512.png' }],
+    images: [{ 
+      url: '/og-image.png',
+      width: 1200,
+      height: 630,
+      alt: 'Etoma-etoto Kelvin Odi - Fullstack Developer Portfolio'
+    }],
     url: 'https://etoma.dev'
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Etoma-etoto Kelvin Odi | Fullstack Developer',
     description: 'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development and workflow automation',
-    images: ['/favicon-512x512.png'],
+    images: ['/og-image.png'],
   },
   other: {
     'x-font-options': 'no-substitute'
@@ -107,9 +113,10 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
         <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
         <link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png" />
+        <link rel="icon" href="/favicon-64x64.png" sizes="64x64" type="image/png" />
         <link rel="icon" href="/favicon-192x192.png" sizes="192x192" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon-192x192.png" />
-        <link rel="shortcut icon" href="/favicon-192x192.png" />
+        <link rel="shortcut icon" href="/favicon-32x32.png" />
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={`bg-surface text-text loaded ${jakarta.className}`}>
