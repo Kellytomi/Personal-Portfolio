@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     images: [{ 
       url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png`,
       width: 1200,
-      height: 630,
+      height: 1200,
       alt: 'Etoma-etoto Kelvin Odi - Fullstack Developer Portfolio',
       type: 'image/png'
     }],
@@ -132,7 +132,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         <meta property="og:url" content={process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png`} />
         <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image:height" content="1200" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:alt" content="Etoma-etoto Kelvin Odi - Fullstack Developer Portfolio" />
         
