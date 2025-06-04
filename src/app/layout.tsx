@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     title: 'Etoma-etoto Kelvin Odi | Fullstack Developer & Workflow Automation Specialist',
     description: 'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development, workflow automation, and business process optimization.',
     images: [{ 
-      url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png?v=2024`,
       width: 1200,
       height: 1200,
       alt: 'Etoma-etoto Kelvin Odi - Fullstack Developer Portfolio',
@@ -91,7 +91,7 @@ export const metadata: Metadata = {
     creator: '@etoma',
     title: 'Etoma-etoto Kelvin Odi | Fullstack Developer',
     description: 'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development and workflow automation',
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png`],
+    images: [`${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png?v=2024`],
   },
   other: {
     'x-font-options': 'no-substitute',
@@ -130,7 +130,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         <meta property="og:title" content="Etoma-etoto Kelvin Odi | Fullstack Developer & Workflow Automation Specialist" />
         <meta property="og:description" content="Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development, workflow automation, and business process optimization." />
         <meta property="og:url" content={process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png?v=2024`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="1200" />
         <meta property="og:image:type" content="image/png" />
@@ -142,7 +142,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         <meta name="twitter:creator" content="@etoma" />
         <meta name="twitter:title" content="Etoma-etoto Kelvin Odi | Fullstack Developer" />
         <meta name="twitter:description" content="Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development and workflow automation" />
-        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png`} />
+        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png?v=2024`} />
         
         <meta name="theme-color" content="#3151B5" />
       </head>
