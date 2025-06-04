@@ -1,6 +1,7 @@
 export const siteConfig = {
   // Set to true to enable coming soon mode, false to disable it
-  comingSoonMode: false,
+  // Can be overridden by NEXT_PUBLIC_COMING_SOON_MODE environment variable
+  comingSoonMode: process.env.NEXT_PUBLIC_COMING_SOON_MODE === 'true' || false,
   
   // Specific launch date (for display purposes only)
   launchDate: new Date('2025-06-15T00:00:00').getTime(),
