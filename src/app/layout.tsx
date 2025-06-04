@@ -77,13 +77,13 @@ export const metadata: Metadata = {
     title: 'Etoma-etoto Kelvin Odi | Fullstack Developer & Workflow Automation Specialist',
     description: 'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development, workflow automation, and business process optimization.',
     images: [{ 
-      url: 'https://etoma.dev/og-image.png',
+      url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png`,
       width: 1200,
       height: 630,
       alt: 'Etoma-etoto Kelvin Odi - Fullstack Developer Portfolio',
       type: 'image/png'
     }],
-    url: 'https://etoma.dev'
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'
   },
   twitter: {
     card: 'summary_large_image',
@@ -91,7 +91,7 @@ export const metadata: Metadata = {
     creator: '@etoma',
     title: 'Etoma-etoto Kelvin Odi | Fullstack Developer',
     description: 'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development and workflow automation',
-    images: ['https://etoma.dev/og-image.png'],
+    images: [`${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png`],
   },
   other: {
     'x-font-options': 'no-substitute',
@@ -120,9 +120,31 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         <link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png" />
         <link rel="icon" href="/favicon-64x64.png" sizes="64x64" type="image/png" />
         <link rel="icon" href="/favicon-192x192.png" sizes="192x192" type="image/png" />
-        <link rel="apple-touch-icon" href="/favicon-192x192.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="shortcut icon" href="/favicon-32x32.png" />
         <link rel="manifest" href="/manifest.json" />
+        
+        {/* Enhanced OpenGraph Meta Tags */}
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Etoma-etoto Kelvin Odi Portfolio" />
+        <meta property="og:title" content="Etoma-etoto Kelvin Odi | Fullstack Developer & Workflow Automation Specialist" />
+        <meta property="og:description" content="Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development, workflow automation, and business process optimization." />
+        <meta property="og:url" content={process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png`} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:alt" content="Etoma-etoto Kelvin Odi - Fullstack Developer Portfolio" />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@etoma" />
+        <meta name="twitter:creator" content="@etoma" />
+        <meta name="twitter:title" content="Etoma-etoto Kelvin Odi | Fullstack Developer" />
+        <meta name="twitter:description" content="Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development and workflow automation" />
+        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png`} />
+        
+        <meta name="theme-color" content="#3151B5" />
       </head>
       <body className={`bg-surface text-text loaded ${jakarta.className}`}>
         <CookiesProvider>
