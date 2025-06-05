@@ -112,7 +112,7 @@ export default function About(): JSX.Element {
               whileTap={{ scale: 0.98 }}
             >
               <Image
-                src="/profile-full.jpg"
+                src="/profile-full.webp"
                 alt="Etoma-Etoto Kelvin Odi"
                 fill
                 className="object-cover"

@@ -99,7 +99,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
           >
             <div className="relative h-[60vh] max-h-[600px] aspect-[3/4] mx-auto rounded-xl overflow-hidden">
               <Image
-                src="/hero-img.jpg"
+                src="/hero-img.webp"
                 alt="Kelvin smiling"
                 fill
                 className="object-cover object-center rounded-xl"
