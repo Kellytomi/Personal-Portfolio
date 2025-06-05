@@ -97,12 +97,12 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
             transition={{ duration: 0.7, delay: 0.2 }}
             className="lg:block relative"
           >
-            <div className="relative h-[60vh] max-h-[600px] rounded-xl overflow-hidden">
+            <div className="relative h-[60vh] max-h-[600px] aspect-[3/4] mx-auto rounded-xl overflow-hidden">
               <Image
-                src="/profile-casual.jpg"
+                src="/hero-img.jpg"
                 alt="Kelvin smiling"
                 fill
-                className="object-cover rounded-xl"
+                className="object-cover object-center rounded-xl"
                 priority
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent mix-blend-multiply rounded-xl" />
