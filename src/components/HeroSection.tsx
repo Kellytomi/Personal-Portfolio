@@ -44,8 +44,8 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
       <motion.div className="absolute inset-0" style={{ y }} />
       <div className="absolute inset-0 bg-gradient-to-b from-surface/50 via-surface/50 to-white/30" />
 
-      <div className="container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+      <div className="container relative z-10 px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="text-center lg:text-left mt-4 sm:mt-0">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -95,11 +95,11 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: isLoading ? 0 : 1, x: isLoading ? 20 : 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:block relative"
+            className="lg:block relative px-4 sm:px-0"
           >
-            <div className="relative h-[60vh] max-h-[600px] aspect-[3/4] mx-auto rounded-xl overflow-hidden">
+            <div className="relative h-[50vh] sm:h-[60vh] max-h-[500px] sm:max-h-[600px] aspect-[3/4] mx-auto rounded-xl overflow-hidden">
               <Image
-                src="/hero-img.jpg"
+                src="/hero-img.webp"
                 alt="Kelvin smiling"
                 fill
                 className="object-cover object-center rounded-xl"
@@ -109,14 +109,14 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
             </div>
 
             {/* Floating highlighted box with personal touch */}
-            <div className="absolute -bottom-6 -left-6 bg-white rounded-lg shadow-card p-6 max-w-xs">
-              <div className="flex items-center gap-4 mb-3">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <span className="text-xl">🎮</span>
+            <div className="absolute -bottom-4 left-4 sm:-bottom-6 sm:-left-6 bg-white rounded-lg shadow-card p-4 sm:p-6 max-w-[280px] sm:max-w-xs z-10">
+              <div className="flex items-center gap-3 sm:gap-4 mb-2 sm:mb-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <span className="text-lg sm:text-xl">🎮</span>
                 </div>
-                <h3 className="font-bold">Fun fact</h3>
+                <h3 className="font-bold text-sm sm:text-base">Fun fact</h3>
               </div>
-              <p className="text-sm text-muted">
+              <p className="text-xs sm:text-sm text-muted">
                 I once stayed up 48 hours straight to finish a game jam project. Worth it!
               </p>
             </div>
