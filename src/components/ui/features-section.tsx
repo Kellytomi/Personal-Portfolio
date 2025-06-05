@@ -1,5 +1,5 @@
-import React from "react";
-import { useId } from "react";
+import React from 'react';
+import { useId } from 'react';
 
 export default function FeaturesSectionDemo() {
   return (
@@ -12,12 +12,8 @@ export default function FeaturesSectionDemo() {
           >
             <Grid size={20} />
             <div className="text-4xl mb-4 relative z-20">{feature.icon}</div>
-            <h3 className="text-xl font-bold mb-2 text-primary relative z-20">
-              {feature.title}
-            </h3>
-            <p className="text-muted relative z-20">
-              {feature.description}
-            </p>
+            <h3 className="text-xl font-bold mb-2 text-primary relative z-20">{feature.title}</h3>
+            <p className="text-muted relative z-20">{feature.description}</p>
           </div>
         ))}
       </div>
@@ -27,44 +23,38 @@ export default function FeaturesSectionDemo() {
 
 const grid = [
   {
-    title: "Frontend Development",
-    description: "Creating beautiful, responsive interfaces that people enjoy using",
-    icon: "💻"
+    title: 'Frontend Development',
+    description: 'Creating beautiful, responsive interfaces that people enjoy using',
+    icon: '💻',
   },
   {
-    title: "Problem Solving", 
-    description: "Finding elegant solutions to complex technical challenges",
-    icon: "🧩"
+    title: 'Problem Solving',
+    description: 'Finding elegant solutions to complex technical challenges',
+    icon: '🧩',
   },
   {
-    title: "Mobile Apps",
-    description: "Building native-feeling experiences for iOS and Android", 
-    icon: "📱"
+    title: 'Mobile Apps',
+    description: 'Building native-feeling experiences for iOS and Android',
+    icon: '📱',
   },
   {
-    title: "UI/UX Design",
-    description: "Crafting intuitive interfaces with the user in mind",
-    icon: "🎨"
+    title: 'UI/UX Design',
+    description: 'Crafting intuitive interfaces with the user in mind',
+    icon: '🎨',
   },
   {
-    title: "Smart Automation",
+    title: 'Smart Automation',
     description: "Making computers do the boring stuff so humans don't have to",
-    icon: "⚡"
+    icon: '⚡',
   },
   {
-    title: "Learning New Tech",
-    description: "Quickly picking up new tools and frameworks",
-    icon: "🚀"
+    title: 'Learning New Tech',
+    description: 'Quickly picking up new tools and frameworks',
+    icon: '🚀',
   },
 ];
 
-export const Grid = ({
-  pattern,
-  size,
-}: {
-  pattern?: number[][];
-  size?: number;
-}) => {
+export const Grid = ({ pattern, size }: { pattern?: number[][]; size?: number }) => {
   const p = pattern ?? [
     [Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
     [Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
@@ -105,12 +95,7 @@ export function GridPattern({ width, height, x, y, squares, ...props }: any) {
           <path d={`M.5 ${height}V.5H${width}`} fill="none" />
         </pattern>
       </defs>
-      <rect
-        width="100%"
-        height="100%"
-        strokeWidth={0}
-        fill={`url(#${patternId})`}
-      />
+      <rect width="100%" height="100%" strokeWidth={0} fill={`url(#${patternId})`} />
       {squares && (
         <svg x={x} y={y} className="overflow-visible">
           {squares.map(([x, y]: any) => (
@@ -127,4 +112,4 @@ export function GridPattern({ width, height, x, y, squares, ...props }: any) {
       )}
     </svg>
   );
-} 
+}

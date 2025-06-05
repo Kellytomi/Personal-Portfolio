@@ -1,11 +1,11 @@
 :root {
-  --color-black: #1A1A1A;
+  --color-black: #1a1a1a;
   --color-white: #ffffff;
-  --color-offwhite: #F8FAFE;
-  --color-primary: #3151B5;
-  --color-secondary: #0F1D56;
-  --color-accent: #56CCF2;
-  --color-muted: #6B7280;
+  --color-offwhite: #f8fafe;
+  --color-primary: #3151b5;
+  --color-secondary: #0f1d56;
+  --color-accent: #56ccf2;
+  --color-muted: #6b7280;
 }
 
 /* Font loading optimization */
@@ -17,12 +17,12 @@
 
 /* Ensure fallback fonts are loaded immediately */
 html {
-  font-family: 
+  font-family:
     var(--font-jakarta, 'Plus Jakarta Sans'),
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
-    "Segoe UI",
+    'Segoe UI',
     Roboto,
     Oxygen,
     Ubuntu,
@@ -32,14 +32,13 @@ html {
 
 /* Display font fallbacks */
 .font-display,
-h1, h2, h3, h4, h5, h6 {
-  font-family: 
-    var(--font-syne, 'Syne'),
-    Georgia,
-    Cambria,
-    "Times New Roman",
-    Times,
-    serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-syne, 'Syne'), Georgia, Cambria, 'Times New Roman', Times, serif;
 }
 
 @tailwind base;
@@ -59,7 +58,9 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.7s ease, visibility 0.7s ease;
+  transition:
+    opacity 0.7s ease,
+    visibility 0.7s ease;
 }
 
 .loading-screen.loaded {
@@ -145,14 +146,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .loading-text {
-  font-family: 
-    var(--font-syne, 'Syne'), 
+  font-family:
+    var(--font-syne, 'Syne'),
     'Syne',
-    system-ui, 
-    -apple-system, 
-    BlinkMacSystemFont, 
-    'Segoe UI', 
-    Georgia, 
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Georgia,
     serif;
   font-weight: 600;
   color: var(--color-primary);
@@ -161,7 +162,12 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 16px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-primary));
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent),
+    var(--color-primary)
+  );
   background-size: 200% auto;
   background-clip: text;
   -webkit-background-clip: text;
@@ -214,7 +220,9 @@ h1, h2, h3, h4, h5, h6 {
 .grid-item {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
 
 .grid-loaded .grid-item {
@@ -227,31 +235,31 @@ h1, h2, h3, h4, h5, h6 {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 
-      var(--font-jakarta, 'Plus Jakarta Sans'), 
+    font-family:
+      var(--font-jakarta, 'Plus Jakarta Sans'),
       'Plus Jakarta Sans',
-      system-ui, 
-      -apple-system, 
-      BlinkMacSystemFont, 
-      'Segoe UI', 
-      Roboto, 
-      'Helvetica Neue', 
-      Arial, 
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      Arial,
       sans-serif !important;
   }
 
   body {
     @apply bg-surface text-text;
-    font-family: 
-      var(--font-jakarta, 'Plus Jakarta Sans'), 
+    font-family:
+      var(--font-jakarta, 'Plus Jakarta Sans'),
       'Plus Jakarta Sans',
-      system-ui, 
-      -apple-system, 
-      BlinkMacSystemFont, 
-      'Segoe UI', 
-      Roboto, 
-      'Helvetica Neue', 
-      Arial, 
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      Arial,
       sans-serif !important;
     background-image: none;
     background-size: 30px 30px;
@@ -266,8 +274,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   /* Custom cursor rules - keep default cursor visible */
-  a, button, input[type="button"], input[type="submit"],
-  .cursor-pointer, [role="button"] {
+  a,
+  button,
+  input[type='button'],
+  input[type='submit'],
+  .cursor-pointer,
+  [role='button'] {
     cursor: pointer;
   }
 
@@ -275,16 +287,21 @@ h1, h2, h3, h4, h5, h6 {
     @apply bg-accent text-white;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display tracking-tight;
-    font-family: 
-      var(--font-syne, 'Syne'), 
+    font-family:
+      var(--font-syne, 'Syne'),
       'Syne',
-      system-ui, 
-      -apple-system, 
-      BlinkMacSystemFont, 
-      'Segoe UI', 
-      Georgia, 
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Georgia,
       serif !important;
   }
 }
@@ -293,23 +310,23 @@ h1, h2, h3, h4, h5, h6 {
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
   .btn {
     @apply inline-flex items-center justify-center px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium tracking-wide transition-all duration-300 shadow-soft hover:shadow-hover transform hover:-translate-y-0.5 text-sm sm:text-base w-full sm:w-auto;
   }
-  
+
   .btn-primary {
     @apply bg-primary text-white hover:bg-opacity-90;
   }
-  
+
   .btn-secondary {
     @apply bg-white border border-primary/20 text-primary hover:bg-primary/5;
   }
-  
+
   .section-title {
     @apply font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-secondary tracking-tighter;
   }
-  
+
   .section-subtitle {
     @apply text-lg md:text-xl text-muted mb-12 tracking-normal;
   }
@@ -333,19 +350,19 @@ h1, h2, h3, h4, h5, h6 {
   .body-text {
     @apply font-sans tracking-normal;
   }
-  
+
   .step-card {
     @apply relative bg-white rounded-lg shadow-card p-6 hover:shadow-hover transition-all duration-300;
   }
-  
+
   .step-number {
     @apply absolute -top-4 -left-4 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm;
   }
-  
+
   .feature-card {
     @apply bg-white rounded-xl shadow-card p-6 hover:shadow-hover transition-all duration-300 border border-gray-100;
   }
-  
+
   .cta-button {
     @apply px-6 py-3 bg-primary text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:bg-primary/90 flex items-center justify-center gap-2;
   }
@@ -360,7 +377,7 @@ h1, h2, h3, h4, h5, h6 {
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
-  
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
@@ -372,7 +389,7 @@ h1, h2, h3, h4, h5, h6 {
   .text-shadow-sm {
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   }
-  
+
   .grid-bg {
     position: absolute;
     inset: 0;
@@ -385,15 +402,15 @@ h1, h2, h3, h4, h5, h6 {
     pointer-events: none;
     z-index: 0;
   }
-  
+
   .loaded .grid-bg {
     opacity: 0.3;
   }
-  
+
   .clip-path-slant {
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   }
-  
+
   .bg-consistent-black {
     background-color: #000000 !important;
   }

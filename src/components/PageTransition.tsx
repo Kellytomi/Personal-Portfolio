@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { motion } from 'framer-motion';
 import { ReactNode, useEffect } from 'react';
@@ -12,12 +12,12 @@ const PageTransition = ({ children }: PageTransitionProps) => {
   useEffect(() => {
     // Remove the loaded class to hide the grid background during transition
     document.body.classList.remove('loaded');
-    
+
     // Add a small delay before showing the grid again to ensure the transition completes first
     const timer = setTimeout(() => {
       document.body.classList.add('loaded');
     }, 400); // Match this with the duration of the enter transition
-    
+
     return () => {
       clearTimeout(timer);
       // Ensure the loaded class is removed on unmount to prevent flashing
@@ -26,26 +26,26 @@ const PageTransition = ({ children }: PageTransitionProps) => {
   }, []);
 
   const variants = {
-    hidden: { 
-      opacity: 0, 
-      scale: 0.98
-    },
-    enter: { 
-      opacity: 1, 
-      scale: 1,
-      transition: { 
-        duration: 0.4, 
-        ease: [0.22, 1, 0.36, 1]  // Custom ease curve for smooth, professional effect
-      }
-    },
-    exit: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       scale: 0.98,
-      transition: { 
-        duration: 0.2, 
-        ease: [0.22, 1, 0.36, 1]
-      }
-    }
+    },
+    enter: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        ease: [0.22, 1, 0.36, 1], // Custom ease curve for smooth, professional effect
+      },
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.98,
+      transition: {
+        duration: 0.2,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
   };
 
   return (
@@ -68,4 +68,4 @@ const PageTransition = ({ children }: PageTransitionProps) => {
   );
 };
 
-export default PageTransition; 
+export default PageTransition;

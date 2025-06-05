@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -17,7 +17,7 @@ import {
   IconMail,
   IconTools,
   IconTrophy,
-} from "@tabler/icons-react";
+} from '@tabler/icons-react';
 
 interface NavItem {
   name: string;
@@ -43,10 +43,10 @@ export default function Navigation(): JSX.Element {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
-    
+
     // Set initial scroll position
     setScrollY(window.scrollY);
-    
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -54,26 +54,31 @@ export default function Navigation(): JSX.Element {
   // Set up intersection observer to detect dark sections
   useEffect(() => {
     // Define sections that should trigger a color change in the navbar
-    const darkSections = document.querySelectorAll('.dark-section, .bg-primary, .bg-secondary, .bg-gradient-to-r');
-    
+    const darkSections = document.querySelectorAll(
+      '.dark-section, .bg-primary, .bg-secondary, .bg-gradient-to-r'
+    );
+
     if (darkSections.length === 0) return;
-    
-    const observer = new IntersectionObserver((entries) => {
-      // Check if any dark section is intersecting with the viewport
-      const isIntersecting = entries.some(entry => entry.isIntersecting);
-      setIsOverDarkSection(isIntersecting);
-    }, { 
-      threshold: 0.15, // When at least 15% of the section is visible
-      rootMargin: '-80px 0px 0px 0px' // Adjust based on navbar height
-    });
-    
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Check if any dark section is intersecting with the viewport
+        const isIntersecting = entries.some((entry) => entry.isIntersecting);
+        setIsOverDarkSection(isIntersecting);
+      },
+      {
+        threshold: 0.15, // When at least 15% of the section is visible
+        rootMargin: '-80px 0px 0px 0px', // Adjust based on navbar height
+      }
+    );
+
     // Observe all dark sections
-    darkSections.forEach(section => {
+    darkSections.forEach((section) => {
       observer.observe(section);
     });
-    
+
     return () => {
-      darkSections.forEach(section => {
+      darkSections.forEach((section) => {
         observer.unobserve(section);
       });
     };
@@ -82,44 +87,42 @@ export default function Navigation(): JSX.Element {
   // Determine navbar classes based on current state and scroll position
   // At the top of any page (scrollY near 0), always use transparent styling
   // Otherwise, check if over dark section
-  const navbarBgClass = scrollY < 10
-    ? 'backdrop-blur-sm bg-white/10'
-    : isOverDarkSection 
-      ? 'backdrop-blur-sm bg-white/80 border-b border-gray-200/20 shadow-sm'
-      : 'backdrop-blur-sm bg-white/10';
-  
-  const textColorClass = scrollY < 10
-    ? 'text-muted' 
-    : isOverDarkSection
-      ? 'text-primary'
-      : 'text-muted';
+  const navbarBgClass =
+    scrollY < 10
+      ? 'backdrop-blur-sm bg-white/10'
+      : isOverDarkSection
+        ? 'backdrop-blur-sm bg-white/80 border-b border-gray-200/20 shadow-sm'
+        : 'backdrop-blur-sm bg-white/10';
+
+  const textColorClass =
+    scrollY < 10 ? 'text-muted' : isOverDarkSection ? 'text-primary' : 'text-muted';
 
   // Floating dock navigation items
   const floatingDockItems = [
     {
-      title: "Home",
+      title: 'Home',
       icon: <IconHome className="h-full w-full transition-colors" />,
-      href: "/",
+      href: '/',
     },
     {
-      title: "About",
+      title: 'About',
       icon: <IconUser className="h-full w-full transition-colors" />,
-      href: "/about",
+      href: '/about',
     },
     {
-      title: "Skills",
+      title: 'Skills',
       icon: <IconTools className="h-full w-full transition-colors" />,
-      href: "/skills",
+      href: '/skills',
     },
     {
-      title: "Projects",
+      title: 'Projects',
       icon: <IconFolder className="h-full w-full transition-colors" />,
-      href: "/projects",
+      href: '/projects',
     },
     {
-      title: "Testimonials",
+      title: 'Testimonials',
       icon: <IconTrophy className="h-full w-full transition-colors" />,
-      href: "/testimonials",
+      href: '/testimonials',
     },
   ];
 
@@ -129,11 +132,11 @@ export default function Navigation(): JSX.Element {
         <div className="container mx-auto relative z-10">
           <div className="flex items-center justify-between h-20">
             <Link href="/" className="flex items-center h-full">
-              <Image 
-                src="/images/etoma.png" 
-                alt="Etoma-Etoto Kelvin Odi" 
-                width={150} 
-                height={40} 
+              <Image
+                src="/images/etoma.png"
+                alt="Etoma-Etoto Kelvin Odi"
+                width={150}
+                height={40}
                 className="object-contain mt-1 w-[120px] sm:w-[140px] md:w-[150px]"
                 priority
               />
@@ -160,8 +163,21 @@ export default function Navigation(): JSX.Element {
               >
                 <div className="flex items-center gap-2">
                   <span>Say Hello</span>
-                  <svg width="16" height="16" className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg
+                    width="16"
+                    height="16"
+                    className="w-4 h-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 12H19M19 12L12 5M19 12L12 19"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
               </MovingBorderButton>
@@ -187,7 +203,7 @@ export default function Navigation(): JSX.Element {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className={`lg:hidden relative border-none backdrop-blur-sm ${scrollY < 10 ? 'bg-white/20' : (isOverDarkSection ? 'bg-white/90' : 'bg-white/20')}`}
+            className={`lg:hidden relative border-none backdrop-blur-sm ${scrollY < 10 ? 'bg-white/20' : isOverDarkSection ? 'bg-white/90' : 'bg-white/20'}`}
           >
             <div className="container mx-auto py-4 space-y-4 relative z-10">
               {floatingDockItems.map((item) => (
@@ -201,11 +217,11 @@ export default function Navigation(): JSX.Element {
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
-                  <div className={`w-4 h-4 ${
-                    pathname === item.href 
-                      ? 'text-white' 
-                      : 'text-primary/70'
-                  }`}>
+                  <div
+                    className={`w-4 h-4 ${
+                      pathname === item.href ? 'text-white' : 'text-primary/70'
+                    }`}
+                  >
                     {item.icon}
                   </div>
                   <span>{item.title}</span>
@@ -217,4 +233,4 @@ export default function Navigation(): JSX.Element {
       </AnimatePresence>
     </nav>
   );
-} 
+}

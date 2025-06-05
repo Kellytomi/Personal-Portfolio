@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
-import { AvatarPlaceholder, getGenderFromName } from "./avatar-placeholder";
+import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { AvatarPlaceholder, getGenderFromName } from './avatar-placeholder';
 
 type Testimonial = {
   quote: string;
@@ -48,7 +48,7 @@ export const AnimatedTestimonials = ({
   const cardBackgroundColors = [
     'linear-gradient(135deg, #3151B5 0%, #4F46E5 100%)', // Primary blue gradient
     'linear-gradient(135deg, #EC4899 0%, #F472B6 100%)', // Pink gradient
-    'linear-gradient(135deg, #9333EA 0%, #A855F7 100%)', // Purple gradient  
+    'linear-gradient(135deg, #9333EA 0%, #A855F7 100%)', // Purple gradient
     'linear-gradient(135deg, #56CCF2 0%, #06B6D4 100%)', // Light blue gradient
     'linear-gradient(135deg, #10B981 0%, #34D399 100%)', // Green gradient
     'linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%)', // Orange gradient
@@ -88,9 +88,7 @@ export const AnimatedTestimonials = ({
                     scale: isActive(index) ? 1 : 0.95,
                     z: isActive(index) ? 0 : -100,
                     rotate: isActive(index) ? 0 : randomRotateY(),
-                    zIndex: isActive(index)
-                      ? 40
-                      : testimonials.length + 2 - index,
+                    zIndex: isActive(index) ? 40 : testimonials.length + 2 - index,
                     y: isActive(index) ? [0, -80, 0] : 0,
                   }}
                   exit={{
@@ -101,16 +99,16 @@ export const AnimatedTestimonials = ({
                   }}
                   transition={{
                     duration: 0.4,
-                    ease: "easeInOut",
+                    ease: 'easeInOut',
                   }}
                   className="absolute inset-0 origin-bottom"
                 >
-                  <div 
+                  <div
                     className="h-full w-full rounded-3xl shadow-lg overflow-hidden flex items-center justify-center"
                     style={{ background: getCardBackground(testimonial.name) }}
                   >
                     <div className="w-32 h-32">
-                      <AvatarPlaceholder 
+                      <AvatarPlaceholder
                         gender={getGenderFromName(testimonial.name)}
                         name={testimonial.name}
                         className="rounded-full"
@@ -139,32 +137,28 @@ export const AnimatedTestimonials = ({
             }}
             transition={{
               duration: 0.2,
-              ease: "easeInOut",
+              ease: 'easeInOut',
             }}
           >
-            <h3 className="text-2xl font-bold text-gray-800">
-              {testimonials[active].name}
-            </h3>
-            <p className="text-sm text-gray-600 font-medium">
-              {testimonials[active].designation}
-            </p>
+            <h3 className="text-2xl font-bold text-gray-800">{testimonials[active].name}</h3>
+            <p className="text-sm text-gray-600 font-medium">{testimonials[active].designation}</p>
             <motion.p className="mt-8 text-lg text-gray-800 leading-relaxed">
-              {testimonials[active].quote.split(" ").map((word, index) => (
+              {testimonials[active].quote.split(' ').map((word, index) => (
                 <motion.span
                   key={index}
                   initial={{
-                    filter: "blur(10px)",
+                    filter: 'blur(10px)',
                     opacity: 0,
                     y: 5,
                   }}
                   animate={{
-                    filter: "blur(0px)",
+                    filter: 'blur(0px)',
                     opacity: 1,
                     y: 0,
                   }}
                   transition={{
                     duration: 0.2,
-                    ease: "easeInOut",
+                    ease: 'easeInOut',
                     delay: 0.02 * index,
                   }}
                   className="inline-block"
@@ -192,4 +186,4 @@ export const AnimatedTestimonials = ({
       </div>
     </div>
   );
-}; 
+};

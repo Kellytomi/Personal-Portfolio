@@ -8,36 +8,36 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary': '#3151B5',  // Primary blue from the ACAD AI design
-        'secondary': '#0F1D56', // Dark blue for secondary elements
-        'accent': '#56CCF2',   // Light blue accent
-        'surface': '#F8FAFE',  // Light blue-tinted background
-        'text': '#1A1A1A',     // Dark text color
-        'muted': '#6B7280',    // Medium gray for secondary text
-        'highlight': '#FFFFFF', // White for highlights
+        primary: '#3151B5', // Primary blue from the ACAD AI design
+        secondary: '#0F1D56', // Dark blue for secondary elements
+        accent: '#56CCF2', // Light blue accent
+        surface: '#F8FAFE', // Light blue-tinted background
+        text: '#1A1A1A', // Dark text color
+        muted: '#6B7280', // Medium gray for secondary text
+        highlight: '#FFFFFF', // White for highlights
       },
       fontFamily: {
         sans: [
-          'var(--font-jakarta)', 
-          'Plus Jakarta Sans', 
-          'system-ui', 
-          '-apple-system', 
-          'BlinkMacSystemFont', 
-          'Segoe UI', 
-          'Roboto', 
-          'Helvetica Neue', 
-          'Arial', 
-          'sans-serif'
+          'var(--font-jakarta)',
+          'Plus Jakarta Sans',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'sans-serif',
         ],
         display: [
-          'var(--font-syne)', 
-          'Syne', 
-          'system-ui', 
-          '-apple-system', 
-          'BlinkMacSystemFont', 
-          'Segoe UI', 
-          'Georgia', 
-          'serif'
+          'var(--font-syne)',
+          'Syne',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Georgia',
+          'serif',
         ],
       },
       fontSize: {
@@ -45,18 +45,18 @@ module.exports = {
         '8xl': ['6.5rem', { lineHeight: '1' }],
       },
       letterSpacing: {
-        'tighter': '-0.05em',
-        'tight': '-0.025em',
-        'normal': '0',
-        'wide': '0.025em',
-        'wider': '0.05em',
-        'widest': '0.1em',
+        tighter: '-0.05em',
+        tight: '-0.025em',
+        normal: '0',
+        wide: '0.025em',
+        wider: '0.05em',
+        widest: '0.1em',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.5s ease-out',
-        'float': 'float 6s ease-in-out infinite',
-        'aurora': 'aurora 60s linear infinite',
+        float: 'float 6s ease-in-out infinite',
+        aurora: 'aurora 60s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -81,9 +81,9 @@ module.exports = {
         },
       },
       boxShadow: {
-        'soft': '0 4px 20px rgba(0, 0, 0, 0.05)',
-        'hover': '0 8px 30px rgba(0, 0, 0, 0.1)',
-        'card': '0px 4px 25px rgba(0, 0, 0, 0.08)',
+        soft: '0 4px 20px rgba(0, 0, 0, 0.05)',
+        hover: '0 8px 30px rgba(0, 0, 0, 0.1)',
+        card: '0px 4px 25px rgba(0, 0, 0, 0.08)',
       },
       backgroundImage: {
         'grid-pattern': "url('/grid-pattern.svg')",
@@ -91,4 +91,4 @@ module.exports = {
     },
   },
   plugins: [],
-} 
+};

@@ -1,8 +1,8 @@
-import React from "react";
-import { FlipWords } from "@/components/ui/flip-words";
+import React from 'react';
+import { FlipWords } from '@/components/ui/flip-words';
 
 export default function FlipWordsDemo() {
-  const words = ["innovative", "scalable", "user-friendly", "modern"];
+  const words = ['innovative', 'scalable', 'user-friendly', 'modern'];
 
   return (
     <div className="h-[40rem] flex justify-center items-center px-4">
@@ -13,4 +13,4 @@ export default function FlipWordsDemo() {
       </div>
     </div>
   );
-} 
+}

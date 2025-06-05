@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from 'react';
 
@@ -12,16 +12,16 @@ const FontDebugger = () => {
       if ('fonts' in document) {
         document.fonts.ready.then(() => {
           setFontsLoaded(true);
-          
+
           // Check specific font loading status
           const fonts = ['Plus Jakarta Sans', 'Syne'];
           const status: Record<string, string> = {};
-          
-          fonts.forEach(font => {
+
+          fonts.forEach((font) => {
             const isLoaded = document.fonts.check(`16px "${font}"`);
             status[font] = isLoaded ? 'Loaded' : 'Not Loaded';
           });
-          
+
           setFontStatus(status);
         });
       }
@@ -45,4 +45,4 @@ const FontDebugger = () => {
   );
 };
 
-export default FontDebugger; 
+export default FontDebugger;

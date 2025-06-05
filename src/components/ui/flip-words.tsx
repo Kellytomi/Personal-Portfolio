@@ -1,7 +1,7 @@
-"use client";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+'use client';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 export const FlipWords = ({
   words,
@@ -54,16 +54,13 @@ export const FlipWords = ({
           }}
           transition={{
             duration: 0.4,
-            ease: "easeInOut",
+            ease: 'easeInOut',
           }}
-          className={cn(
-            "inline-block font-bold",
-            className
-          )}
+          className={cn('inline-block font-bold', className)}
         >
           {currentWord}
         </motion.span>
       </AnimatePresence>
     </span>
   );
-}; 
+};
