@@ -26,10 +26,10 @@ export const AnimatedTooltip = ({
   };
 
   return (
-    <>
+    <div className="flex items-center">
       {items.map((item, idx) => (
         <div
-          className="group relative -mr-4"
+          className={`group relative ${idx === 0 ? '' : '-ml-4'}`}
           key={item.name}
           onMouseEnter={() => setHoveredIndex(item.id)}
           onMouseLeave={() => setHoveredIndex(null)}
@@ -73,6 +73,6 @@ export const AnimatedTooltip = ({
           />
         </div>
       ))}
-    </>
+    </div>
   );
 };
