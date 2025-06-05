@@ -25,17 +25,20 @@ A modern, professional portfolio website for Etoma-Etoto Kelvin Odi, founder of 
 ## Getting Started
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/kelvin-portfolio.git
 cd kelvin-portfolio
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Create a `.env.local` file in the root directory and add your configuration:
+
 ```env
 # Coming Soon Mode (optional)
 # Set to 'true' to enable the coming soon page, 'false' or omit to show the main site
@@ -51,6 +54,7 @@ NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
 ```
 
 4. Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -66,6 +70,7 @@ The portfolio includes a beautiful coming soon page that can be enabled/disabled
 - **Development Tools**: Press `Shift+D` while the site is running to toggle development tools and test the coming soon mode
 
 The coming soon page features:
+
 - Animated countdown timer
 - Email subscription form
 - Social media links
@@ -97,13 +102,13 @@ src/
 
 ## Environment Variables
 
-| Variable | Description | Required | Default |
-|----------|-------------|----------|---------|
-| `NEXT_PUBLIC_COMING_SOON_MODE` | Enable/disable coming soon page | No | `false` |
-| `NEXT_PUBLIC_SITE_URL` | Base URL for SEO and social sharing | No | `https://etoma.dev` |
-| `NEXT_PUBLIC_EMAILJS_SERVICE_ID` | EmailJS service ID for contact form | Yes | - |
-| `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` | EmailJS template ID for contact form | Yes | - |
-| `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` | EmailJS public key for contact form | Yes | - |
+| Variable                          | Description                          | Required | Default             |
+| --------------------------------- | ------------------------------------ | -------- | ------------------- |
+| `NEXT_PUBLIC_COMING_SOON_MODE`    | Enable/disable coming soon page      | No       | `false`             |
+| `NEXT_PUBLIC_SITE_URL`            | Base URL for SEO and social sharing  | No       | `https://etoma.dev` |
+| `NEXT_PUBLIC_EMAILJS_SERVICE_ID`  | EmailJS service ID for contact form  | Yes      | -                   |
+| `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` | EmailJS template ID for contact form | Yes      | -                   |
+| `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`  | EmailJS public key for contact form  | Yes      | -                   |
 
 ## Customization
 
@@ -119,6 +124,7 @@ src/
 The site can be deployed to any platform that supports Next.js applications, such as Vercel, Netlify, or AWS Amplify.
 
 **For Production Deployment:**
+
 1. Set your environment variables in your hosting platform
 2. Enable coming soon mode by setting `NEXT_PUBLIC_COMING_SOON_MODE=true`
 3. Deploy your site

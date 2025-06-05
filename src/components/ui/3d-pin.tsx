@@ -1,7 +1,7 @@
-"use client";
-import React, { useState, createContext, useContext, useEffect } from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+'use client';
+import React, { useState, createContext, useContext, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 const ROTATION_RANGE = 50; // Maximum rotation range in degrees
 
@@ -19,9 +19,7 @@ export const PinProvider = ({ children }: { children: React.ReactNode }) => {
   const [activePinId, setActivePinId] = useState<string | null>(null);
 
   return (
-    <PinContext.Provider value={{ activePinId, setActivePinId }}>
-      {children}
-    </PinContext.Provider>
+    <PinContext.Provider value={{ activePinId, setActivePinId }}>{children}</PinContext.Provider>
   );
 };
 
@@ -42,10 +40,8 @@ export const PinContainer = ({
 }) => {
   const { activePinId, setActivePinId } = useContext(PinContext);
   const pinId = id || Math.random().toString(36).substr(2, 9); // Generate unique ID if not provided
-  
-  const [transform, setTransform] = useState(
-    "translate(-50%,-50%) rotateX(0deg)"
-  );
+
+  const [transform, setTransform] = useState('translate(-50%,-50%) rotateX(0deg)');
   const [isHovered, setIsHovered] = useState(false);
   const [isTouching, setIsTouching] = useState(false);
 
@@ -56,7 +52,7 @@ export const PinContainer = ({
   useEffect(() => {
     if (!isActive) {
       // Always reset transform when pin becomes inactive
-      setTransform("translate(-50%,-50%) rotateX(0deg) scale(1)");
+      setTransform('translate(-50%,-50%) rotateX(0deg) scale(1)');
       setIsHovered(false);
       setIsTouching(false);
     }
@@ -64,16 +60,18 @@ export const PinContainer = ({
 
   // Original desktop hover behavior
   const onMouseEnter = () => {
-    if (!isTouching) { // Don't interfere with touch interactions
-      setTransform("translate(-50%,-50%) rotateX(40deg) scale(0.8)");
+    if (!isTouching) {
+      // Don't interfere with touch interactions
+      setTransform('translate(-50%,-50%) rotateX(40deg) scale(0.8)');
       setIsHovered(true);
       setActivePinId(pinId);
     }
   };
-  
+
   const onMouseLeave = () => {
-    if (!isTouching) { // Don't interfere with touch interactions
-      setTransform("translate(-50%,-50%) rotateX(0deg) scale(1)");
+    if (!isTouching) {
+      // Don't interfere with touch interactions
+      setTransform('translate(-50%,-50%) rotateX(0deg) scale(1)');
       setIsHovered(false);
       setActivePinId(null);
     }
@@ -83,31 +81,29 @@ export const PinContainer = ({
   const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsTouching(true);
-    
+
     // Toggle pin visibility on touch
     const newShowPin = !isActive;
-    
+
     if (newShowPin) {
       setActivePinId(pinId);
       // Start with a subtle tilt when showing pin
       setTransform(
-        `translate(-50%,-50%) rotateX(${ROTATION_RANGE / 4}deg) rotateY(${
-          ROTATION_RANGE / 4
-        }deg)`
+        `translate(-50%,-50%) rotateX(${ROTATION_RANGE / 4}deg) rotateY(${ROTATION_RANGE / 4}deg)`
       );
     } else {
       setActivePinId(null);
       // Reset when hiding pin
-      setTransform("translate(-50%,-50%) rotateX(0deg) scale(1)");
+      setTransform('translate(-50%,-50%) rotateX(0deg) scale(1)');
     }
   };
 
   const onTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     // Only allow move if pin is showing
     if (!isActive || !isTouching) return;
-    
+
     e.preventDefault();
-    
+
     const element = e.currentTarget;
     const rect = element.getBoundingClientRect();
     const touch = e.touches[0];
@@ -124,22 +120,19 @@ export const PinContainer = ({
 
   const onTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
     e.preventDefault();
-    
+
     // Only reset transform if pin is still showing, otherwise keep it hidden
     if (isActive) {
-      setTransform("translate(-50%,-50%) rotateX(40deg) scale(0.8)");
+      setTransform('translate(-50%,-50%) rotateX(40deg) scale(0.8)');
     }
-    
+
     // Reset touching state after a small delay to prevent mouse events from interfering
     setTimeout(() => setIsTouching(false), 100);
   };
 
   return (
     <div
-      className={cn(
-        "relative group/pin z-50 cursor-pointer",
-        containerClassName
-      )}
+      className={cn('relative group/pin z-50 cursor-pointer', containerClassName)}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onTouchStart={onTouchStart}
@@ -148,8 +141,8 @@ export const PinContainer = ({
     >
       <div
         style={{
-          perspective: "1000px",
-          transform: "rotateX(70deg) translateZ(0deg)",
+          perspective: '1000px',
+          transform: 'rotateX(70deg) translateZ(0deg)',
         }}
         className="absolute left-1/2 top-1/2 ml-[0.09375rem] mt-4 -translate-x-1/2 -translate-y-1/2"
       >
@@ -159,10 +152,15 @@ export const PinContainer = ({
           }}
           className="absolute left-1/2 p-4 top-1/2 flex justify-start items-start rounded-2xl shadow-[0_8px_16px_rgb(0_0_0/0.4)] bg-white border border-gray-200 group-hover/pin:border-primary/30 transition duration-700 overflow-hidden"
         >
-          <div className={cn("relative z-50", className)}>{children}</div>
+          <div className={cn('relative z-50', className)}>{children}</div>
         </div>
       </div>
-      <PinPerspective title={title} href={href} showPin={isActive} isHovered={isHovered && !isTouching} />
+      <PinPerspective
+        title={title}
+        href={href}
+        showPin={isActive}
+        isHovered={isHovered && !isTouching}
+      />
     </div>
   );
 };
@@ -179,7 +177,7 @@ export const PinPerspective = ({
   isHovered?: boolean;
 }) => {
   return (
-    <motion.div 
+    <motion.div
       className={`pointer-events-none w-72 sm:w-80 md:w-96 h-64 sm:h-72 md:h-80 flex items-center justify-center z-[60] transition duration-500 ${
         showPin || isHovered ? 'opacity-100' : 'opacity-0'
       }`}
@@ -188,7 +186,7 @@ export const PinPerspective = ({
         <div className="absolute top-0 inset-x-0 flex justify-center">
           <a
             href={href}
-            target={"_blank"}
+            target={'_blank'}
             className="relative flex space-x-2 items-center z-10 rounded-full bg-primary py-0.5 px-3 sm:px-4 ring-1 ring-primary/20"
           >
             <span className="relative z-20 text-white text-xs font-bold inline-block py-0.5">
@@ -201,8 +199,8 @@ export const PinPerspective = ({
 
         <div
           style={{
-            perspective: "1000px",
-            transform: "rotateX(70deg) translateZ(0)",
+            perspective: '1000px',
+            transform: 'rotateX(70deg) translateZ(0)',
           }}
           className="absolute left-1/2 top-1/2 ml-[0.09375rem] mt-2 sm:mt-3 md:mt-4 -translate-x-1/2 -translate-y-1/2"
         >
@@ -211,8 +209,8 @@ export const PinPerspective = ({
               initial={{
                 opacity: 0,
                 scale: 0,
-                x: "-50%",
-                y: "-50%",
+                x: '-50%',
+                y: '-50%',
               }}
               animate={{
                 opacity: [0, 1, 0.5, 0],
@@ -230,8 +228,8 @@ export const PinPerspective = ({
               initial={{
                 opacity: 0,
                 scale: 0,
-                x: "-50%",
-                y: "-50%",
+                x: '-50%',
+                y: '-50%',
               }}
               animate={{
                 opacity: [0, 1, 0.5, 0],
@@ -249,8 +247,8 @@ export const PinPerspective = ({
               initial={{
                 opacity: 0,
                 scale: 0,
-                x: "-50%",
-                y: "-50%",
+                x: '-50%',
+                y: '-50%',
               }}
               animate={{
                 opacity: [0, 1, 0.5, 0],
@@ -276,4 +274,4 @@ export const PinPerspective = ({
       </div>
     </motion.div>
   );
-}; 
+};

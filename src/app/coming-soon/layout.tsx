@@ -5,14 +5,6 @@ export const metadata: Metadata = {
   description: 'My portfolio is under construction and will be launched soon.',
 };
 
-export default function ComingSoonLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <section>
-      {children}
-    </section>
-  );
-} 
+export default function ComingSoonLayout({ children }: { children: React.ReactNode }) {
+  return <section>{children}</section>;
+}

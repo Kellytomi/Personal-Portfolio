@@ -1,6 +1,6 @@
-"use client";
-import React from "react";
-import { BackgroundBeams } from "@/components/ui/background-beams";
+'use client';
+import React from 'react';
+import { BackgroundBeams } from '@/components/ui/background-beams';
 
 export default function BackgroundBeamsDemo() {
   return (
@@ -10,8 +10,8 @@ export default function BackgroundBeamsDemo() {
           Something Amazing is Coming
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto my-6 text-lg text-center relative z-10 leading-relaxed">
-          We're crafting an incredible digital experience just for you. 
-          Join our waitlist to be the first to know when we launch and get exclusive early access.
+          We're crafting an incredible digital experience just for you. Join our waitlist to be the
+          first to know when we launch and get exclusive early access.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mt-8">
           <input
@@ -27,4 +27,4 @@ export default function BackgroundBeamsDemo() {
       <BackgroundBeams />
     </div>
   );
-} 
+}

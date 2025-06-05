@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
@@ -9,10 +9,10 @@ interface WelcomeScreenProps {
 }
 
 const greetings = [
-  { text: "Hello", language: "English" },
-  { text: "Hola", language: "Español" },
-  { text: "Bonjour", language: "Français" },
-  { text: "こんにちは", language: "日本語" },
+  { text: 'Hello', language: 'English' },
+  { text: 'Hola', language: 'Español' },
+  { text: 'Bonjour', language: 'Français' },
+  { text: 'こんにちは', language: '日本語' },
 ];
 
 export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
@@ -22,7 +22,7 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
   useEffect(() => {
     if (currentIndex < greetings.length - 1) {
       const timer = setTimeout(() => {
-        setCurrentIndex(prev => prev + 1);
+        setCurrentIndex((prev) => prev + 1);
       }, 1500);
       return () => clearTimeout(timer);
     } else {
@@ -58,22 +58,22 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
           transition={{
             delay: 0.3,
             duration: 0.8,
-            ease: "easeInOut",
+            ease: 'easeInOut',
           }}
           className="relative flex flex-col gap-8 items-center justify-center px-8 text-center"
         >
           {/* Main greeting */}
           <div className="mb-4">
-            <motion.h1 
+            <motion.h1
               key={currentIndex}
               initial={{ opacity: 0, scale: 0.8, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
               className="text-6xl md:text-8xl font-display font-bold text-white mb-4"
             >
               {greetings[currentIndex].text}
             </motion.h1>
-            <motion.p 
+            <motion.p
               key={`lang-${currentIndex}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.8 }}
@@ -115,4 +115,4 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
       </AuroraBackground>
     </div>
   );
-} 
+}

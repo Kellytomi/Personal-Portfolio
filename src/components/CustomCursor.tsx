@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
@@ -10,31 +10,32 @@ const useTouchDetection = () => {
 
   useEffect(() => {
     const detectTouch = () => {
-      const hasTouchAPI = 'ontouchstart' in window || 
-                          navigator.maxTouchPoints > 0 || 
-                          (navigator as any).msMaxTouchPoints > 0;
-      
+      const hasTouchAPI =
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        (navigator as any).msMaxTouchPoints > 0;
+
       let hasMouseEvents = false;
-      
+
       const mouseDetect = () => {
         hasMouseEvents = true;
         cleanup();
       };
-      
+
       window.addEventListener('mousemove', mouseDetect, { once: true });
       window.addEventListener('mousedown', mouseDetect, { once: true });
-      
+
       const cleanup = () => {
         window.removeEventListener('mousemove', mouseDetect);
         window.removeEventListener('mousedown', mouseDetect);
       };
-      
+
       setTimeout(() => {
         cleanup();
         setIsTouchDevice(hasTouchAPI && !hasMouseEvents);
       }, 500);
     };
-    
+
     detectTouch();
   }, []);
 
@@ -42,13 +43,13 @@ const useTouchDetection = () => {
 };
 
 // Cursor character component
-const CursorCharacter = ({ 
-  cursorXSpring, 
-  cursorYSpring, 
-  isLoading, 
-  isClicking, 
-  isHovering
-}: { 
+const CursorCharacter = ({
+  cursorXSpring,
+  cursorYSpring,
+  isLoading,
+  isClicking,
+  isHovering,
+}: {
   cursorXSpring: any;
   cursorYSpring: any;
   isLoading: boolean;
@@ -57,10 +58,10 @@ const CursorCharacter = ({
 }) => {
   // Determine character expression based on state
   const getExpression = () => {
-    if (isLoading) return "😴"; // Sleeping
-    if (isClicking) return "😮"; // Surprised
-    if (isHovering) return "😊"; // Happy
-    return "😐"; // Neutral
+    if (isLoading) return '😴'; // Sleeping
+    if (isClicking) return '😮'; // Surprised
+    if (isHovering) return '😊'; // Happy
+    return '😐'; // Neutral
   };
 
   return (
@@ -79,9 +80,9 @@ const CursorCharacter = ({
             scale: isLoading ? 1.2 : isClicking ? 0.8 : isHovering ? 1.5 : 1,
             rotate: isClicking ? [0, -10, 10, -10, 0] : 0,
           }}
-          transition={{ 
+          transition={{
             duration: isLoading ? 0.3 : isClicking ? 0.2 : 0.2,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
         >
           <div className="relative">
@@ -89,9 +90,9 @@ const CursorCharacter = ({
             <div className="w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-lg">
               {getExpression()}
             </div>
-            
+
             {/* Character body */}
-            <motion.div 
+            <motion.div
               className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rounded-full"
               animate={{
                 y: isClicking ? 2 : 0,
@@ -131,16 +132,16 @@ const CursorCharacter = ({
               y: cursorYSpring,
             }}
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ 
+            animate={{
               opacity: [0.1, 0.3, 0.1],
               scale: [0.8, 1.2, 0.8],
-              rotate: [0, 360]
+              rotate: [0, 360],
             }}
             exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ 
+            transition={{
               duration: 1.5,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: 'easeInOut',
             }}
           >
             <div className="absolute w-12 h-12 rounded-full border-2 border-black/30 -ml-6 -mt-6" />
@@ -156,15 +157,15 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-  
+
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const isTouchDevice = useTouchDetection();
-  
-  const springConfig = { damping: 25, stiffness: 300 };
+
+  const springConfig = { damping: 15, stiffness: 700 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
@@ -174,19 +175,19 @@ export default function CustomCursor() {
 
   useEffect(() => {
     if (!mounted || isTouchDevice) return;
-    
+
     setIsLoading(true);
-    
+
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 600);
-    
+
     return () => clearTimeout(timer);
   }, [pathname, searchParams, mounted, isTouchDevice]);
 
   useEffect(() => {
     if (!mounted || isTouchDevice) return;
-    
+
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
@@ -194,12 +195,12 @@ export default function CustomCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      
+
       // Regular hovering detection
       if (
-        target.tagName.toLowerCase() === 'a' || 
+        target.tagName.toLowerCase() === 'a' ||
         target.tagName.toLowerCase() === 'button' ||
-        target.closest('a') || 
+        target.closest('a') ||
         target.closest('button') ||
         target.classList.contains('cursor-pointer') ||
         target.closest('.cursor-pointer')
@@ -209,7 +210,7 @@ export default function CustomCursor() {
         setIsHovering(false);
       }
     };
-    
+
     const handleMouseDown = () => setIsClicking(true);
     const handleMouseUp = () => setIsClicking(false);
 
@@ -225,7 +226,7 @@ export default function CustomCursor() {
       window.removeEventListener('mouseup', handleMouseUp);
     };
   }, [cursorX, cursorY, mounted, isTouchDevice]);
-  
+
   if (!mounted || isTouchDevice) {
     return null;
   }
@@ -239,4 +240,4 @@ export default function CustomCursor() {
       isHovering={isHovering}
     />
   );
-} 
+}

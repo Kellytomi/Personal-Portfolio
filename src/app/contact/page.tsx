@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Navigation from '@/components/Navigation';
 import { motion } from 'framer-motion';
@@ -13,7 +13,7 @@ export default function Contact(): JSX.Element {
     <PageTransition>
       <main className="min-h-screen bg-surface">
         <Navigation />
-        
+
         <section className="pt-32 pb-20">
           <div className="container max-w-6xl mx-auto">
             {/* Main Headline */}
@@ -29,23 +29,21 @@ export default function Contact(): JSX.Element {
                 </div>
               </div>
               <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight text-center mb-16 text-text">
-                If you would like 
-                to chat you can
-                reach me at:
+                If you would like to chat you can reach me at:
               </h1>
             </motion.div>
 
             {/* Contact Card */}
             <div className="flex flex-col items-center">
               {/* Email Button */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
                 className="mb-6"
               >
-                <a 
-                  href="mailto:kelvinetoma95@gmail.com" 
+                <a
+                  href="mailto:kelvinetoma95@gmail.com"
                   className="inline-block bg-primary/10 text-primary px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:bg-primary hover:text-white"
                 >
                   kelvinetoma95@gmail.com
@@ -59,10 +57,10 @@ export default function Contact(): JSX.Element {
                 className="text-muted mb-16"
               >
                 or message via
-                <a 
-                  href="https://t.me/klvntmi" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href="https://t.me/klvntmi"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center w-8 h-8 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-full ml-2 transition-all duration-300"
                 >
                   {FaTelegramPlane({ size: 16 })}
@@ -78,18 +76,18 @@ export default function Contact(): JSX.Element {
               >
                 <div className="bg-primary text-white p-8 md:p-12 rounded-xl">
                   <p className="text-xl md:text-2xl mb-10">
-                    Let's collaborate! Whether it's a new project, a partnership, or
-                    just a question, I'd love to hear from you. Reach out, and let's
-                    create something amazing together!
+                    Let's collaborate! Whether it's a new project, a partnership, or just a
+                    question, I'd love to hear from you. Reach out, and let's create something
+                    amazing together!
                   </p>
 
                   <div className="flex items-center">
                     <div className="mr-4">
-                      <Image 
-                        src="/images/etoma.png" 
-                        alt="Kelvin Odi" 
-                        width={60} 
-                        height={60} 
+                      <Image
+                        src="/images/etoma.png"
+                        alt="Kelvin Odi"
+                        width={60}
+                        height={60}
                         className="rounded-full object-cover bg-white p-1"
                       />
                     </div>
@@ -108,9 +106,21 @@ export default function Contact(): JSX.Element {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="flex space-x-6 mt-16"
               >
-                <SocialLink href="https://x.com/kelvin_dart" icon={FaXTwitter({ size: 18 })} label="X (Twitter)" />
-                <SocialLink href="https://www.linkedin.com/in/etoma-etoto-odi-9ba176251/" icon={FaLinkedinIn({ size: 18 })} label="LinkedIn" />
-                <SocialLink href="https://github.com/Kellytomi" icon={FaGithub({ size: 18 })} label="GitHub" />
+                <SocialLink
+                  href="https://x.com/kelvin_dart"
+                  icon={FaXTwitter({ size: 18 })}
+                  label="X (Twitter)"
+                />
+                <SocialLink
+                  href="https://www.linkedin.com/in/etoma-etoto-odi-9ba176251/"
+                  icon={FaLinkedinIn({ size: 18 })}
+                  label="LinkedIn"
+                />
+                <SocialLink
+                  href="https://github.com/Kellytomi"
+                  icon={FaGithub({ size: 18 })}
+                  label="GitHub"
+                />
               </motion.div>
             </div>
           </div>
@@ -129,9 +139,9 @@ interface SocialLinkProps {
 
 const SocialLink = ({ href, icon, label }: SocialLinkProps) => {
   return (
-    <a 
-      href={href} 
-      target="_blank" 
+    <a
+      href={href}
+      target="_blank"
       rel="noopener noreferrer"
       className="p-3 bg-transparent hover:bg-primary hover:text-white border border-gray-300 hover:border-primary rounded-full transition-all duration-300"
       aria-label={label}
@@ -139,4 +149,4 @@ const SocialLink = ({ href, icon, label }: SocialLinkProps) => {
       {icon}
     </a>
   );
-}; 
+};

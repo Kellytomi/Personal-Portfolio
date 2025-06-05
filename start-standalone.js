@@ -24,16 +24,16 @@ if (!fs.existsSync(SERVER_JS)) {
 if (!fs.existsSync(STANDALONE_PUBLIC_DIR)) {
   console.log('Creating public directory in standalone output...');
   fs.mkdirSync(STANDALONE_PUBLIC_DIR, { recursive: true });
-  
+
   // Copy public files if they exist
   if (fs.existsSync(PUBLIC_DIR)) {
     console.log('Copying public files to standalone output...');
     const publicFiles = fs.readdirSync(PUBLIC_DIR);
-    
-    publicFiles.forEach(file => {
+
+    publicFiles.forEach((file) => {
       const sourcePath = path.join(PUBLIC_DIR, file);
       const destPath = path.join(STANDALONE_PUBLIC_DIR, file);
-      
+
       if (fs.lstatSync(sourcePath).isDirectory()) {
         // Copy directory recursively
         execSync(`cp -R "${sourcePath}" "${destPath}"`, { stdio: 'inherit' });
@@ -49,7 +49,7 @@ if (!fs.existsSync(STANDALONE_PUBLIC_DIR)) {
 if (!fs.existsSync(STANDALONE_STATIC_DIR)) {
   console.log('Creating .next/static directory in standalone output...');
   fs.mkdirSync(STANDALONE_STATIC_DIR, { recursive: true });
-  
+
   // Copy static files
   if (fs.existsSync(STATIC_DIR)) {
     console.log('Copying static files to standalone output...');
@@ -59,4 +59,4 @@ if (!fs.existsSync(STANDALONE_STATIC_DIR)) {
 
 // Start the standalone server
 console.log('Starting standalone server...');
-require(SERVER_JS); 
+require(SERVER_JS);

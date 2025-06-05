@@ -1,0 +1,10 @@
+node_modules
+.next
+coverage
+dist
+build
+*.log
+.git
+.DS_Store
+public/
+temp_favicon/ 

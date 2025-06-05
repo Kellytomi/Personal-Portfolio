@@ -6,24 +6,24 @@ const https = require('https');
 const logos = [
   {
     name: 'nextjs.svg',
-    url: 'https://cdn.worldvectorlogo.com/logos/nextjs-2.svg'
+    url: 'https://cdn.worldvectorlogo.com/logos/nextjs-2.svg',
   },
   {
     name: 'react.svg',
-    url: 'https://cdn.worldvectorlogo.com/logos/react-2.svg'
+    url: 'https://cdn.worldvectorlogo.com/logos/react-2.svg',
   },
   {
     name: 'typescript.svg',
-    url: 'https://cdn.worldvectorlogo.com/logos/typescript.svg'
+    url: 'https://cdn.worldvectorlogo.com/logos/typescript.svg',
   },
   {
     name: 'nodejs.svg',
-    url: 'https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg'
+    url: 'https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg',
   },
   {
     name: 'flutter.svg',
-    url: 'https://cdn.worldvectorlogo.com/logos/flutter.svg'
-  }
+    url: 'https://cdn.worldvectorlogo.com/logos/flutter.svg',
+  },
 ];
 
 // Create the output directory if it doesn't exist
@@ -36,22 +36,24 @@ if (!fs.existsSync(outputDir)) {
 function downloadFile(url, outputPath) {
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(outputPath);
-    
-    https.get(url, response => {
-      if (response.statusCode !== 200) {
-        reject(new Error(`Failed to download ${url}: ${response.statusCode}`));
-        return;
-      }
-      
-      response.pipe(file);
-      
-      file.on('finish', () => {
-        file.close(() => resolve());
+
+    https
+      .get(url, (response) => {
+        if (response.statusCode !== 200) {
+          reject(new Error(`Failed to download ${url}: ${response.statusCode}`));
+          return;
+        }
+
+        response.pipe(file);
+
+        file.on('finish', () => {
+          file.close(() => resolve());
+        });
+      })
+      .on('error', (err) => {
+        fs.unlink(outputPath, () => {}); // Delete the file if there was an error
+        reject(err);
       });
-    }).on('error', err => {
-      fs.unlink(outputPath, () => {}); // Delete the file if there was an error
-      reject(err);
-    });
   });
 }
 
@@ -59,7 +61,7 @@ function downloadFile(url, outputPath) {
 async function downloadLogos() {
   for (const logo of logos) {
     const outputPath = path.join(outputDir, logo.name);
-    
+
     console.log(`Downloading ${logo.name}...`);
     try {
       await downloadFile(logo.url, outputPath);
@@ -72,4 +74,4 @@ async function downloadLogos() {
 
 downloadLogos().then(() => {
   console.log('All downloads completed!');
-}); 
+});

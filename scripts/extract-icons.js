@@ -4,11 +4,11 @@ const simpleIcons = require('simple-icons');
 
 // Icons we want to extract
 const iconsToExtract = [
-  'nextdotjs',   // Next.js
-  'react',       // React
-  'typescript',  // TypeScript
-  'nodedotjs',   // Node.js
-  'flutter',     // Flutter
+  'nextdotjs', // Next.js
+  'react', // React
+  'typescript', // TypeScript
+  'nodedotjs', // Node.js
+  'flutter', // Flutter
 ];
 
 // Ensure the directory exists
@@ -18,9 +18,9 @@ if (!fs.existsSync(outputDir)) {
 }
 
 // Extract each icon
-iconsToExtract.forEach(iconSlug => {
+iconsToExtract.forEach((iconSlug) => {
   const icon = simpleIcons[`si${iconSlug.charAt(0).toUpperCase() + iconSlug.slice(1)}`];
-  
+
   if (!icon) {
     console.error(`Icon ${iconSlug} not found`);
     return;
@@ -46,4 +46,4 @@ iconsToExtract.forEach(iconSlug => {
   console.log(`Created ${filename} with color #${icon.hex}`);
 });
 
-console.log('All icons extracted successfully!'); 
+console.log('All icons extracted successfully!');

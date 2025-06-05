@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect, useRef, Fragment } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
@@ -26,7 +26,7 @@ export default function CommandPalette() {
   const dialogRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const pathname = usePathname();
-  
+
   // Define command items
   const generateItems = (): CommandItem[] => {
     return [
@@ -35,42 +35,42 @@ export default function CommandPalette() {
         name: 'Home',
         action: () => router.push('/'),
         section: 'Navigation',
-        href: '/'
+        href: '/',
       },
       {
         id: 'about',
         name: 'About',
         action: () => router.push('/about'),
         section: 'Navigation',
-        href: '/about'
+        href: '/about',
       },
       {
         id: 'projects',
         name: 'Projects',
         action: () => router.push('/projects'),
         section: 'Navigation',
-        href: '/projects'
+        href: '/projects',
       },
       {
         id: 'skills',
         name: 'Skills',
         action: () => router.push('/skills'),
         section: 'Navigation',
-        href: '/skills'
+        href: '/skills',
       },
       {
         id: 'contact',
         name: 'Contact',
         action: () => router.push('/contact'),
         section: 'Navigation',
-        href: '/contact'
+        href: '/contact',
       },
       {
         id: 'testimonials',
         name: 'Testimonials',
         action: () => router.push('/testimonials'),
         section: 'Navigation',
-        href: '/testimonials'
+        href: '/testimonials',
       },
       {
         id: 'theme',
@@ -95,57 +95,66 @@ export default function CommandPalette() {
       },
     ];
   };
-  
+
   const items = generateItems();
-  
+
   // Check if we should render the command palette
   useEffect(() => {
     // Don't render when:
     // 1. We're on the admin or coming-soon page, OR
     // 2. The coming soon mode is enabled in siteConfig
-    if (pathname?.startsWith('/admin') || pathname === '/coming-soon' || siteConfig.comingSoonMode) {
+    if (
+      pathname?.startsWith('/admin') ||
+      pathname === '/coming-soon' ||
+      siteConfig.comingSoonMode
+    ) {
       setShouldRender(false);
     } else {
       setShouldRender(true);
     }
   }, [pathname]);
-  
+
   // Don't render the component at all on excluded pages
   if (!shouldRender) {
     return null;
   }
 
   // Filter items based on query
-  const filteredItems = query === ''
-    ? items
-    : items.filter((item) =>
-        item.name.toLowerCase().includes(query.toLowerCase()) ||
-        item.section?.toLowerCase().includes(query.toLowerCase())
-      );
+  const filteredItems =
+    query === ''
+      ? items
+      : items.filter(
+          (item) =>
+            item.name.toLowerCase().includes(query.toLowerCase()) ||
+            item.section?.toLowerCase().includes(query.toLowerCase())
+        );
 
   // Group items by section
-  const sections = filteredItems.reduce((acc, item) => {
-    const section = item.section || 'Other';
-    if (!acc[section]) {
-      acc[section] = [];
-    }
-    acc[section].push(item);
-    return acc;
-  }, {} as Record<string, CommandItem[]>);
-  
+  const sections = filteredItems.reduce(
+    (acc, item) => {
+      const section = item.section || 'Other';
+      if (!acc[section]) {
+        acc[section] = [];
+      }
+      acc[section].push(item);
+      return acc;
+    },
+    {} as Record<string, CommandItem[]>
+  );
+
   // Update the active item ID based on the current pathname
   useEffect(() => {
     // Find the item that matches the current path
-    const matchingItem = items.find(item => {
+    const matchingItem = items.find((item) => {
       if (!item.href) return false;
       if (item.href === '/' && pathname === '/') return true;
       if (item.href !== '/' && pathname?.startsWith(item.href)) return true;
       return false;
     });
-    
+
     setActiveItemId(matchingItem?.id || null);
   }, [pathname, items]);
-  
+
   // Detect OS on mount
   useEffect(() => {
     const userAgent = window.navigator.userAgent;
@@ -161,8 +170,10 @@ export default function CommandPalette() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Toggle command palette with proper OS shortcut
-      if ((isMac && e.metaKey && e.key.toLowerCase() === 'k') ||
-          (!isMac && e.altKey && e.key.toLowerCase() === 'k')) {
+      if (
+        (isMac && e.metaKey && e.key.toLowerCase() === 'k') ||
+        (!isMac && e.altKey && e.key.toLowerCase() === 'k')
+      ) {
         e.preventDefault();
         setIsOpen((prev) => !prev);
       }
@@ -171,11 +182,11 @@ export default function CommandPalette() {
       if (e.key === 'Escape') {
         setIsOpen(false);
       }
-      
+
       // Handle keyboard navigation when palette is open
       if (isOpen) {
         const allItems = Object.values(sections).flat();
-        
+
         if (e.key === 'ArrowDown') {
           e.preventDefault();
           setSelectedIndex((prev) => (prev < allItems.length - 1 ? prev + 1 : 0));
@@ -201,18 +212,18 @@ export default function CommandPalette() {
     if (isOpen) {
       // Focus immediately
       inputRef.current?.focus();
-      
+
       // Also set a small timeout to ensure focus in some edge cases
       const timeoutId = setTimeout(() => {
         inputRef.current?.focus();
       }, 50);
-      
+
       // Debug logging
       console.log('Command palette opened');
       console.log('Items count:', items.length);
       console.log('Filtered items count:', filteredItems.length);
       console.log('Sections count:', Object.keys(sections).length);
-      
+
       return () => clearTimeout(timeoutId);
     }
   }, [isOpen, items.length, filteredItems.length, sections]);
@@ -220,16 +231,14 @@ export default function CommandPalette() {
   return (
     <>
       {/* Floating indicator with improved visibility on any background */}
-      <div 
+      <div
         className="fixed bottom-4 right-4 bg-secondary/90 backdrop-blur-sm p-2 rounded-lg shadow-lg border border-white/20 text-white text-xs hidden sm:flex items-center gap-2 hover:bg-secondary transition-colors cursor-pointer z-50"
         onClick={() => setIsOpen(true)}
       >
         <kbd className="bg-black/20 rounded px-1.5 py-0.5 font-sans text-white/90">
           {isMac ? '⌘' : 'Alt'}
         </kbd>
-        <kbd className="bg-black/20 rounded px-1.5 py-0.5 font-sans text-white/90">
-          K
-        </kbd>
+        <kbd className="bg-black/20 rounded px-1.5 py-0.5 font-sans text-white/90">K</kbd>
         <span className="ml-1">Command Palette</span>
       </div>
 
@@ -267,7 +276,7 @@ export default function CommandPalette() {
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
                     />
-                    
+
                     <div className="absolute top-4 right-4 flex items-center gap-2">
                       <kbd className="px-2 py-1 text-xs rounded bg-black/20 text-white/70">↑↓</kbd>
                       <span className="text-white/50 text-xs">to navigate</span>
@@ -277,7 +286,7 @@ export default function CommandPalette() {
                       <span className="text-white/50 text-xs">to close</span>
                     </div>
                   </div>
-                  
+
                   <div className="max-h-[60vh] overflow-auto p-2">
                     {Object.keys(sections).length > 0 ? (
                       Object.entries(sections).map(([sectionName, sectionItems], sectionIdx) => (
@@ -289,15 +298,19 @@ export default function CommandPalette() {
                             {sectionItems.map((item, itemIdx) => {
                               // Calculate the overall index of this item
                               const allItems = Object.values(sections).flat();
-                              const globalIdx = allItems.findIndex(i => i.id === item.id);
+                              const globalIdx = allItems.findIndex((i) => i.id === item.id);
                               const isSelected = globalIdx === selectedIndex;
                               const isActive = item.id === activeItemId;
-                              
+
                               return (
                                 <div
                                   key={item.id}
                                   className={`px-4 py-2 cursor-pointer rounded-lg flex items-center justify-between ${
-                                    isActive ? 'bg-primary/20' : (isSelected ? 'bg-white/5' : 'hover:bg-white/5')
+                                    isActive
+                                      ? 'bg-primary/20'
+                                      : isSelected
+                                        ? 'bg-white/5'
+                                        : 'hover:bg-white/5'
                                   }`}
                                   onClick={() => {
                                     item.action();
@@ -305,20 +318,50 @@ export default function CommandPalette() {
                                   }}
                                 >
                                   <div className="flex items-center gap-3">
-                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                                      isActive ? 'bg-primary text-white' : 'bg-white/10 text-white/70'
-                                    }`}>
+                                    <div
+                                      className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                                        isActive
+                                          ? 'bg-primary text-white'
+                                          : 'bg-white/10 text-white/70'
+                                      }`}
+                                    >
                                       {sectionName === 'Navigation' ? (
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                        <svg
+                                          width="14"
+                                          height="14"
+                                          viewBox="0 0 24 24"
+                                          fill="none"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                          <path
+                                            d="M9 18L15 12L9 6"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                          />
                                         </svg>
                                       ) : (
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path d="M13 10V3L4 14H11V21L20 10H13Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                        <svg
+                                          width="14"
+                                          height="14"
+                                          viewBox="0 0 24 24"
+                                          fill="none"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                          <path
+                                            d="M13 10V3L4 14H11V21L20 10H13Z"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                          />
                                         </svg>
                                       )}
                                     </div>
-                                    <span className={`${isActive ? 'text-white font-medium' : 'text-white/80'}`}>
+                                    <span
+                                      className={`${isActive ? 'text-white font-medium' : 'text-white/80'}`}
+                                    >
                                       {item.name}
                                     </span>
                                   </div>
@@ -334,11 +377,9 @@ export default function CommandPalette() {
                         </div>
                       ))
                     ) : (
-                      <div className="py-8 text-center text-white/50">
-                        No commands available
-                      </div>
+                      <div className="py-8 text-center text-white/50">No commands available</div>
                     )}
-                    
+
                     {filteredItems.length === 0 && query !== '' && (
                       <div className="py-8 text-center text-white/50">
                         No results found for "{query}"
@@ -353,4 +394,4 @@ export default function CommandPalette() {
       </AnimatePresence>
     </>
   );
-} 
+}

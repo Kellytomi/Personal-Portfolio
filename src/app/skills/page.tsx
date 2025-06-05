@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Navigation from '@/components/Navigation';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -28,7 +28,7 @@ export default function Skills(): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ['start start', 'end start'],
   });
 
   // Define skill categories
@@ -36,7 +36,8 @@ export default function Skills(): JSX.Element {
     {
       category: 'Automation & Integration',
       description: 'Connecting and automating business systems for maximum efficiency',
-      moreInfo: 'I specialize in creating seamless workflows between different platforms, eliminating manual processes and reducing operational overhead. My automation solutions have helped businesses save thousands of hours in manual tasks.',
+      moreInfo:
+        'I specialize in creating seamless workflows between different platforms, eliminating manual processes and reducing operational overhead. My automation solutions have helped businesses save thousands of hours in manual tasks.',
       icon: '⚡',
       iconBg: 'from-amber-400 to-orange-500',
       skills: [
@@ -50,7 +51,8 @@ export default function Skills(): JSX.Element {
     {
       category: 'Web Development',
       description: 'Building modern web applications with cutting-edge technologies',
-      moreInfo: 'My development approach focuses on creating scalable, maintainable web applications using the latest technologies. I prioritize performance, accessibility, and user experience in every project.',
+      moreInfo:
+        'My development approach focuses on creating scalable, maintainable web applications using the latest technologies. I prioritize performance, accessibility, and user experience in every project.',
       icon: '🌐',
       iconBg: 'from-blue-400 to-indigo-500',
       skills: [
@@ -64,7 +66,8 @@ export default function Skills(): JSX.Element {
     {
       category: 'Mobile Development',
       description: 'Creating native and cross-platform mobile applications',
-      moreInfo: 'I build high-performance mobile applications that provide exceptional user experiences. Using Flutter, I can deliver beautiful, natively compiled applications from a single codebase.',
+      moreInfo:
+        'I build high-performance mobile applications that provide exceptional user experiences. Using Flutter, I can deliver beautiful, natively compiled applications from a single codebase.',
       icon: '📱',
       iconBg: 'from-blue-400 to-indigo-500',
       skills: [
@@ -78,7 +81,8 @@ export default function Skills(): JSX.Element {
     {
       category: 'Document Solutions',
       description: 'Streamlining document workflows and automating paperwork processes',
-      moreInfo: 'I transform document-heavy processes into streamlined digital workflows. From contract generation to automated approvals, my document solutions reduce turnaround times and improve accuracy.',
+      moreInfo:
+        'I transform document-heavy processes into streamlined digital workflows. From contract generation to automated approvals, my document solutions reduce turnaround times and improve accuracy.',
       icon: '📄',
       iconBg: 'from-sky-400 to-cyan-500',
       skills: [
@@ -89,14 +93,12 @@ export default function Skills(): JSX.Element {
       ],
     },
   ];
-  
+
   // Helper function for generating category IDs
   const getCategoryId = (category: string): string => {
-    return category.toLowerCase()
-      .replace(/&/g, 'and')
-      .replace(/\s+/g, '-');
+    return category.toLowerCase().replace(/&/g, 'and').replace(/\s+/g, '-');
   };
-  
+
   // Setup initial state for activeCategory based on URL hash
   const [activeCategory, setActiveCategory] = useState<number>(() => {
     // This function runs only on initial render
@@ -104,7 +106,7 @@ export default function Skills(): JSX.Element {
       const hash = window.location.hash.substring(1);
       if (hash) {
         const index = skillCategories.findIndex(
-          category => getCategoryId(category.category) === hash
+          (category) => getCategoryId(category.category) === hash
         );
         if (index !== -1) {
           return index;
@@ -113,12 +115,12 @@ export default function Skills(): JSX.Element {
     }
     return 0; // Default to first category if no hash or no match
   });
-  
+
   // Handle URL hash changes and scroll to the correct section
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash.substring(1);
-      
+
       if (hash) {
         const element = document.getElementById(hash);
         if (element) {
@@ -127,10 +129,10 @@ export default function Skills(): JSX.Element {
             element.scrollIntoView({ behavior: 'smooth' });
           }, 300);
         }
-        
+
         // Set active category based on hash
         const index = skillCategories.findIndex(
-          category => getCategoryId(category.category) === hash
+          (category) => getCategoryId(category.category) === hash
         );
         if (index !== -1 && index !== activeCategory) {
           setActiveCategory(index);
@@ -143,11 +145,11 @@ export default function Skills(): JSX.Element {
     <PageTransition>
       <main className="min-h-screen bg-surface overflow-hidden" ref={containerRef}>
         <Navigation />
-        
+
         {/* Hero Section */}
         <section className="pt-32 pb-16 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface to-white/50" />
-          
+
           <div className="container relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -162,7 +164,8 @@ export default function Skills(): JSX.Element {
                 Skills & Expertise
               </h1>
               <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
-                Combining deep technical knowledge with strategic thinking to deliver exceptional digital solutions that drive business growth and innovation.
+                Combining deep technical knowledge with strategic thinking to deliver exceptional
+                digital solutions that drive business growth and innovation.
               </p>
             </motion.div>
 
@@ -173,8 +176,8 @@ export default function Skills(): JSX.Element {
                   key={index}
                   onClick={() => setActiveCategory(index)}
                   className={`px-6 py-3 rounded-full transition-all duration-300 font-medium ${
-                    activeCategory === index 
-                      ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg' 
+                    activeCategory === index
+                      ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg'
                       : 'bg-white text-gray-600 hover:bg-gray-50'
                   }`}
                   initial={{ opacity: 0, y: 20 }}
@@ -199,47 +202,62 @@ export default function Skills(): JSX.Element {
           <div className="container">
             <div className="grid lg:grid-cols-5 gap-8">
               {/* Category Info - Left Panel */}
-              <motion.div 
+              <motion.div
                 className="lg:col-span-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
                 key={`info-${activeCategory}`}
               >
-                <div className="sticky top-32" id={getCategoryId(skillCategories[activeCategory].category)}>
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${skillCategories[activeCategory].iconBg} flex items-center justify-center mb-6 text-3xl shadow-lg`}>
+                <div
+                  className="sticky top-32"
+                  id={getCategoryId(skillCategories[activeCategory].category)}
+                >
+                  <div
+                    className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${skillCategories[activeCategory].iconBg} flex items-center justify-center mb-6 text-3xl shadow-lg`}
+                  >
                     {skillCategories[activeCategory].icon}
                   </div>
-                  
+
                   <h2 className="text-3xl font-bold mb-4 text-primary">
                     {skillCategories[activeCategory].category}
                   </h2>
-                  
+
                   <p className="text-lg text-muted mb-6 leading-relaxed">
                     {skillCategories[activeCategory].description}
                   </p>
-                  
+
                   <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 mb-6">
                     <h3 className="text-lg font-semibold mb-3 text-primary">Expertise Highlight</h3>
                     <p className="text-gray-600 leading-relaxed">
                       {skillCategories[activeCategory].moreInfo}
                     </p>
                   </div>
-                  
-                  <Link 
-                    href="/projects" 
+
+                  <Link
+                    href="/projects"
                     className="inline-flex items-center text-primary font-medium"
                   >
                     <span>View Related Projects</span>
-                    <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    <svg
+                      className="w-5 h-5 ml-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
                     </svg>
                   </Link>
                 </div>
               </motion.div>
-              
+
               {/* Skills Detail - Right Panel */}
-              <motion.div 
+              <motion.div
                 className="lg:col-span-3"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -248,10 +266,10 @@ export default function Skills(): JSX.Element {
               >
                 <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
                   <h3 className="text-xl font-bold mb-8 text-gray-700">Skill Proficiency</h3>
-                  
+
                   <div className="space-y-10">
                     {skillCategories[activeCategory].skills.map((skill, index) => (
-                      <motion.div 
+                      <motion.div
                         key={index}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -261,8 +279,8 @@ export default function Skills(): JSX.Element {
                         <div className="flex justify-between items-center mb-3">
                           <div className="flex items-center">
                             <div className="w-10 h-10 mr-4 relative">
-                              <Image 
-                                src={skill.icon || '/skills/placeholder.svg'} 
+                              <Image
+                                src={skill.icon || '/skills/placeholder.svg'}
                                 alt={skill.name}
                                 width={40}
                                 height={40}
@@ -277,30 +295,32 @@ export default function Skills(): JSX.Element {
                             {skill.level}%
                           </div>
                         </div>
-                        
+
                         <div className="relative">
                           <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                             <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: `${skill.level}%` }}
-                              transition={{ duration: 1, delay: 0.3 + (index * 0.1) }}
+                              transition={{ duration: 1, delay: 0.3 + index * 0.1 }}
                               className="h-full rounded-full"
-                              style={{ 
+                              style={{
                                 backgroundColor: skill.color,
-                                boxShadow: `0 0 20px ${skill.color}40`
+                                boxShadow: `0 0 20px ${skill.color}40`,
                               }}
                             />
                           </div>
-                          
+
                           {/* Skill level markers */}
                           <div className="absolute -top-2 left-0 right-0 flex justify-between">
                             {[0, 25, 50, 75, 100].map((marker) => (
-                              <div 
-                                key={marker} 
+                              <div
+                                key={marker}
                                 className={`relative h-0 ${marker === 0 ? 'text-left' : marker === 100 ? 'text-right' : 'text-center'}`}
                                 style={{ left: `${marker}%` }}
                               >
-                                <div className={`absolute h-3 w-px bg-gray-200 ${marker === 0 ? '-left-px' : marker === 100 ? '-right-px' : ''}`}></div>
+                                <div
+                                  className={`absolute h-3 w-px bg-gray-200 ${marker === 0 ? '-left-px' : marker === 100 ? '-right-px' : ''}`}
+                                ></div>
                               </div>
                             ))}
                           </div>
@@ -309,10 +329,10 @@ export default function Skills(): JSX.Element {
                     ))}
                   </div>
                 </div>
-                
+
                 {/* Technical Process Cards */}
                 <div className="grid md:grid-cols-2 gap-6 mt-8">
-                  <motion.div 
+                  <motion.div
                     className="bg-white p-6 rounded-xl shadow-sm border border-gray-100"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -320,11 +340,13 @@ export default function Skills(): JSX.Element {
                   >
                     <h4 className="font-bold mb-3 text-primary">My Approach</h4>
                     <p className="text-gray-600 text-sm">
-                      I focus on understanding your business goals first, then leverage these skills to create solutions that are not just technically sound, but strategically aligned with your objectives.
+                      I focus on understanding your business goals first, then leverage these skills
+                      to create solutions that are not just technically sound, but strategically
+                      aligned with your objectives.
                     </p>
                   </motion.div>
-                  
-                  <motion.div 
+
+                  <motion.div
                     className="bg-white p-6 rounded-xl shadow-sm border border-gray-100"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -332,7 +354,9 @@ export default function Skills(): JSX.Element {
                   >
                     <h4 className="font-bold mb-3 text-primary">Continuous Learning</h4>
                     <p className="text-gray-600 text-sm">
-                      Technology evolves rapidly, and so do I. I'm constantly expanding my skills and keeping up with the latest innovations in {skillCategories[activeCategory].category.toLowerCase()}.
+                      Technology evolves rapidly, and so do I. I'm constantly expanding my skills
+                      and keeping up with the latest innovations in{' '}
+                      {skillCategories[activeCategory].category.toLowerCase()}.
                     </p>
                   </motion.div>
                 </div>
@@ -356,11 +380,11 @@ export default function Skills(): JSX.Element {
                   Let's Put These Skills to Work
                 </h2>
                 <p className="text-lg mb-8 max-w-2xl mx-auto">
-                  Looking for a technical partner who can bring your ideas to life?
-                  Let's discuss how my expertise can help solve your challenges and achieve your business goals.
+                  Looking for a technical partner who can bring your ideas to life? Let's discuss
+                  how my expertise can help solve your challenges and achieve your business goals.
                 </p>
-                <Link 
-                  href="/contact" 
+                <Link
+                  href="/contact"
                   className="btn bg-white text-primary hover:bg-gray-100 py-3 px-8 text-lg inline-block"
                 >
                   Discuss Your Project
@@ -373,4 +397,4 @@ export default function Skills(): JSX.Element {
       </main>
     </PageTransition>
   );
-} 
+}

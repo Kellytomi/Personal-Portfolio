@@ -1,7 +1,7 @@
-"use client";
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+'use client';
+import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
 
 export function PointerHighlight({
   children,
@@ -42,23 +42,17 @@ export function PointerHighlight({
   }, []);
 
   return (
-    <div
-      className={cn("relative inline-block", containerClassName)}
-      ref={containerRef}
-    >
+    <div className={cn('relative inline-block', containerClassName)} ref={containerRef}>
       {children}
       {dimensions.width > 0 && dimensions.height > 0 && (
         <motion.div
           className="pointer-events-none absolute inset-0 z-0"
           initial={{ opacity: 0, scale: 0.95, originX: 0, originY: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
         >
           <motion.div
-            className={cn(
-              "absolute border-2 border-[#2563eb] bg-[#2563eb]/20",
-              rectangleClassName,
-            )}
+            className={cn('absolute border-2 border-[#2563eb] bg-[#2563eb]/20', rectangleClassName)}
             initial={{
               width: 0,
               height: 0,
@@ -68,13 +62,13 @@ export function PointerHighlight({
               height: dimensions.height,
             }}
             style={{
-              left: "50%",
-              top: "calc(50% + 8px)",
-              transform: "translate(-50%, -50%)",
+              left: '50%',
+              top: 'calc(50% + 8px)',
+              transform: 'translate(-50%, -50%)',
             }}
             transition={{
               duration: 1,
-              ease: "easeInOut",
+              ease: 'easeInOut',
             }}
           />
           <motion.div
@@ -89,14 +83,12 @@ export function PointerHighlight({
               rotate: -90,
             }}
             transition={{
-              opacity: { duration: 0.1, ease: "easeInOut" },
+              opacity: { duration: 0.1, ease: 'easeInOut' },
               duration: 1,
-              ease: "easeInOut",
+              ease: 'easeInOut',
             }}
           >
-            <Pointer
-              className={cn("h-5 w-5 text-[#2563eb]", pointerClassName)}
-            />
+            <Pointer className={cn('h-5 w-5 text-[#2563eb]', pointerClassName)} />
           </motion.div>
         </motion.div>
       )}
@@ -121,4 +113,4 @@ const Pointer = ({ ...props }: React.SVGProps<SVGSVGElement>) => {
       <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"></path>
     </svg>
   );
-}; 
+};
