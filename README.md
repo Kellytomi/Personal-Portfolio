@@ -238,10 +238,10 @@ This project is licensed under the MIT License. See the repository for details.
 **Etoma-Etoto Kelvin Odi**
 - 📧 Email: [kelvinetoma95@gmail.com](mailto:kelvinetoma95@gmail.com)
 - 🌐 Website: [https://etoma.dev](https://etoma.dev)
-- 🏢 Agency: [Fxsion Digital Solutions](https://fxsion.com)
+- 🏢 Agency: [Fxsion Digital Solutions](https://fxsion.agency)
 
 ---
 
 **Repository**: [https://github.com/Kellytomi/Personal-Portfolio](https://github.com/Kellytomi/Personal-Portfolio)
 
-> Built with ❤️ by Kelvin | Powered by Next.js & Vercel
+> Built with ❤️ by Kelvin | Powered by Next.js & Railway
