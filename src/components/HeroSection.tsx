@@ -22,7 +22,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
 
   return (
     <section
-      className="min-h-[85vh] flex items-center pt-16 sm:pt-20 md:pt-16 lg:pt-0 relative"
+      className="min-h-[85vh] flex items-center pt-16 sm:pt-20 md:pt-16 lg:pt-12 relative"
       ref={containerRef}
     >
       {/* Direct grid background with inline styles */}
