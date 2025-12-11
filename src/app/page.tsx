@@ -37,6 +37,7 @@ export default function Home(): JSX.Element {
       setTimeout(() => {
         setIsLoading(false);
         document.body.classList.add('loaded');
+        document.body.classList.add('body-decor');
       }, 600);
     };
 
@@ -51,11 +52,13 @@ export default function Home(): JSX.Element {
     const timeout = setTimeout(() => {
       setIsLoading(false);
       document.body.classList.add('loaded');
+      document.body.classList.add('body-decor');
     }, 2000);
 
     return () => {
       window.removeEventListener('load', handleLoad);
       clearTimeout(timeout);
+      document.body.classList.remove('body-decor');
     };
   }, []);
 
