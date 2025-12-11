@@ -20,6 +20,8 @@
     "@headlessui/react": "^2.2.2",
     "@heroicons/react": "^2.0.18",
     "@tabler/icons-react": "^3.33.0",
+    "baseline-browser-mapping": "^2.9.6",
+    "caniuse-lite": "^1.0.30001760",
     "clsx": "^2.1.1",
     "framer-motion": "^10.16.4",
     "isomorphic-dompurify": "^2.24.0",
