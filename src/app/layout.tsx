@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Syne } from 'next/font/google';
 import './globals.css';
-import CustomCursor from '@/components/CustomCursor';
-import ClientOnly from '@/components/ClientOnly';
 import NavigationLoadingProvider from '@/components/NavigationLoadingProvider';
 import { CookiesProvider } from 'next-client-cookies/server';
 import LaunchWrapper from '@/components/LaunchWrapper';
@@ -181,9 +179,6 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
       </head>
       <body className={`bg-surface text-text loaded ${jakarta.className}`}>
         <CookiesProvider>
-          <ClientOnly>
-            <CustomCursor />
-          </ClientOnly>
           <NavigationLoadingProvider>
             <LaunchWrapper>
               {children}
