@@ -31,7 +31,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="min-h-[90vh] pt-16 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32 relative" ref={containerRef}>
+    <section className="min-h-[90vh] pt-16 sm:pt-40 md:pt-44 lg:pt-48 xl:pt-52 relative" ref={containerRef}>
       <PaperBackground variant="cream" className="absolute inset-0 pointer-events-none" hasTexture />
       <TextureOverlay opacity={0.45} className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-surface/80 via-surface/70 to-surface/40" />
@@ -125,7 +125,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 12 : 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-start gap-4 max-w-md mx-auto lg:mx-0"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-center lg:justify-start gap-4 max-w-md mx-auto lg:mx-0"
             >
               <a href="#about" className="cta-button bg-primary text-white shadow-card">
                 <span>See the story</span>
@@ -185,7 +185,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
           animate={{ y: reduceMotion ? 0 : [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <p className="text-sm mb-1">Scroll for the scrapbook</p>
+          <p className="text-sm mb-1">Scroll to explore</p>
           <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M12 5V19M12 19L5 12M12 19L19 12"
