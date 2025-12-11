@@ -2,7 +2,6 @@
 
 import Navigation from '@/components/Navigation';
 import { useEffect, useState } from 'react';
-import PageSpacer from '@/components/PageSpacer';
 import PageTransition from '@/components/PageTransition';
 import Footer from '@/components/Footer';
 import PageFadeIn from '@/components/PageFadeIn';
@@ -11,65 +10,49 @@ import dynamic from 'next/dynamic';
 
 // Lazy load heavy sections that appear below the fold
 const PersonalStorySection = dynamic(() => import('@/components/PersonalStorySection'), {
-  loading: () => <div className="animate-pulse bg-gray-200 h-32" />,
-  ssr: false,
-});
-
-const WhatIDoSection = dynamic(() => import('@/components/WhatIDoSection'), {
-  loading: () => <div className="animate-pulse bg-gray-200 h-32" />,
+  loading: () => <div className="animate-pulse bg-gray-100 h-96" />,
   ssr: false,
 });
 
 const ServicesSection = dynamic(() => import('@/components/ServicesSection'), {
-  loading: () => <div className="animate-pulse bg-gray-200 h-32" />,
-  ssr: false,
-});
-
-const HowIWorkSection = dynamic(() => import('@/components/HowIWorkSection'), {
-  loading: () => <div className="animate-pulse bg-gray-200 h-32" />,
+  loading: () => <div className="animate-pulse bg-gray-100 h-96" />,
   ssr: false,
 });
 
 const FeaturedProjectsSection = dynamic(() => import('@/components/FeaturedProjectsSection'), {
-  loading: () => <div className="animate-pulse bg-gray-200 h-32" />,
+  loading: () => <div className="animate-pulse bg-gray-100 h-96" />,
   ssr: false,
 });
 
-const CallToActionSection = dynamic(() => import('@/components/CallToActionSection'), {
-  loading: () => <div className="animate-pulse bg-gray-200 h-32" />,
+const ContactSection = dynamic(() => import('@/components/ContactSection'), {
+  loading: () => <div className="animate-pulse bg-primary/20 h-96" />,
   ssr: false,
 });
 
 export default function Home(): JSX.Element {
-  // Add loading state
   const [isLoading, setIsLoading] = useState(true);
-  
+
   useEffect(() => {
-    // Hide loading screen after everything is loaded
     const handleLoad = () => {
       setTimeout(() => {
         setIsLoading(false);
-        // Add loaded class to body to trigger background image
         document.body.classList.add('loaded');
-      }, 800); // Small delay to ensure smooth transition and show the animation
+      }, 600);
     };
-    
-    // If the window is already loaded, run immediately
+
     if (document.readyState === 'complete') {
       handleLoad();
     } else {
       window.addEventListener('load', handleLoad);
     }
-    
-    // Apply loaded class immediately as well to ensure grid is visible
+
     document.body.classList.add('loaded');
-    
-    // Initial timeout in case load event doesn't fire
+
     const timeout = setTimeout(() => {
       setIsLoading(false);
       document.body.classList.add('loaded');
-    }, 2500); // Increased timeout to allow animation to be seen
-    
+    }, 2000);
+
     return () => {
       window.removeEventListener('load', handleLoad);
       clearTimeout(timeout);
@@ -92,39 +75,36 @@ export default function Home(): JSX.Element {
                 <div className="loader-face"></div>
               </div>
             </div>
-            <div className="loading-text">CREATING EXPERIENCE</div>
+            <div className="loading-text">LOADING</div>
             <div className="progress-bar"></div>
           </div>
         )}
-        
+
         <main className={`min-h-screen bg-surface overflow-hidden ${isLoading ? 'loading' : ''}`}>
           <Navigation />
-          <PageSpacer />
-          
+
           {/* Hero Section */}
-          <HeroSection isLoading={isLoading} />
+          <section id="home">
+            <HeroSection isLoading={isLoading} />
+          </section>
 
-          {/* Personal Story Section - Lazy Loaded */}
-          <PersonalStorySection />
+          {/* About Section */}
+          <section id="about">
+            <PersonalStorySection />
+          </section>
 
-          {/* What I Do Section - Lazy Loaded */}
-          <WhatIDoSection />
+          {/* Skills Section */}
+          <section id="skills">
+            <ServicesSection />
+          </section>
 
-          {/* Services Section - Lazy Loaded */}
-          <ServicesSection />
-
-          {/* How I Work Section - Lazy Loaded */}
-          <HowIWorkSection />
-
-          {/* Featured Projects Section - Lazy Loaded */}
+          {/* Projects Section */}
           <FeaturedProjectsSection />
 
+          {/* Contact Section */}
+          <ContactSection />
 
-
-          {/* Call to Action Section - Lazy Loaded */}
-          <CallToActionSection />
-
-            <Footer />
+          <Footer />
         </main>
       </PageFadeIn>
     </PageTransition>

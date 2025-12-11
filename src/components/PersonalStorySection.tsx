@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
@@ -46,7 +45,7 @@ export default function PersonalStorySection(): JSX.Element {
             >
               <div className="relative h-64 md:h-80 rounded-xl overflow-hidden">
                 <Image
-                  src="/profile-casual-2.jpg"
+                  src="/about-me.jpg"
                   alt="Kelvin coding"
                   fill
                   className="object-cover rounded-xl"
@@ -106,9 +105,9 @@ export default function PersonalStorySection(): JSX.Element {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex justify-center mt-8"
           >
-            <Link href="/about" className="btn btn-primary">
-              More about me
-            </Link>
+            <a href="#contact" className="btn btn-primary">
+              Let's connect
+            </a>
           </motion.div>
         </div>
       </div>

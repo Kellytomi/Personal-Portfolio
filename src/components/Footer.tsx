@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
@@ -78,8 +77,8 @@ export default function Footer({ variant = 'black' }: FooterProps): JSX.Element 
           </div>
 
           <div className="flex items-center">
-            <Link
-              href="/contact"
+            <a
+              href="#contact"
               className={`flex items-center gap-1 ${isWhite ? 'text-black hover:text-gray-700' : 'text-white hover:text-gray-300'} transition-colors text-xs sm:text-sm md:text-base`}
             >
               Say hi
@@ -97,7 +96,7 @@ export default function Footer({ variant = 'black' }: FooterProps): JSX.Element 
                   strokeLinejoin="round"
                 />
               </svg>
-            </Link>
+            </a>
           </div>
         </div>
       </div>
