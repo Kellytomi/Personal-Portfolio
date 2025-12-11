@@ -170,34 +170,6 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
               >
                 <Image src="/doodles/sparkle.svg" alt="" width={120} height={120} className="opacity-80" priority />
               </motion.div>
-
-              <motion.div
-                className="absolute -left-6 bottom-2 sm:-left-10 sm:-bottom-4"
-                animate={
-                  reduceMotion
-                    ? { opacity: 1, y: 0 }
-                    : {
-                        opacity: 1,
-                        y: [0, -4, 0],
-                        rotate: [0, -1.5, 0.5, 0],
-                      }
-                }
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <PaperCard tone="cream" rotation={-3} withTape className="max-w-[280px] shadow-card">
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="text-lg sm:text-xl">🎮</span>
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-sm font-semibold text-primary">Fun fact</p>
-                      <p className="text-sm text-muted">
-                        When I’m not coding, you’d find me playing volleyball, binging Netflix, or experimenting with new recipes.
-                      </p>
-                    </div>
-                  </div>
-                </PaperCard>
-              </motion.div>
             </div>
           </motion.div>
         </div>

@@ -289,3 +289,4 @@ export default function ContactSection(): JSX.Element {
     </section>
   );
 }
+

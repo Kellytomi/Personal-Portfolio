@@ -3,10 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
-import { PaperCard } from '@/components/ui/PaperCard';
-import { Sticker } from '@/components/ui/Sticker';
-import { TextureOverlay } from '@/components/ui/TextureOverlay';
-import { CutoutLetters, WashiTape } from '@/components/scrapbook';
+import { Sticker, WashiTape, PaperBackground, CutoutLetters } from '@/components/scrapbook';
 
 interface Project {
   id: string;
@@ -15,12 +12,13 @@ interface Project {
   longDescription: string;
   tag: string;
   tagColor: string;
-  gradient: string;
   url?: string;
   technologies: string[];
   type: 'web' | 'mobile' | 'automation';
   status: 'live' | 'coming-soon';
   previewImage?: string;
+  stickerIcon: 'star' | 'heart' | 'sparkle' | 'lightning' | 'flower';
+  stickerColor: 'coral' | 'mustard' | 'sage' | 'lavender' | 'sky' | 'peach' | 'mint';
 }
 
 export default function FeaturedProjectsSection(): JSX.Element {
@@ -31,46 +29,46 @@ export default function FeaturedProjectsSection(): JSX.Element {
       id: 'yacht-zero',
       title: 'Yacht Zero',
       description: 'Luxury yacht brokerage platform',
-      longDescription:
-        'A premium yacht brokerage website built for discerning clients from Wall Street to Silicon Valley. Features advanced search filters, yacht comparison tools, and seamless integration with their global network.',
-      tag: 'Web Development',
-      tagColor: 'bg-blue-500/20 text-blue-600',
-      gradient: 'from-slate-900 via-blue-900 to-cyan-800',
+      longDescription: 'A premium yacht brokerage website built for discerning clients from Wall Street to Silicon Valley.',
+      tag: 'Web Dev',
+      tagColor: 'bg-scrapbook-sky text-gray-800',
       url: 'https://www.yachtzero.com/',
-      technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript'],
+      technologies: ['Next.js', 'React', 'Tailwind'],
       type: 'web',
       status: 'live',
       previewImage: 'https://www.yachtzero.com/og-image.jpg',
+      stickerIcon: 'star',
+      stickerColor: 'mustard',
     },
     {
       id: 'debut-hub',
       title: 'The Debut Hub',
       description: 'Music community & chart platform',
-      longDescription:
-        'A global music community platform for artists and fans. Features trending charts, breaking news, artist features, and tools to help musicians elevate their sound and reach their audience.',
-      tag: 'Web Development',
-      tagColor: 'bg-purple-500/20 text-purple-600',
-      gradient: 'from-purple-900 via-pink-800 to-orange-700',
+      longDescription: 'A global music community platform for artists and fans. Features trending charts and artist tools.',
+      tag: 'Web Dev',
+      tagColor: 'bg-scrapbook-lavender text-white',
       url: 'https://thedebuthub.com/',
-      technologies: ['Next.js', 'React', 'API Integration', 'Responsive Design'],
+      technologies: ['Next.js', 'React', 'API'],
       type: 'web',
       status: 'live',
       previewImage: 'https://thedebuthub.com/og-image.png',
+      stickerIcon: 'heart',
+      stickerColor: 'coral',
     },
     {
       id: 'docsyde',
       title: 'Docsyde',
       description: 'Document automation platform',
-      longDescription:
-        'An AI-powered document management platform that transforms workflows. Features smart templates, real-time collaboration, enterprise security, and intelligent document analysis.',
-      tag: 'Web Application',
-      tagColor: 'bg-emerald-500/20 text-emerald-600',
-      gradient: 'from-emerald-900 via-teal-800 to-cyan-700',
+      longDescription: 'An AI-powered document management platform that transforms workflows with smart templates.',
+      tag: 'Web App',
+      tagColor: 'bg-scrapbook-sage text-white',
       url: 'https://staging.usedocsyde.com/',
-      technologies: ['React', 'Node.js', 'AI/ML', 'Document Processing'],
+      technologies: ['React', 'Node.js', 'AI/ML'],
       type: 'web',
       status: 'live',
       previewImage: 'https://staging.usedocsyde.com/og-image.png',
+      stickerIcon: 'sparkle',
+      stickerColor: 'sage',
     },
   ];
 
@@ -79,153 +77,133 @@ export default function FeaturedProjectsSection(): JSX.Element {
       id: 'subtrackr',
       title: 'Subtrackr',
       description: 'Subscription management app',
-      longDescription:
-        'A mobile app that helps you track and manage all your subscriptions in one place. Get reminders before renewals, analyze your spending patterns, and never pay for forgotten subscriptions again.',
+      longDescription: 'A mobile app that helps you track and manage all your subscriptions in one place.',
       tag: 'Mobile App',
-      tagColor: 'bg-violet-500/20 text-violet-600',
-      gradient: 'from-violet-600 via-purple-600 to-indigo-700',
-      technologies: ['Flutter', 'Firebase', 'Mobile Development'],
+      tagColor: 'bg-scrapbook-lavender text-white',
+      technologies: ['Flutter', 'Firebase'],
       type: 'mobile',
       status: 'coming-soon',
+      stickerIcon: 'lightning',
+      stickerColor: 'lavender',
     },
   ];
 
-  // Render a project card
   const renderProjectCard = (project: Project, index: number) => (
     <motion.div
       key={project.id}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30, rotate: index % 2 === 0 ? -2 : 2 }}
+      whileInView={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -2 : 2 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       onMouseEnter={() => setHoveredProject(project.id)}
       onMouseLeave={() => setHoveredProject(null)}
-      className="group relative"
+      className="relative group"
     >
-      <PaperCard
-        withTape
-        rotation={index % 2 === 0 ? -1.5 : 1.2}
-        tone={project.type === 'mobile' ? 'teal' : 'cream'}
-        className={`min-h-[450px] md:min-h-[500px] transition-all duration-500 ${
-          hoveredProject === project.id ? 'scale-[1.01]' : ''
+      <div className="absolute -top-4 -right-4 z-20">
+        <Sticker variant={project.stickerIcon} size="md" color={project.stickerColor} rotation={15} />
+      </div>
+
+      <div
+        className={`relative bg-white p-4 rounded-lg shadow-polaroid transition-all duration-300 transform ${
+          hoveredProject === project.id ? 'shadow-polaroid-hover scale-[1.02] rotate-0' : ''
         }`}
       >
-        <div className="flex flex-col h-full gap-4">
-          <div className="flex items-center justify-between">
-            <Sticker
-              variant="badge"
-              tone={project.type === 'mobile' ? 'teal' : 'yellow'}
-              className="shadow-none"
-            >
-              {project.tag}
-            </Sticker>
-            <div className="hidden md:block">
-              <WashiTape color="mint" pattern="dots" width="sm" rotation={index % 2 === 0 ? -10 : 12} />
-            </div>
-            {project.status === 'coming-soon' && (
-              <Sticker tone="cream" variant="label" className="gap-2">
-                <span className="w-2 h-2 bg-secondary rounded-full animate-ping" />
-                Coming soon
-              </Sticker>
-            )}
-            {project.status === 'live' && project.url && (
-              <Sticker tone="coral" variant="label">
-                Live
-              </Sticker>
-            )}
-          </div>
+        <div className="absolute -top-3 left-1/4">
+          <WashiTape color={index % 2 === 0 ? 'yellow' : 'pink'} width="md" rotation={index % 2 === 0 ? -5 : 5} />
+        </div>
 
-          <div className="flex flex-col gap-2">
-            <h3 className="text-2xl md:text-3xl font-bold text-primary">{project.title}</h3>
-            <p className="text-muted text-base md:text-lg">{project.description}</p>
-          </div>
-
-          {/* Preview image */}
-          {project.previewImage && project.url && (
-            <div className="relative w-full min-h-[200px] rounded-2xl overflow-hidden border border-primary/10 bg-white shadow-card">
-              <Image
-                src={project.previewImage}
-                alt={`${project.title} preview`}
-                fill
-                className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
-              />
-              <span className="absolute -top-3 left-4 w-16 h-6 bg-[url(/textures/washi-teal.svg)] bg-cover rotate-[-8deg] opacity-90" />
+        <div className="relative aspect-video bg-scrapbook-cream rounded overflow-hidden mb-4 mt-2">
+          {project.previewImage ? (
+            <Image
+              src={project.previewImage}
+              alt={`${project.title} preview`}
+              fill
+              className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <span className="text-4xl">{project.type === 'mobile' ? '📱' : '🖥️'}</span>
             </div>
           )}
 
-          {/* Mobile placeholder */}
-          {project.type === 'mobile' && !project.previewImage && (
-            <div className="relative z-10 flex-1 mb-2 flex items-center justify-center">
-              <div className="relative w-32 h-56 bg-white rounded-3xl border-4 border-primary/10 shadow-card flex items-center justify-center">
-                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-primary/15 rounded-full" />
-                <div className="text-center px-4">
-                  <svg className="w-12 h-12 mx-auto mb-2 text-primary/60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 18H12.01M7 21H17C18.1046 21 19 20.1046 19 19V5C19 3.89543 18.1046 3 17 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <span className="text-xs text-muted font-medium">App preview in progress</span>
-                </div>
-              </div>
-            </div>
-          )}
-
-          <AnimatePresence>
-            {hoveredProject === project.id && !project.previewImage && (
-              <motion.p
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="text-muted text-sm leading-relaxed"
-              >
-                {project.longDescription}
-              </motion.p>
-            )}
-          </AnimatePresence>
-
-          <div className="flex flex-wrap gap-2">
-            {project.technologies.map((tech, i) => (
-              <Sticker key={i} variant="label" tone="cream" className="normal-case tracking-normal">
-                {tech}
-              </Sticker>
-            ))}
-          </div>
-
-          <div className="mt-auto flex items-center justify-between">
-            {project.url ? (
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-white rounded-xl font-semibold shadow-soft hover:-translate-y-0.5 transition-all duration-300"
-              >
-                <span>View live</span>
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
+          <div className="absolute top-2 right-2">
+            {project.status === 'coming-soon' ? (
+              <span className="px-2 py-1 bg-scrapbook-mustard text-white text-xs font-handwriting rounded-full">Coming Soon ⏰</span>
             ) : (
-              <div className="inline-flex items-center gap-2 px-5 py-3 bg-secondary/80 text-primary rounded-xl font-semibold">
-                <span>Launching soon</span>
-              </div>
+              <span className="px-2 py-1 bg-scrapbook-sage text-white text-xs font-handwriting rounded-full">Live ✓</span>
             )}
-
-            <span className="text-sm text-muted">{project.type === 'mobile' ? 'Mobile' : 'Web'}</span>
           </div>
         </div>
-      </PaperCard>
+
+        <span className={`inline-block px-3 py-1 rounded-full text-xs font-handwriting ${project.tagColor} mb-2`}>{project.tag}</span>
+
+        <h3 className="font-handwriting text-2xl font-bold text-gray-800 mb-1">{project.title}</h3>
+        <p className="font-sketch text-gray-600 text-sm mb-3">{project.description}</p>
+
+        <AnimatePresence>
+          {hoveredProject === project.id && (
+            <motion.p
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="font-sketch text-gray-500 text-xs mb-3"
+            >
+              {project.longDescription}
+            </motion.p>
+          )}
+        </AnimatePresence>
+
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.technologies.map((tech, i) => (
+            <span
+              key={i}
+              className="px-2 py-1 bg-scrapbook-cream border border-dashed border-scrapbook-kraft rounded text-xs font-sketch text-gray-700"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {project.url ? (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-scrapbook-coral text-white rounded-lg font-handwriting text-lg hover:bg-scrapbook-coral/90 transition-all duration-300 transform hover:-translate-y-0.5"
+          >
+            View Site →
+          </a>
+        ) : (
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-scrapbook-kraft/30 text-gray-600 rounded-lg font-handwriting text-lg cursor-default">
+            Coming Soon ⏳
+          </span>
+        )}
+      </div>
     </motion.div>
   );
 
   return (
-    <section id="projects" className="py-24 md:py-32 bg-surface relative overflow-hidden">
-      <TextureOverlay opacity={0.5} className="absolute inset-0">
-        <div className="absolute top-10 left-6 w-36 h-10 bg-[url(/textures/washi-yellow.svg)] bg-cover rotate-[-12deg] opacity-90" />
-        <div className="absolute bottom-16 right-8 w-40 h-10 bg-[url(/textures/washi-teal.svg)] bg-cover rotate-[10deg] opacity-90" />
-      </TextureOverlay>
+    <PaperBackground variant="grid" className="py-24 md:py-32 relative overflow-hidden" id="projects">
+      <div className="absolute top-20 left-10 z-20 hidden md:block">
+        <Sticker variant="star" size="xl" color="mustard" rotation={-12} />
+      </div>
+      <div className="absolute bottom-32 right-16 z-20 hidden lg:block">
+        <Sticker variant="flower" size="lg" color="sage" rotation={20} />
+      </div>
+      <div className="absolute top-1/2 right-8 z-20 hidden lg:block">
+        <Sticker variant="heart" size="md" color="coral" />
+      </div>
+      <div className="absolute top-12 right-1/4 z-10 hidden lg:block">
+        <WashiTape color="mint" pattern="stripe" width="lg" rotation={15} />
+      </div>
+      <div className="absolute bottom-20 left-1/3 z-10 hidden lg:block">
+        <WashiTape color="lavender" pattern="dots" width="md" rotation={-10} />
+      </div>
 
       <div className="container relative">
         <motion.div
@@ -235,19 +213,17 @@ export default function FeaturedProjectsSection(): JSX.Element {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <Sticker tone="yellow" variant="badge">
-            Featured Work
-          </Sticker>
-          <h2 className="section-title mb-2 text-primary mt-4">Projects I've Shipped</h2>
-          <div className="flex justify-center mb-4">
-            <CutoutLetters text="launches + collabs" size="md" colorScheme="warm" />
+          <div className="inline-block px-4 py-2 bg-scrapbook-cream border-2 border-dashed border-scrapbook-kraft rounded-lg font-handwriting text-lg mb-4 shadow-sm transform -rotate-1">
+            ✨ Featured Work
           </div>
-          <p className="section-subtitle max-w-2xl mx-auto text-muted">
-            Real projects, real clients, real impact—packaged like a memory board of the things I loved building.
+          <h2 className="mb-4">
+            <CutoutLetters text="Projects I've Shipped" size="lg" colorScheme="vibrant" />
+          </h2>
+          <p className="font-sketch text-lg text-gray-600 max-w-2xl mx-auto">
+            Real projects, real clients, real impact. Here's a scrapbook of work I'm proud of! 📸
           </p>
         </motion.div>
 
-        {/* Web Projects Section */}
         <div className="mb-16">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -256,17 +232,14 @@ export default function FeaturedProjectsSection(): JSX.Element {
             transition={{ duration: 0.5 }}
             className="flex items-center gap-3 mb-8"
           >
-            <Sticker tone="teal" variant="label">
-              Web Projects
-            </Sticker>
-            <h3 className="text-2xl font-bold text-primary">Polished & live</h3>
+            <span className="text-2xl">🌐</span>
+            <h3 className="font-handwriting text-3xl font-bold text-gray-800">Web Projects</h3>
           </motion.div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {webProjects.map((project, index) => renderProjectCard(project, index))}
           </div>
         </div>
 
-        {/* Mobile Projects Section */}
         <div className="mb-16">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -275,47 +248,30 @@ export default function FeaturedProjectsSection(): JSX.Element {
             transition={{ duration: 0.5 }}
             className="flex items-center gap-3 mb-8"
           >
-            <Sticker tone="coral" variant="label">
-              Mobile Projects
-            </Sticker>
-            <h3 className="text-2xl font-bold text-primary">Handheld builds</h3>
+            <span className="text-2xl">📱</span>
+            <h3 className="font-handwriting text-3xl font-bold text-gray-800">Mobile Projects</h3>
           </motion.div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {mobileProjects.map((project, index) => renderProjectCard(project, index))}
           </div>
         </div>
 
-        {/* Want to work together CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-16 text-center"
+          className="text-center"
         >
-          <p className="text-muted mb-4">Have a project in mind?</p>
+          <p className="font-handwriting text-xl text-gray-600 mb-4">Have a project in mind? 🤔</p>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all duration-300"
+            className="inline-flex items-center gap-2 font-handwriting text-xl text-scrapbook-coral hover:text-scrapbook-coral/80 transition-colors"
           >
-            <span>Let's build something amazing together</span>
-            <svg
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M5 12H19M19 12L12 5M19 12L12 19"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            Let's build something amazing together →
           </a>
         </motion.div>
       </div>
-    </section>
+    </PaperBackground>
   );
 }

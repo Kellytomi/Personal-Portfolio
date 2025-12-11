@@ -1,9 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { PaperCard } from '@/components/ui/PaperCard';
-import { Sticker } from '@/components/ui/Sticker';
-import { TextureOverlay } from '@/components/ui/TextureOverlay';
+import { Sticker, WashiTape, PaperBackground, CutoutLetters } from '@/components/scrapbook';
 
 export default function ServicesSection(): JSX.Element {
   const services = [
@@ -12,17 +10,17 @@ export default function ServicesSection(): JSX.Element {
       description:
         'I create engaging websites and web apps that are not only beautiful but also fun to use. From landing pages to complex platforms.',
       icon: '🌐',
-      tone: 'yellow',
-      rotation: -1.2,
-      technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+      bgColor: 'bg-blue-100',
+      borderColor: 'border-blue-300',
+      technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind'],
     },
     {
       title: 'Mobile Apps',
       description:
         'I build mobile apps that people actually want to use. Smooth, intuitive experiences that feel natural on iOS and Android.',
       icon: '📱',
-      tone: 'teal',
-      rotation: 1.4,
+      bgColor: 'bg-orange-100',
+      borderColor: 'border-orange-300',
       technologies: ['Flutter', 'React Native', 'Firebase'],
     },
     {
@@ -30,18 +28,27 @@ export default function ServicesSection(): JSX.Element {
       description:
         "I love making computers do boring stuff so humans don't have to. Connecting systems and automating workflows.",
       icon: '⚡',
-      tone: 'coral',
-      rotation: -0.6,
+      bgColor: 'bg-purple-100',
+      borderColor: 'border-purple-300',
       technologies: ['Zapier', 'Make.com', 'Node.js', 'APIs'],
     },
   ];
 
+  const stickerVariants: Array<'star' | 'sparkle' | 'lightning'> = ['star', 'sparkle', 'lightning'];
+  const stickerColors: Array<'mustard' | 'lavender' | 'coral'> = ['mustard', 'lavender', 'coral'];
+
   return (
-    <section className="py-24 md:py-32 bg-surface relative overflow-hidden">
-      <TextureOverlay opacity={0.55} className="absolute inset-0">
-        <div className="absolute top-8 left-4 w-36 h-10 bg-[url(/textures/washi-yellow.svg)] bg-cover rotate-[-10deg] opacity-85" />
-        <div className="absolute bottom-10 right-6 w-40 h-10 bg-[url(/textures/washi-teal.svg)] bg-cover rotate-[9deg] opacity-85" />
-      </TextureOverlay>
+    <PaperBackground variant="kraft" className="py-24 md:py-32 relative overflow-hidden">
+      <div className="absolute top-16 right-16 z-20 hidden md:block">
+        <Sticker variant="star" size="lg" color="mustard" rotation={-10} />
+      </div>
+      <div className="absolute bottom-24 left-12 z-20 hidden lg:block">
+        <Sticker variant="heart" size="md" color="coral" rotation={15} />
+      </div>
+      <div className="absolute top-1/3 left-8 z-10 hidden lg:block">
+        <WashiTape color="pink" pattern="stripe" width="lg" rotation={-80} />
+      </div>
+
       <div className="container relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -50,49 +57,69 @@ export default function ServicesSection(): JSX.Element {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <Sticker tone="yellow" variant="badge">
-            What I Do
-          </Sticker>
-          <h2 className="section-title mb-4 text-primary mt-4">Skills & Services</h2>
-          <p className="section-subtitle max-w-2xl mx-auto text-muted">
-            A mix of product thinking, delightful UI, and dependable engineering—assembled like a curated board of what I love to build.
+          <div className="inline-block px-4 py-2 bg-scrapbook-cream border-2 border-dashed border-scrapbook-kraft-dark rounded-lg font-handwriting text-lg mb-4 shadow-sm transform rotate-1">
+            💼 What I Do
+          </div>
+          <h2 className="mb-4">
+            <CutoutLetters text="Skills & Services" size="lg" colorScheme="cool" />
+          </h2>
+          <p className="font-sketch text-lg text-gray-700 max-w-2xl mx-auto">
+            Here's what I bring to the table when working on projects ✨
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20, rotate: index % 2 === 0 ? -2 : 2 }}
+              whileInView={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -2 : 2 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="h-full"
+              className="relative group"
             >
-              <PaperCard withTape rotation={service.rotation} tone={service.tone === 'teal' ? 'teal' : 'cream'} className="h-full">
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-2xl">
-                    {service.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-primary">{service.title}</h3>
-                    <p className="text-sm text-muted mt-1">Signature offer</p>
-                  </div>
+              <div className="absolute -top-3 -right-3 z-10">
+                <Sticker variant={stickerVariants[index]} size="sm" color={stickerColors[index]} rotation={10 + index * 5} />
+              </div>
+
+              <div
+                className={`
+                  relative ${service.bgColor} p-6 rounded-lg shadow-md
+                  border-2 border-dashed ${service.borderColor}
+                  transition-all duration-300 h-full
+                  hover:shadow-lg hover:-translate-y-1 hover:rotate-0
+                `}
+                style={{ boxShadow: '4px 4px 12px rgba(0,0,0,0.1)' }}
+              >
+                <div className="absolute -top-3 left-1/4">
+                  <WashiTape
+                    color={index === 0 ? 'blue' : index === 1 ? 'coral' : 'lavender'}
+                    width="sm"
+                    rotation={index % 2 === 0 ? -5 : 5}
+                  />
                 </div>
-                <p className="text-muted mb-5">{service.description}</p>
+
+                <div className="text-5xl mb-4 pt-2">{service.icon}</div>
+
+                <h3 className="font-handwriting text-2xl font-bold text-gray-800 mb-3">{service.title}</h3>
+
+                <p className="font-sketch text-gray-700 mb-5">{service.description}</p>
 
                 <div className="flex flex-wrap gap-2">
                   {service.technologies.map((tech, i) => (
-                    <Sticker key={i} variant="label" tone="cream" className="normal-case tracking-normal">
+                    <span
+                      key={i}
+                      className="px-2 py-1 bg-white/60 border border-gray-300 rounded text-xs font-sketch text-gray-600"
+                    >
                       {tech}
-                    </Sticker>
+                    </span>
                   ))}
                 </div>
-              </PaperCard>
+              </div>
             </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </PaperBackground>
   );
-} 
+}

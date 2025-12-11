@@ -52,3 +52,4 @@ export function Sticker({
     </motion.span>
   );
 }
+
