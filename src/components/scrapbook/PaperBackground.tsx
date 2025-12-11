@@ -1,8 +1,8 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, HTMLAttributes } from 'react';
 
-interface PaperBackgroundProps {
+interface PaperBackgroundProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   variant?: 'cream' | 'kraft' | 'notebook' | 'aged' | 'grid';
   className?: string;
@@ -22,9 +22,10 @@ export default function PaperBackground({
   variant = 'cream',
   className = '',
   hasTexture = true,
+  ...rest
 }: PaperBackgroundProps): JSX.Element {
   return (
-    <div className={`relative ${variantStyles[variant]} ${className}`}>
+    <div className={`relative ${variantStyles[variant]} ${className}`} {...rest}>
       {hasTexture && (
         <div
           className="absolute inset-0 opacity-30 pointer-events-none"

@@ -98,9 +98,15 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
               transition={{ duration: 0.7, delay: 0.12 }}
               className="leading-tight"
             >
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-primary">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl font-display font-bold text-primary leading-[1.1]">
                 I craft digital experiences that feel like{' '}
-                <CutoutLetters text="keepsakes" colorScheme="warm" size="lg" className="align-middle" /> people{' '}
+                <CutoutLetters
+                  text="keepsakes"
+                  colorScheme="warm"
+                  size="md"
+                  className="align-middle scale-95 sm:scale-100"
+                />{' '}
+                people{' '}
                 <FlipWords words={['love', 'use daily', 'talk about', 'remember']} className="text-primary" />
               </h1>
             </motion.div>

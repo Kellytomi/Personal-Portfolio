@@ -56,26 +56,26 @@ export default function Footer({ variant = 'black' }: FooterProps): JSX.Element 
         </div>
 
         <div className="flex justify-between items-center">
-          <button
-            onClick={scrollToTop}
+            <button
+              onClick={scrollToTop}
             className="flex items-center gap-1 font-sketch text-gray-600 hover:text-scrapbook-coral transition-colors text-sm md:text-base group"
-            aria-label="Back to top"
-          >
+              aria-label="Back to top"
+            >
             <span className="transform group-hover:-translate-y-1 transition-transform">↑</span>
-            <span>Back to top</span>
-          </button>
+              <span>Back to top</span>
+            </button>
 
           <div className="font-handwriting text-center text-gray-600 text-sm md:text-lg mx-2">
             {currentYear} © Kelvin's Digital Playground 🎨
           </div>
 
-          <a
-            href="#contact"
+            <a
+              href="#contact"
             className="flex items-center gap-1 font-sketch text-gray-600 hover:text-scrapbook-coral transition-colors text-sm md:text-base group"
           >
             <span>Say hi</span>
             <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-          </a>
+            </a>
         </div>
       </div>
     </motion.footer>

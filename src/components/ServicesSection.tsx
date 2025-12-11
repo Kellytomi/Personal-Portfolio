@@ -97,23 +97,23 @@ export default function ServicesSection(): JSX.Element {
                     width="sm"
                     rotation={index % 2 === 0 ? -5 : 5}
                   />
-                </div>
+              </div>
 
                 <div className="text-5xl mb-4 pt-2">{service.icon}</div>
 
                 <h3 className="font-handwriting text-2xl font-bold text-gray-800 mb-3">{service.title}</h3>
 
                 <p className="font-sketch text-gray-700 mb-5">{service.description}</p>
-
-                <div className="flex flex-wrap gap-2">
-                  {service.technologies.map((tech, i) => (
-                    <span
-                      key={i}
+              
+              <div className="flex flex-wrap gap-2">
+                {service.technologies.map((tech, i) => (
+                  <span
+                    key={i}
                       className="px-2 py-1 bg-white/60 border border-gray-300 rounded text-xs font-sketch text-gray-600"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  >
+                    {tech}
+                  </span>
+                ))}
                 </div>
               </div>
             </motion.div>
@@ -122,4 +122,4 @@ export default function ServicesSection(): JSX.Element {
       </div>
     </PaperBackground>
   );
-}
+} 

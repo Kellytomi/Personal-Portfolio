@@ -27,7 +27,7 @@ export default function ContactSection(): JSX.Element {
     const body = encodeURIComponent(
       `Name: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`
     );
-    window.location.href = `mailto:hello@etoma.dev?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:kelvinetoma95@gmail.com?subject=${subject}&body=${body}`;
 
     setIsSubmitting(false);
     setSubmitted(true);
@@ -216,10 +216,10 @@ export default function ContactSection(): JSX.Element {
                     <div>
                       <h4 className="text-primary font-semibold">Email</h4>
                       <a
-                        href="mailto:hello@etoma.dev"
+                        href="mailto:kelvinetoma95@gmail.com"
                         className="text-muted hover:text-primary transition-colors"
                       >
-                        hello@etoma.dev
+                        kelvinetoma95@gmail.com
                       </a>
                     </div>
                   </div>
