@@ -53,6 +53,10 @@ export default function Navigation(): JSX.Element {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Track whether we're at the top of the page (navbar should be transparent)
+  // Using scroll position is more reliable than IntersectionObserver when the hero has top margin
+  const isAtTop = scrollY < 50;
+
   // Smooth scroll to section
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -75,10 +79,9 @@ export default function Navigation(): JSX.Element {
   };
 
   // Navbar styling based on scroll
-  const isScrolled = scrollY > 20;
-  const navbarBgClass = isScrolled
-    ? 'backdrop-blur-md bg-white/90 border-b border-gray-200/50 shadow-sm'
-    : 'backdrop-blur-sm bg-transparent';
+  const navbarBgClass = isAtTop
+    ? 'bg-transparent border-b-0 shadow-none [backdrop-filter:none]'
+    : 'backdrop-blur-md bg-white/90 border-b border-gray-200/50 shadow-sm';
 
   return (
     <nav className={`fixed w-full z-[100] transition-all duration-300 ${navbarBgClass}`}>

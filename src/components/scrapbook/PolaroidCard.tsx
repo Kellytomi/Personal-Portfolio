@@ -9,6 +9,7 @@ interface PolaroidCardProps {
   imageAlt?: string;
   caption?: string | ReactNode;
   rotation?: 'left' | 'right' | 'random' | 'none';
+  aspect?: 'square' | 'portrait' | 'landscape';
   className?: string;
   children?: ReactNode;
   onClick?: () => void;
@@ -19,6 +20,7 @@ export default function PolaroidCard({
   imageAlt = 'Polaroid photo',
   caption,
   rotation = 'random',
+  aspect = 'square',
   className = '',
   children,
   onClick,
@@ -29,6 +31,9 @@ export default function PolaroidCard({
     if (rotation === 'right') return 4;
     return Math.random() * 10 - 5;
   }, [rotation]);
+
+  const aspectClass =
+    aspect === 'portrait' ? 'aspect-[3/4]' : aspect === 'landscape' ? 'aspect-video' : 'aspect-square';
 
   return (
     <motion.div
@@ -50,7 +55,7 @@ export default function PolaroidCard({
       `}
       style={{ transform: `rotate(${rotationDeg}deg)` }}
     >
-      <div className="relative aspect-square bg-gray-100 overflow-hidden">
+      <div className={`relative ${aspectClass} bg-gray-100 overflow-hidden`}>
         {imageSrc ? (
           <Image src={imageSrc} alt={imageAlt} fill className="object-cover" />
         ) : children ? (

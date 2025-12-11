@@ -36,7 +36,7 @@ export default function FeaturedProjectsSection(): JSX.Element {
       technologies: ['Next.js', 'React', 'Tailwind'],
       type: 'web',
       status: 'live',
-      previewImage: 'https://www.yachtzero.com/og-image.jpg',
+      previewImage: '/projects/yacht-zero.png',
       stickerIcon: 'star',
       stickerColor: 'mustard',
     },
@@ -51,7 +51,7 @@ export default function FeaturedProjectsSection(): JSX.Element {
       technologies: ['Next.js', 'React', 'API'],
       type: 'web',
       status: 'live',
-      previewImage: 'https://thedebuthub.com/og-image.png',
+      previewImage: '/projects/debut-hub.png',
       stickerIcon: 'heart',
       stickerColor: 'coral',
     },
@@ -66,7 +66,7 @@ export default function FeaturedProjectsSection(): JSX.Element {
       technologies: ['React', 'Node.js', 'AI/ML'],
       type: 'web',
       status: 'live',
-      previewImage: 'https://staging.usedocsyde.com/og-image.png',
+      previewImage: '/projects/docsyde.png',
       stickerIcon: 'sparkle',
       stickerColor: 'sage',
     },
@@ -214,10 +214,17 @@ export default function FeaturedProjectsSection(): JSX.Element {
           className="text-center mb-16"
         >
           <div className="inline-block px-4 py-2 bg-scrapbook-cream border-2 border-dashed border-scrapbook-kraft rounded-lg font-handwriting text-lg mb-4 shadow-sm transform -rotate-1">
-            ✨ Featured Work
+            ✨ Projects I've Shipped
           </div>
-          <h2 className="mb-4">
-            <CutoutLetters text="Projects I've Shipped" size="lg" colorScheme="vibrant" />
+          <h2 className="mb-4 flex flex-col items-center">
+            <span className="hidden sm:inline-block">
+              <CutoutLetters text="Projects I've Shipped" size="lg" colorScheme="vibrant" />
+            </span>
+            <span className="sm:hidden flex flex-col items-center gap-1 leading-tight">
+              <CutoutLetters text="Projects" size="lg" colorScheme="vibrant" />
+              <CutoutLetters text="I've" size="md" colorScheme="vibrant" />
+              <CutoutLetters text="Shipped" size="lg" colorScheme="vibrant" />
+            </span>
           </h2>
           <p className="font-sketch text-lg text-gray-600 max-w-2xl mx-auto">
             Real projects, real clients, real impact. Here's a scrapbook of work I'm proud of! 📸
