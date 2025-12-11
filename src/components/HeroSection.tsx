@@ -1,7 +1,6 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useRef } from 'react';
 import { FlipWords } from '@/components/ui/flip-words';
@@ -22,7 +21,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
 
   return (
     <section
-      className="min-h-[85vh] flex items-center pt-16 sm:pt-20 md:pt-16 lg:pt-0 relative"
+      className="min-h-[85vh] flex items-center pt-16 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32 relative"
       ref={containerRef}
     >
       {/* Direct grid background with inline styles */}
@@ -82,12 +81,12 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
               </div>
 
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center lg:justify-start gap-4 sm:mb-0 mb-10 max-w-md mx-auto lg:mx-0">
-                <Link href="/about" className="cta-button">
+                <a href="#about" className="cta-button">
                   <span>Get to know me</span>
-                </Link>
-                <Link href="/projects" className="btn btn-secondary text-center">
+                </a>
+                <a href="#projects" className="btn btn-secondary text-center">
                   See my work
-                </Link>
+                </a>
               </div>
             </motion.div>
           </div>
