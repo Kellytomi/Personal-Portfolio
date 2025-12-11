@@ -6,7 +6,6 @@ import { useRef } from 'react';
 import { FlipWords } from '@/components/ui/flip-words';
 import AnimatedTooltipDemo from '@/components/AnimatedTooltipDemo';
 import { Sticker as UiSticker } from '@/components/ui/Sticker';
-import { PaperCard } from '@/components/ui/PaperCard';
 import { TextureOverlay } from '@/components/ui/TextureOverlay';
 import {
   CutoutLetters,
@@ -15,6 +14,7 @@ import {
   Sticker as ScrapbookSticker,
   WashiTape,
 } from '@/components/scrapbook';
+import { useDevicePerformance } from '@/hooks/useDevicePerformance';
 
 interface HeroSectionProps {
   isLoading: boolean;
@@ -22,13 +22,20 @@ interface HeroSectionProps {
 
 export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { isLowPower } = useDevicePerformance();
+  const reduceMotion = useReducedMotion();
+  
+  // Only use scroll-based animations on high-power devices
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const reduceMotion = useReducedMotion();
+  // Disable parallax on low-power devices (Android, mobile)
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', isLowPower ? '0%' : '50%']);
+  
+  // Skip infinite animations on low-power devices
+  const skipAnimations = reduceMotion || isLowPower;
 
   return (
     <section className="min-h-[90vh] pt-16 sm:pt-40 md:pt-44 lg:pt-48 xl:pt-52 relative" ref={containerRef}>
@@ -162,27 +169,30 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
                 <p className="text-center font-handwriting text-xl text-muted mt-3 pb-2">Builder, storyteller, collaborator</p>
               </ScrapbookFrame>
 
-              <motion.div
-                className="absolute -left-10 -top-12"
-                animate={
-                  reduceMotion
-                    ? undefined
-                    : {
-                        rotate: [0, -2, 2, 0],
-                        y: [0, -4, 0],
-                      }
-                }
-                transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-              >
-                <Image src="/doodles/sparkle.svg" alt="" width={120} height={120} className="opacity-80" priority />
-              </motion.div>
+              {/* Only show animated sparkle on high-power devices */}
+              {!skipAnimations ? (
+                <motion.div
+                  className="absolute -left-10 -top-12"
+                  animate={{
+                    rotate: [0, -2, 2, 0],
+                    y: [0, -4, 0],
+                  }}
+                  transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+                >
+                  <Image src="/doodles/sparkle.svg" alt="" width={120} height={120} className="opacity-80" priority />
+                </motion.div>
+              ) : (
+                <div className="absolute -left-10 -top-12">
+                  <Image src="/doodles/sparkle.svg" alt="" width={120} height={120} className="opacity-80" priority />
+                </div>
+              )}
             </div>
           </motion.div>
         </div>
 
         <motion.div
           className="flex flex-col items-center text-center text-gray-600 mt-12 md:mt-16"
-          animate={{ y: reduceMotion ? 0 : [0, 8, 0] }}
+          animate={{ y: skipAnimations ? 0 : [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         >
           <p className="text-sm mb-1">Scroll to explore</p>

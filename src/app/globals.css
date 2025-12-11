@@ -54,15 +54,17 @@ h6 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--color-surface);
+  background-color: var(--color-offwhite);
+  /* Keep loader backdrop solid to avoid gradient flash on load */
+  background-image: none;
   z-index: 9999;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   transition:
-    opacity 0.7s ease,
-    visibility 0.7s ease;
+    opacity 0.5s ease,
+    visibility 0.5s ease;
 }
 
 .loading-screen.loaded {
@@ -72,78 +74,83 @@ h6 {
 
 .loader {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   margin-bottom: 24px;
-  perspective: 800px;
 }
 
+/* Simple 2D spinner that works on all devices including Android */
 .loader-cube {
-  position: absolute;
   width: 100%;
   height: 100%;
-  transform-style: preserve-3d;
-  animation: rotate 3s infinite ease-in-out;
+  position: relative;
+  animation: loader-spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 }
 
 .loader-face {
   position: absolute;
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-  opacity: 0.8;
-  border-radius: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  animation: loader-dot 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 }
 
 .loader-face:nth-child(1) {
-  transform: translateZ(40px);
-  opacity: 0.9;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: -0.45s;
 }
 
 .loader-face:nth-child(2) {
-  transform: rotateY(180deg) translateZ(40px);
-  opacity: 0.7;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  animation-delay: -0.3s;
+  background: var(--color-accent);
 }
 
 .loader-face:nth-child(3) {
-  transform: rotateY(90deg) translateZ(40px);
-  background: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
-  opacity: 0.8;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: -0.15s;
+  background: var(--color-secondary);
 }
 
 .loader-face:nth-child(4) {
-  transform: rotateY(-90deg) translateZ(40px);
-  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
-  opacity: 0.8;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  animation-delay: 0s;
+  background: var(--color-teal);
 }
 
-.loader-face:nth-child(5) {
-  transform: rotateX(90deg) translateZ(40px);
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-  opacity: 0.9;
-}
-
+/* Hide extra faces from the old cube */
+.loader-face:nth-child(5),
 .loader-face:nth-child(6) {
-  transform: rotateX(-90deg) translateZ(40px);
-  background: linear-gradient(135deg, var(--color-accent), var(--color-primary));
-  opacity: 0.7;
+  display: none;
 }
 
-@keyframes rotate {
+@keyframes loader-spin {
   0% {
-    transform: rotateX(0deg) rotateY(0deg);
-  }
-  25% {
-    transform: rotateX(90deg) rotateY(90deg);
-  }
-  50% {
-    transform: rotateX(180deg) rotateY(180deg);
-  }
-  75% {
-    transform: rotateX(270deg) rotateY(270deg);
+    transform: rotate(0deg);
   }
   100% {
-    transform: rotateX(360deg) rotateY(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.6);
+    opacity: 0.5;
   }
 }
 
@@ -264,15 +271,23 @@ h6 {
       Arial,
       sans-serif !important;
     background-color: var(--color-offwhite);
-    /* Keep the soft radial glow but drop the heavy paper texture for better mobile performance */
-    background-image:
-      radial-gradient(circle at 10% 20%, rgba(240, 210, 90, 0.18), transparent 25%),
-      radial-gradient(circle at 80% 10%, rgba(74, 163, 162, 0.12), transparent 24%),
-      radial-gradient(circle at 20% 80%, rgba(240, 122, 99, 0.12), transparent 26%);
-    background-size: 520px 520px, 520px 520px, 620px 620px;
-    background-position: 10% 12%, 80% 8%, 20% 80%;
+    /* Simple solid background on mobile, gradients on desktop */
     background-attachment: scroll;
     transition: opacity 0.5s ease-in-out;
+    /* Optimize scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Only show decorative gradients on larger screens, and only after app has mounted */
+  @media (min-width: 768px) {
+    body.body-decor {
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(240, 210, 90, 0.18), transparent 25%),
+        radial-gradient(circle at 80% 10%, rgba(74, 163, 162, 0.12), transparent 24%),
+        radial-gradient(circle at 20% 80%, rgba(240, 122, 99, 0.12), transparent 26%);
+      background-size: 520px 520px, 520px 520px, 620px 620px;
+      background-position: 10% 12%, 80% 8%, 20% 80%;
+    }
   }
 
   /* JavaScript will add this class once loaded */
@@ -423,7 +438,7 @@ h6 {
   }
 
   @media (max-width: 1024px) {
-    body {
+    body.body-decor {
       /* Lighter backdrop sizing and no fixed attachment to avoid repaint jank on mobile */
       background-size: 360px 360px, 380px 380px, 440px 440px;
       background-position: 14% 16%, 78% 10%, 24% 82%;
@@ -437,7 +452,7 @@ h6 {
   }
 
   @media (min-width: 1025px) {
-    body {
+    body.body-decor {
       background-attachment: fixed;
     }
 

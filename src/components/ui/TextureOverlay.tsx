@@ -12,16 +12,14 @@ export function TextureOverlay({
   children,
   className,
   opacity = 0.6,
-  variant = 'paper',
 }: TextureOverlayProps): JSX.Element {
-  const textureUrl = variant === 'paper' ? '/textures/paper.svg' : '/textures/paper.svg';
-
   return (
     <div className={cn('relative', className)}>
+      {/* Texture disabled on mobile for better performance */}
       <div
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 hidden md:block"
         style={{
-          backgroundImage: `url(${textureUrl})`,
+          backgroundImage: `url(/textures/paper.svg)`,
           opacity,
           mixBlendMode: 'multiply',
         }}
