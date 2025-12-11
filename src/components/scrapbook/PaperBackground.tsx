@@ -3,7 +3,7 @@
 import { ReactNode, HTMLAttributes } from 'react';
 
 interface PaperBackgroundProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
+  children?: ReactNode;
   variant?: 'cream' | 'kraft' | 'notebook' | 'aged' | 'grid';
   className?: string;
   hasTexture?: boolean;
