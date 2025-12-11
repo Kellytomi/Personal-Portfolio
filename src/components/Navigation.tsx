@@ -6,18 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { FloatingDock } from '@/components/ui/floating-dock';
 import { Button as MovingBorderButton } from '@/components/ui/moving-border';
-import {
-  IconBrandGithub,
-  IconBrandLinkedin,
-  IconHome,
-  IconUser,
-  IconFolder,
-  IconMail,
-  IconTools,
-  IconTrophy,
-} from '@tabler/icons-react';
 
 interface NavItem {
   name: string;
@@ -25,173 +14,163 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Skills', href: '/skills' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Testimonials', href: '/testimonials' },
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Contact', href: '#contact' },
 ];
 
 export default function Navigation(): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isOverDarkSection, setIsOverDarkSection] = useState<boolean>(false);
   const [scrollY, setScrollY] = useState<number>(0);
+  const [activeSection, setActiveSection] = useState<string>('#home');
   const pathname = usePathname();
 
   // Track scroll position
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
+
+      // Determine active section based on scroll position
+      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(`#${section}`);
+            break;
+          }
+        }
+      }
     };
 
-    // Set initial scroll position
     setScrollY(window.scrollY);
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Set up intersection observer to detect dark sections
-  useEffect(() => {
-    // Define sections that should trigger a color change in the navbar
-    const darkSections = document.querySelectorAll(
-      '.dark-section, .bg-primary, .bg-secondary, .bg-gradient-to-r'
-    );
-
-    if (darkSections.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Check if any dark section is intersecting with the viewport
-        const isIntersecting = entries.some((entry) => entry.isIntersecting);
-        setIsOverDarkSection(isIntersecting);
-      },
-      {
-        threshold: 0.15, // When at least 15% of the section is visible
-        rootMargin: '-80px 0px 0px 0px', // Adjust based on navbar height
+  // Smooth scroll to section
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    
+    // Close mobile menu first
+    setIsOpen(false);
+    
+    // Small delay to allow menu to close and sections to be available
+    setTimeout(() => {
+      const element = document.getElementById(targetId);
+      if (element) {
+        const offsetTop = element.offsetTop - 80; // Account for fixed navbar
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth',
+        });
       }
-    );
+    }, 100);
+  };
 
-    // Observe all dark sections
-    darkSections.forEach((section) => {
-      observer.observe(section);
-    });
-
-    return () => {
-      darkSections.forEach((section) => {
-        observer.unobserve(section);
-      });
-    };
-  }, [pathname]); // Re-run when path changes to observe sections on new pages
-
-  // Determine navbar classes based on current state and scroll position
-  // At the top of any page (scrollY near 0), always use transparent styling
-  // Otherwise, check if over dark section
-  const navbarBgClass =
-    scrollY < 10
-      ? 'backdrop-blur-sm bg-white/10'
-      : isOverDarkSection
-        ? 'backdrop-blur-sm bg-white/80 border-b border-gray-200/20 shadow-sm'
-        : 'backdrop-blur-sm bg-white/10';
-
-  const textColorClass =
-    scrollY < 10 ? 'text-muted' : isOverDarkSection ? 'text-primary' : 'text-muted';
-
-  // Floating dock navigation items
-  const floatingDockItems = [
-    {
-      title: 'Home',
-      icon: <IconHome className="h-full w-full transition-colors" />,
-      href: '/',
-    },
-    {
-      title: 'About',
-      icon: <IconUser className="h-full w-full transition-colors" />,
-      href: '/about',
-    },
-    {
-      title: 'Skills',
-      icon: <IconTools className="h-full w-full transition-colors" />,
-      href: '/skills',
-    },
-    {
-      title: 'Projects',
-      icon: <IconFolder className="h-full w-full transition-colors" />,
-      href: '/projects',
-    },
-    {
-      title: 'Testimonials',
-      icon: <IconTrophy className="h-full w-full transition-colors" />,
-      href: '/testimonials',
-    },
-  ];
+  // Navbar styling based on scroll
+  const isScrolled = scrollY > 20;
+  const navbarBgClass = isScrolled
+    ? 'backdrop-blur-md bg-white/90 border-b border-gray-200/50 shadow-sm'
+    : 'backdrop-blur-sm bg-transparent';
 
   return (
     <nav className={`fixed w-full z-[100] transition-all duration-300 ${navbarBgClass}`}>
-      <div className="relative border-none">
-        <div className="container mx-auto relative z-10">
-          <div className="flex items-center justify-between h-20">
-            <Link href="/" className="flex items-center h-full">
-              <Image
-                src="/images/etoma.png"
-                alt="Etoma-Etoto Kelvin Odi"
-                width={150}
-                height={40}
-                className="object-contain mt-1 w-[120px] sm:w-[140px] md:w-[150px]"
-                priority
-              />
-            </Link>
+      <div className="container mx-auto">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <a
+            href="#home"
+            onClick={(e) => scrollToSection(e, '#home')}
+            className="flex items-center h-full"
+          >
+            <Image
+              src="/images/etoma.png"
+              alt="Etoma-Etoto Kelvin Odi"
+              width={150}
+              height={40}
+              className="object-contain mt-1 w-[120px] sm:w-[140px] md:w-[150px]"
+              priority
+            />
+          </a>
 
-            {/* Desktop Navigation - Floating Dock */}
-            <div className="hidden lg:flex items-center justify-center flex-1">
-              <FloatingDock
-                items={floatingDockItems}
-                desktopClassName=""
-                mobileClassName="hidden"
-              />
-            </div>
-
-            {/* CTA Button */}
-            <div className="hidden lg:block">
-              <MovingBorderButton
-                as={Link}
-                href="/contact"
-                borderRadius="2rem"
-                className="text-primary hover:text-primary font-medium px-6 py-3 bg-white hover:bg-white border-2 border-primary/10"
-                containerClassName="h-12 w-32"
-                duration={4000}
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-1">
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={(e) => scrollToSection(e, item.href)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 relative group
+                  ${
+                    activeSection === item.href
+                      ? 'text-primary'
+                      : 'text-gray-600 hover:text-primary'
+                  }`}
               >
-                <div className="flex items-center gap-2">
-                  <span>Say Hello</span>
-                  <svg
-                    width="16"
-                    height="16"
-                    className="w-4 h-4"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M5 12H19M19 12L12 5M19 12L12 19"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </MovingBorderButton>
-            </div>
-
-            {/* Mobile Navigation Button */}
-            <button
-              className="lg:hidden p-2 hover:bg-primary/5 rounded-lg transition-colors duration-200"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
-            >
-              <Bars3Icon className="h-6 w-6 text-primary" />
-            </button>
+                {item.name}
+                {activeSection === item.href && (
+                  <motion.div
+                    layoutId="activeSection"
+                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </a>
+            ))}
           </div>
+
+          {/* CTA Button */}
+          <div className="hidden lg:block">
+            <MovingBorderButton
+              as="a"
+              href="#contact"
+              onClick={(e: React.MouseEvent<HTMLAnchorElement>) => scrollToSection(e, '#contact')}
+              borderRadius="2rem"
+              className="text-primary hover:text-primary font-medium px-6 py-3 bg-white hover:bg-white border-2 border-primary/10 cursor-pointer"
+              containerClassName="h-12 w-32"
+              duration={4000}
+            >
+              <div className="flex items-center gap-2">
+                <span>Say Hello</span>
+                <svg
+                  width="16"
+                  height="16"
+                  className="w-4 h-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 12H19M19 12L12 5M19 12L12 19"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            </MovingBorderButton>
+          </div>
+
+          {/* Mobile Navigation Button */}
+          <button
+            className="lg:hidden p-2 hover:bg-primary/5 rounded-lg transition-colors duration-200"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? (
+              <XMarkIcon className="h-6 w-6 text-primary" />
+            ) : (
+              <Bars3Icon className="h-6 w-6 text-primary" />
+            )}
+          </button>
         </div>
       </div>
 
@@ -199,34 +178,39 @@ export default function Navigation(): JSX.Element {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className={`lg:hidden relative border-none backdrop-blur-sm ${scrollY < 10 ? 'bg-white/20' : isOverDarkSection ? 'bg-white/90' : 'bg-white/20'}`}
+            className="lg:hidden backdrop-blur-md bg-white/95 border-t border-gray-200/50"
           >
-            <div className="container mx-auto py-4 space-y-4 relative z-10">
-              {floatingDockItems.map((item) => (
-                <Link
-                  key={item.title}
+            <div className="container mx-auto py-4 space-y-1">
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
                   href={item.href}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors duration-200 ${
-                    pathname === item.href
-                      ? 'bg-primary text-white'
-                      : `${textColorClass} hover:bg-primary/5`
-                  }`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  <div
-                    className={`w-4 h-4 ${
-                      pathname === item.href ? 'text-white' : 'text-primary/70'
+                  onClick={(e) => scrollToSection(e, item.href)}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors duration-200
+                    ${
+                      activeSection === item.href
+                        ? 'bg-primary text-white'
+                        : 'text-gray-600 hover:bg-primary/5 hover:text-primary'
                     }`}
-                  >
-                    {item.icon}
-                  </div>
-                  <span>{item.title}</span>
-                </Link>
+                >
+                  <span className="font-medium">{item.name}</span>
+                </a>
               ))}
+
+              {/* Mobile CTA */}
+              <div className="pt-4 px-4">
+                <a
+                  href="#contact"
+                  onClick={(e) => scrollToSection(e, '#contact')}
+                  className="block w-full text-center px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary/90 transition-colors"
+                >
+                  Get in Touch
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

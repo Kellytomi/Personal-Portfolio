@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { Sticker, WashiTape } from '@/components/scrapbook';
 
 interface FooterProps {
   variant?: 'black' | 'white';
@@ -17,17 +17,10 @@ export default function Footer({ variant = 'black' }: FooterProps): JSX.Element 
   };
 
   const currentYear = new Date().getFullYear();
-
-  const isWhite = variant === 'white';
-
-  // Fun emoji array to randomly select from
   const emojis = ['✨', '🚀', '💻', '🎮', '🎧', '🍕', '🏀', '📚'];
-
-  // Use state and effect to handle client-side rendering only
   const [emoji, setEmoji] = useState('💻');
 
   useEffect(() => {
-    // Only run this on the client after hydration
     setEmoji(emojis[Math.floor(Math.random() * emojis.length)]);
   }, []);
 
@@ -37,68 +30,52 @@ export default function Footer({ variant = 'black' }: FooterProps): JSX.Element 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className={`${isWhite ? 'bg-white text-black' : 'bg-consistent-black text-white'} pt-8 pb-6`}
+      className="relative bg-scrapbook-kraft/30 pt-8 pb-6 overflow-hidden"
     >
-      <div className="container mx-auto px-4">
+      <div
+        className="absolute inset-0 opacity-20 pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundSize: '200px 200px',
+        }}
+      />
+
+      <div className="absolute top-4 left-8 hidden md:block">
+        <Sticker variant="heart" size="sm" color="coral" rotation={-15} animate={false} />
+      </div>
+      <div className="absolute top-4 right-12 hidden md:block">
+        <Sticker variant="star" size="sm" color="mustard" rotation={20} animate={false} />
+      </div>
+      <div className="absolute bottom-2 left-1/4 hidden lg:block">
+        <WashiTape color="pink" width="sm" rotation={-10} />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="mb-4 text-center">
-          <p className={`text-sm ${isWhite ? 'text-black/70' : 'text-white/80'}`}>
-            Made with {emoji} and lots of coffee in Calabar, Nigeria
-          </p>
+          <p className="font-handwriting text-lg text-gray-700">Made with {emoji} and lots of coffee in Calabar, Nigeria ☕</p>
         </div>
 
         <div className="flex justify-between items-center">
-          <div className="flex items-center">
             <button
               onClick={scrollToTop}
-              className={`flex items-center gap-1 ${isWhite ? 'text-black hover:text-gray-700' : 'text-white hover:text-gray-300'} transition-colors text-xs sm:text-sm md:text-base`}
+            className="flex items-center gap-1 font-sketch text-gray-600 hover:text-scrapbook-coral transition-colors text-sm md:text-base group"
               aria-label="Back to top"
             >
-              <svg
-                className="w-4 h-4 sm:w-5 sm:h-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 19V5M12 5L5 12M12 5L19 12"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+            <span className="transform group-hover:-translate-y-1 transition-transform">↑</span>
               <span>Back to top</span>
             </button>
+
+          <div className="font-handwriting text-center text-gray-600 text-sm md:text-lg mx-2">
+            {currentYear} © Kelvin's Digital Playground 🎨
           </div>
 
-          <div
-            className={`text-center ${isWhite ? 'text-black/70' : 'text-white/80'} text-xs sm:text-sm md:text-base mx-2`}
+            <a
+              href="#contact"
+            className="flex items-center gap-1 font-sketch text-gray-600 hover:text-scrapbook-coral transition-colors text-sm md:text-base group"
           >
-            {currentYear} © Kelvin's Digital Playground
-          </div>
-
-          <div className="flex items-center">
-            <Link
-              href="/contact"
-              className={`flex items-center gap-1 ${isWhite ? 'text-black hover:text-gray-700' : 'text-white hover:text-gray-300'} transition-colors text-xs sm:text-sm md:text-base`}
-            >
-              Say hi
-              <svg
-                className="w-4 h-4 sm:w-5 sm:h-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7 17L17 7M17 7H7M17 7V17"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Link>
-          </div>
+            <span>Say hi</span>
+            <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+            </a>
         </div>
       </div>
     </motion.footer>

@@ -8,6 +8,23 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // Allow external images from project sites
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.yachtzero.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'thedebuthub.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'staging.usedocsyde.com',
+      },
+    ],
+  },
   // Disable standalone output for now
   // output: 'standalone',
   experimental: {

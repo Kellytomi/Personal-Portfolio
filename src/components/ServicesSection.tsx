@@ -1,38 +1,54 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { Sticker, WashiTape, PaperBackground, CutoutLetters } from '@/components/scrapbook';
 
 export default function ServicesSection(): JSX.Element {
   const services = [
     {
-      title: 'Websites & Apps',
+      title: 'Websites & Web Apps',
       description:
-        'I create engaging websites and web apps that are not only beautiful but also fun to use. I focus on the details that make users smile.',
+        'I create engaging websites and web apps that are not only beautiful but also fun to use. From landing pages to complex platforms.',
       icon: '🌐',
-      gradient: 'from-[#3151B5] to-[#56CCF2]',
-      skillsLink: '/skills#web-development',
+      bgColor: 'bg-blue-100',
+      borderColor: 'border-blue-300',
+      technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind'],
     },
     {
-      title: 'Mobile Experiences',
+      title: 'Mobile Apps',
       description:
-        'I build mobile apps that people actually want to use. No clunky interfaces here - just smooth, intuitive experiences that feel natural.',
+        'I build mobile apps that people actually want to use. Smooth, intuitive experiences that feel natural on iOS and Android.',
       icon: '📱',
-      gradient: 'from-[#8B5A2B] to-[#FFA500]',
-      skillsLink: '/skills#mobile-development',
+      bgColor: 'bg-orange-100',
+      borderColor: 'border-orange-300',
+      technologies: ['Flutter', 'React Native', 'Firebase'],
     },
     {
-      title: 'Smart Automation',
+      title: 'Automation & Integration',
       description:
-        "I love making computers do boring stuff so humans don't have to. It's like magic, but with code instead of wands.",
+        "I love making computers do boring stuff so humans don't have to. Connecting systems and automating workflows.",
       icon: '⚡',
-      gradient: 'from-[#9333EA] to-[#EC4899]',
-      skillsLink: '/skills#automation-and-integration',
+      bgColor: 'bg-purple-100',
+      borderColor: 'border-purple-300',
+      technologies: ['Zapier', 'Make.com', 'Node.js', 'APIs'],
     },
   ];
 
+  const stickerVariants: Array<'star' | 'sparkle' | 'lightning'> = ['star', 'sparkle', 'lightning'];
+  const stickerColors: Array<'mustard' | 'lavender' | 'coral'> = ['mustard', 'lavender', 'coral'];
+
   return (
-    <section className="py-32 bg-white relative">
+    <PaperBackground variant="kraft" className="py-24 md:py-32 relative overflow-hidden">
+      <div className="absolute top-16 right-16 z-20 hidden md:block">
+        <Sticker variant="star" size="lg" color="mustard" rotation={-10} />
+      </div>
+      <div className="absolute bottom-24 left-12 z-20 hidden lg:block">
+        <Sticker variant="heart" size="md" color="coral" rotation={15} />
+      </div>
+      <div className="absolute top-1/3 left-8 z-10 hidden lg:block">
+        <WashiTape color="pink" pattern="stripe" width="lg" rotation={-80} />
+      </div>
+
       <div className="container relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -41,56 +57,69 @@ export default function ServicesSection(): JSX.Element {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-            My Skills
+          <div className="inline-block px-4 py-2 bg-scrapbook-cream border-2 border-dashed border-scrapbook-kraft-dark rounded-lg font-handwriting text-lg mb-4 shadow-sm transform rotate-1">
+            💼 What I Do
           </div>
-          <h2 className="section-title mb-4">What I Love Building</h2>
-          <p className="section-subtitle max-w-2xl mx-auto">
-            Here are the things I'm passionate about creating
+          <h2 className="mb-4">
+            <CutoutLetters text="Skills & Services" size="lg" colorScheme="cool" />
+          </h2>
+          <p className="font-sketch text-lg text-gray-700 max-w-2xl mx-auto">
+            Here's what I bring to the table when working on projects ✨
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <Link href={service.skillsLink} key={index} className="block">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="feature-card group h-full cursor-pointer"
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20, rotate: index % 2 === 0 ? -2 : 2 }}
+              whileInView={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -2 : 2 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="relative group"
+            >
+              <div className="absolute -top-3 -right-3 z-10">
+                <Sticker variant={stickerVariants[index]} size="sm" color={stickerColors[index]} rotation={10 + index * 5} />
+              </div>
+
+              <div
+                className={`
+                  relative ${service.bgColor} p-6 rounded-lg shadow-md
+                  border-2 border-dashed ${service.borderColor}
+                  transition-all duration-300 h-full
+                  hover:shadow-lg hover:-translate-y-1 hover:rotate-0
+                `}
+                style={{ boxShadow: '4px 4px 12px rgba(0,0,0,0.1)' }}
               >
-                <div
-                  className={`w-16 h-16 rounded-lg bg-primary/10 group-hover:bg-gradient-to-r ${service.gradient} flex items-center justify-center text-2xl mb-6 transition-all duration-300 group-hover:text-white text-primary`}
-                >
-                  {service.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-muted mb-4">{service.description}</p>
-                <div className="inline-flex items-center text-primary font-medium">
-                  Check it out
-                  <svg
-                    className="w-4 h-4 ml-1"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
+                <div className="absolute -top-3 left-1/4">
+                  <WashiTape
+                    color={index === 0 ? 'blue' : index === 1 ? 'coral' : 'lavender'}
+                    width="sm"
+                    rotation={index % 2 === 0 ? -5 : 5}
+                  />
+              </div>
+
+                <div className="text-5xl mb-4 pt-2">{service.icon}</div>
+
+                <h3 className="font-handwriting text-2xl font-bold text-gray-800 mb-3">{service.title}</h3>
+
+                <p className="font-sketch text-gray-700 mb-5">{service.description}</p>
+              
+              <div className="flex flex-wrap gap-2">
+                {service.technologies.map((tech, i) => (
+                  <span
+                    key={i}
+                      className="px-2 py-1 bg-white/60 border border-gray-300 rounded text-xs font-sketch text-gray-600"
                   >
-                    <path
-                      d="M5 12H19M19 12L12 5M19 12L12 19"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                    {tech}
+                  </span>
+                ))}
                 </div>
-              </motion.div>
-            </Link>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </PaperBackground>
   );
 } 
