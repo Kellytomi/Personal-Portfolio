@@ -33,7 +33,14 @@ export default function PersonalStorySection(): JSX.Element {
             </Sticker>
             <h2 className="text-3xl md:text-4xl font-bold mb-2 mt-4 text-primary">A bit about me</h2>
             <div className="flex justify-center">
-              <CutoutLetters text="builder + storyteller" size="md" colorScheme="warm" />
+              <div className="hidden sm:inline-flex">
+                <CutoutLetters text="builder + storyteller" size="md" colorScheme="warm" />
+              </div>
+              <div className="sm:hidden flex flex-col items-center gap-1">
+                <CutoutLetters text="builder" size="md" colorScheme="warm" />
+                <CutoutLetters text="+" size="sm" colorScheme="warm" />
+                <CutoutLetters text="storyteller" size="md" colorScheme="warm" />
+              </div>
             </div>
           </motion.div>
 
@@ -46,7 +53,12 @@ export default function PersonalStorySection(): JSX.Element {
               className="md:col-span-2"
             >
               <ScrapbookFrame rotation="left" tapePosition="corners" tapeColor="pink">
-                <PolaroidCard imageSrc="/about-me.jpg" imageAlt="Kelvin coding" caption="Building with curiosity" rotation="none" />
+                <PolaroidCard
+                  imageSrc="/images/about-me-portrait.png"
+                  imageAlt="Kelvin in a Lakers jersey taking a mirror photo"
+                  rotation="none"
+                  aspect="portrait"
+                />
               </ScrapbookFrame>
             </motion.div>
             <motion.div

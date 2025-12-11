@@ -58,10 +58,17 @@ export default function ServicesSection(): JSX.Element {
           className="text-center mb-16"
         >
           <div className="inline-block px-4 py-2 bg-scrapbook-cream border-2 border-dashed border-scrapbook-kraft-dark rounded-lg font-handwriting text-lg mb-4 shadow-sm transform rotate-1">
-            💼 What I Do
+            💼 Skills & Services
           </div>
-          <h2 className="mb-4">
-            <CutoutLetters text="Skills & Services" size="lg" colorScheme="cool" />
+          <h2 className="mb-4 flex flex-col items-center">
+            <span className="hidden sm:inline-block">
+              <CutoutLetters text="Skills & Services" size="lg" colorScheme="cool" />
+            </span>
+            <span className="sm:hidden flex flex-col items-center gap-1 leading-tight">
+              <CutoutLetters text="Skills" size="lg" colorScheme="cool" />
+              <CutoutLetters text="&" size="md" colorScheme="cool" />
+              <CutoutLetters text="Services" size="lg" colorScheme="cool" />
+            </span>
           </h2>
           <p className="font-sketch text-lg text-gray-700 max-w-2xl mx-auto">
             Here's what I bring to the table when working on projects ✨
