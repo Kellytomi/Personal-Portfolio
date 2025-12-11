@@ -3,6 +3,9 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
+import { PaperCard } from '@/components/ui/PaperCard';
+import { Sticker } from '@/components/ui/Sticker';
+import { TextureOverlay } from '@/components/ui/TextureOverlay';
 
 interface Project {
   id: string;
@@ -98,175 +101,127 @@ export default function FeaturedProjectsSection(): JSX.Element {
       onMouseLeave={() => setHoveredProject(null)}
       className="group relative"
     >
-      <div
-        className={`relative rounded-2xl overflow-hidden bg-gradient-to-br ${project.gradient} 
-          min-h-[450px] md:min-h-[500px] p-6 md:p-8 flex flex-col
-          transition-all duration-500 transform 
-          ${hoveredProject === project.id ? 'scale-[1.02] shadow-2xl' : 'shadow-xl'}
-          ${project.status === 'coming-soon' ? 'opacity-90' : ''}`}
+      <PaperCard
+        withTape
+        rotation={index % 2 === 0 ? -1.5 : 1.2}
+        tone={project.type === 'mobile' ? 'teal' : 'cream'}
+        className={`min-h-[450px] md:min-h-[500px] transition-all duration-500 ${
+          hoveredProject === project.id ? 'scale-[1.01]' : ''
+        }`}
       >
-        {/* Overlay pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-              backgroundSize: '24px 24px',
-            }}
-          />
-        </div>
-
-        {/* Top Section - Header */}
-        <div className="relative z-10">
-          <div className="flex items-center justify-between mb-4">
-            <span
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold ${project.tagColor} backdrop-blur-sm`}
+        <div className="flex flex-col h-full gap-4">
+          <div className="flex items-center justify-between">
+            <Sticker
+              variant="badge"
+              tone={project.type === 'mobile' ? 'teal' : 'yellow'}
+              className="shadow-none"
             >
               {project.tag}
-            </span>
+            </Sticker>
             {project.status === 'coming-soon' && (
-              <span className="px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-xs font-semibold text-white flex items-center gap-1.5">
-                <span className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
-                Coming Soon
-              </span>
+              <Sticker tone="cream" variant="label" className="gap-2">
+                <span className="w-2 h-2 bg-secondary rounded-full animate-ping" />
+                Coming soon
+              </Sticker>
             )}
             {project.status === 'live' && project.url && (
-              <span className="px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-xs font-semibold text-white flex items-center gap-1.5">
-                <span className="w-2 h-2 bg-green-400 rounded-full" />
+              <Sticker tone="coral" variant="label">
                 Live
-              </span>
+              </Sticker>
             )}
           </div>
 
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{project.title}</h3>
-          <p className="text-white/80 text-lg mb-4">{project.description}</p>
-        </div>
+          <div className="flex flex-col gap-2">
+            <h3 className="text-2xl md:text-3xl font-bold text-primary">{project.title}</h3>
+            <p className="text-muted text-base md:text-lg">{project.description}</p>
+          </div>
 
-        {/* Site Preview Image */}
-        {project.previewImage && project.url && (
-          <div className="relative z-10 flex-1 mb-4">
-            <div className="relative w-full h-full min-h-[160px] rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg group-hover:shadow-xl transition-all duration-300">
+          {/* Preview image */}
+          {project.previewImage && project.url && (
+            <div className="relative w-full min-h-[200px] rounded-2xl overflow-hidden border border-primary/10 bg-white shadow-card">
               <Image
                 src={project.previewImage}
                 alt={`${project.title} preview`}
                 fill
-                className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 onError={(e) => {
-                  // Hide image on error
                   (e.target as HTMLImageElement).style.display = 'none';
                 }}
               />
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="absolute -top-3 left-4 w-16 h-6 bg-[url(/textures/washi-teal.svg)] bg-cover rotate-[-8deg] opacity-90" />
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Mobile app placeholder */}
-        {project.type === 'mobile' && !project.previewImage && (
-          <div className="relative z-10 flex-1 mb-4 flex items-center justify-center">
-            <div className="relative w-32 h-56 bg-white/10 backdrop-blur-sm rounded-3xl border-4 border-white/30 shadow-lg flex items-center justify-center">
-              <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-white/30 rounded-full" />
-              <div className="text-center px-4">
-                <svg className="w-12 h-12 mx-auto mb-2 text-white/60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 18H12.01M7 21H17C18.1046 21 19 20.1046 19 19V5C19 3.89543 18.1046 3 17 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <span className="text-xs text-white/60 font-medium">App Preview Coming Soon</span>
+          {/* Mobile placeholder */}
+          {project.type === 'mobile' && !project.previewImage && (
+            <div className="relative z-10 flex-1 mb-2 flex items-center justify-center">
+              <div className="relative w-32 h-56 bg-white rounded-3xl border-4 border-primary/10 shadow-card flex items-center justify-center">
+                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-primary/15 rounded-full" />
+                <div className="text-center px-4">
+                  <svg className="w-12 h-12 mx-auto mb-2 text-primary/60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 18H12.01M7 21H17C18.1046 21 19 20.1046 19 19V5C19 3.89543 18.1046 3 17 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span className="text-xs text-muted font-medium">App preview in progress</span>
+                </div>
               </div>
             </div>
-          </div>
-        )}
-
-        {/* Extended description on hover */}
-        <AnimatePresence>
-          {hoveredProject === project.id && !project.previewImage && (
-            <motion.p
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="text-white/70 text-sm leading-relaxed relative z-10 mb-4"
-            >
-              {project.longDescription}
-            </motion.p>
           )}
-        </AnimatePresence>
 
-        {/* Bottom Section */}
-        <div className="relative z-10 mt-auto">
-          {/* Technologies */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {project.technologies.map((tech, i) => (
-              <span
-                key={i}
-                className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white/90 font-medium"
+          <AnimatePresence>
+            {hoveredProject === project.id && !project.previewImage && (
+              <motion.p
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="text-muted text-sm leading-relaxed"
               >
+                {project.longDescription}
+              </motion.p>
+            )}
+          </AnimatePresence>
+
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map((tech, i) => (
+              <Sticker key={i} variant="label" tone="cream" className="normal-case tracking-normal">
                 {tech}
-              </span>
+              </Sticker>
             ))}
           </div>
 
-          {/* Action Button */}
-          {project.url ? (
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold 
-                hover:bg-white/90 transition-all duration-300 group/btn"
-            >
-              <span>View Live Site</span>
-              <svg
-                className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+          <div className="mt-auto flex items-center justify-between">
+            {project.url ? (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-white rounded-xl font-semibold shadow-soft hover:-translate-y-0.5 transition-all duration-300"
               >
-                <path
-                  d="M7 17L17 7M17 7H7M17 7V17"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
-          ) : (
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-xl font-semibold cursor-default">
-              <span>Launching Soon</span>
-              <svg
-                className="w-4 h-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 8V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-          )}
-        </div>
+                <span>View live</span>
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            ) : (
+              <div className="inline-flex items-center gap-2 px-5 py-3 bg-secondary/80 text-primary rounded-xl font-semibold">
+                <span>Launching soon</span>
+              </div>
+            )}
 
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-2xl transform -translate-x-1/2 translate-y-1/2" />
-      </div>
+            <span className="text-sm text-muted">{project.type === 'mobile' ? 'Mobile' : 'Web'}</span>
+          </div>
+        </div>
+      </PaperCard>
     </motion.div>
   );
 
   return (
-    <section id="projects" className="py-24 md:py-32 bg-white relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      </div>
+    <section id="projects" className="py-24 md:py-32 bg-surface relative overflow-hidden">
+      <TextureOverlay opacity={0.5} className="absolute inset-0">
+        <div className="absolute top-10 left-6 w-36 h-10 bg-[url(/textures/washi-yellow.svg)] bg-cover rotate-[-12deg] opacity-90" />
+        <div className="absolute bottom-16 right-8 w-40 h-10 bg-[url(/textures/washi-teal.svg)] bg-cover rotate-[10deg] opacity-90" />
+      </TextureOverlay>
 
       <div className="container relative">
         <motion.div
@@ -276,12 +231,12 @@ export default function FeaturedProjectsSection(): JSX.Element {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+          <Sticker tone="yellow" variant="badge">
             Featured Work
-          </div>
-          <h2 className="section-title mb-4">Projects I've Shipped</h2>
-          <p className="section-subtitle max-w-2xl mx-auto">
-            Real projects, real clients, real impact. Here's a selection of work I'm proud of.
+          </Sticker>
+          <h2 className="section-title mb-4 text-primary mt-4">Projects I've Shipped</h2>
+          <p className="section-subtitle max-w-2xl mx-auto text-muted">
+            Real projects, real clients, real impact—packaged like a memory board of the things I loved building.
           </p>
         </motion.div>
 
@@ -294,12 +249,10 @@ export default function FeaturedProjectsSection(): JSX.Element {
             transition={{ duration: 0.5 }}
             className="flex items-center gap-3 mb-8"
           >
-            <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
-              <svg className="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21 12C21 16.9706 16.9706 21 12 21M21 12C21 7.02944 16.9706 3 12 3M21 12H3M12 21C7.02944 21 3 16.9706 3 12M12 21C13.6569 21 15 16.9706 15 12C15 7.02944 13.6569 3 12 3M12 21C10.3431 21 9 16.9706 9 12C9 7.02944 10.3431 3 12 3M3 12C3 7.02944 7.02944 3 12 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900">Web Projects</h3>
+            <Sticker tone="teal" variant="label">
+              Web Projects
+            </Sticker>
+            <h3 className="text-2xl font-bold text-primary">Polished & live</h3>
           </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {webProjects.map((project, index) => renderProjectCard(project, index))}
@@ -315,12 +268,10 @@ export default function FeaturedProjectsSection(): JSX.Element {
             transition={{ duration: 0.5 }}
             className="flex items-center gap-3 mb-8"
           >
-            <div className="w-10 h-10 rounded-xl bg-violet-500/10 flex items-center justify-center">
-              <svg className="w-5 h-5 text-violet-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 18H12.01M7 21H17C18.1046 21 19 20.1046 19 19V5C19 3.89543 18.1046 3 17 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900">Mobile Projects</h3>
+            <Sticker tone="coral" variant="label">
+              Mobile Projects
+            </Sticker>
+            <h3 className="text-2xl font-bold text-primary">Handheld builds</h3>
           </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {mobileProjects.map((project, index) => renderProjectCard(project, index))}

@@ -1,11 +1,13 @@
 :root {
-  --color-black: #1a1a1a;
+  --color-black: #1c1a16;
   --color-white: #ffffff;
-  --color-offwhite: #f8fafe;
-  --color-primary: #3151b5;
-  --color-secondary: #0f1d56;
-  --color-accent: #56ccf2;
-  --color-muted: #6b7280;
+  --color-offwhite: #f8f4e8;
+  --color-primary: #1f3b2e; /* forest ink */
+  --color-secondary: #f6d447; /* sunny yellow */
+  --color-accent: #f07a63; /* warm coral */
+  --color-muted: #5e5a52; /* warm gray */
+  --color-teal: #4aa3a2; /* soft teal */
+  --color-plum: #59426d; /* retro plum */
 }
 
 /* Font loading optimization */
@@ -261,9 +263,14 @@ h6 {
       'Helvetica Neue',
       Arial,
       sans-serif !important;
-    background-image: none;
-    background-size: 30px 30px;
-    background-position: center;
+    background-color: var(--color-offwhite);
+    background-image:
+      url('/textures/paper.svg'),
+      radial-gradient(circle at 10% 20%, rgba(240, 210, 90, 0.18), transparent 25%),
+      radial-gradient(circle at 80% 10%, rgba(74, 163, 162, 0.12), transparent 24%),
+      radial-gradient(circle at 20% 80%, rgba(240, 122, 99, 0.12), transparent 26%);
+    background-size: 500px 500px, 520px 520px, 520px 520px, 620px 620px;
+    background-position: center, 10% 12%, 80% 8%, 20% 80%;
     background-attachment: fixed;
     transition: opacity 0.5s ease-in-out;
   }

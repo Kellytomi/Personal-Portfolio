@@ -1,25 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
-
-// Lazy load the BackgroundGradient for performance
-const BackgroundGradient = dynamic(
-  () =>
-    import('@/components/ui/background-gradient').then((mod) => ({
-      default: mod.BackgroundGradient,
-    })),
-  {
-    loading: () => <div className="animate-pulse bg-gray-200 rounded-lg h-48" />,
-    ssr: false,
-  }
-);
+import { PaperCard } from '@/components/ui/PaperCard';
+import { Sticker } from '@/components/ui/Sticker';
+import { TextureOverlay } from '@/components/ui/TextureOverlay';
+import { PhotoPolaroid } from '@/components/ui/PhotoPolaroid';
 
 export default function PersonalStorySection(): JSX.Element {
   return (
-    <section className="py-20 relative bg-white">
-      <div className="absolute inset-0 bg-gradient-to-b from-surface to-white" />
+    <section className="py-24 relative bg-surface overflow-hidden">
+      <TextureOverlay opacity={0.5} className="absolute inset-0">
+        <div className="absolute -left-10 top-8 w-40 h-10 bg-[url(/textures/washi-yellow.svg)] bg-cover rotate-[-10deg] opacity-80" />
+        <div className="absolute right-4 bottom-16 w-44 h-10 bg-[url(/textures/washi-teal.svg)] bg-cover rotate-[8deg] opacity-80" />
+      </TextureOverlay>
       <div className="container relative">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -29,13 +22,13 @@ export default function PersonalStorySection(): JSX.Element {
             transition={{ duration: 0.5 }}
             className="text-center mb-8"
           >
-            <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+            <Sticker tone="teal" variant="badge">
               My Story
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">A bit about me</h2>
+            </Sticker>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 mt-4 text-primary">A bit about me</h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-5 gap-8 items-start">
+          <div className="grid md:grid-cols-5 gap-10 items-start">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -43,16 +36,8 @@ export default function PersonalStorySection(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="md:col-span-2"
             >
-              <div className="relative h-64 md:h-80 rounded-xl overflow-hidden">
-                <Image
-                  src="/about-me.jpg"
-                  alt="Kelvin coding"
-                  fill
-                  className="object-cover rounded-xl"
-                />
-              </div>
+              <PhotoPolaroid src="/about-me.jpg" alt="Kelvin coding" rotation={-3} caption="Building with curiosity" />
             </motion.div>
-
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -60,41 +45,38 @@ export default function PersonalStorySection(): JSX.Element {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="md:col-span-3 space-y-4 md:ml-4"
             >
-              <BackgroundGradient className="bg-white p-6 rounded-xl shadow-sm">
+              <PaperCard withTape rotation={-1}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-2xl">👨‍💻</span>
-                  <h3 className="text-xl font-bold">The Dev Journey</h3>
+                  <h3 className="text-xl font-bold text-primary">The dev journey</h3>
                 </div>
                 <p className="text-muted">
-                  I'm Kelvin, a self-taught developer with a passion for creating digital experiences
-                  that make people smile. I started coding when I was 14, building simple games and
-                  websites for fun.
+                  Self-taught since age 14, tinkering with games and early websites before turning that curiosity into
+                  a career. I ship with a mix of design empathy and pragmatic engineering.
                 </p>
-              </BackgroundGradient>
+              </PaperCard>
 
-              <BackgroundGradient className="bg-white p-6 rounded-xl shadow-sm">
+              <PaperCard tone="cream" rotation={1.5}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-2xl">🛠️</span>
-                  <h3 className="text-xl font-bold">What Drives Me</h3>
+                  <h3 className="text-xl font-bold text-primary">What drives me</h3>
                 </div>
                 <p className="text-muted">
-                  These days, I love combining creativity with technology to build things that solve
-                  real problems. Whether it's a sleek mobile app, an intuitive website, or a clever
-                  automation tool, I'm happiest when I'm making something that helps people.
+                  Pairing playful storytelling with reliable, scalable builds. I love helping founders and teams make
+                  products people keep returning to.
                 </p>
-              </BackgroundGradient>
+              </PaperCard>
 
-              <BackgroundGradient className="bg-white p-6 rounded-xl shadow-sm">
+              <PaperCard tone="teal" rotation={-0.5}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-2xl">🏐</span>
-                  <h3 className="text-xl font-bold">Outside the Code</h3>
+                  <h3 className="text-xl font-bold text-primary">Outside the code</h3>
                 </div>
                 <p className="text-muted">
-                  When I'm not in front of my computer, I'm probably spiking at the local volleyball
-                  court, trying to perfect my pasta carbonara recipe, or binge-watching sci-fi shows
-                  with my dog, Buddy.
+                  Volleyball player, amateur chef, sci-fi binger. If there’s a new sport, recipe, or gadget, I’m probably
+                  testing it with friends.
                 </p>
-              </BackgroundGradient>
+              </PaperCard>
             </motion.div>
           </div>
 

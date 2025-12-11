@@ -1,10 +1,14 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
 import { FlipWords } from '@/components/ui/flip-words';
 import AnimatedTooltipDemo from '@/components/AnimatedTooltipDemo';
+import { Sticker } from '@/components/ui/Sticker';
+import { PaperCard } from '@/components/ui/PaperCard';
+import { PhotoPolaroid } from '@/components/ui/PhotoPolaroid';
+import { TextureOverlay } from '@/components/ui/TextureOverlay';
 
 interface HeroSectionProps {
   isLoading: boolean;
@@ -18,123 +22,174 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
   });
 
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
+  const reduceMotion = useReducedMotion();
 
   return (
     <section
-      className="min-h-[85vh] flex items-center pt-16 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32 relative"
+      className="min-h-[90vh] flex items-center pt-16 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32 relative"
       ref={containerRef}
     >
-      {/* Direct grid background with inline styles */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: 'url(/grid-pattern.svg)',
-          backgroundSize: '30px 30px',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          opacity: 0.5,
-          pointerEvents: 'none',
-          zIndex: 0,
-        }}
-      />
-
-      <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/30 to-transparent" />
-
-      <motion.div className="absolute inset-0" style={{ y }} />
-      <div className="absolute inset-0 bg-gradient-to-b from-surface/50 via-surface/50 to-white/30" />
+      <TextureOverlay opacity={0.7} className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-surface/80 via-surface/70 to-surface/40" />
+        <motion.div className="absolute inset-0" style={{ y }} />
+        <Image
+          src="/doodles/squiggle.svg"
+          alt=""
+          width={240}
+          height={120}
+          className="absolute hidden lg:block top-16 right-24 opacity-60"
+          priority
+        />
+        <Image
+          src="/doodles/star.svg"
+          alt=""
+          width={160}
+          height={160}
+          className="absolute hidden md:block bottom-12 left-10 rotate-[-8deg] opacity-70"
+          priority
+        />
+      </TextureOverlay>
 
       <div className="container relative z-10 px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="text-center lg:text-left mt-4 sm:mt-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="text-center lg:text-left mt-4 sm:mt-0 space-y-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 20 : 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-3"
             >
-              <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-3">
-                <span className="relative inline-flex mr-2">
-                  <span className="inline-block w-2.5 h-2.5 bg-green-500 rounded-full"></span>
-                  <span className="animate-ping absolute inline-flex h-2.5 w-2.5 rounded-full bg-green-400 opacity-75"></span>
-                </span>
-                Open to new projects
-              </div>
-              <h4 className="text-primary font-medium mb-2 md:mb-3">
-                Hey there, I'm Etoma-etoto (Kelvin) Odi 👋
-              </h4>
-              <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-5">
-                I build <span className="text-black">awesome digital stuff</span> that{' '}
-                <FlipWords
-                  words={['people love', 'users enjoy', 'clients adore', 'founders need']}
-                  className="gradient-text"
-                />
-              </h1>
-              <p className="text-base sm:text-lg mb-6 md:mb-8 text-muted max-w-xl mx-auto lg:mx-0">
-                When I'm not coding, you'll find me playing volleyball, binging Netflix shows, or
-                experimenting with new recipes. My passion is creating digital experiences that make
-                people's lives easier and more enjoyable.
-              </p>
-
-              {/* Trusted by section with animated tooltips */}
-              <div className="flex flex-col items-center lg:items-start mb-6 md:mb-8">
-                <p className="text-sm text-muted mb-4">Trusted by amazing people</p>
-                <AnimatedTooltipDemo />
-              </div>
-
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center lg:justify-start gap-4 sm:mb-0 mb-10 max-w-md mx-auto lg:mx-0">
-                <a href="#about" className="cta-button">
-                  <span>Get to know me</span>
-                </a>
-                <a href="#projects" className="btn btn-secondary text-center">
-                  See my work
-                </a>
-              </div>
+              <Sticker variant="stamp" tone="yellow" icon={<span className="w-2 h-2 bg-green-500 rounded-full" />}>
+                Open to collabs
+              </Sticker>
+              <Sticker variant="badge" tone="coral">
+                Lagos ➜ Global
+              </Sticker>
             </motion.div>
+
+            <motion.h4
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 14 : 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-primary font-semibold"
+            >
+              Hey, I'm Etoma-etoto (Kelvin) Odi 👋
+            </motion.h4>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 14 : 0 }}
+              transition={{ duration: 0.7, delay: 0.12 }}
+              className="text-4xl sm:text-5xl md:text-6xl font-display font-bold leading-tight"
+            >
+              I craft digital experiences that feel like{' '}
+              <span className="text-accent">keepsakes</span> people{' '}
+              <FlipWords words={['love', 'use daily', 'talk about', 'remember']} className="text-primary" />
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 12 : 0 }}
+              transition={{ duration: 0.6, delay: 0.16 }}
+              className="text-base sm:text-lg text-muted max-w-xl mx-auto lg:mx-0"
+            >
+              Designer-minded developer mixing playful storytelling with reliable builds. From scrappy MVPs to polished
+              products, I love shipping work that feels personal and genuinely useful.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 12 : 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-start gap-4 max-w-md mx-auto lg:mx-0"
+            >
+              <a href="#about" className="cta-button bg-primary text-white shadow-card">
+                <span>See the story</span>
+              </a>
+              <a href="#projects" className="btn btn-secondary text-center bg-surface border-primary/20 text-primary">
+                View projects
+              </a>
+            </motion.div>
+
+            <PaperCard withTape rotation={-1.5} className="max-w-lg mx-auto lg:mx-0">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <span className="text-lg sm:text-xl">🎮</span>
+                  </div>
+                  <h3 className="font-bold text-sm sm:text-base text-primary">Fun fact</h3>
+                </div>
+                <p className="text-sm sm:text-base text-muted">
+                  Stayed up 48 hours straight to ship a game jam—sleepy, but totally worth it.
+                </p>
+              </div>
+            </PaperCard>
+
+            <div className="flex flex-col items-center lg:items-start">
+              <p className="text-sm text-muted mb-3">Trusted by thoughtful teams</p>
+              <AnimatedTooltipDemo />
+            </div>
           </div>
+
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: isLoading ? 0 : 1, x: isLoading ? 20 : 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:block relative px-4 sm:px-0"
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: isLoading ? 0 : 1, x: isLoading ? 24 : 0 }}
+            transition={{ duration: 0.8, delay: 0.18 }}
+            className="lg:block relative"
           >
-            <div className="relative h-[50vh] sm:h-[60vh] max-h-[500px] sm:max-h-[600px] aspect-[3/4] mx-auto rounded-xl overflow-hidden">
-              <Image
+            <div className="relative flex items-center justify-center">
+              <PhotoPolaroid
                 src="/hero-img.webp"
                 alt="Kelvin smiling"
-                fill
-                className="object-cover object-center rounded-xl"
-                priority
+                rotation={-2}
+                caption="Builder, storyteller, collaborator"
+                badge={<Sticker tone="teal" variant="badge">In the zone</Sticker>}
+                className="shadow-2xl"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent mix-blend-multiply rounded-xl" />
-            </div>
 
-            {/* Floating highlighted box with personal touch */}
-            <div className="absolute -bottom-4 left-4 sm:-bottom-6 sm:-left-6 bg-white rounded-lg shadow-card p-4 sm:p-6 max-w-[280px] sm:max-w-xs z-10">
-              <div className="flex items-center gap-3 sm:gap-4 mb-2 sm:mb-3">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <span className="text-lg sm:text-xl">🎮</span>
-                </div>
-                <h3 className="font-bold text-sm sm:text-base">Fun fact</h3>
-              </div>
-              <p className="text-xs sm:text-sm text-muted">
-                I once stayed up 48 hours straight to finish a game jam project. Worth it!
-              </p>
+              <motion.div
+                className="absolute -left-10 -top-12"
+                animate={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        rotate: [0, -2, 2, 0],
+                        y: [0, -4, 0],
+                      }
+                }
+                transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+              >
+                <Image src="/doodles/sparkle.svg" alt="" width={120} height={120} className="opacity-80" priority />
+              </motion.div>
+
+              <motion.div
+                className="absolute -right-6 bottom-0"
+                animate={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        rotate: [0, 2, -2, 0],
+                        y: [0, 6, 0],
+                      }
+                }
+                transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}
+              >
+                <PaperCard tone="teal" rotation={3} className="max-w-xs">
+                  <p className="text-sm text-primary font-semibold mb-1">Currently curious about</p>
+                  <p className="text-sm text-muted">Playful UI motion, low-latency DX, and AI copilots that feel human.</p>
+                </PaperCard>
+              </motion.div>
             </div>
           </motion.div>
         </div>
 
-        {/* Scroll to explore animation */}
         <motion.div
-          className="flex flex-col items-center text-center text-gray-500 mt-12 md:mt-16 mb-0"
-          animate={{ y: [0, 8, 0] }}
+          className="flex flex-col items-center text-center text-gray-600 mt-12 md:mt-16"
+          animate={{ y: reduceMotion ? 0 : [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <p className="text-sm mb-1">Scroll down for more</p>
-          <svg
-            className="w-5 h-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <p className="text-sm mb-1">Scroll for the scrapbook</p>
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M12 5V19M12 19L5 12M12 19L19 12"
               stroke="currentColor"

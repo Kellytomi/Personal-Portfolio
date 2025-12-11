@@ -8,13 +8,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#3151B5', // Primary blue from the ACAD AI design
-        secondary: '#0F1D56', // Dark blue for secondary elements
-        accent: '#56CCF2', // Light blue accent
-        surface: '#F8FAFE', // Light blue-tinted background
-        text: '#1A1A1A', // Dark text color
-        muted: '#6B7280', // Medium gray for secondary text
+        primary: '#1F3B2E', // Forest ink for text + anchors
+        secondary: '#F6D447', // Sunny yellow accent
+        accent: '#F07A63', // Warm coral accent
+        surface: '#F8F4E8', // Paper off-white background
+        text: '#1C1A16', // Charcoal text
+        muted: '#5E5A52', // Warm gray for secondary text
         highlight: '#FFFFFF', // White for highlights
+        teal: '#4AA3A2', // Soft teal accent
+        plum: '#59426D', // Retro plum accent
       },
       fontFamily: {
         sans: [
