@@ -129,19 +129,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
               </a>
             </motion.div>
 
-            <PaperCard withTape rotation={-1.5} className="max-w-lg mx-auto lg:mx-0">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <span className="text-lg sm:text-xl">🎮</span>
-                  </div>
-                  <h3 className="font-bold text-sm sm:text-base text-primary">Fun fact</h3>
-                </div>
-                <p className="text-sm sm:text-base text-muted">
-                  Stayed up 48 hours straight to ship a game jam—sleepy, but totally worth it.
-                </p>
-              </div>
-            </PaperCard>
+            {/* removed initial fun fact card to avoid duplication */}
 
             <div className="flex flex-col items-center lg:items-start">
               <p className="text-sm text-muted mb-3">Trusted by thoughtful teams</p>
@@ -155,8 +143,13 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
             transition={{ duration: 0.8, delay: 0.18 }}
             className="lg:block relative"
           >
-            <div className="relative flex items-center justify-center">
-              <ScrapbookFrame rotation="left" tapePosition="corners" tapeColor="yellow" className="max-w-md mx-auto">
+            <div className="relative flex flex-col items-center justify-center gap-4">
+              <ScrapbookFrame
+                rotation="left"
+                tapePosition="corners"
+                tapeColor="yellow"
+                className="max-w-md mx-auto -translate-y-4"
+              >
                 <div className="relative h-[50vh] sm:h-[60vh] max-h-[500px] sm:max-h-[550px] aspect-[3/4] rounded overflow-hidden">
                   <Image src="/hero-img.webp" alt="Kelvin smiling" fill className="object-cover object-center" priority />
                 </div>
@@ -179,20 +172,30 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
               </motion.div>
 
               <motion.div
-                className="absolute -right-6 bottom-0"
+                className="absolute -left-6 bottom-2 sm:-left-10 sm:-bottom-4"
                 animate={
                   reduceMotion
-                    ? undefined
+                    ? { opacity: 1, y: 0 }
                     : {
-                        rotate: [0, 2, -2, 0],
-                        y: [0, 6, 0],
+                        opacity: 1,
+                        y: [0, -4, 0],
+                        rotate: [0, -1.5, 0.5, 0],
                       }
                 }
-                transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <PaperCard tone="teal" rotation={3} className="max-w-xs">
-                  <p className="text-sm text-primary font-semibold mb-1">Currently curious about</p>
-                  <p className="text-sm text-muted">Playful UI motion, low-latency DX, and AI copilots that feel human.</p>
+                <PaperCard tone="cream" rotation={-3} withTape className="max-w-[280px] shadow-card">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                      <span className="text-lg sm:text-xl">🎮</span>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-sm font-semibold text-primary">Fun fact</p>
+                      <p className="text-sm text-muted">
+                        When I’m not coding, you’d find me playing volleyball, binging Netflix, or experimenting with new recipes.
+                      </p>
+                    </div>
+                  </div>
                 </PaperCard>
               </motion.div>
             </div>
