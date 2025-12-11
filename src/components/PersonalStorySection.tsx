@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { PaperCard } from '@/components/ui/PaperCard';
 import { Sticker } from '@/components/ui/Sticker';
 import { TextureOverlay } from '@/components/ui/TextureOverlay';
-import { PhotoPolaroid } from '@/components/ui/PhotoPolaroid';
+import { PolaroidCard, ScrapbookFrame, WashiTape, CutoutLetters } from '@/components/scrapbook';
 
 export default function PersonalStorySection(): JSX.Element {
   return (
@@ -12,6 +12,12 @@ export default function PersonalStorySection(): JSX.Element {
       <TextureOverlay opacity={0.5} className="absolute inset-0">
         <div className="absolute -left-10 top-8 w-40 h-10 bg-[url(/textures/washi-yellow.svg)] bg-cover rotate-[-10deg] opacity-80" />
         <div className="absolute right-4 bottom-16 w-44 h-10 bg-[url(/textures/washi-teal.svg)] bg-cover rotate-[8deg] opacity-80" />
+        <div className="absolute top-6 left-12 hidden md:block">
+          <WashiTape color="mint" pattern="dots" width="md" rotation={-12} />
+        </div>
+        <div className="absolute bottom-10 right-16 hidden md:block">
+          <WashiTape color="coral" pattern="stripe" width="lg" rotation={10} />
+        </div>
       </TextureOverlay>
       <div className="container relative">
         <div className="max-w-4xl mx-auto">
@@ -25,7 +31,10 @@ export default function PersonalStorySection(): JSX.Element {
             <Sticker tone="teal" variant="badge">
               My Story
             </Sticker>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 mt-4 text-primary">A bit about me</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-2 mt-4 text-primary">A bit about me</h2>
+            <div className="flex justify-center">
+              <CutoutLetters text="builder + storyteller" size="md" colorScheme="warm" />
+            </div>
           </motion.div>
 
           <div className="grid md:grid-cols-5 gap-10 items-start">
@@ -36,7 +45,9 @@ export default function PersonalStorySection(): JSX.Element {
               transition={{ duration: 0.5 }}
               className="md:col-span-2"
             >
-              <PhotoPolaroid src="/about-me.jpg" alt="Kelvin coding" rotation={-3} caption="Building with curiosity" />
+              <ScrapbookFrame rotation="left" tapePosition="corners" tapeColor="pink">
+                <PolaroidCard imageSrc="/about-me.jpg" imageAlt="Kelvin coding" caption="Building with curiosity" rotation="none" />
+              </ScrapbookFrame>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 20 }}

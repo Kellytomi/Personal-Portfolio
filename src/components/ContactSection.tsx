@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { PaperCard } from '@/components/ui/PaperCard';
 import { Sticker } from '@/components/ui/Sticker';
 import { TextureOverlay } from '@/components/ui/TextureOverlay';
+import { CutoutLetters, PaperBackground, WashiTape } from '@/components/scrapbook';
 import { siteConfig } from '@/config/site';
 
 export default function ContactSection(): JSX.Element {
@@ -40,6 +41,7 @@ export default function ContactSection(): JSX.Element {
 
   return (
     <section id="contact" className="py-24 md:py-32 bg-surface relative overflow-hidden">
+      <PaperBackground variant="cream" className="absolute inset-0 pointer-events-none" hasTexture />
       <TextureOverlay opacity={0.55} className="absolute inset-0">
         <div className="absolute top-6 left-6 w-36 h-10 bg-[url(/textures/washi-yellow.svg)] bg-cover rotate-[-12deg] opacity-85" />
         <div className="absolute bottom-8 right-10 w-44 h-10 bg-[url(/textures/washi-teal.svg)] bg-cover rotate-[8deg] opacity-85" />
@@ -65,7 +67,10 @@ export default function ContactSection(): JSX.Element {
             <Sticker tone="coral" variant="badge">
               Get in touch
             </Sticker>
-            <h2 className="text-3xl md:text-5xl font-bold text-primary mb-4 mt-4">Let’s build something memorable</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-primary mb-2 mt-4">Let’s build something memorable</h2>
+            <div className="flex justify-center mb-3">
+              <CutoutLetters text="say hello" size="md" colorScheme="warm" />
+            </div>
             <p className="text-lg text-muted max-w-2xl mx-auto">
               Collaborations, freelance, or a quick hello—drop a note and I’ll reply fast. The more context you share, the better I can help.
             </p>
@@ -79,7 +84,10 @@ export default function ContactSection(): JSX.Element {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <PaperCard withTape rotation={-1} tone="cream">
+              <PaperCard withTape rotation={-1} tone="cream" className="relative">
+                <div className="absolute -top-6 right-6 hidden sm:block">
+                  <WashiTape color="pink" pattern="stripe" width="md" rotation={-12} />
+                </div>
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-primary mb-2">

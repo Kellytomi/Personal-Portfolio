@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { PaperCard } from '@/components/ui/PaperCard';
 import { Sticker } from '@/components/ui/Sticker';
 import { TextureOverlay } from '@/components/ui/TextureOverlay';
+import { CutoutLetters, WashiTape } from '@/components/scrapbook';
 
 interface Project {
   id: string;
@@ -118,6 +119,9 @@ export default function FeaturedProjectsSection(): JSX.Element {
             >
               {project.tag}
             </Sticker>
+            <div className="hidden md:block">
+              <WashiTape color="mint" pattern="dots" width="sm" rotation={index % 2 === 0 ? -10 : 12} />
+            </div>
             {project.status === 'coming-soon' && (
               <Sticker tone="cream" variant="label" className="gap-2">
                 <span className="w-2 h-2 bg-secondary rounded-full animate-ping" />
@@ -234,7 +238,10 @@ export default function FeaturedProjectsSection(): JSX.Element {
           <Sticker tone="yellow" variant="badge">
             Featured Work
           </Sticker>
-          <h2 className="section-title mb-4 text-primary mt-4">Projects I've Shipped</h2>
+          <h2 className="section-title mb-2 text-primary mt-4">Projects I've Shipped</h2>
+          <div className="flex justify-center mb-4">
+            <CutoutLetters text="launches + collabs" size="md" colorScheme="warm" />
+          </div>
           <p className="section-subtitle max-w-2xl mx-auto text-muted">
             Real projects, real clients, real impact—packaged like a memory board of the things I loved building.
           </p>

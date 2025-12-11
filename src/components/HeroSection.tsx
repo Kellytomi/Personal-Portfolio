@@ -5,10 +5,16 @@ import Image from 'next/image';
 import { useRef } from 'react';
 import { FlipWords } from '@/components/ui/flip-words';
 import AnimatedTooltipDemo from '@/components/AnimatedTooltipDemo';
-import { Sticker } from '@/components/ui/Sticker';
+import { Sticker as UiSticker } from '@/components/ui/Sticker';
 import { PaperCard } from '@/components/ui/PaperCard';
-import { PhotoPolaroid } from '@/components/ui/PhotoPolaroid';
 import { TextureOverlay } from '@/components/ui/TextureOverlay';
+import {
+  CutoutLetters,
+  PaperBackground,
+  ScrapbookFrame,
+  Sticker as ScrapbookSticker,
+  WashiTape,
+} from '@/components/scrapbook';
 
 interface HeroSectionProps {
   isLoading: boolean;
@@ -25,11 +31,9 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
   const reduceMotion = useReducedMotion();
 
   return (
-    <section
-      className="min-h-[90vh] flex items-center pt-16 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32 relative"
-      ref={containerRef}
-    >
-      <TextureOverlay opacity={0.7} className="absolute inset-0">
+    <section className="min-h-[90vh] pt-16 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32 relative" ref={containerRef}>
+      <PaperBackground variant="cream" className="absolute inset-0 pointer-events-none" hasTexture />
+      <TextureOverlay opacity={0.45} className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-surface/80 via-surface/70 to-surface/40" />
         <motion.div className="absolute inset-0" style={{ y }} />
         <Image
@@ -48,6 +52,12 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
           className="absolute hidden md:block bottom-12 left-10 rotate-[-8deg] opacity-70"
           priority
         />
+        <div className="absolute top-12 left-8 hidden md:block">
+          <WashiTape color="mint" pattern="dots" width="md" rotation={-6} />
+        </div>
+        <div className="absolute bottom-8 right-10 hidden lg:block">
+          <WashiTape color="coral" pattern="stripe" width="lg" rotation={8} />
+        </div>
       </TextureOverlay>
 
       <div className="container relative z-10 px-4 sm:px-6">
@@ -59,12 +69,18 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
               transition={{ duration: 0.6 }}
               className="inline-flex items-center gap-3"
             >
-              <Sticker variant="stamp" tone="yellow" icon={<span className="w-2 h-2 bg-green-500 rounded-full" />}>
+              <UiSticker
+                variant="stamp"
+                tone="yellow"
+                icon={<span className="w-2 h-2 bg-green-500 rounded-full" />}
+                className="shadow-sticker"
+              >
                 Open to collabs
-              </Sticker>
-              <Sticker variant="badge" tone="coral">
+              </UiSticker>
+              <UiSticker variant="badge" tone="coral" className="shadow-sticker">
                 Lagos ➜ Global
-              </Sticker>
+              </UiSticker>
+              <ScrapbookSticker variant="sparkle" size="md" color="mint" className="hidden sm:inline-flex" />
             </motion.div>
 
             <motion.h4
@@ -76,16 +92,18 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
               Hey, I'm Etoma-etoto (Kelvin) Odi 👋
             </motion.h4>
 
-            <motion.h1
+            <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 14 : 0 }}
               transition={{ duration: 0.7, delay: 0.12 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-display font-bold leading-tight"
+              className="leading-tight"
             >
-              I craft digital experiences that feel like{' '}
-              <span className="text-accent">keepsakes</span> people{' '}
-              <FlipWords words={['love', 'use daily', 'talk about', 'remember']} className="text-primary" />
-            </motion.h1>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-primary">
+                I craft digital experiences that feel like{' '}
+                <CutoutLetters text="keepsakes" colorScheme="warm" size="lg" className="align-middle" /> people{' '}
+                <FlipWords words={['love', 'use daily', 'talk about', 'remember']} className="text-primary" />
+              </h1>
+            </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -138,14 +156,12 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
             className="lg:block relative"
           >
             <div className="relative flex items-center justify-center">
-              <PhotoPolaroid
-                src="/hero-img.webp"
-                alt="Kelvin smiling"
-                rotation={-2}
-                caption="Builder, storyteller, collaborator"
-                badge={<Sticker tone="teal" variant="badge">In the zone</Sticker>}
-                className="shadow-2xl"
-              />
+              <ScrapbookFrame rotation="left" tapePosition="corners" tapeColor="yellow" className="max-w-md mx-auto">
+                <div className="relative h-[50vh] sm:h-[60vh] max-h-[500px] sm:max-h-[550px] aspect-[3/4] rounded overflow-hidden">
+                  <Image src="/hero-img.webp" alt="Kelvin smiling" fill className="object-cover object-center" priority />
+                </div>
+                <p className="text-center font-handwriting text-xl text-muted mt-3 pb-2">Builder, storyteller, collaborator</p>
+              </ScrapbookFrame>
 
               <motion.div
                 className="absolute -left-10 -top-12"
