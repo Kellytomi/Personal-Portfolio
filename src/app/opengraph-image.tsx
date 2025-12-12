@@ -4,8 +4,7 @@ export const runtime = 'edge';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-// Use local URL in dev so the image fetch works; set NEXT_PUBLIC_SITE_URL in production.
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev';
 
 export default function OpengraphImage(): ImageResponse {
   // Scrapbook palette
