@@ -98,7 +98,7 @@ export default function Navigation(): JSX.Element {
               alt="Etoma-Etoto Kelvin Odi"
               width={150}
               height={40}
-              className="object-contain mt-1 w-[120px] sm:w-[140px] md:w-[150px]"
+              className="object-contain mt-1 w-[120px] sm:w-[140px] md:w-[150px] h-auto"
               priority
             />
           </a>

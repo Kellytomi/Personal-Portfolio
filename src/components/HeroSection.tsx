@@ -164,7 +164,14 @@ export default function HeroSection({ isLoading }: HeroSectionProps): JSX.Elemen
                 className="max-w-md mx-auto -translate-y-4"
               >
                 <div className="relative h-[50vh] sm:h-[60vh] max-h-[500px] sm:max-h-[550px] aspect-[3/4] rounded overflow-hidden">
-                  <Image src="/hero-img.webp" alt="Kelvin smiling" fill className="object-cover object-center" priority />
+                  <Image
+                    src="/hero-img.webp"
+                    alt="Kelvin smiling"
+                    fill
+                    className="object-cover object-center"
+                    priority
+                    sizes="(max-width: 768px) 80vw, (max-width: 1200px) 45vw, 520px"
+                  />
                 </div>
                 <p className="text-center font-handwriting text-xl text-muted mt-3 pb-2">Builder, storyteller, collaborator</p>
               </ScrapbookFrame>

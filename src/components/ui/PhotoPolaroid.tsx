@@ -42,7 +42,14 @@ export function PhotoPolaroid({
     >
       {badge ? <div className="absolute -top-4 left-4 z-20">{badge}</div> : null}
       <div className="relative h-[420px] sm:h-[480px] bg-primary/5">
-        <Image src={src} alt={alt} fill className="object-cover" priority />
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover"
+          priority
+          sizes="(max-width: 768px) 80vw, (max-width: 1200px) 50vw, 420px"
+        />
         <span className="absolute -top-3 right-6 w-20 h-6 bg-[url(/textures/washi-yellow.svg)] bg-cover rotate-[12deg] opacity-90" />
       </div>
       {caption ? (
@@ -53,4 +60,5 @@ export function PhotoPolaroid({
     </motion.div>
   );
 }
+
 

@@ -57,7 +57,13 @@ export default function PolaroidCard({
     >
       <div className={`relative ${aspectClass} bg-gray-100 overflow-hidden`}>
         {imageSrc ? (
-          <Image src={imageSrc} alt={imageAlt} fill className="object-cover" />
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 80vw, (max-width: 1200px) 50vw, 420px"
+        />
         ) : children ? (
           children
         ) : (
@@ -82,4 +88,5 @@ export default function PolaroidCard({
     </motion.div>
   );
 }
+
 
