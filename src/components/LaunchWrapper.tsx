@@ -14,9 +14,9 @@ interface LaunchWrapperProps {
 }
 
 export default function LaunchWrapper({ children }: LaunchWrapperProps) {
-  const [isLoading, setIsLoading] = useState(true);
   const [showDevTools, setShowDevTools] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(!siteConfig.comingSoonMode);
+  const [hasHydrated, setHasHydrated] = useState(false);
 
   // For development testing only - press Shift+D to show dev tools
   useEffect(() => {
@@ -56,10 +56,12 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
 
     if (!hasSeenWelcome && !siteConfig.comingSoonMode) {
       setShowWelcome(true);
+    } else {
+      setShowWelcome(false);
     }
 
-    // Set loading to false after component mounts
-    setIsLoading(false);
+    // Mark hydration so we can avoid UI mismatches when toggling the welcome screen
+    setHasHydrated(true);
   }, []);
 
   const handleWelcomeComplete = () => {
@@ -67,22 +69,13 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
     setShowWelcome(false);
   };
 
-  // Show nothing during initial load to prevent flash
-  if (isLoading) {
-    return null;
-  }
-
-  // Show welcome screen if it's the first visit and not in coming soon mode
-  if (showWelcome && !siteConfig.comingSoonMode) {
-    return <WelcomeScreen onComplete={handleWelcomeComplete} />;
-  }
-
   // Check if coming soon mode is enabled from config
   const showComingSoon = siteConfig.comingSoonMode;
 
   // Show either the countdown or the actual site
   return (
     <>
+      {!showComingSoon && showWelcome && hasHydrated && <WelcomeScreen onComplete={handleWelcomeComplete} />}
       {showDevTools && (
         <div
           style={{
