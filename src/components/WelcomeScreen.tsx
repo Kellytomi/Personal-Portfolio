@@ -47,7 +47,7 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-50 transition-opacity duration-500 ${
+      className={`fixed inset-0 z-[120] transition-opacity duration-500 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >
