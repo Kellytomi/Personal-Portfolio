@@ -35,6 +35,8 @@ const syne = Syne({
   adjustFontFallback: true,
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev';
+
 interface RootLayoutProps {
   children: React.ReactNode;
 }
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
   },
   description:
     'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development, workflow automation, and business process optimization.',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'),
+  metadataBase: new URL(siteUrl),
   keywords: [
     'web development',
     'workflow automation',
@@ -88,14 +90,14 @@ export const metadata: Metadata = {
       'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development, workflow automation, and business process optimization.',
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png?v=2024`,
+        url: `${siteUrl}/opengraph-image`,
         width: 1200,
-        height: 1200,
-        alt: 'Etoma-etoto Kelvin Odi - Fullstack Developer Portfolio',
+        height: 630,
+        alt: 'Etoma-etoto Kelvin Odi - Portfolio',
         type: 'image/png',
       },
     ],
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev',
+    url: siteUrl,
   },
   twitter: {
     card: 'summary_large_image',
@@ -104,7 +106,7 @@ export const metadata: Metadata = {
     title: 'Etoma-etoto Kelvin Odi | Fullstack Developer',
     description:
       'Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development and workflow automation',
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png?v=2024`],
+    images: [`${siteUrl}/opengraph-image`],
   },
   other: {
     'x-font-options': 'no-substitute',
@@ -148,17 +150,17 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
           property="og:description"
           content="Professional portfolio of Etoma-etoto Kelvin Odi, a specialist in web development, workflow automation, and business process optimization."
         />
-        <meta property="og:url" content={process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'} />
+        <meta property="og:url" content={siteUrl} />
         <meta
           property="og:image"
-          content={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png?v=2024`}
+          content={`${siteUrl}/opengraph-image`}
         />
         <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/png" />
         <meta
           property="og:image:alt"
-          content="Etoma-etoto Kelvin Odi - Fullstack Developer Portfolio"
+          content="Etoma-etoto Kelvin Odi - Portfolio"
         />
 
         {/* Twitter Card Meta Tags */}
@@ -172,7 +174,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         />
         <meta
           name="twitter:image"
-          content={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://etoma.dev'}/og-image.png?v=2024`}
+          content={`${siteUrl}/opengraph-image`}
         />
 
         <meta name="theme-color" content="#3151B5" />
