@@ -19,10 +19,6 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'thedebuthub.com',
       },
-      {
-        protocol: 'https',
-        hostname: 'staging.usedocsyde.com',
-      },
     ],
   },
   // Disable standalone output for now

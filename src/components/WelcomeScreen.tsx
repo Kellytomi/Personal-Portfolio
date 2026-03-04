@@ -1,118 +1,168 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
-import { AuroraBackground } from '@/components/ui/aurora-background';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface WelcomeScreenProps {
   onComplete: () => void;
 }
 
-const greetings = [
-  { text: 'Hello', language: 'English' },
-  { text: 'Hola', language: 'Español' },
-  { text: 'Bonjour', language: 'Français' },
-  { text: 'こんにちは', language: '日本語' },
-];
+const SCRAMBLE_CHARS = '0123456789';
 
-export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
+function ScrambleDigit({ value, active }: { value: string; active: boolean }) {
+  const [display, setDisplay] = useState(value);
+  const frameRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const iterationsRef = useRef(0);
 
   useEffect(() => {
-    if (currentIndex < greetings.length - 1) {
-      const timer = setTimeout(() => {
-        setCurrentIndex((prev) => prev + 1);
-      }, 1500);
-      return () => clearTimeout(timer);
-    } else {
-      // Automatically go to portfolio after the last greeting
-      const timer = setTimeout(() => {
-        setIsVisible(false);
-        setTimeout(() => {
-          onComplete();
-        }, 500);
-      }, 2000);
-      return () => clearTimeout(timer);
+    if (!active) {
+      setDisplay(value);
+      return;
     }
-  }, [currentIndex, onComplete]);
 
-  const handleSkip = () => {
-    // Skip directly to portfolio
-    setIsVisible(false);
-    setTimeout(() => {
-      onComplete();
-    }, 300);
-  };
+    iterationsRef.current = 0;
+    const maxIterations = 6;
+
+    frameRef.current = setInterval(() => {
+      iterationsRef.current++;
+      if (iterationsRef.current >= maxIterations) {
+        setDisplay(value);
+        if (frameRef.current) clearInterval(frameRef.current);
+      } else {
+        setDisplay(SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]);
+      }
+    }, 40);
+
+    return () => {
+      if (frameRef.current) clearInterval(frameRef.current);
+    };
+  }, [value, active]);
 
   return (
-    <div
-      className={`fixed inset-0 z-[120] transition-opacity duration-500 ${
-        isVisible ? 'opacity-100' : 'opacity-0'
-      }`}
+    <span
+      className="inline-block font-display font-bold text-primary tabular-nums"
+      style={{
+        fontSize: 'clamp(5rem, 20vw, 13rem)',
+        lineHeight: 1,
+        letterSpacing: '-0.04em',
+        minWidth: '0.6em',
+        textAlign: 'center',
+        fontVariantNumeric: 'tabular-nums',
+      }}
     >
-      <AuroraBackground className="bg-gradient-to-br from-primary via-secondary to-primary">
+      {display}
+    </span>
+  );
+}
+
+export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
+  const [progress, setProgress] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+  const prevProgress = useRef(0);
+
+  useEffect(() => {
+    const duration = 2800;
+    const startTime = performance.now();
+
+    // Ease in-out cubic
+    const easeInOut = (t: number) =>
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+    let raf: number;
+
+    const tick = (now: number) => {
+      const elapsed = now - startTime;
+      const raw = Math.min(elapsed / duration, 1);
+      const eased = easeInOut(raw);
+      const val = Math.round(eased * 100);
+      setProgress(val);
+      prevProgress.current = val;
+
+      if (raw < 1) {
+        raf = requestAnimationFrame(tick);
+      }
+    };
+
+    raf = requestAnimationFrame(tick);
+
+    const exitTimer = setTimeout(() => {
+      setIsVisible(false);
+      setTimeout(() => onComplete(), 600);
+    }, 3800);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(exitTimer);
+    };
+  }, [onComplete]);
+
+  // Split number into individual digit characters for scramble effect
+  const digits = progress.toString().padStart(3, ' ').split('');
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
         <motion.div
-          initial={{ opacity: 0.0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: 'easeInOut',
-          }}
-          className="relative flex flex-col gap-8 items-center justify-center px-8 text-center"
+          key="welcome"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+          className="fixed inset-0 z-[120] flex flex-col items-center justify-center bg-surface overflow-hidden"
         >
-          {/* Main greeting */}
-          <div className="mb-4">
-            <motion.h1
-              key={currentIndex}
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
-              className="text-6xl md:text-8xl font-display font-bold text-white mb-4"
-            >
-              {greetings[currentIndex].text}
-            </motion.h1>
-            <motion.p
-              key={`lang-${currentIndex}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.8 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-blue-200 text-lg md:text-xl font-medium"
-            >
-              {greetings[currentIndex].language}
-            </motion.p>
-          </div>
+          {/* Subtle paper grain */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage:
+                'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'300\' height=\'300\' filter=\'url(%23n)\' opacity=\'1\'/%3E%3C/svg%3E")',
+            }}
+          />
 
-          {/* Progress indicator */}
-          <div className="flex justify-center mb-8">
-            <div className="flex space-x-2">
-              {greetings.map((_, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index <= currentIndex ? 'bg-blue-300' : 'bg-white/30'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Skip button (visible during carousel) */}
-          <motion.button
-            initial={{ opacity: 0, y: 10 }}
+          {/* Main counter */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            onClick={handleSkip}
-            className="text-white/60 hover:text-white text-sm transition-colors duration-300 underline"
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="flex items-end gap-0 relative"
           >
-            Skip
-          </motion.button>
+            {digits.map((d, i) => (
+              <ScrambleDigit
+                key={i}
+                value={d === ' ' ? '\u00A0' : d}
+                active={d !== ' ' && d !== prevProgress.current.toString().padStart(3, ' ')[i]}
+              />
+            ))}
+            <span
+              className="font-display font-bold text-primary/40 self-end mb-[0.1em]"
+              style={{ fontSize: 'clamp(2rem, 7vw, 5rem)', letterSpacing: '-0.04em' }}
+            >
+              %
+            </span>
+          </motion.div>
+
+          {/* Thin progress line at bottom of screen */}
+          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary/10">
+            <motion.div
+              className="h-full origin-left"
+              style={{
+                background: 'linear-gradient(90deg, #1F3B2E, #4AA3A2)',
+                width: `${progress}%`,
+              }}
+              transition={{ ease: 'linear', duration: 0.05 }}
+            />
+          </div>
+
+          {/* Subtle label */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="absolute bottom-6 left-0 right-0 text-center font-sans text-[10px] tracking-[0.3em] uppercase text-muted/50"
+          >
+            Loading portfolio
+          </motion.p>
         </motion.div>
-      </AuroraBackground>
-    </div>
+      )}
+    </AnimatePresence>
   );
 }

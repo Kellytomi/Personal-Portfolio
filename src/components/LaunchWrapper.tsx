@@ -51,10 +51,8 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
   };
 
   useEffect(() => {
-    // Check if this is the first visit
-    const hasSeenWelcome = localStorage.getItem('portfolio-welcome-shown');
-
-    if (!hasSeenWelcome && !siteConfig.comingSoonMode) {
+    // Show welcome screen for everyone on load (unless in comingSoonMode)
+    if (!siteConfig.comingSoonMode) {
       setShowWelcome(true);
     } else {
       setShowWelcome(false);
@@ -65,7 +63,6 @@ export default function LaunchWrapper({ children }: LaunchWrapperProps) {
   }, []);
 
   const handleWelcomeComplete = () => {
-    localStorage.setItem('portfolio-welcome-shown', 'true');
     setShowWelcome(false);
   };
 

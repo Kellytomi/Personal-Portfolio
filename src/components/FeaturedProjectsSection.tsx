@@ -55,21 +55,6 @@ export default function FeaturedProjectsSection(): JSX.Element {
       stickerIcon: 'heart',
       stickerColor: 'coral',
     },
-    {
-      id: 'docsyde',
-      title: 'Docsyde',
-      description: 'Document automation platform',
-      longDescription: 'An AI-powered document management platform that transforms workflows with smart templates.',
-      tag: 'Web App',
-      tagColor: 'bg-scrapbook-sage text-white',
-      url: 'https://staging.usedocsyde.com/',
-      technologies: ['React', 'Node.js', 'AI/ML'],
-      type: 'web',
-      status: 'live',
-      previewImage: '/projects/docsyde.png',
-      stickerIcon: 'sparkle',
-      stickerColor: 'sage',
-    },
   ];
 
   const mobileProjects: Project[] = [
@@ -104,9 +89,8 @@ export default function FeaturedProjectsSection(): JSX.Element {
       </div>
 
       <div
-        className={`relative bg-white p-4 rounded-lg shadow-polaroid transition-all duration-300 transform ${
-          hoveredProject === project.id ? 'shadow-polaroid-hover scale-[1.02] rotate-0' : ''
-        }`}
+        className={`relative bg-white p-4 rounded-lg shadow-polaroid transition-all duration-300 transform ${hoveredProject === project.id ? 'shadow-polaroid-hover scale-[1.02] rotate-0' : ''
+          }`}
       >
         <div className="absolute -top-3 left-1/4">
           <WashiTape color={index % 2 === 0 ? 'yellow' : 'pink'} width="md" rotation={index % 2 === 0 ? -5 : 5} />
